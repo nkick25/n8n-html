@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arquitectura de Sistemas - Diagrama Interactivo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Syne', sans-serif;
+        }
+        .connection-line {
+            stroke: #3b82f6;
+            stroke-width: 2;
+            fill: none;
+            stroke-dasharray: 5,5;
+            animation: dash 2s linear infinite;
+        }
+        
+        .connection-line-solid {
+            stroke: #10b981;
+            stroke-width: 3;
+            fill: none;
+        }
+        
+        @keyframes dash {
+            to {
+                stroke-dashoffset: -10;
+            }
+        }
+        
+        .platform-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .platform-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .pulse-dot {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+        
+        .flow-arrow {
+            animation: flow 3s ease-in-out infinite;
+        }
+        
+        @keyframes flow {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(10px); }
+        }
+    </style>
+</head>
+<body class="bg-black min-h-screen p-6">
+    <div class="max-w-7xl mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-white mb-4">Arquitectura de Sistemas</h1>
+            <p class="text-lg text-gray-300">Diagrama interactivo de integración de plataformas</p>
+        </div>
+
+        <!-- Main Architecture Diagram -->
+        <div class="relative bg-gray-900 rounded-2xl shadow-xl border border-gray-700 p-8 mb-8">
+            <svg class="absolute inset-0 w-full h-full" style="z-index: 1;">
+                <!-- Connection Lines -->
+                <!-- ManyChat to N8N -->
+                <line x1="25%" y1="50%" x2="50%" y2="50%" class="connection-line-solid"/>
+                <!-- N8N to Supabase -->
+                <line x1="50%" y1="50%" x2="75%" y2="30%" class="connection-line-solid"/>
+                <!-- N8N to External Systems -->
+                <line x1="50%" y1="50%" x2="50%" y2="20%" class="connection-line"/>
+                <!-- Supabase to Lovable -->
+                <line x1="75%" y1="30%" x2="75%" y2="70%" class="connection-line-solid"/>
+                
+                <!-- Flow indicators -->
+                <circle cx="37.5%" cy="50%" r="4" fill="#3b82f6" class="pulse-dot"/>
+                <circle cx="62.5%" cy="40%" r="4" fill="#10b981" class="pulse-dot"/>
+                <circle cx="50%" cy="35%" r="4" fill="#f59e0b" class="pulse-dot"/>
+                <circle cx="75%" cy="50%" r="4" fill="#10b981" class="pulse-dot"/>
+            </svg>
+
+            <div class="relative grid grid-cols-3 gap-8 h-[500px]" style="z-index: 2;">
+                <!-- Left Column - External Channels & ManyChat -->
+                <div class="space-y-6">
+                    <!-- External Channels -->
+                    <div class="bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl p-4 text-white">
+                        <h3 class="font-bold text-lg mb-3">Canales de Atención</h3>
+                        <div class="space-y-2">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 bg-white rounded-full"></div>
+                                <span class="text-sm">Instagram</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 bg-white rounded-full"></div>
+                                <span class="text-sm">WhatsApp</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 bg-white rounded-full"></div>
+                                <span class="text-sm">Meta Business</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ManyChat -->
+                    <div class="platform-card bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl p-6 text-white" onclick="showDetails('manychat')">
+                        <div class="flex items-center mb-3">
+                            <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center mr-3">
+                                <span class="text-2xl">💬</span>
+                            </div>
+                            <h3 class="font-bold text-xl">ManyChat</h3>
+                        </div>
+                        <p class="text-sm opacity-90">Integración con canales de atención</p>
+                        <div class="mt-3 flex items-center text-xs">
+                            <div class="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
+                            <span>Activo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Center Column - N8N with AI & External Systems -->
+                <div class="space-y-6">
+                    <!-- External Systems (Top) -->
+                    <div class="platform-card bg-gradient-to-r from-gray-600 to-gray-700 rounded-xl p-4 text-white border-2 border-dashed border-gray-400" onclick="showDetails('external')">
+                        <div class="text-center">
+                            <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center mx-auto mb-2">
+                                <span class="text-xl">🔗</span>
+                            </div>
+                            <h3 class="font-bold text-lg">Sistemas Externos</h3>
+                            <p class="text-xs opacity-90 mt-1">CRMs • ERPs • APIs</p>
+                        </div>
+                    </div>
+
+                    <!-- N8N Central (AI + Orchestration) -->
+                    <div class="platform-card bg-gradient-to-br from-orange-500 via-red-500 to-cyan-500 rounded-xl p-8 text-white" onclick="showDetails('n8n-unified')">
+                        <div class="text-center">
+                            <div class="flex justify-center space-x-2 mb-4">
+                                <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                                    <span class="text-2xl">🤖</span>
+                                </div>
+                                <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                                    <span class="text-2xl">⚡</span>
+                                </div>
+                            </div>
+                            <h3 class="font-bold text-2xl mb-2">N8N</h3>
+                            <p class="text-sm opacity-90 mb-4">Motor de IA + Orquestación</p>
+                            <div class="bg-white bg-opacity-20 rounded-lg p-3">
+                                <p class="text-xs">Procesamiento inteligente y automatización</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column - Supabase & APP de Suscripciones -->
+                <div class="space-y-6">
+                    <!-- Supabase -->
+                    <div class="platform-card bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl p-6 text-white" onclick="showDetails('supabase')">
+                        <div class="flex items-center mb-3">
+                            <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center mr-3">
+                                <span class="text-2xl">🗄️</span>
+                            </div>
+                            <h3 class="font-bold text-xl">Supabase</h3>
+                        </div>
+                        <p class="text-sm opacity-90">Base de datos PostgreSQL</p>
+                        <div class="mt-3 flex items-center text-xs">
+                            <div class="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
+                            <span>Conectado</span>
+                        </div>
+                    </div>
+
+                    <!-- APP de Suscripciones -->
+                    <div class="platform-card bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl p-6 text-white" onclick="showDetails('lovable')">
+                        <div class="flex items-center mb-3">
+                            <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center mr-3">
+                                <span class="text-2xl">📱</span>
+                            </div>
+                            <h3 class="font-bold text-xl">APP de Suscripciones</h3>
+                        </div>
+                        <p class="text-sm opacity-90">Gestión de suscripciones y citas</p>
+                        <div class="mt-3 flex items-center text-xs">
+                            <div class="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
+                            <span>En línea</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Flow Legend -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div class="bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-700">
+                <h3 class="font-bold text-lg mb-4 text-white">Flujo de Datos</h3>
+                <div class="space-y-3">
+                    <div class="flex items-center">
+                        <div class="w-4 h-0.5 bg-green-500 mr-3"></div>
+                        <span class="text-sm text-gray-300">Conexión directa</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-4 h-0.5 bg-blue-500 border-dashed border-t-2 border-blue-500 mr-3"></div>
+                        <span class="text-sm text-gray-300">Conexión orquestada</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-3 h-3 bg-blue-500 rounded-full mr-3 pulse-dot"></div>
+                        <span class="text-sm text-gray-300">Punto de transferencia activo</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-700">
+                <h3 class="font-bold text-lg mb-4 text-white">Roles Principales</h3>
+                <div class="space-y-2 text-sm text-gray-300">
+                    <div>• <strong class="text-white">ManyChat:</strong> Gateway de comunicación</div>
+                    <div>• <strong class="text-white">N8N:</strong> Motor de IA + Orquestación central</div>
+                    <div>• <strong class="text-white">Supabase:</strong> Almacenamiento de datos</div>
+                    <div>• <strong class="text-white">APP de Suscripciones:</strong> Interfaz de usuario</div>
+                    <div>• <strong class="text-white">Sistemas Externos:</strong> Integraciones CRM/ERP</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Details Modal -->
+        <div id="detailsModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50" onclick="closeModal()">
+            <div class="bg-gray-900 border border-gray-700 rounded-2xl p-8 max-w-md mx-4" onclick="event.stopPropagation()">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 id="modalTitle" class="text-2xl font-bold text-white"></h3>
+                    <button onclick="closeModal()" class="text-gray-400 hover:text-gray-200 text-2xl">&times;</button>
+                </div>
+                <div id="modalContent" class="text-gray-300"></div>
+                <button onclick="closeModal()" class="mt-6 bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const platformDetails = {
+            manychat: {
+                title: "ManyChat",
+                content: `
+                    <div class="space-y-4">
+                        <p><strong>Función principal:</strong> Integración con canales de atención tradicional</p>
+                        <div>
+                            <p class="font-semibold mb-2">Canales conectados:</p>
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li>Instagram Direct Messages</li>
+                                <li>WhatsApp Business API</li>
+                                <li>Facebook Messenger</li>
+                                <li>Meta Business Suite</li>
+                            </ul>
+                        </div>
+                        <p class="text-sm bg-blue-50 p-3 rounded-lg">
+                            <strong>Flujo:</strong> Recibe mensajes de usuarios → Procesa con chatbots básicos → Envía al Motor de IA para procesamiento inteligente
+                        </p>
+                    </div>
+                `
+            },
+            'n8n-unified': {
+                title: "N8N - Motor de IA + Orquestación",
+                content: `
+                    <div class="space-y-4">
+                        <p><strong>Función principal:</strong> Aplicativo central que combina IA y orquestación</p>
+                        <div>
+                            <p class="font-semibold mb-2">Capacidades de IA:</p>
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li>Análisis de lenguaje natural (NLP)</li>
+                                <li>Clasificación automática de consultas</li>
+                                <li>Generación de respuestas inteligentes</li>
+                                <li>Enrutamiento inteligente de conversaciones</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="font-semibold mb-2">Capacidades de Orquestación:</p>
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li>Automatización de workflows</li>
+                                <li>Integración entre plataformas</li>
+                                <li>Procesamiento de datos</li>
+                                <li>Sincronización en tiempo real</li>
+                            </ul>
+                        </div>
+                        <p class="text-sm bg-gradient-to-r from-orange-50 to-cyan-50 p-3 rounded-lg">
+                            <strong>Posición central:</strong> Actúa como el cerebro inteligente que procesa, decide y coordina todas las comunicaciones entre sistemas
+                        </p>
+                    </div>
+                `
+            },
+            supabase: {
+                title: "Supabase Database",
+                content: `
+                    <div class="space-y-4">
+                        <p><strong>Función principal:</strong> Base de datos PostgreSQL</p>
+                        <div>
+                            <p class="font-semibold mb-2">Características:</p>
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li>Almacenamiento de datos estructurados</li>
+                                <li>API REST automática</li>
+                                <li>Autenticación integrada</li>
+                                <li>Tiempo real con subscripciones</li>
+                            </ul>
+                        </div>
+                        <p class="text-sm bg-green-50 p-3 rounded-lg">
+                            <strong>Acceso:</strong> N8N escribe datos → APP de Suscripciones lee y gestiona → Usuarios finales consultan
+                        </p>
+                    </div>
+                `
+            },
+            lovable: {
+                title: "APP de Suscripciones",
+                content: `
+                    <div class="space-y-4">
+                        <p><strong>Función principal:</strong> Gestión integral de suscripciones con vistas para administradores y clientes</p>
+                        <div>
+                            <p class="font-semibold mb-2">Funcionalidades Administrativas:</p>
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li>Dashboard de administración completo</li>
+                                <li>Gestión de tablas de Supabase</li>
+                                <li>Herramientas de análisis y reportes</li>
+                                <li>Control de usuarios y permisos</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="font-semibold mb-2">Vista del Cliente Externo:</p>
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li><strong>Gestión de Suscripciones:</strong> Visualización y modificación de planes activos</li>
+                                <li><strong>Administración de Créditos:</strong> Consulta de saldo y historial de transacciones</li>
+                                <li><strong>Sistema de Citas:</strong> Programación, reprogramación y cancelación de citas</li>
+                                <li>Portal personalizado con autenticación segura</li>
+                            </ul>
+                        </div>
+                        <p class="text-sm bg-purple-50 p-3 rounded-lg">
+                            <strong>Experiencia:</strong> Ofrece una plataforma completa con doble interfaz: administrativa para la gestión interna y un portal intuitivo para que los clientes gestionen sus suscripciones, créditos y citas de forma autónoma
+                        </p>
+                    </div>
+                `
+            },
+            external: {
+                title: "Sistemas Externos",
+                content: `
+                    <div class="space-y-4">
+                        <p><strong>Función principal:</strong> Integración con plataformas externas</p>
+                        <div>
+                            <p class="font-semibold mb-2">Tipos de sistemas:</p>
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li><strong>CRMs:</strong> Salesforce, HubSpot, Pipedrive</li>
+                                <li><strong>ERPs:</strong> SAP, Oracle, Microsoft Dynamics</li>
+                                <li><strong>APIs:</strong> Servicios de pago, logística, marketing</li>
+                                <li><strong>Otros:</strong> Sistemas legacy, bases de datos externas</li>
+                            </ul>
+                        </div>
+                        <p class="text-sm bg-gray-50 p-3 rounded-lg">
+                            <strong>Conexión:</strong> N8N actúa como puente para sincronizar datos y automatizar procesos con estos sistemas externos
+                        </p>
+                    </div>
+                `
+            }
+        };
+
+        function showDetails(platform) {
+            const modal = document.getElementById('detailsModal');
+            const title = document.getElementById('modalTitle');
+            const content = document.getElementById('modalContent');
+            
+            title.textContent = platformDetails[platform].title;
+            content.innerHTML = platformDetails[platform].content;
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('detailsModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // Add some interactive animations on load
+        window.addEventListener('load', function() {
+            const cards = document.querySelectorAll('.platform-card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    card.style.transition = 'all 0.6s ease';
+                    
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 100);
+                }, index * 200);
+            });
+        });
+    </script>
+</body>
+</html>
