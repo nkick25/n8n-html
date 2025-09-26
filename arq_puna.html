@@ -78,20 +78,23 @@
                 <!-- ManyChat to N8N -->
                 <line x1="25%" y1="50%" x2="50%" y2="50%" class="connection-line-solid"/>
                 <!-- N8N to Supabase -->
-                <line x1="50%" y1="50%" x2="75%" y2="30%" class="connection-line-solid"/>
+                <line x1="50%" y1="50%" x2="75%" y2="25%" class="connection-line-solid"/>
                 <!-- N8N to External Systems -->
-                <line x1="50%" y1="50%" x2="50%" y2="20%" class="connection-line"/>
-                <!-- Supabase to Lovable -->
-                <line x1="75%" y1="30%" x2="75%" y2="70%" class="connection-line-solid"/>
+                <line x1="50%" y1="50%" x2="50%" y2="15%" class="connection-line"/>
+                <!-- Supabase to APP de Suscripciones -->
+                <line x1="75%" y1="25%" x2="75%" y2="55%" class="connection-line-solid"/>
+                <!-- APP de Suscripciones to Cliente -->
+                <line x1="75%" y1="55%" x2="75%" y2="85%" class="connection-line-solid"/>
                 
                 <!-- Flow indicators -->
                 <circle cx="37.5%" cy="50%" r="4" fill="#3b82f6" class="pulse-dot"/>
-                <circle cx="62.5%" cy="40%" r="4" fill="#10b981" class="pulse-dot"/>
-                <circle cx="50%" cy="35%" r="4" fill="#f59e0b" class="pulse-dot"/>
-                <circle cx="75%" cy="50%" r="4" fill="#10b981" class="pulse-dot"/>
+                <circle cx="62.5%" cy="37.5%" r="4" fill="#10b981" class="pulse-dot"/>
+                <circle cx="50%" cy="32.5%" r="4" fill="#f59e0b" class="pulse-dot"/>
+                <circle cx="75%" cy="40%" r="4" fill="#10b981" class="pulse-dot"/>
+                <circle cx="75%" cy="70%" r="4" fill="#06b6d4" class="pulse-dot"/>
             </svg>
 
-            <div class="relative grid grid-cols-3 gap-8 h-[500px]" style="z-index: 2;">
+            <div class="relative grid grid-cols-3 gap-8 h-[600px]" style="z-index: 2;">
                 <!-- Left Column - External Channels & ManyChat -->
                 <div class="space-y-6">
                     <!-- External Channels -->
@@ -187,10 +190,25 @@
                             </div>
                             <h3 class="font-bold text-xl">APP de Suscripciones</h3>
                         </div>
-                        <p class="text-sm opacity-90">Gestión de suscripciones y citas</p>
+                        <p class="text-sm opacity-90">Gestión administrativa</p>
                         <div class="mt-3 flex items-center text-xs">
                             <div class="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
                             <span>En línea</span>
+                        </div>
+                    </div>
+
+                    <!-- Cliente -->
+                    <div class="platform-card bg-gradient-to-r from-blue-400 to-cyan-500 rounded-xl p-6 text-white" onclick="showDetails('cliente')">
+                        <div class="flex items-center mb-3">
+                            <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center mr-3">
+                                <span class="text-2xl">👤</span>
+                            </div>
+                            <h3 class="font-bold text-xl">Cliente</h3>
+                        </div>
+                        <p class="text-sm opacity-90">Vista del cliente externo</p>
+                        <div class="mt-3 flex items-center text-xs">
+                            <div class="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
+                            <span>Disponible</span>
                         </div>
                     </div>
                 </div>
@@ -223,7 +241,8 @@
                     <div>• <strong class="text-white">ManyChat:</strong> Gateway de comunicación</div>
                     <div>• <strong class="text-white">N8N:</strong> Motor de IA + Orquestación central</div>
                     <div>• <strong class="text-white">Supabase:</strong> Almacenamiento de datos</div>
-                    <div>• <strong class="text-white">APP de Suscripciones:</strong> Interfaz de usuario</div>
+                    <div>• <strong class="text-white">APP de Suscripciones:</strong> Interfaz administrativa</div>
+                    <div>• <strong class="text-white">Cliente:</strong> Portal de autogestión</div>
                     <div>• <strong class="text-white">Sistemas Externos:</strong> Integraciones CRM/ERP</div>
                 </div>
             </div>
@@ -319,7 +338,7 @@
                 title: "APP de Suscripciones",
                 content: `
                     <div class="space-y-4">
-                        <p><strong>Función principal:</strong> Gestión integral de suscripciones con vistas para administradores y clientes</p>
+                        <p><strong>Función principal:</strong> Plataforma administrativa para gestión interna de suscripciones</p>
                         <div>
                             <p class="font-semibold mb-2">Funcionalidades Administrativas:</p>
                             <ul class="list-disc list-inside space-y-1 text-sm">
@@ -327,19 +346,50 @@
                                 <li>Gestión de tablas de Supabase</li>
                                 <li>Herramientas de análisis y reportes</li>
                                 <li>Control de usuarios y permisos</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <p class="font-semibold mb-2">Vista del Cliente Externo:</p>
-                            <ul class="list-disc list-inside space-y-1 text-sm">
-                                <li><strong>Gestión de Suscripciones:</strong> Visualización y modificación de planes activos</li>
-                                <li><strong>Administración de Créditos:</strong> Consulta de saldo y historial de transacciones</li>
-                                <li><strong>Sistema de Citas:</strong> Programación, reprogramación y cancelación de citas</li>
-                                <li>Portal personalizado con autenticación segura</li>
+                                <li>Configuración de planes y tarifas</li>
+                                <li>Monitoreo de métricas de negocio</li>
                             </ul>
                         </div>
                         <p class="text-sm bg-purple-50 p-3 rounded-lg">
-                            <strong>Experiencia:</strong> Ofrece una plataforma completa con doble interfaz: administrativa para la gestión interna y un portal intuitivo para que los clientes gestionen sus suscripciones, créditos y citas de forma autónoma
+                            <strong>Acceso:</strong> Interfaz interna para administradores que gestiona toda la lógica de negocio y proporciona datos al portal del cliente
+                        </p>
+                    </div>
+                `
+            },
+            cliente: {
+                title: "Cliente - Portal Externo",
+                content: `
+                    <div class="space-y-4">
+                        <p><strong>Función principal:</strong> Portal de autogestión para clientes externos</p>
+                        <div>
+                            <p class="font-semibold mb-2">Gestión de Suscripciones:</p>
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li>Visualización de planes activos y vencimientos</li>
+                                <li>Modificación y upgrade de suscripciones</li>
+                                <li>Historial de pagos y facturas</li>
+                                <li>Cancelación y pausa de servicios</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="font-semibold mb-2">Administración de Créditos:</p>
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li>Consulta de saldo actual</li>
+                                <li>Historial de transacciones detallado</li>
+                                <li>Recarga de créditos online</li>
+                                <li>Notificaciones de saldo bajo</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="font-semibold mb-2">Sistema de Citas:</p>
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li>Programación de nuevas citas</li>
+                                <li>Reprogramación y cancelación</li>
+                                <li>Calendario personal integrado</li>
+                                <li>Recordatorios automáticos</li>
+                            </ul>
+                        </div>
+                        <p class="text-sm bg-cyan-50 p-3 rounded-lg">
+                            <strong>Experiencia:</strong> Portal intuitivo y personalizado que permite a los clientes gestionar todos sus servicios de forma autónoma con autenticación segura y interfaz responsiva
                         </p>
                     </div>
                 `
@@ -400,6 +450,9 @@
                 }, index * 200);
             });
         });
+    </script>
+</body>
+</html>
     </script>
 </body>
 </html>
