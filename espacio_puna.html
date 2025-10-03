@@ -13,33 +13,33 @@
         }
         
         :root {
-            /* Paleta Principal - Basada en Manual de Marca */
-            --puna-primary: #6B4B3A;      /* Marrón principal (más similar al manual) */
-            --puna-secondary: #B89176;    /* Beige cálido intermedio */
-            --puna-accent: #D4A574;       /* Terracota suave */
-            --puna-light: #F5F1ED;       /* Crema muy clara */
-            --puna-dark: #4A3429;        /* Marrón muy oscuro para texto */
+            /* Paleta Oficial del Manual de Marca */
+            --puna-cacao: #806763;        /* CACAO - Color principal */
+            --puna-mauve: #D1A99A;        /* MAUVE - Uso moderado */
+            --puna-cream: #EADED5;        /* CREAM - Fondos suaves */
+            --puna-terracota: #C97D68;    /* TERRACOTA - Acentos */
+            --puna-verde-calma: #C6CDBC;  /* VERDE CALMA - Secciones especiales */
+            --puna-durazno: #EDCCB4;      /* DURAZNO - Uso mínimo */
             
-            /* Tonos Complementarios del Manual */
-            --puna-terracota: #C4826B;   /* Terracota como en poster 3 */
-            --puna-sage: #A8B5A0;        /* Verde suave como poster 4 */
-            --puna-earth: #8B6B47;       /* Tierra media */
-            --puna-sand: #F2E8D9;        /* Arena muy clara */
-            --puna-warm-beige: #E8D5C4;  /* Beige cálido como poster 5 */
+            /* Variaciones para uso principal */
+            --puna-primary: #806763;      /* CACAO como color principal */
+            --puna-secondary: #C6CDBC;    /* VERDE CALMA como secundario */
+            --puna-accent: #EADED5;       /* CREAM para destacar */
+            --puna-light: #F5F2EF;       /* Crema muy clara */
+            --puna-dark: #5D4B47;        /* CACAO oscuro para texto */
             
-            /* Neutros Optimizados */
-            --puna-white: #FFFCF7;       /* Blanco cálido */
-            --puna-cream: #FAF5EF;       /* Crema clara */
-            --puna-soft: #F7F2EC;        /* Muy suave */
+            /* Neutros optimizados */
+            --puna-white: #FFFCF9;       /* Blanco cálido */
+            --puna-soft: #F8F5F2;        /* Muy suave */
             
-            /* Colores para texto optimizados */
-            --puna-text-dark: #3D2B1F;   /* Texto oscuro con buen contraste */
-            --puna-text-light: #F5F1ED;  /* Texto claro para fondos oscuros */
-            --puna-text-medium: #6B4B3A; /* Texto medio para fondos claros */
+            /* Colores de texto específicos */
+            --puna-text-dark: #5D4B47;   /* CACAO oscuro para texto principal */
+            --puna-text-light: #F5F2EF;  /* Texto claro para fondos oscuros */
+            --puna-text-medium: #806763; /* CACAO para texto medio */
         }
 
         body {
-            background: linear-gradient(135deg, var(--puna-soft) 0%, var(--puna-sand) 50%, var(--puna-light) 100%);
+            background: linear-gradient(135deg, var(--puna-verde-calma) 0%, var(--puna-cream) 50%, var(--puna-light) 100%);
             font-family: 'Poppins', sans-serif;
             color: var(--puna-text-dark);
             line-height: 1.6;
@@ -51,20 +51,20 @@
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(250, 245, 239, 0.95);
+            background: rgba(234, 222, 213, 0.95);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(180, 145, 118, 0.3);
+            border-bottom: 1px solid rgba(128, 103, 99, 0.3);
             z-index: 1000;
             padding: 1rem 2rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
             transition: all 0.3s ease;
-            box-shadow: 0 2px 20px rgba(107, 75, 58, 0.08);
+            box-shadow: 0 2px 20px rgba(128, 103, 99, 0.08);
         }
         
         .app-btn {
-            background: linear-gradient(135deg, var(--puna-primary), var(--puna-earth));
+            background: linear-gradient(135deg, var(--puna-cacao), var(--puna-dark));
             color: var(--puna-white);
             border: none;
             border-radius: 25px;
@@ -72,16 +72,16 @@
             font-size: 0.9rem;
             font-weight: 600;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(139, 69, 19, 0.25);
+            box-shadow: 0 4px 15px rgba(128, 103, 99, 0.25);
             transition: all 0.3s ease;
             text-decoration: none;
             display: inline-block;
         }
         
         .app-btn:hover {
-            background: linear-gradient(135deg, var(--puna-earth), var(--puna-clay));
+            background: linear-gradient(135deg, var(--puna-dark), var(--puna-cacao));
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(139, 69, 19, 0.35);
+            box-shadow: 0 6px 20px rgba(128, 103, 99, 0.35);
         }
         
         .logo {
@@ -159,16 +159,16 @@
             align-items: center;
             gap: 4rem;
             padding: 8rem 2rem 4rem;
-            background: linear-gradient(135deg, rgba(247, 243, 239, 0.8), rgba(240, 232, 220, 0.8));
+            background: linear-gradient(135deg, rgba(198, 205, 188, 0.3), rgba(234, 222, 213, 0.6));
         }
         
         .hero-content h1 {
             font-size: clamp(2.8rem, 5vw, 4.5rem);
             font-weight: 700;
-            color: var(--puna-primary);
+            color: var(--puna-cacao);
             margin-bottom: 1.5rem;
             animation: fadeInUp 1s ease;
-            text-shadow: 0 2px 4px rgba(107, 75, 58, 0.15);
+            text-shadow: 0 2px 4px rgba(128, 103, 99, 0.15);
         }
         
         .hero-content p {
@@ -191,20 +191,22 @@
         }
         
         .hero-feature {
-            background: rgba(255, 255, 255, 0.7);
+            background: linear-gradient(135deg, rgba(198, 205, 188, 0.4), rgba(234, 222, 213, 0.6));
             border-radius: 15px;
             padding: 1.5rem;
             text-align: center;
             transition: all 0.3s ease;
+            border: 1px solid rgba(128, 103, 99, 0.2);
         }
         
         .hero-feature:hover {
             transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.9);
+            background: linear-gradient(135deg, rgba(234, 222, 213, 0.8), rgba(198, 205, 188, 0.6));
+            border-color: var(--puna-cacao);
         }
         
         .hero-feature h3 {
-            color: var(--puna-primary);
+            color: var(--puna-cacao);
             font-size: 1.1rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
@@ -254,20 +256,20 @@
             backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 2rem;
-            box-shadow: 0 8px 32px rgba(107, 75, 58, 0.12);
+            box-shadow: 0 8px 32px rgba(128, 103, 99, 0.12);
             transition: all 0.3s ease;
-            border: 1px solid rgba(180, 145, 118, 0.2);
+            border: 1px solid rgba(198, 205, 188, 0.3);
         }
         
         .card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(107, 75, 58, 0.2);
-            border-color: var(--puna-accent);
-            background: linear-gradient(135deg, var(--puna-cream), var(--puna-warm-beige));
+            box-shadow: 0 15px 40px rgba(128, 103, 99, 0.2);
+            border-color: var(--puna-cacao);
+            background: linear-gradient(135deg, var(--puna-cream), var(--puna-verde-calma));
         }
         
         .card h3 {
-            color: var(--puna-primary);
+            color: var(--puna-cacao);
             font-size: 1.3rem;
             font-weight: 600;
             margin-bottom: 1rem;
@@ -284,12 +286,12 @@
         }
         
         .highlight-box {
-            background: linear-gradient(135deg, var(--puna-warm-beige), var(--puna-sand));
+            background: linear-gradient(135deg, var(--puna-verde-calma), var(--puna-cream));
             border-radius: 15px;
             padding: 2rem;
             margin: 2rem 0;
-            border-left: 4px solid var(--puna-primary);
-            box-shadow: 0 4px 20px rgba(107, 75, 58, 0.15);
+            border-left: 4px solid var(--puna-cacao);
+            box-shadow: 0 4px 20px rgba(128, 103, 99, 0.15);
         }
         
         .highlight-box p {
@@ -310,17 +312,17 @@
             background: linear-gradient(135deg, var(--puna-white), var(--puna-cream));
             border-radius: 15px;
             transition: all 0.3s ease;
-            border: 1px solid rgba(180, 145, 118, 0.2);
+            border: 1px solid rgba(198, 205, 188, 0.3);
         }
         
         .contact-item:hover {
             transform: translateY(-5px);
-            background: linear-gradient(135deg, var(--puna-cream), var(--puna-warm-beige));
-            border-color: var(--puna-primary);
+            background: linear-gradient(135deg, var(--puna-cream), var(--puna-verde-calma));
+            border-color: var(--puna-cacao);
         }
         
         .contact-item h4 {
-            color: var(--puna-primary);
+            color: var(--puna-cacao);
             font-weight: 600;
             margin-bottom: 0.5rem;
         }
@@ -332,7 +334,7 @@
         }
         
         .contact-item a:hover {
-            color: var(--puna-primary);
+            color: var(--puna-cacao);
         }
         
         .faq-item {
@@ -341,17 +343,17 @@
             margin-bottom: 1rem;
             padding: 1.5rem;
             transition: all 0.3s ease;
-            border: 1px solid rgba(180, 145, 118, 0.2);
+            border: 1px solid rgba(198, 205, 188, 0.3);
         }
         
         .faq-item:hover {
-            background: linear-gradient(135deg, var(--puna-cream), var(--puna-warm-beige));
+            background: linear-gradient(135deg, var(--puna-cream), var(--puna-verde-calma));
             transform: translateX(5px);
-            border-color: var(--puna-primary);
+            border-color: var(--puna-cacao);
         }
         
         .faq-item h4 {
-            color: var(--puna-primary);
+            color: var(--puna-cacao);
             font-weight: 600;
             margin-bottom: 0.5rem;
         }
@@ -361,7 +363,7 @@
         }
         
         footer {
-            background: linear-gradient(135deg, var(--puna-primary), var(--puna-text-dark));
+            background: linear-gradient(135deg, var(--puna-cacao), var(--puna-dark));
             color: var(--puna-text-light);
             padding: 3rem 2rem 2rem;
             margin-top: 4rem;
@@ -376,7 +378,7 @@
         }
         
         .footer-section h4 {
-            color: var(--puna-sand);
+            color: var(--puna-cream);
             font-size: 1.1rem;
             font-weight: 600;
             margin-bottom: 1rem;
@@ -391,15 +393,15 @@
         }
         
         .footer-section a:hover {
-            color: var(--puna-sand);
+            color: var(--puna-cream);
         }
         
         .footer-bottom {
             text-align: center;
             padding-top: 2rem;
             margin-top: 2rem;
-            border-top: 1px solid rgba(242, 232, 217, 0.3);
-            color: var(--puna-sand);
+            border-top: 1px solid rgba(234, 222, 213, 0.3);
+            color: var(--puna-cream);
             font-size: 0.85rem;
         }
         
@@ -676,10 +678,10 @@
         window.addEventListener('scroll', () => {
             const navbar = document.querySelector('.navbar');
             if (window.scrollY > 100) {
-                navbar.style.background = 'rgba(250, 245, 239, 0.98)';
-                navbar.style.boxShadow = '0 2px 20px rgba(107, 75, 58, 0.12)';
+                navbar.style.background = 'rgba(234, 222, 213, 0.98)';
+                navbar.style.boxShadow = '0 2px 20px rgba(128, 103, 99, 0.12)';
             } else {
-                navbar.style.background = 'rgba(250, 245, 239, 0.95)';
+                navbar.style.background = 'rgba(234, 222, 213, 0.95)';
                 navbar.style.boxShadow = 'none';
             }
         });
