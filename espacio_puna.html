@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Espacio Puna - Pilates & Yoga</title>
+    <title>Espacio Puna - Pilates • Yoga</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -39,9 +39,9 @@
         }
 
         body {
-            background: linear-gradient(135deg, var(--puna-verde-calma) 0%, var(--puna-cream) 50%, var(--puna-light) 100%);
+            background: #806763;
             font-family: 'Poppins', sans-serif;
-            color: var(--puna-text-dark);
+            color: var(--puna-cream);
             line-height: 1.6;
             overflow-x: hidden;
         }
@@ -51,37 +51,37 @@
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(234, 222, 213, 0.95);
+            background: rgba(128, 103, 99, 0.95);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(128, 103, 99, 0.3);
+            border-bottom: 1px solid rgba(234, 222, 213, 0.2);
             z-index: 1000;
             padding: 1rem 2rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
             transition: all 0.3s ease;
-            box-shadow: 0 2px 20px rgba(128, 103, 99, 0.08);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
         }
         
         .app-btn {
-            background: linear-gradient(135deg, var(--puna-cacao), var(--puna-dark));
-            color: var(--puna-white);
+            background: #EADED5;
+            color: #806763;
             border: none;
             border-radius: 25px;
             padding: 0.6rem 1.2rem;
             font-size: 0.9rem;
             font-weight: 600;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(128, 103, 99, 0.25);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             transition: all 0.3s ease;
             text-decoration: none;
             display: inline-block;
         }
         
         .app-btn:hover {
-            background: linear-gradient(135deg, var(--puna-dark), var(--puna-cacao));
+            background: #F0E6D9;
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(128, 103, 99, 0.35);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
         }
         
         .logo {
@@ -99,7 +99,7 @@
             align-items: center;
             gap: 2rem;
             font-size: 0.85rem;
-            color: var(--puna-text-medium);
+            color: var(--puna-cream);
         }
         
         .header-info-item {
@@ -109,13 +109,13 @@
         }
         
         .header-info a {
-            color: var(--puna-text-medium);
+            color: var(--puna-cream);
             text-decoration: none;
             transition: color 0.3s ease;
         }
         
         .header-info a:hover {
-            color: var(--puna-primary);
+            color: #F0E6D9;
         }
         
         .nav-links {
@@ -124,7 +124,7 @@
         }
         
         .nav-links a {
-            color: var(--puna-text-medium);
+            color: var(--puna-cream);
             text-decoration: none;
             font-weight: 500;
             font-size: 0.9rem;
@@ -133,7 +133,7 @@
         }
         
         .nav-links a:hover {
-            color: var(--puna-primary);
+            color: #F0E6D9;
             transform: translateY(-1px);
         }
         
@@ -144,7 +144,7 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--puna-primary);
+            background: var(--puna-cream);
             transition: width 0.3s ease;
         }
         
@@ -159,21 +159,20 @@
             align-items: center;
             gap: 4rem;
             padding: 8rem 2rem 4rem;
-            background: linear-gradient(135deg, rgba(198, 205, 188, 0.3), rgba(234, 222, 213, 0.6));
+            background: #806763;
         }
         
         .hero-content h1 {
             font-size: clamp(2.8rem, 5vw, 4.5rem);
             font-weight: 700;
-            color: var(--puna-cacao);
+            color: var(--puna-cream);
             margin-bottom: 1.5rem;
             animation: fadeInUp 1s ease;
-            text-shadow: 0 2px 4px rgba(128, 103, 99, 0.15);
         }
         
         .hero-content p {
             font-size: clamp(1.1rem, 2vw, 1.3rem);
-            color: var(--puna-text-dark);
+            color: var(--puna-cream);
             margin-bottom: 2rem;
             line-height: 1.6;
             animation: fadeInUp 1.2s ease;
@@ -191,31 +190,46 @@
         }
         
         .hero-feature {
-            background: linear-gradient(135deg, rgba(198, 205, 188, 0.4), rgba(234, 222, 213, 0.6));
+            background: rgba(234, 222, 213, 0.1);
             border-radius: 15px;
             padding: 1.5rem;
             text-align: center;
             transition: all 0.3s ease;
-            border: 1px solid rgba(128, 103, 99, 0.2);
+            border: 1px solid rgba(234, 222, 213, 0.2);
         }
         
         .hero-feature:hover {
             transform: translateY(-5px);
-            background: linear-gradient(135deg, rgba(234, 222, 213, 0.8), rgba(198, 205, 188, 0.6));
-            border-color: var(--puna-cacao);
+            background: rgba(234, 222, 213, 0.2);
+            border-color: var(--puna-cream);
         }
         
         .hero-feature h3 {
-            color: var(--puna-cacao);
+            color: var(--puna-cream);
             font-size: 1.1rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
         }
         
         .hero-feature p {
-            color: var(--puna-text-dark);
+            color: var(--puna-cream);
             font-size: 0.9rem;
             margin: 0;
+        }
+        
+        .feature-icon {
+            margin-bottom: 1rem;
+            color: var(--puna-cream);
+            display: flex;
+            justify-content: center;
+        }
+        
+        .feature-icon svg {
+            transition: transform 0.3s ease;
+        }
+        
+        .hero-feature:hover .feature-icon svg {
+            transform: scale(1.1);
         }
         
         .container {
@@ -239,9 +253,18 @@
         .section h2 {
             font-size: clamp(1.8rem, 4vw, 2.5rem);
             font-weight: 600;
-            color: var(--puna-primary);
+            color: var(--puna-cream);
             margin-bottom: 1.5rem;
             text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .section-icon {
+            font-size: 1.2em;
+            filter: grayscale(20%);
         }
         
         .cards-grid {
@@ -252,31 +275,31 @@
         }
         
         .card {
-            background: linear-gradient(135deg, var(--puna-white), var(--puna-cream));
+            background: rgba(234, 222, 213, 0.1);
             backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 2rem;
-            box-shadow: 0 8px 32px rgba(128, 103, 99, 0.12);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
-            border: 1px solid rgba(198, 205, 188, 0.3);
+            border: 1px solid rgba(234, 222, 213, 0.2);
         }
         
         .card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(128, 103, 99, 0.2);
-            border-color: var(--puna-cacao);
-            background: linear-gradient(135deg, var(--puna-cream), var(--puna-verde-calma));
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            border-color: var(--puna-cream);
+            background: rgba(234, 222, 213, 0.2);
         }
         
         .card h3 {
-            color: var(--puna-cacao);
+            color: var(--puna-cream);
             font-size: 1.3rem;
             font-weight: 600;
             margin-bottom: 1rem;
         }
         
         .card p, .card ul {
-            color: var(--puna-text-dark);
+            color: var(--puna-cream);
             font-size: 0.95rem;
             line-height: 1.6;
         }
@@ -285,17 +308,35 @@
             padding-left: 1.2rem;
         }
         
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .card-icon {
+            font-size: 2rem;
+            filter: grayscale(20%);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover .card-icon {
+            transform: scale(1.1);
+            filter: grayscale(0%);
+        }
+        
         .highlight-box {
-            background: linear-gradient(135deg, var(--puna-verde-calma), var(--puna-cream));
+            background: rgba(234, 222, 213, 0.15);
             border-radius: 15px;
             padding: 2rem;
             margin: 2rem 0;
-            border-left: 4px solid var(--puna-cacao);
-            box-shadow: 0 4px 20px rgba(128, 103, 99, 0.15);
+            border-left: 4px solid var(--puna-cream);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
         
         .highlight-box p {
-            color: var(--puna-text-dark);
+            color: var(--puna-cream);
             margin-bottom: 0;
         }
         
@@ -338,28 +379,33 @@
         }
         
         .faq-item {
-            background: linear-gradient(135deg, var(--puna-white), var(--puna-cream));
+            background: rgba(234, 222, 213, 0.1);
             border-radius: 12px;
             margin-bottom: 1rem;
             padding: 1.5rem;
             transition: all 0.3s ease;
-            border: 1px solid rgba(198, 205, 188, 0.3);
+            border: 1px solid rgba(234, 222, 213, 0.2);
         }
         
         .faq-item:hover {
-            background: linear-gradient(135deg, var(--puna-cream), var(--puna-verde-calma));
+            background: rgba(234, 222, 213, 0.2);
             transform: translateX(5px);
-            border-color: var(--puna-cacao);
+            border-color: var(--puna-cream);
         }
         
         .faq-item h4 {
-            color: var(--puna-cacao);
+            color: var(--puna-cream);
             font-weight: 600;
             margin-bottom: 0.5rem;
         }
         
         .faq-item p {
-            color: var(--puna-text-dark);
+            color: var(--puna-cream);
+        }
+        
+        .faq-icon {
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
         }
         
         .terms-container {
@@ -368,16 +414,16 @@
         }
         
         .terms-content {
-            background: linear-gradient(135deg, var(--puna-white), var(--puna-cream));
+            background: rgba(234, 222, 213, 0.1);
             border-radius: 20px;
             padding: 3rem;
-            box-shadow: 0 8px 32px rgba(128, 103, 99, 0.12);
-            border: 1px solid rgba(198, 205, 188, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(234, 222, 213, 0.2);
             line-height: 1.7;
         }
         
         .terms-content h3 {
-            color: var(--puna-cacao);
+            color: var(--puna-cream);
             font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 1.5rem;
@@ -385,7 +431,7 @@
         }
         
         .terms-content h4 {
-            color: var(--puna-cacao);
+            color: var(--puna-cream);
             font-size: 1.1rem;
             font-weight: 600;
             margin-top: 2rem;
@@ -393,13 +439,13 @@
         }
         
         .terms-content p {
-            color: var(--puna-text-dark);
+            color: var(--puna-cream);
             font-size: 0.95rem;
             margin-bottom: 1rem;
         }
         
         .terms-content ul {
-            color: var(--puna-text-dark);
+            color: var(--puna-cream);
             font-size: 0.95rem;
             margin-bottom: 1rem;
             padding-left: 1.5rem;
@@ -412,15 +458,15 @@
         .terms-update {
             margin-top: 2rem;
             padding-top: 1.5rem;
-            border-top: 1px solid rgba(198, 205, 188, 0.4);
+            border-top: 1px solid rgba(234, 222, 213, 0.3);
             font-style: italic;
             text-align: center;
-            color: var(--puna-text-medium) !important;
+            color: var(--puna-cream) !important;
         }
         
         .terms-toggle {
-            background: linear-gradient(135deg, var(--puna-cacao), var(--puna-dark));
-            color: var(--puna-white);
+            background: #EADED5;
+            color: #806763;
             border: none;
             border-radius: 25px;
             padding: 0.8rem 1.5rem;
@@ -432,22 +478,33 @@
             align-items: center;
             gap: 0.5rem;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(128, 103, 99, 0.25);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
         
         .terms-toggle:hover {
-            background: linear-gradient(135deg, var(--puna-dark), var(--puna-cacao));
+            background: #F0E6D9;
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(128, 103, 99, 0.35);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
         }
         
         .toggle-icon {
-            transition: transform 0.3s ease;
-            font-size: 0.8rem;
+            transition: all 0.3s ease;
+            font-size: 1.1em;
+            margin-left: 8px;
         }
         
         .terms-toggle.expanded .toggle-icon {
-            transform: rotate(180deg);
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        .terms-toggle:hover .toggle-icon {
+            animation: bounce 0.6s ease-in-out;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-3px); }
+            60% { transform: translateY(-2px); }
         }
         
         .terms-expanded {
@@ -467,10 +524,11 @@
         }
         
         footer {
-            background: linear-gradient(135deg, var(--puna-cacao), var(--puna-dark));
-            color: var(--puna-text-light);
+            background: #806763;
+            color: var(--puna-cream);
             padding: 3rem 2rem 2rem;
             margin-top: 4rem;
+            border-top: 1px solid rgba(234, 222, 213, 0.2);
         }
         
         .footer-content {
@@ -486,10 +544,17 @@
             font-size: 1.1rem;
             font-weight: 600;
             margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .footer-icon {
+            font-size: 1.2em;
         }
         
         .footer-section p, .footer-section a {
-            color: var(--puna-text-light);
+            color: var(--puna-cream);
             font-size: 0.9rem;
             line-height: 1.6;
             text-decoration: none;
@@ -497,14 +562,14 @@
         }
         
         .footer-section a:hover {
-            color: var(--puna-cream);
+            color: #F0E6D9;
         }
         
         .footer-bottom {
             text-align: center;
             padding-top: 2rem;
             margin-top: 2rem;
-            border-top: 1px solid rgba(234, 222, 213, 0.3);
+            border-top: 1px solid rgba(234, 222, 213, 0.2);
             color: var(--puna-cream);
             font-size: 0.85rem;
         }
@@ -652,14 +717,35 @@
         <div class="hero-info">
             <div class="hero-features">
                 <div class="hero-feature">
+                    <div class="feature-icon">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 2C10.06 2 2 10.06 2 20s8.06 18 18 18 18-8.06 18-18S29.94 2 20 2zm0 32c-7.73 0-14-6.27-14-14S12.27 6 20 6s14 6.27 14 14-6.27 14-14 14z" fill="currentColor"/>
+                            <circle cx="20" cy="15" r="3" fill="currentColor"/>
+                            <path d="M20 20c-2.21 0-4 1.79-4 4v8h2v-8c0-1.1.9-2 2-2s2 .9 2 2v8h2v-8c0-2.21-1.79-4-4-4z" fill="currentColor"/>
+                        </svg>
+                    </div>
                     <h3>Pilates Reformer</h3>
                     <!-- <p>6 camas equipadas con todos los accesorios para mejorar postura y flexibilidad</p> -->
                 </div>
                 <div class="hero-feature">
+                    <div class="feature-icon">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 4c-8.84 0-16 7.16-16 16s7.16 16 16 16 16-7.16 16-16S28.84 4 20 4zm0 28c-6.63 0-12-5.37-12-12S13.37 8 20 8s12 5.37 12 12-5.37 12-12 12z" fill="currentColor"/>
+                            <path d="M20 12c-1.1 0-2 .9-2 2v4c0 1.1.9 2 2 2s2-.9 2-2v-4c0-1.1-.9-2-2-2z" fill="currentColor"/>
+                            <path d="M14 18c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM26 18c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" fill="currentColor"/>
+                        </svg>
+                    </div>
                     <h3>Yoga Integral</h3>
                     <!-- <p>Clases grupales hasta 7 personas en un ambiente de respeto y aceptación</p> -->
                 </div>
                 <div class="hero-feature">
+                    <div class="feature-icon">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 2C10.06 2 2 10.06 2 20s8.06 18 18 18 18-8.06 18-18S29.94 2 20 2zm8 28H12c-1.1 0-2-.9-2-2V14c0-1.1.9-2 2-2h16c1.1 0 2 .9 2 2v14c0 1.1-.9 2-2 2z" fill="currentColor"/>
+                            <circle cx="20" cy="20" r="4" fill="currentColor"/>
+                            <path d="M16 8h8v4h-8V8zM12 16h4v4h-4v-4zM24 16h4v4h-4v-4z" fill="currentColor"/>
+                        </svg>
+                    </div>
                     <h3>Talleres Especiales</h3>
                     <!-- <p>Meditación, yoga para embarazadas y reflexología</p> -->
                 </div>
@@ -673,21 +759,30 @@
 
     <div class="container">
         <div class="section" id="actividades">
-            <h2>Nuestra Propuesta</h2>
+            <h2><span class="section-icon">🌿</span> Nuestra Propuesta</h2>
             <div class="highlight-box">
                 <p>Crear un espacio seguro y cálido donde cada persona pueda conectarse consigo misma y con otros, a través de yoga, pilates y talleres de bienestar integral.</p>
             </div>
             <div class="cards-grid">
                 <div class="card">
-                    <h3>Pilates Reformer</h3>
+                    <div class="card-header">
+                        <div class="card-icon">🏋️‍♀️</div>
+                        <h3>Pilates Reformer</h3>
+                    </div>
                     <p>6 camas equipadas con box, tabla de salto y todos los accesorios. Método contemporáneo para mejorar postura, fuerza y flexibilidad.</p>
                 </div>
                 <div class="card">
-                    <h3>Yoga Integral</h3>
+                    <div class="card-header">
+                        <div class="card-icon">🧘‍♀️</div>
+                        <h3>Yoga Integral</h3>
+                    </div>
                     <p>Clases grupales hasta 7 personas con modalidad integral. Conectá con tu cuerpo y mente en un ambiente de respeto y aceptación.</p>
                 </div>
                 <div class="card">
-                    <h3>Talleres Especiales</h3>
+                    <div class="card-header">
+                        <div class="card-icon">✨</div>
+                        <h3>Talleres Especiales</h3>
+                    </div>
                     <p>Meditación, yoga para embarazadas y reflexología. Actividades orientadas al movimiento consciente y la relajación.</p>
                 </div>
             </div>
@@ -711,23 +806,23 @@
         </div> -->
 
         <div class="section" id="faq">
-            <h2>Preguntas Frecuentes</h2>
+            <h2><span class="section-icon">❓</span> Preguntas Frecuentes</h2>
             <div class="faq-item">
-                <h4>¿Cómo me suscribo y anoto en una clase?</h4>
+                <h4><span class="faq-icon">📱</span> ¿Cómo me suscribo y anoto en una clase?</h4>
                 <p>Las suscripciones las contratas directamente con nuestro Staff por nuestras redes (Instagram o WhatsApp). Con la primera suscripción te damos acceso a nuestra app y desde allí podrás registrarte y elegir las Clases que prefieras.</p>
             </div>
             <div class="faq-item">
-                <h4>¿Puedo cancelar una clase?</h4>
+                <h4><span class="faq-icon">🕒</span> ¿Puedo cancelar una clase?</h4>
                 <p>Sí, con 24hs de anticipación desde la app con excepciones hechas por el Staff del Espacio exclusivamente. Las clases canceladas el mismo día no se recuperan.</p>
             </div>
             <div class="faq-item">
-                <h4>¿Puedo combinar yoga y pilates?</h4>
+                <h4><span class="faq-icon">🤸‍♀️</span> ¿Puedo combinar yoga y pilates?</h4>
                 <p>Podes combinar las actividades que quieras siempre y cuando respetes los horarios y modalidades de cada clase. También es importante tener en cuenta tu salud y bienestar general al hacerlo.</p>
             </div>
         </div>
 
         <div class="section" id="terminos">
-            <h2>Términos y Condiciones</h2>
+            <h2><span class="section-icon">📋</span> Términos y Condiciones</h2>
             <div class="terms-container">
                 <div class="terms-content">
                     <h3>Espacio Puna</h3>
@@ -740,7 +835,7 @@
                         
                         <button class="terms-toggle" onclick="toggleTerms()">
                             <span class="toggle-text">Ver términos completos</span>
-                            <span class="toggle-icon">▼</span>
+                            <span class="toggle-icon">📄</span>
                         </button>
                     </div>
 
@@ -788,14 +883,14 @@
     <footer>
         <div class="footer-content">
             <div class="footer-section">
-                <h4>Contacto</h4>
+                <h4><span class="footer-icon">💬</span> Contacto</h4>
                 <p>📧 <a href="mailto:espaciopuna@gmail.com">espaciopuna@gmail.com</a></p>
                 <p>📱 <a href="https://www.instagram.com/espaciopuna?igsh=MWxvNGExeDQxeW9pMw==" target="_blank">@espaciopuna</a></p>
                 <p>🌐 <a href="https://preview--espaciopuna.lovable.app/" target="_blank">App de Reservas</a></p>
             </div>
             <div class="footer-section">
-                <h4>Ubicación</h4>
-                <p>📍 Mariano Acha 2771<br>Villa Urquiza - CABA</p>
+                <h4><span class="footer-icon">📍</span> Ubicación</h4>
+                <p>🏢 Mariano Acha 2771<br>Villa Urquiza - CABA</p>
                 <!-- <p>🕒 Lunes a viernes: 8-20hs<br>Sábados: 8-13hs</p> -->
             </div>
             <!-- <div class="footer-section">
@@ -857,10 +952,10 @@
         window.addEventListener('scroll', () => {
             const navbar = document.querySelector('.navbar');
             if (window.scrollY > 100) {
-                navbar.style.background = 'rgba(234, 222, 213, 0.98)';
-                navbar.style.boxShadow = '0 2px 20px rgba(128, 103, 99, 0.12)';
+                navbar.style.background = 'rgba(128, 103, 99, 0.98)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.15)';
             } else {
-                navbar.style.background = 'rgba(234, 222, 213, 0.95)';
+                navbar.style.background = 'rgba(128, 103, 99, 0.95)';
                 navbar.style.boxShadow = 'none';
             }
         });
