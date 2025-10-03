@@ -4,205 +4,482 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Espacio Puna - Bienestar Integral</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            background: #f7f3ef;
-            font-family: 'Montserrat', sans-serif;
-            color: #5a4632;
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .header {
+        
+        body {
+            background: linear-gradient(135deg, #f7f3ef 0%, #f0e8dc 100%);
+            font-family: 'Poppins', sans-serif;
+            color: #5a4632;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 248, 242, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(216, 176, 140, 0.2);
+            z-index: 1000;
+            padding: 0.8rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+        }
+        
+        .app-btn {
+            background: linear-gradient(135deg, #d8b08c, #b88a5a);
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            padding: 0.6rem 1.2rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(216, 176, 140, 0.3);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .app-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(216, 176, 140, 0.4);
+        }
+        
+        .logo {
+            max-width: 100px;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: #b88a5a;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: #5a4632;
+            transform: translateY(-1px);
+        }
+        
+        .hero {
+            min-height: 90vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
-            padding: 2rem 0 1rem 0;
+            text-align: center;
+            padding: 6rem 2rem 2rem;
+            background: linear-gradient(135deg, rgba(247, 243, 239, 0.8), rgba(240, 232, 220, 0.8));
         }
-        .app-btn {
-            position: absolute;
-            left: 2rem;
-            top: 2rem;
-            background: #d8b08c;
-            color: #fff;
-            border: none;
-            border-radius: 24px;
-            padding: 0.7rem 1.5rem;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 2px 8px rgba(90,70,50,0.08);
-            transition: background 0.2s;
+        
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            color: #5a4632;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
         }
-        .app-btn:hover {
-            background: #b88a5a;
+        
+        .hero-content p {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            color: #8b6b47;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            animation: fadeInUp 1.2s ease;
         }
-        .logo {
-            max-width: 160px;
-            height: auto;
-        }
+        
         .container {
-            max-width: 650px;
-            margin: 2rem auto;
-            background: #fff;
-            border-radius: 18px;
-            box-shadow: 0 4px 24px rgba(90,70,50,0.07);
+            max-width: 1200px;
+            margin: 0 auto;
             padding: 2rem;
         }
-        h1 {
+        
+        .section {
+            margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .section h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 600;
+            color: #5a4632;
+            margin-bottom: 1.5rem;
             text-align: center;
-            font-size: 2.2rem;
-            margin-bottom: 1.2rem;
-            font-weight: 700;
-            letter-spacing: 1px;
         }
-        section {
-            margin-bottom: 2rem;
+        
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
         }
-        section:last-child {
-            margin-bottom: 0;
+        
+        .card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(90, 70, 50, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(216, 176, 140, 0.2);
         }
-        h2 {
-            font-size: 1.3rem;
-            margin-bottom: 0.7rem;
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(90, 70, 50, 0.15);
+        }
+        
+        .card h3 {
             color: #b88a5a;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
         }
-        p, ul {
-            font-size: 1rem;
-            line-height: 1.7;
-            margin: 0 0 1rem 0;
+        
+        .card p, .card ul {
+            color: #6b5344;
+            font-size: 0.95rem;
+            line-height: 1.6;
         }
-        ul {
+        
+        .card ul {
             padding-left: 1.2rem;
         }
-        .valores-list {
-            margin-bottom: 1rem;
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #f7e7d9, #ede0d3);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-left: 4px solid #d8b08c;
+            box-shadow: 0 4px 20px rgba(216, 176, 140, 0.2);
         }
-        .info-box {
-            background: #f7e7d9;
+        
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .contact-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.8);
+        }
+        
+        .contact-item h4 {
+            color: #b88a5a;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .contact-item a {
+            color: #5a4632;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .contact-item a:hover {
+            color: #d8b08c;
+        }
+        
+        .faq-item {
+            background: rgba(255, 255, 255, 0.7);
             border-radius: 12px;
-            padding: 1rem;
-            margin-bottom: 1.2rem;
-        }
-        .contacto {
-            font-size: 1rem;
             margin-bottom: 1rem;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
         }
-        @media (max-width: 700px) {
+        
+        .faq-item:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateX(5px);
+        }
+        
+        .faq-item h4 {
+            color: #b88a5a;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        footer {
+            background: rgba(255, 248, 242, 0.9);
+            text-align: center;
+            padding: 2rem 0;
+            color: #b88a5a;
+            font-size: 0.9rem;
+            margin-top: 4rem;
+            border-top: 1px solid rgba(216, 176, 140, 0.2);
+        }
+        
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0);
+            }
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0.6rem 1rem;
+                flex-wrap: wrap;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .app-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+            
+            .hero {
+                padding: 5rem 1rem 2rem;
+                min-height: 70vh;
+            }
+            
             .container {
                 padding: 1rem;
             }
-            .header {
-                padding: 1rem 0 0.5rem 0;
+            
+            .cards-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
-            .app-btn {
-                left: 1rem;
-                top: 1rem;
-                padding: 0.5rem 1rem;
+            
+            .card {
+                padding: 1.5rem;
+            }
+            
+            .contact-info {
+                grid-template-columns: 1fr;
             }
         }
-        @keyframes fadeInDown { from { opacity:0; transform:translateY(-30px);} to { opacity:1; transform:translateY(0);} }
-        @keyframes fadeInUp { from { opacity:0; transform:translateY(30px);} to { opacity:1; transform:translateY(0);} }
+        
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 0.5rem 0.8rem;
+            }
+            
+            .hero {
+                padding: 4rem 0.8rem 1.5rem;
+            }
+            
+            .container {
+                padding: 0.8rem;
+            }
+        }
     </style>
 </head>
 <body>
-    <nav class="navbar" style="position:fixed;top:0;left:0;width:100%;background:#fff8f2;border-bottom:1px solid #f0e3d1;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:0.5rem 2rem;">
-        <button class="app-btn" onclick="window.location.href='https://app.espaciopuna.com'">Ir a la APP</button>
-        <img src="logo-espacio-puna.png" alt="Espacio Puna Logo" class="logo" style="max-width:120px;">
-        <div style="flex:1"></div>
-        <div class="nav-links" style="display:flex;gap:1.5rem;">
-            <a href="#mision" style="color:#b88a5a;text-decoration:none;font-weight:600;">Misión</a>
-            <a href="#actividades" style="color:#b88a5a;text-decoration:none;font-weight:600;">Actividades</a>
-            <a href="#suscripciones" style="color:#b88a5a;text-decoration:none;font-weight:600;">Suscripciones</a>
-            <a href="#faq" style="color:#b88a5a;text-decoration:none;font-weight:600;">Preguntas</a>
-            <a href="#contacto" style="color:#b88a5a;text-decoration:none;font-weight:600;">Contacto</a>
+    <nav class="navbar">
+        <a href="https://preview--espaciopuna.lovable.app/" class="app-btn">Reservar en APP</a>
+        <img src="logo-espacio-puna.png" alt="Espacio Puna Logo" class="logo">
+        <div class="nav-links">
+            <a href="#actividades">Actividades</a>
+            <a href="#suscripciones">Packs</a>
+            <a href="#faq">Preguntas</a>
+            <a href="#contacto">Contacto</a>
         </div>
     </nav>
-    <div style="height:80px;"></div>
-    <div class="container">
-        <h1 style="animation:fadeInDown 1s;">Bienvenida a Espacio Puna</h1>
-        <section id="mision" style="animation:fadeInUp 1.2s;">
-            <h2>Misión</h2>
-            <p>Crear un espacio seguro y cálido para que las mujeres se conecten consigo mismas y con otras, a través de yoga, pilates y talleres enfocados en su bienestar. Buscamos ser un refugio donde cada una pueda relajarse, fortalecer su cuerpo y nutrir su alma, en un ambiente de apoyo, amistad y crecimiento.</p>
-        </section>
-        <section style="animation:fadeInUp 1.3s;">
-            <h2>Visión</h2>
-            <p>Ser el lugar de encuentro preferido por las mujeres, reconocido por la calidad de sus clases y por ser una verdadera comunidad. Queremos que nuestro espacio sea sinónimo de bienestar integral, donde el ejercicio físico sea el punto de partida para charlas, risas y conexiones reales, creando una red de mujeres fuertes y empoderadas.</p>
-        </section>
-        <section style="animation:fadeInUp 1.4s;">
-            <h2>Valores</h2>
-            <ul class="valores-list">
-                <li><strong>Comunidad:</strong> Fomentamos la unión y la sororidad. Creemos en el poder de apoyarnos entre mujeres, celebrando nuestras diferencias y compartiendo experiencias.</li>
-                <li><strong>Bienestar Integral:</strong> Entendemos el bienestar como equilibrio entre cuerpo y mente. Nuestras actividades nutren ambas partes, promoviendo salud física y emocional.</li>
-                <li><strong>Aceptación:</strong> Espacio libre de juicios, donde cada mujer puede ser auténtica. Celebramos la diversidad de cuerpos, historias y ritmos, creando respeto y amor propio.</li>
-                <li><strong>Conexión:</strong> Valoramos la conexión profunda, tanto con una misma como con las demás. Cada clase y taller es una oportunidad para escuchar el cuerpo, las emociones y crear lazos genuinos.</li>
-                <li><strong>Pasión:</strong> Ponemos el corazón en cada detalle. Nos mueve la pasión por el yoga, pilates y el desarrollo personal, compartiéndolo con alegría y dedicación.</li>
-            </ul>
-        </section>
-        <section id="actividades" class="info-box" style="animation:fadeInUp 1.5s;">
-            <h2>Actividades</h2>
-            <ul>
-                <li><strong>Pilates reformer:</strong> 6 camas (box, tabla de salto y accesorios incluidos).</li>
-                <li><strong>Yoga integral y stretching:</strong> Clases grupales de hasta 7 personas (con todo tipo de accesorios).</li>
-                <li><strong>Talleres especiales:</strong> Meditación, yoga para embarazadas, reflexología.</li>
-            </ul>
-            <p>Las actividades están orientadas al cuerpo, mente, relajación y movimiento consciente.</p>
-        </section>
-        <section id="suscripciones" style="animation:fadeInUp 1.6s;">
-            <h2>Suscripciones</h2>
-            <ul>
-                <li><strong>Pack fijo:</strong> Días y horarios fijos. Cancelación con 24 hs de anticipación y recuperación en el mismo horario.</li>
-                <li><strong>Pack móvil:</strong> Días y horarios flexibles. Cancelación con 24 hs de anticipación y recuperación en cualquier horario disponible.</li>
-            </ul>
-        </section>
-        <section style="animation:fadeInUp 1.7s;">
-            <h2>Cancelaciones y elección de clases</h2>
-            <p>Si necesitás cancelar una clase, hacelo con 24 hs de anticipación para no perderla y poder recuperarla otro día. Las clases canceladas el mismo día no se recuperan.</p>
-            <p>Podés elegir la clase desde nuestra app, seleccionando tipo, día y horario.</p>
-        </section>
-        <section style="animation:fadeInUp 1.8s;">
-            <h2>Ventajas de hacer pilates</h2>
-            <ul>
-                <li>Mejora la postura integral</li>
-                <li>Trabaja la fuerza corporal</li>
-                <li>Mejora la concentración</li>
-                <li>Aumenta la flexibilidad</li>
-                <li>Espacio para centrarse en uno mismo y conectarse con el presente</li>
-            </ul>
-        </section>
-        <section style="animation:fadeInUp 1.9s;">
-            <h2>Actividades para patologías especiales</h2>
-            <p>Te esperamos en nuestro espacio para una charla personal sobre tus necesidades. Podemos evaluar clases personalizadas, centradas en tus propósitos.</p>
-        </section>
-        <section id="faq" style="animation:fadeInUp 2s;">
-            <h2>Preguntas frecuentes</h2>
-            <ul>
-                <li><strong>¿Cómo me anoto en una clase?</strong> Podés reservar tu lugar a través de la app. Registrate y elegí el pack o clase que prefieras.</li>
-                <li><strong>¿Qué métodos de pago aceptan?</strong> Efectivo, transferencia y Mercado Pago. Pagando en efectivo obtenés descuento.</li>
-                <li><strong>¿Puedo combinar clases de yoga y pilates?</strong> Sí, con los packs flexibles podés tomar ambas disciplinas.</li>
-                <li><strong>¿Puedo cancelar o cambiar de horario una clase?</strong> Sí, con 24 hs de anticipación desde la app.</li>
-                <li><strong>¿Puedo anotarme en lista de espera?</strong> Sí, si el cupo está lleno podés anotarte y recibirás notificación si se libera un lugar.</li>
-            </ul>
-        </section>
-        <section id="contacto" style="animation:fadeInUp 2.1s;">
-            <h2>Contacto</h2>
-            <p><strong>Dirección:</strong> Mariano Acha 2771, entre Nahuel Huapí y Pedro Rivera - Villa Urquiza - CABA.</p>
-            <p><strong>Email:</strong> <a href="mailto:espaciopuna@gmail.com">espaciopuna@gmail.com</a></p>
-            <p><strong>Instagram:</strong> <a href="https://instagram.com/espaciopuna" target="_blank">@espaciopuna</a></p>
-        </section>
-        <section style="animation:fadeInUp 2.2s;">
-            <h2>Términos y Condiciones</h2>
-            <p>Al utilizar nuestros servicios, aceptás los términos y condiciones establecidos por Espacio Puna. Nos reservamos el derecho de modificar estos términos en cualquier momento. Por favor, revisá esta sección periódicamente para estar informada sobre cambios.</p>
-            <p>Las clases y talleres están sujetas a disponibilidad y pueden requerir reserva previa. El uso de las instalaciones implica el respeto por las normas del espacio y el cuidado de los materiales.</p>
-        </section>
-        <section style="animation:fadeInUp 2.3s;">
-            <h2>Política Comercial</h2>
-            <p>Espacio Puna se compromete a ofrecer productos y servicios de calidad, priorizando la satisfacción de cada mujer que nos visita. Todas las transacciones son seguras y la información personal es tratada con confidencialidad. Para más detalles sobre devoluciones, garantías y atención al cliente, consultá esta sección o comunicate con nuestro equipo.</p>
-            <p>Los precios y promociones serán comunicados oportunamente. Ante cualquier duda, podés escribirnos por email o mensaje directo de Instagram.</p>
-        </section>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Espacio Puna</h1>
+            <p>Un refugio donde cada mujer puede relajarse, fortalecer su cuerpo y nutrir su alma en un ambiente de apoyo y crecimiento.</p>
+        </div>
     </div>
-    <footer style="background:#fff8f2;text-align:center;padding:2rem 0 1rem 0;color:#b88a5a;font-size:1rem;margin-top:2rem;">
-        <p>© Espacio Puna 2025 - Bienestar Integral</p>
+
+    <div class="container">
+        <div class="section" id="mision">
+            <h2>Nuestra Misión</h2>
+            <div class="highlight-box">
+                <p>Crear un espacio seguro y cálido donde las mujeres se conecten consigo mismas y con otras, a través de yoga, pilates y talleres de bienestar integral.</p>
+            </div>
+        </div>
+
+        <div class="section" id="actividades">
+            <h2>Actividades</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>Pilates Reformer</h3>
+                    <p>6 camas equipadas con box, tabla de salto y todos los accesorios. Método contemporáneo para mejorar postura, fuerza y flexibilidad.</p>
+                </div>
+                <div class="card">
+                    <h3>Yoga Integral</h3>
+                    <p>Clases grupales hasta 7 personas con modalidad integral. Conectá con tu cuerpo y mente en un ambiente de respeto y aceptación.</p>
+                </div>
+                <div class="card">
+                    <h3>Talleres Especiales</h3>
+                    <p>Meditación, yoga para embarazadas y reflexología. Actividades orientadas al movimiento consciente y la relajación.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="suscripciones">
+            <h2>Packs de Clases</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>Pack Fijo</h3>
+                    <p>Días y horarios fijos para mantener tu rutina. Cancelación con 24hs de anticipación y recuperación en el mismo horario.</p>
+                </div>
+                <div class="card">
+                    <h3>Pack Móvil</h3>
+                    <p>Días y horarios flexibles según tu rutina semanal. Cancelación con 24hs de anticipación y recuperación cuando quieras.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Información del Local</h2>
+            <div class="highlight-box">
+                <p><strong>Horarios:</strong> Lunes a viernes 8-20hs | Sábados 8-13hs</p>
+                <p><strong>Dirección:</strong> Mariano Acha 2771, Villa Urquiza - CABA</p>
+                <p><strong>Reservas:</strong> Elegí tu clase desde nuestra app seleccionando tipo, día y horario</p>
+            </div>
+        </div>
+
+        <div class="section" id="faq">
+            <h2>Preguntas Frecuentes</h2>
+            <div class="faq-item">
+                <h4>¿Cómo me anoto en una clase?</h4>
+                <p>Reservá tu lugar a través de nuestra app. Registrate y elegí el pack o clase que prefieras.</p>
+            </div>
+            <div class="faq-item">
+                <h4>¿Puedo cancelar una clase?</h4>
+                <p>Sí, con 24hs de anticipación desde la app. Las clases canceladas el mismo día no se recuperan.</p>
+            </div>
+            <div class="faq-item">
+                <h4>¿Puedo combinar yoga y pilates?</h4>
+                <p>Sí, con los packs flexibles podés tomar ambas disciplinas según tu preferencia.</p>
+            </div>
+        </div>
+
+        <div class="section" id="contacto">
+            <h2>Contacto</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <h4>Email</h4>
+                    <a href="mailto:espaciopuna@gmail.com">espaciopuna@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <h4>Instagram</h4>
+                    <a href="https://www.instagram.com/espaciopuna?igsh=MWxvNGExeDQxeW9pMw==" target="_blank">@espaciopuna</a>
+                </div>
+                <div class="contact-item">
+                    <h4>APP de Reservas</h4>
+                    <a href="https://preview--espaciopuna.lovable.app/" target="_blank">Reservar Clases</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Términos y Condiciones</h2>
+            <div class="highlight-box">
+                <p>Al utilizar nuestros servicios, aceptás nuestros términos. Las clases requieren reserva previa y el uso de las instalaciones implica respeto por las normas del espacio.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Política Comercial</h2>
+            <div class="highlight-box">
+                <p>Nos comprometemos a ofrecer servicios de calidad priorizando tu satisfacción. Todas las transacciones son seguras y tu información es tratada con confidencialidad.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 Espacio Puna - Bienestar Integral para Mujeres</p>
     </footer>
+
+    <script>
+        // Animación de scroll para las secciones
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observar todas las secciones
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Scroll suave para los enlaces del menú
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Efecto navbar en scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(255, 248, 242, 0.98)';
+                navbar.style.boxShadow = '0 2px 20px rgba(90, 70, 50, 0.1)';
+            } else {
+                navbar.style.background = 'rgba(255, 248, 242, 0.95)';
+                navbar.style.boxShadow = 'none';
+            }
+        });
+    </script>
 </body>
 </html>
