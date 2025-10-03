@@ -362,6 +362,62 @@
             color: var(--puna-text-dark);
         }
         
+        .terms-container {
+            width: 100%;
+            max-width: none;
+        }
+        
+        .terms-content {
+            background: linear-gradient(135deg, var(--puna-white), var(--puna-cream));
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 8px 32px rgba(128, 103, 99, 0.12);
+            border: 1px solid rgba(198, 205, 188, 0.3);
+            line-height: 1.7;
+        }
+        
+        .terms-content h3 {
+            color: var(--puna-cacao);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .terms-content h4 {
+            color: var(--puna-cacao);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .terms-content p {
+            color: var(--puna-text-dark);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+        
+        .terms-content ul {
+            color: var(--puna-text-dark);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+        }
+        
+        .terms-content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .terms-update {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(198, 205, 188, 0.4);
+            font-style: italic;
+            text-align: center;
+            color: var(--puna-text-medium) !important;
+        }
+        
         footer {
             background: linear-gradient(135deg, var(--puna-cacao), var(--puna-dark));
             color: var(--puna-text-light);
@@ -470,6 +526,18 @@
                 grid-template-columns: 1fr;
                 text-align: center;
             }
+            
+            .terms-content {
+                padding: 2rem 1.5rem;
+            }
+            
+            .terms-content h3 {
+                font-size: 1.3rem;
+            }
+            
+            .terms-content h4 {
+                font-size: 1rem;
+            }
         }
         
         @media (max-width: 480px) {
@@ -483,6 +551,14 @@
             
             .container {
                 padding: 0.8rem;
+            }
+            
+            .terms-content {
+                padding: 1.5rem 1rem;
+            }
+            
+            .terms-content h3 {
+                font-size: 1.2rem;
             }
         }
     </style>
@@ -505,6 +581,7 @@
             <a href="#actividades">Actividades</a>
             <a href="#suscripciones">Packs</a>
             <a href="#faq">Preguntas</a>
+            <a href="#terminos">Términos</a>
         </div>
     </nav>
 
@@ -591,16 +668,61 @@
             </div>
         </div>
 
-        <div class="section">
-            <h2>Políticas del Espacio</h2>
-            <div class="cards-grid">
-                <div class="card">
-                    <h3>Términos y Condiciones</h3>
-                    <p>Al utilizar nuestros servicios, aceptás nuestros términos. Las clases requieren reserva previa y el uso de las instalaciones implica respeto por las normas del espacio.</p>
-                </div>
-                <div class="card">
-                    <h3>Política Comercial</h3>
-                    <p>Nos comprometemos a ofrecer servicios de calidad priorizando tu satisfacción. Todas las transacciones son seguras y tu información es tratada con confidencialidad.</p>
+        <div class="section" id="terminos">
+            <h2>Términos y Condiciones</h2>
+            <div class="terms-container">
+                <div class="terms-content">
+                    <h3>Servicios de Bienestar - Espacio Puna</h3>
+                    
+                    <p>Los siguientes términos y condiciones rigen la prestación de servicios de bienestar integral por parte de <strong>Espacio Puna</strong> al cliente. Al utilizar nuestros servicios, aceptás estar sujeto a estos términos y condiciones.</p>
+
+                    <h4>1. Descripción de los Servicios</h4>
+                    <p>Espacio Puna se compromete a brindar servicios de bienestar integral que incluyen:</p>
+                    <ul>
+                        <li>Clases de Pilates Reformer con equipamiento profesional</li>
+                        <li>Yoga integral en grupos reducidos</li>
+                        <li>Talleres especiales (meditación, yoga para embarazadas, reflexología)</li>
+                        <li>Asesoramiento personalizado según necesidades individuales</li>
+                    </ul>
+
+                    <h4>2. Reservas y Packs</h4>
+                    <p>Las clases deben reservarse con anticipación a través de nuestra aplicación. Los packs tienen validez de 30 días desde la fecha de compra y pueden ser:</p>
+                    <ul>
+                        <li><strong>Pack Fijo:</strong> Días y horarios establecidos con recuperación en el mismo horario</li>
+                        <li><strong>Pack Móvil:</strong> Horarios flexibles con recuperación según disponibilidad</li>
+                    </ul>
+
+                    <h4>3. Cancelaciones y Reprogramación</h4>
+                    <p>Las clases pueden cancelarse hasta 24 horas antes del horario programado. Las cancelaciones realizadas con menos anticipación no podrán recuperarse. La reprogramación está sujeta a disponibilidad de cupos.</p>
+
+                    <h4>4. Precios y Pagos</h4>
+                    <p>Los precios se establecen en pesos argentinos con IVA incluido. Los pagos deben realizarse según las modalidades acordadas. Nos reservamos el derecho de suspender el servicio ante falta de pago.</p>
+
+                    <h4>5. Responsabilidades del Cliente</h4>
+                    <p>El cliente se compromete a:</p>
+                    <ul>
+                        <li>Informar sobre condiciones médicas relevantes antes de iniciar las actividades</li>
+                        <li>Respetar las normas del espacio y a otros participantes</li>
+                        <li>Llegar puntualmente a las clases reservadas</li>
+                        <li>Cuidar el equipamiento proporcionado</li>
+                    </ul>
+
+                    <h4>6. Limitación de Responsabilidad</h4>
+                    <p>Espacio Puna no se responsabiliza por lesiones que puedan ocurrir durante las actividades, siempre que se hayan seguido las indicaciones del instructor. Se recomienda consultar con un médico antes de iniciar cualquier programa de ejercicios.</p>
+
+                    <h4>7. Privacidad y Confidencialidad</h4>
+                    <p>Nos comprometemos a mantener la confidencialidad de la información personal proporcionada por nuestros clientes, utilizándola únicamente para la prestación de servicios.</p>
+
+                    <h4>8. Modificaciones de Servicios</h4>
+                    <p>Espacio Puna se reserva el derecho de modificar horarios, suspender clases por razones de fuerza mayor, o realizar cambios en la programación con aviso previo a los clientes.</p>
+
+                    <h4>9. Rescisión</h4>
+                    <p>Cualquiera de las partes puede rescindir la relación comercial con un preaviso de 30 días. En caso de incumplimiento grave de las normas, Espacio Puna puede suspender el servicio inmediatamente.</p>
+
+                    <h4>10. Jurisdicción</h4>
+                    <p>Estos términos se rigen por las leyes de la República Argentina. Cualquier disputa se resolverá en los tribunales competentes de la Ciudad Autónoma de Buenos Aires.</p>
+
+                    <p class="terms-update"><strong>Última actualización:</strong> Octubre 2025</p>
                 </div>
             </div>
         </div>
