@@ -13,30 +13,35 @@
         }
         
         :root {
-            /* Paleta Principal */
-            --puna-primary: #8B4513;      /* Marrón tierra principal */
-            --puna-secondary: #D2B48C;    /* Beige cálido */
-            --puna-accent: #CD853F;       /* Ocre dorado */
-            --puna-light: #F5F5DC;       /* Crema suave */
-            --puna-dark: #654321;        /* Marrón oscuro */
+            /* Paleta Principal - Basada en Manual de Marca */
+            --puna-primary: #6B4B3A;      /* Marrón principal (más similar al manual) */
+            --puna-secondary: #B89176;    /* Beige cálido intermedio */
+            --puna-accent: #D4A574;       /* Terracota suave */
+            --puna-light: #F5F1ED;       /* Crema muy clara */
+            --puna-dark: #4A3429;        /* Marrón muy oscuro para texto */
             
-            /* Tonos Complementarios */
-            --puna-warm: #DEB887;        /* Beige rosado */
-            --puna-earth: #A0522D;       /* Tierra rojiza */
-            --puna-sand: #F4E4BC;        /* Arena clara */
-            --puna-clay: #B8860B;        /* Arcilla dorada */
-            --puna-stone: #696969;       /* Piedra gris */
+            /* Tonos Complementarios del Manual */
+            --puna-terracota: #C4826B;   /* Terracota como en poster 3 */
+            --puna-sage: #A8B5A0;        /* Verde suave como poster 4 */
+            --puna-earth: #8B6B47;       /* Tierra media */
+            --puna-sand: #F2E8D9;        /* Arena muy clara */
+            --puna-warm-beige: #E8D5C4;  /* Beige cálido como poster 5 */
             
-            /* Neutros */
-            --puna-white: #FFFEF7;       /* Blanco cálido */
-            --puna-cream: #FDF6E3;       /* Crema */
-            --puna-soft: #F7F3E9;        /* Suave */
+            /* Neutros Optimizados */
+            --puna-white: #FFFCF7;       /* Blanco cálido */
+            --puna-cream: #FAF5EF;       /* Crema clara */
+            --puna-soft: #F7F2EC;        /* Muy suave */
+            
+            /* Colores para texto optimizados */
+            --puna-text-dark: #3D2B1F;   /* Texto oscuro con buen contraste */
+            --puna-text-light: #F5F1ED;  /* Texto claro para fondos oscuros */
+            --puna-text-medium: #6B4B3A; /* Texto medio para fondos claros */
         }
 
         body {
             background: linear-gradient(135deg, var(--puna-soft) 0%, var(--puna-sand) 50%, var(--puna-light) 100%);
             font-family: 'Poppins', sans-serif;
-            color: var(--puna-dark);
+            color: var(--puna-text-dark);
             line-height: 1.6;
             overflow-x: hidden;
         }
@@ -46,16 +51,16 @@
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(253, 246, 227, 0.95);
+            background: rgba(250, 245, 239, 0.95);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(210, 180, 140, 0.3);
+            border-bottom: 1px solid rgba(180, 145, 118, 0.3);
             z-index: 1000;
             padding: 1rem 2rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
             transition: all 0.3s ease;
-            box-shadow: 0 2px 20px rgba(139, 69, 19, 0.08);
+            box-shadow: 0 2px 20px rgba(107, 75, 58, 0.08);
         }
         
         .app-btn {
@@ -94,7 +99,7 @@
             align-items: center;
             gap: 2rem;
             font-size: 0.85rem;
-            color: var(--puna-primary);
+            color: var(--puna-text-medium);
         }
         
         .header-info-item {
@@ -104,13 +109,13 @@
         }
         
         .header-info a {
-            color: var(--puna-primary);
+            color: var(--puna-text-medium);
             text-decoration: none;
             transition: color 0.3s ease;
         }
         
         .header-info a:hover {
-            color: var(--puna-earth);
+            color: var(--puna-primary);
         }
         
         .nav-links {
@@ -119,7 +124,7 @@
         }
         
         .nav-links a {
-            color: var(--puna-accent);
+            color: var(--puna-text-medium);
             text-decoration: none;
             font-weight: 500;
             font-size: 0.9rem;
@@ -139,7 +144,7 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--puna-earth);
+            background: var(--puna-primary);
             transition: width 0.3s ease;
         }
         
@@ -163,12 +168,12 @@
             color: var(--puna-primary);
             margin-bottom: 1.5rem;
             animation: fadeInUp 1s ease;
-            text-shadow: 0 2px 4px rgba(90, 70, 50, 0.1);
+            text-shadow: 0 2px 4px rgba(107, 75, 58, 0.15);
         }
         
         .hero-content p {
             font-size: clamp(1.1rem, 2vw, 1.3rem);
-            color: var(--puna-secondary);
+            color: var(--puna-text-dark);
             margin-bottom: 2rem;
             line-height: 1.6;
             animation: fadeInUp 1.2s ease;
@@ -199,14 +204,14 @@
         }
         
         .hero-feature h3 {
-            color: var(--puna-accent);
+            color: var(--puna-primary);
             font-size: 1.1rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
         }
         
         .hero-feature p {
-            color: var(--puna-dark);
+            color: var(--puna-text-dark);
             font-size: 0.9rem;
             margin: 0;
         }
@@ -245,31 +250,31 @@
         }
         
         .card {
-            background: linear-gradient(135deg, var(--puna-warm-white), var(--puna-cream));
+            background: linear-gradient(135deg, var(--puna-white), var(--puna-cream));
             backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 2rem;
-            box-shadow: 0 8px 32px rgba(90, 70, 50, 0.1);
+            box-shadow: 0 8px 32px rgba(107, 75, 58, 0.12);
             transition: all 0.3s ease;
-            border: 1px solid var(--puna-beige-light);
+            border: 1px solid rgba(180, 145, 118, 0.2);
         }
         
         .card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(90, 70, 50, 0.2);
+            box-shadow: 0 15px 40px rgba(107, 75, 58, 0.2);
             border-color: var(--puna-accent);
-            background: linear-gradient(135deg, var(--puna-cream), var(--puna-beige-light));
+            background: linear-gradient(135deg, var(--puna-cream), var(--puna-warm-beige));
         }
         
         .card h3 {
-            color: var(--puna-accent);
+            color: var(--puna-primary);
             font-size: 1.3rem;
             font-weight: 600;
             margin-bottom: 1rem;
         }
         
         .card p, .card ul {
-            color: var(--puna-dark);
+            color: var(--puna-text-dark);
             font-size: 0.95rem;
             line-height: 1.6;
         }
@@ -279,12 +284,17 @@
         }
         
         .highlight-box {
-            background: linear-gradient(135deg, var(--puna-cream), var(--puna-beige-light));
+            background: linear-gradient(135deg, var(--puna-warm-beige), var(--puna-sand));
             border-radius: 15px;
             padding: 2rem;
             margin: 2rem 0;
-            border-left: 4px solid var(--puna-accent);
-            box-shadow: 0 4px 20px rgba(184, 138, 90, 0.25);
+            border-left: 4px solid var(--puna-primary);
+            box-shadow: 0 4px 20px rgba(107, 75, 58, 0.15);
+        }
+        
+        .highlight-box p {
+            color: var(--puna-text-dark);
+            margin-bottom: 0;
         }
         
         .contact-info {
@@ -297,58 +307,62 @@
         .contact-item {
             text-align: center;
             padding: 1.5rem;
-            background: linear-gradient(135deg, var(--puna-warm-white), var(--puna-cream));
+            background: linear-gradient(135deg, var(--puna-white), var(--puna-cream));
             border-radius: 15px;
             transition: all 0.3s ease;
-            border: 1px solid var(--puna-beige-light);
+            border: 1px solid rgba(180, 145, 118, 0.2);
         }
         
         .contact-item:hover {
             transform: translateY(-5px);
-            background: linear-gradient(135deg, var(--puna-cream), var(--puna-beige-light));
-            border-color: var(--puna-accent);
+            background: linear-gradient(135deg, var(--puna-cream), var(--puna-warm-beige));
+            border-color: var(--puna-primary);
         }
         
         .contact-item h4 {
-            color: var(--puna-accent);
+            color: var(--puna-primary);
             font-weight: 600;
             margin-bottom: 0.5rem;
         }
         
         .contact-item a {
-            color: var(--puna-primary);
+            color: var(--puna-text-medium);
             text-decoration: none;
             transition: color 0.3s ease;
         }
         
         .contact-item a:hover {
-            color: var(--puna-earth);
+            color: var(--puna-primary);
         }
         
         .faq-item {
-            background: linear-gradient(135deg, var(--puna-warm-white), var(--puna-cream));
+            background: linear-gradient(135deg, var(--puna-white), var(--puna-cream));
             border-radius: 12px;
             margin-bottom: 1rem;
             padding: 1.5rem;
             transition: all 0.3s ease;
-            border: 1px solid var(--puna-beige-light);
+            border: 1px solid rgba(180, 145, 118, 0.2);
         }
         
         .faq-item:hover {
-            background: linear-gradient(135deg, var(--puna-cream), var(--puna-beige-light));
+            background: linear-gradient(135deg, var(--puna-cream), var(--puna-warm-beige));
             transform: translateX(5px);
-            border-color: var(--puna-accent);
+            border-color: var(--puna-primary);
         }
         
         .faq-item h4 {
-            color: var(--puna-accent);
+            color: var(--puna-primary);
             font-weight: 600;
             margin-bottom: 0.5rem;
         }
         
+        .faq-item p {
+            color: var(--puna-text-dark);
+        }
+        
         footer {
-            background: linear-gradient(135deg, var(--puna-primary), var(--puna-dark));
-            color: var(--puna-warm-white);
+            background: linear-gradient(135deg, var(--puna-primary), var(--puna-text-dark));
+            color: var(--puna-text-light);
             padding: 3rem 2rem 2rem;
             margin-top: 4rem;
         }
@@ -362,14 +376,14 @@
         }
         
         .footer-section h4 {
-            color: var(--puna-accent);
+            color: var(--puna-sand);
             font-size: 1.1rem;
             font-weight: 600;
             margin-bottom: 1rem;
         }
         
         .footer-section p, .footer-section a {
-            color: var(--puna-cream);
+            color: var(--puna-text-light);
             font-size: 0.9rem;
             line-height: 1.6;
             text-decoration: none;
@@ -377,15 +391,15 @@
         }
         
         .footer-section a:hover {
-            color: var(--puna-accent);
+            color: var(--puna-sand);
         }
         
         .footer-bottom {
             text-align: center;
             padding-top: 2rem;
             margin-top: 2rem;
-            border-top: 1px solid var(--puna-accent);
-            color: var(--puna-accent);
+            border-top: 1px solid rgba(242, 232, 217, 0.3);
+            color: var(--puna-sand);
             font-size: 0.85rem;
         }
         
@@ -662,10 +676,10 @@
         window.addEventListener('scroll', () => {
             const navbar = document.querySelector('.navbar');
             if (window.scrollY > 100) {
-                navbar.style.background = 'rgba(255, 248, 242, 0.98)';
-                navbar.style.boxShadow = '0 2px 20px rgba(90, 70, 50, 0.1)';
+                navbar.style.background = 'rgba(250, 245, 239, 0.98)';
+                navbar.style.boxShadow = '0 2px 20px rgba(107, 75, 58, 0.12)';
             } else {
-                navbar.style.background = 'rgba(255, 248, 242, 0.95)';
+                navbar.style.background = 'rgba(250, 245, 239, 0.95)';
                 navbar.style.boxShadow = 'none';
             }
         });
