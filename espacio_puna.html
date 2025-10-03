@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Espacio Puna - Pilates & Yoga</title>
+    <title>Espacio Puna - Bienestar Integral</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -101,25 +101,35 @@
                 padding: 0.5rem 1rem;
             }
         }
+        @keyframes fadeInDown { from { opacity:0; transform:translateY(-30px);} to { opacity:1; transform:translateY(0);} }
+        @keyframes fadeInUp { from { opacity:0; transform:translateY(30px);} to { opacity:1; transform:translateY(0);} }
     </style>
 </head>
 <body>
-    <div class="header">
-        <button class="app-btn" onclick="window.location.href='https://preview--espaciopuna.lovable.app/'">Ir a la APP</button>
-        <!-- Reemplaza la siguiente línea con la imagen exportada del PDF -->
-        <img src="logo-espacio-puna.png" alt="Espacio Puna Logo" class="logo">
-    </div>
+    <nav class="navbar" style="position:fixed;top:0;left:0;width:100%;background:#fff8f2;border-bottom:1px solid #f0e3d1;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:0.5rem 2rem;">
+        <button class="app-btn" onclick="window.location.href='https://app.espaciopuna.com'">Ir a la APP</button>
+        <img src="logo-espacio-puna.png" alt="Espacio Puna Logo" class="logo" style="max-width:120px;">
+        <div style="flex:1"></div>
+        <div class="nav-links" style="display:flex;gap:1.5rem;">
+            <a href="#mision" style="color:#b88a5a;text-decoration:none;font-weight:600;">Misión</a>
+            <a href="#actividades" style="color:#b88a5a;text-decoration:none;font-weight:600;">Actividades</a>
+            <a href="#suscripciones" style="color:#b88a5a;text-decoration:none;font-weight:600;">Suscripciones</a>
+            <a href="#faq" style="color:#b88a5a;text-decoration:none;font-weight:600;">Preguntas</a>
+            <a href="#contacto" style="color:#b88a5a;text-decoration:none;font-weight:600;">Contacto</a>
+        </div>
+    </nav>
+    <div style="height:80px;"></div>
     <div class="container">
-        <h1>Bienvenida a Espacio Puna</h1>
-        <section>
+        <h1 style="animation:fadeInDown 1s;">Bienvenida a Espacio Puna</h1>
+        <section id="mision" style="animation:fadeInUp 1.2s;">
             <h2>Misión</h2>
             <p>Crear un espacio seguro y cálido para que las mujeres se conecten consigo mismas y con otras, a través de yoga, pilates y talleres enfocados en su bienestar. Buscamos ser un refugio donde cada una pueda relajarse, fortalecer su cuerpo y nutrir su alma, en un ambiente de apoyo, amistad y crecimiento.</p>
         </section>
-        <section>
+        <section style="animation:fadeInUp 1.3s;">
             <h2>Visión</h2>
             <p>Ser el lugar de encuentro preferido por las mujeres, reconocido por la calidad de sus clases y por ser una verdadera comunidad. Queremos que nuestro espacio sea sinónimo de bienestar integral, donde el ejercicio físico sea el punto de partida para charlas, risas y conexiones reales, creando una red de mujeres fuertes y empoderadas.</p>
         </section>
-        <section>
+        <section style="animation:fadeInUp 1.4s;">
             <h2>Valores</h2>
             <ul class="valores-list">
                 <li><strong>Comunidad:</strong> Fomentamos la unión y la sororidad. Creemos en el poder de apoyarnos entre mujeres, celebrando nuestras diferencias y compartiendo experiencias.</li>
@@ -129,13 +139,7 @@
                 <li><strong>Pasión:</strong> Ponemos el corazón en cada detalle. Nos mueve la pasión por el yoga, pilates y el desarrollo personal, compartiéndolo con alegría y dedicación.</li>
             </ul>
         </section>
-        <section class="info-box">
-            <h2>Características del local</h2>
-            <p><strong>Horario de atención:</strong> Lunes a viernes: 8 a 20 hs | Sábados: 8 a 13 hs</p>
-            <p><strong>Dirección:</strong> Mariano Acha 2771, entre Nahuel Huapí y Pedro Rivera - Villa Urquiza - CABA.</p>
-            <p class="contacto"><strong>Contacto:</strong> IG mensaje directo | Email: <a href="mailto:espaciopuna@gmail.com">espaciopuna@gmail.com</a></p>
-        </section>
-        <section>
+        <section id="actividades" class="info-box" style="animation:fadeInUp 1.5s;">
             <h2>Actividades</h2>
             <ul>
                 <li><strong>Pilates reformer:</strong> 6 camas (box, tabla de salto y accesorios incluidos).</li>
@@ -144,19 +148,19 @@
             </ul>
             <p>Las actividades están orientadas al cuerpo, mente, relajación y movimiento consciente.</p>
         </section>
-        <section>
+        <section id="suscripciones" style="animation:fadeInUp 1.6s;">
             <h2>Suscripciones</h2>
             <ul>
                 <li><strong>Pack fijo:</strong> Días y horarios fijos. Cancelación con 24 hs de anticipación y recuperación en el mismo horario.</li>
                 <li><strong>Pack móvil:</strong> Días y horarios flexibles. Cancelación con 24 hs de anticipación y recuperación en cualquier horario disponible.</li>
             </ul>
         </section>
-        <section>
+        <section style="animation:fadeInUp 1.7s;">
             <h2>Cancelaciones y elección de clases</h2>
             <p>Si necesitás cancelar una clase, hacelo con 24 hs de anticipación para no perderla y poder recuperarla otro día. Las clases canceladas el mismo día no se recuperan.</p>
             <p>Podés elegir la clase desde nuestra app, seleccionando tipo, día y horario.</p>
         </section>
-        <section>
+        <section style="animation:fadeInUp 1.8s;">
             <h2>Ventajas de hacer pilates</h2>
             <ul>
                 <li>Mejora la postura integral</li>
@@ -166,20 +170,39 @@
                 <li>Espacio para centrarse en uno mismo y conectarse con el presente</li>
             </ul>
         </section>
-        <section>
+        <section style="animation:fadeInUp 1.9s;">
             <h2>Actividades para patologías especiales</h2>
             <p>Te esperamos en nuestro espacio para una charla personal sobre tus necesidades. Podemos evaluar clases personalizadas, centradas en tus propósitos.</p>
         </section>
-        <section>
+        <section id="faq" style="animation:fadeInUp 2s;">
+            <h2>Preguntas frecuentes</h2>
+            <ul>
+                <li><strong>¿Cómo me anoto en una clase?</strong> Podés reservar tu lugar a través de la app. Registrate y elegí el pack o clase que prefieras.</li>
+                <li><strong>¿Qué métodos de pago aceptan?</strong> Efectivo, transferencia y Mercado Pago. Pagando en efectivo obtenés descuento.</li>
+                <li><strong>¿Puedo combinar clases de yoga y pilates?</strong> Sí, con los packs flexibles podés tomar ambas disciplinas.</li>
+                <li><strong>¿Puedo cancelar o cambiar de horario una clase?</strong> Sí, con 24 hs de anticipación desde la app.</li>
+                <li><strong>¿Puedo anotarme en lista de espera?</strong> Sí, si el cupo está lleno podés anotarte y recibirás notificación si se libera un lugar.</li>
+            </ul>
+        </section>
+        <section id="contacto" style="animation:fadeInUp 2.1s;">
+            <h2>Contacto</h2>
+            <p><strong>Dirección:</strong> Mariano Acha 2771, entre Nahuel Huapí y Pedro Rivera - Villa Urquiza - CABA.</p>
+            <p><strong>Email:</strong> <a href="mailto:espaciopuna@gmail.com">espaciopuna@gmail.com</a></p>
+            <p><strong>Instagram:</strong> <a href="https://instagram.com/espaciopuna" target="_blank">@espaciopuna</a></p>
+        </section>
+        <section style="animation:fadeInUp 2.2s;">
             <h2>Términos y Condiciones</h2>
             <p>Al utilizar nuestros servicios, aceptás los términos y condiciones establecidos por Espacio Puna. Nos reservamos el derecho de modificar estos términos en cualquier momento. Por favor, revisá esta sección periódicamente para estar informada sobre cambios.</p>
             <p>Las clases y talleres están sujetas a disponibilidad y pueden requerir reserva previa. El uso de las instalaciones implica el respeto por las normas del espacio y el cuidado de los materiales.</p>
         </section>
-        <section>
+        <section style="animation:fadeInUp 2.3s;">
             <h2>Política Comercial</h2>
             <p>Espacio Puna se compromete a ofrecer productos y servicios de calidad, priorizando la satisfacción de cada mujer que nos visita. Todas las transacciones son seguras y la información personal es tratada con confidencialidad. Para más detalles sobre devoluciones, garantías y atención al cliente, consultá esta sección o comunicate con nuestro equipo.</p>
             <p>Los precios y promociones serán comunicados oportunamente. Ante cualquier duda, podés escribirnos por email o mensaje directo de Instagram.</p>
         </section>
     </div>
+    <footer style="background:#fff8f2;text-align:center;padding:2rem 0 1rem 0;color:#b88a5a;font-size:1rem;margin-top:2rem;">
+        <p>© Espacio Puna 2025 - Bienestar Integral</p>
+    </footer>
 </body>
 </html>
