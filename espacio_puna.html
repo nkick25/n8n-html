@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Espacio Puna - Bienestar Integral</title>
+    <title>Espacio Puna - Pilates & Yoga</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -418,6 +418,54 @@
             color: var(--puna-text-medium) !important;
         }
         
+        .terms-toggle {
+            background: linear-gradient(135deg, var(--puna-cacao), var(--puna-dark));
+            color: var(--puna-white);
+            border: none;
+            border-radius: 25px;
+            padding: 0.8rem 1.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 1.5rem auto;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(128, 103, 99, 0.25);
+        }
+        
+        .terms-toggle:hover {
+            background: linear-gradient(135deg, var(--puna-dark), var(--puna-cacao));
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(128, 103, 99, 0.35);
+        }
+        
+        .toggle-icon {
+            transition: transform 0.3s ease;
+            font-size: 0.8rem;
+        }
+        
+        .terms-toggle.expanded .toggle-icon {
+            transform: rotate(180deg);
+        }
+        
+        .terms-expanded {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, opacity 0.3s ease;
+            opacity: 0;
+        }
+        
+        .terms-expanded.show {
+            max-height: 2000px;
+            opacity: 1;
+        }
+        
+        .terms-preview {
+            text-align: center;
+        }
+        
         footer {
             background: linear-gradient(135deg, var(--puna-cacao), var(--puna-dark));
             color: var(--puna-text-light);
@@ -538,6 +586,11 @@
             .terms-content h4 {
                 font-size: 1rem;
             }
+            
+            .terms-toggle {
+                padding: 0.7rem 1.2rem;
+                font-size: 0.8rem;
+            }
         }
         
         @media (max-width: 480px) {
@@ -560,6 +613,11 @@
             .terms-content h3 {
                 font-size: 1.2rem;
             }
+            
+            .terms-toggle {
+                padding: 0.6rem 1rem;
+                font-size: 0.75rem;
+            }
         }
     </style>
 </head>
@@ -579,36 +637,36 @@
         </div>
         <div class="nav-links">
             <a href="#actividades">Actividades</a>
-            <a href="#suscripciones">Packs</a>
-            <a href="#faq">Preguntas</a>
-            <a href="#terminos">Términos</a>
+            <!-- <a href="#suscripciones">Packs</a> -->
+            <a href="#faq">Packs y Preguntas</a>
+            <a href="#terminos">Términos y Condiciones</a>
         </div>
     </nav>
 
     <div class="hero">
         <div class="hero-content">
             <h1>Espacio Puna</h1>
-            <p>Un refugio donde cada persona puede relajarse, fortalecer su cuerpo y nutrir su alma en un ambiente de apoyo y crecimiento.</p>
-            <p><strong>Horarios:</strong> Lunes a viernes 8-20hs | Sábados 8-13hs</p>
+            <p><strong>Un refugio donde cada persona puede relajarse, fortalecer su cuerpo y nutrir su alma en un ambiente de apoyo y crecimiento.</strong></p>
+            <!-- <p><strong>Horarios:</strong> Lunes a viernes 8-20hs | Sábados 8-13hs</p> -->
         </div>
         <div class="hero-info">
             <div class="hero-features">
                 <div class="hero-feature">
                     <h3>Pilates Reformer</h3>
-                    <p>6 camas equipadas con todos los accesorios para mejorar postura y flexibilidad</p>
+                    <!-- <p>6 camas equipadas con todos los accesorios para mejorar postura y flexibilidad</p> -->
                 </div>
                 <div class="hero-feature">
                     <h3>Yoga Integral</h3>
-                    <p>Clases grupales hasta 7 personas en un ambiente de respeto y aceptación</p>
+                    <!-- <p>Clases grupales hasta 7 personas en un ambiente de respeto y aceptación</p> -->
                 </div>
                 <div class="hero-feature">
                     <h3>Talleres Especiales</h3>
-                    <p>Meditación, yoga para embarazadas y reflexología</p>
+                    <!-- <p>Meditación, yoga para embarazadas y reflexología</p> -->
                 </div>
-                <div class="hero-feature">
+                <!-- <div class="hero-feature">
                     <h3>Packs Flexibles</h3>
                     <p>Horarios fijos o móviles según tu rutina personal</p>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -635,7 +693,7 @@
             </div>
         </div>
 
-        <div class="section" id="suscripciones">
+        <!-- <div class="section" id="suscripciones">
             <h2>Packs de Clases</h2>
             <div class="cards-grid">
                 <div class="card">
@@ -650,21 +708,21 @@
             <div class="highlight-box">
                 <p><strong>Reservas:</strong> Elegí tu clase desde nuestra app seleccionando tipo, día y horario. Los packs son válidos por 30 días desde la compra.</p>
             </div>
-        </div>
+        </div> -->
 
         <div class="section" id="faq">
             <h2>Preguntas Frecuentes</h2>
             <div class="faq-item">
-                <h4>¿Cómo me anoto en una clase?</h4>
-                <p>Reservá tu lugar a través de nuestra app. Registrate y elegí el pack o clase que prefieras.</p>
+                <h4>¿Cómo me suscribo y anoto en una clase?</h4>
+                <p>Las suscripciones las contratas directamente con nuestro Staff por nuestras redes (Instagram o WhatsApp). Con la primera suscripción te damos acceso a nuestra app y desde allí podrás registrarte y elegir las Clases que prefieras.</p>
             </div>
             <div class="faq-item">
                 <h4>¿Puedo cancelar una clase?</h4>
-                <p>Sí, con 24hs de anticipación desde la app. Las clases canceladas el mismo día no se recuperan.</p>
+                <p>Sí, con 24hs de anticipación desde la app con excepciones hechas por el Staff del Espacio exclusivamente. Las clases canceladas el mismo día no se recuperan.</p>
             </div>
             <div class="faq-item">
                 <h4>¿Puedo combinar yoga y pilates?</h4>
-                <p>Sí, con los packs flexibles podés tomar ambas disciplinas según tu preferencia.</p>
+                <p>Podes combinar las actividades que quieras siempre y cuando respetes los horarios y modalidades de cada clase. También es importante tener en cuenta tu salud y bienestar general al hacerlo.</p>
             </div>
         </div>
 
@@ -672,57 +730,56 @@
             <h2>Términos y Condiciones</h2>
             <div class="terms-container">
                 <div class="terms-content">
-                    <h3>Servicios de Bienestar - Espacio Puna</h3>
+                    <h3>Espacio Puna</h3>
                     
                     <p>Los siguientes términos y condiciones rigen la prestación de servicios de bienestar integral por parte de <strong>Espacio Puna</strong> al cliente. Al utilizar nuestros servicios, aceptás estar sujeto a estos términos y condiciones.</p>
 
-                    <h4>1. Descripción de los Servicios</h4>
-                    <p>Espacio Puna se compromete a brindar servicios de bienestar integral que incluyen:</p>
-                    <ul>
-                        <li>Clases de Pilates Reformer con equipamiento profesional</li>
-                        <li>Yoga integral en grupos reducidos</li>
-                        <li>Talleres especiales (meditación, yoga para embarazadas, reflexología)</li>
-                        <li>Asesoramiento personalizado según necesidades individuales</li>
-                    </ul>
+                    <div class="terms-preview">
+                        <h4>1. Descripción de los Servicios</h4>
+                        <p>Espacio Puna se compromete a brindar servicios de bienestar integral que incluyen Pilates, Yoga y otras actividades relacionadas. Los servicios se ofrecen en nuestras instalaciones ubicadas en Mariano Acha 2771, Villa Urquiza, CABA.</p>
+                        
+                        <button class="terms-toggle" onclick="toggleTerms()">
+                            <span class="toggle-text">Ver términos completos</span>
+                            <span class="toggle-icon">▼</span>
+                        </button>
+                    </div>
 
-                    <h4>2. Reservas y Packs</h4>
-                    <p>Las clases deben reservarse con anticipación a través de nuestra aplicación. Los packs tienen validez de 30 días desde la fecha de compra y pueden ser:</p>
-                    <ul>
-                        <li><strong>Pack Fijo:</strong> Días y horarios establecidos con recuperación en el mismo horario</li>
-                        <li><strong>Pack Móvil:</strong> Horarios flexibles con recuperación según disponibilidad</li>
-                    </ul>
+                    <div class="terms-expanded" id="termsExpanded">
+                        <h4>2. Reservas y Packs</h4>
+                        <p>Las clases deben reservarse con anticipación a través de nuestra aplicación o con asistencia excepcional de nuestro personal. Los packs pueden tener validez diario, semanal, mensual, entre otras opciones.</p>
 
-                    <h4>3. Cancelaciones y Reprogramación</h4>
-                    <p>Las clases pueden cancelarse hasta 24 horas antes del horario programado. Las cancelaciones realizadas con menos anticipación no podrán recuperarse. La reprogramación está sujeta a disponibilidad de cupos.</p>
+                        <h4>3. Cancelaciones y Reprogramación</h4>
+                        <p>Las clases pueden cancelarse hasta 24 horas antes del horario programado únicamente con excepciones gestionadas por el Staff del Espacio. Las cancelaciones realizadas con menos anticipación no podrán recuperarse. La reprogramación está sujeta a disponibilidad de cupos.</p>
 
-                    <h4>4. Precios y Pagos</h4>
-                    <p>Los precios se establecen en pesos argentinos con IVA incluido. Los pagos deben realizarse según las modalidades acordadas. Nos reservamos el derecho de suspender el servicio ante falta de pago.</p>
+                        <h4>4. Precios y Pagos</h4>
+                        <p>Los precios se establecen en pesos argentinos con IVA incluido. Los pagos deben realizarse según las modalidades acordadas. Nos reservamos el derecho de suspender el servicio ante falta de pago.</p>
 
-                    <h4>5. Responsabilidades del Cliente</h4>
-                    <p>El cliente se compromete a:</p>
-                    <ul>
-                        <li>Informar sobre condiciones médicas relevantes antes de iniciar las actividades</li>
-                        <li>Respetar las normas del espacio y a otros participantes</li>
-                        <li>Llegar puntualmente a las clases reservadas</li>
-                        <li>Cuidar el equipamiento proporcionado</li>
-                    </ul>
+                        <h4>5. Responsabilidades del Cliente</h4>
+                        <p>El cliente se compromete a:</p>
+                        <ul>
+                            <li>Informar sobre condiciones médicas relevantes antes de iniciar las actividades</li>
+                            <li>Respetar las normas del espacio y a otros participantes</li>
+                            <li>Llegar puntualmente a las clases reservadas</li>
+                            <li>Cuidar el equipamiento proporcionado</li>
+                        </ul>
 
-                    <h4>6. Limitación de Responsabilidad</h4>
-                    <p>Espacio Puna no se responsabiliza por lesiones que puedan ocurrir durante las actividades, siempre que se hayan seguido las indicaciones del instructor. Se recomienda consultar con un médico antes de iniciar cualquier programa de ejercicios.</p>
+                        <h4>6. Limitación de Responsabilidad</h4>
+                        <p>Espacio Puna no se responsabiliza por lesiones que puedan ocurrir durante las actividades, siempre que se hayan seguido las indicaciones del instructor. Se recomienda consultar con un médico antes de iniciar cualquier programa de ejercicios.</p>
 
-                    <h4>7. Privacidad y Confidencialidad</h4>
-                    <p>Nos comprometemos a mantener la confidencialidad de la información personal proporcionada por nuestros clientes, utilizándola únicamente para la prestación de servicios.</p>
+                        <h4>7. Privacidad y Confidencialidad</h4>
+                        <p>Nos comprometemos a mantener la confidencialidad de la información personal proporcionada por nuestros clientes, utilizándola únicamente para la prestación de servicios.</p>
 
-                    <h4>8. Modificaciones de Servicios</h4>
-                    <p>Espacio Puna se reserva el derecho de modificar horarios, suspender clases por razones de fuerza mayor, o realizar cambios en la programación con aviso previo a los clientes.</p>
+                        <h4>8. Modificaciones de Servicios</h4>
+                        <p>Espacio Puna se reserva el derecho de modificar horarios, suspender clases por razones de fuerza mayor, o realizar cambios en la programación con aviso previo a los clientes.</p>
 
-                    <h4>9. Rescisión</h4>
-                    <p>Cualquiera de las partes puede rescindir la relación comercial con un preaviso de 30 días. En caso de incumplimiento grave de las normas, Espacio Puna puede suspender el servicio inmediatamente.</p>
+                        <h4>9. Rescisión</h4>
+                        <p>Cualquiera de las partes puede rescindir la relación comercial con un preaviso de 30 días. En caso de incumplimiento grave de las normas, Espacio Puna puede suspender el servicio inmediatamente.</p>
 
-                    <h4>10. Jurisdicción</h4>
-                    <p>Estos términos se rigen por las leyes de la República Argentina. Cualquier disputa se resolverá en los tribunales competentes de la Ciudad Autónoma de Buenos Aires.</p>
+                        <h4>10. Jurisdicción</h4>
+                        <p>Estos términos se rigen por las leyes de la República Argentina. Cualquier disputa se resolverá en los tribunales competentes de la Ciudad Autónoma de Buenos Aires.</p>
 
-                    <p class="terms-update"><strong>Última actualización:</strong> Octubre 2025</p>
+                        <p class="terms-update"><strong>Última actualización:</strong> Octubre 2025</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -739,9 +796,9 @@
             <div class="footer-section">
                 <h4>Ubicación</h4>
                 <p>📍 Mariano Acha 2771<br>Villa Urquiza - CABA</p>
-                <p>🕒 Lunes a viernes: 8-20hs<br>Sábados: 8-13hs</p>
+                <!-- <p>🕒 Lunes a viernes: 8-20hs<br>Sábados: 8-13hs</p> -->
             </div>
-            <div class="footer-section">
+            <!-- <div class="footer-section">
                 <h4>Actividades</h4>
                 <p>• Pilates Reformer</p>
                 <p>• Yoga Integral</p>
@@ -755,7 +812,7 @@
                 <p>• Pack Móvil</p>
                 <p>• Clases de Prueba</p>
                 <p>• Talleres Especiales</p>
-            </div>
+            </div> -->
         </div>
         <div class="footer-bottom">
             <p>© 2025 Espacio Puna - Bienestar Integral</p>
@@ -807,6 +864,25 @@
                 navbar.style.boxShadow = 'none';
             }
         });
+
+        // Función para expandir/contraer términos y condiciones
+        function toggleTerms() {
+            const expandedSection = document.getElementById('termsExpanded');
+            const toggleButton = document.querySelector('.terms-toggle');
+            const toggleText = document.querySelector('.toggle-text');
+            
+            if (expandedSection.classList.contains('show')) {
+                // Contraer
+                expandedSection.classList.remove('show');
+                toggleButton.classList.remove('expanded');
+                toggleText.textContent = 'Ver términos completos';
+            } else {
+                // Expandir
+                expandedSection.classList.add('show');
+                toggleButton.classList.add('expanded');
+                toggleText.textContent = 'Ocultar términos';
+            }
+        }
     </script>
 </body>
 </html>
