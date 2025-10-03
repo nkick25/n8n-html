@@ -967,7 +967,7 @@
         // Animación de scroll para las secciones
         const observerOptions = {
             threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
+            rootMargin: '0px 0px -20px 0px'
         };
 
         const observer = new IntersectionObserver((entries) => {
@@ -978,10 +978,29 @@
             });
         }, observerOptions);
 
+        // Función para mostrar secciones visibles al cargar
+        function showVisibleSections() {
+            document.querySelectorAll('.section').forEach(section => {
+                const rect = section.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                
+                // Si la sección está visible en el viewport, mostrarla
+                if (rect.top < windowHeight * 0.8 && rect.bottom > 0) {
+                    section.classList.add('visible');
+                }
+            });
+        }
+
         // Observar todas las secciones
         document.querySelectorAll('.section').forEach(section => {
             observer.observe(section);
         });
+
+        // Mostrar secciones visibles al cargar la página
+        showVisibleSections();
+        
+        // También ejecutar después de un breve delay para asegurar que todo esté cargado
+        setTimeout(showVisibleSections, 100);
 
         // Scroll suave para los enlaces del menú
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
