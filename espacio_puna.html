@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espacio Puna - Pilates & Yoga</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: #f7f3ef;
+            font-family: 'Montserrat', sans-serif;
+            color: #5a4632;
+            margin: 0;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 2rem 0 1rem 0;
+        }
+        .app-btn {
+            position: absolute;
+            left: 2rem;
+            top: 2rem;
+            background: #d8b08c;
+            color: #fff;
+            border: none;
+            border-radius: 24px;
+            padding: 0.7rem 1.5rem;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(90,70,50,0.08);
+            transition: background 0.2s;
+        }
+        .app-btn:hover {
+            background: #b88a5a;
+        }
+        .logo {
+            max-width: 160px;
+            height: auto;
+        }
+        .container {
+            max-width: 650px;
+            margin: 2rem auto;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 4px 24px rgba(90,70,50,0.07);
+            padding: 2rem;
+        }
+        h1 {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        section {
+            margin-bottom: 2rem;
+        }
+        section:last-child {
+            margin-bottom: 0;
+        }
+        h2 {
+            font-size: 1.3rem;
+            margin-bottom: 0.7rem;
+            color: #b88a5a;
+        }
+        p, ul {
+            font-size: 1rem;
+            line-height: 1.7;
+            margin: 0 0 1rem 0;
+        }
+        ul {
+            padding-left: 1.2rem;
+        }
+        .valores-list {
+            margin-bottom: 1rem;
+        }
+        .info-box {
+            background: #f7e7d9;
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1.2rem;
+        }
+        .contacto {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        @media (max-width: 700px) {
+            .container {
+                padding: 1rem;
+            }
+            .header {
+                padding: 1rem 0 0.5rem 0;
+            }
+            .app-btn {
+                left: 1rem;
+                top: 1rem;
+                padding: 0.5rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <button class="app-btn" onclick="window.location.href='https://app.espaciopuna.com'">Ir a la APP</button>
+        <!-- Reemplaza la siguiente línea con la imagen exportada del PDF -->
+        <img src="logo-espacio-puna.png" alt="Espacio Puna Logo" class="logo">
+    </div>
+    <div class="container">
+        <h1>Bienvenida a Espacio Puna</h1>
+        <section>
+            <h2>Misión</h2>
+            <p>Crear un espacio seguro y cálido para que las mujeres se conecten consigo mismas y con otras, a través de yoga, pilates y talleres enfocados en su bienestar. Buscamos ser un refugio donde cada una pueda relajarse, fortalecer su cuerpo y nutrir su alma, en un ambiente de apoyo, amistad y crecimiento.</p>
+        </section>
+        <section>
+            <h2>Visión</h2>
+            <p>Ser el lugar de encuentro preferido por las mujeres, reconocido por la calidad de sus clases y por ser una verdadera comunidad. Queremos que nuestro espacio sea sinónimo de bienestar integral, donde el ejercicio físico sea el punto de partida para charlas, risas y conexiones reales, creando una red de mujeres fuertes y empoderadas.</p>
+        </section>
+        <section>
+            <h2>Valores</h2>
+            <ul class="valores-list">
+                <li><strong>Comunidad:</strong> Fomentamos la unión y la sororidad. Creemos en el poder de apoyarnos entre mujeres, celebrando nuestras diferencias y compartiendo experiencias.</li>
+                <li><strong>Bienestar Integral:</strong> Entendemos el bienestar como equilibrio entre cuerpo y mente. Nuestras actividades nutren ambas partes, promoviendo salud física y emocional.</li>
+                <li><strong>Aceptación:</strong> Espacio libre de juicios, donde cada mujer puede ser auténtica. Celebramos la diversidad de cuerpos, historias y ritmos, creando respeto y amor propio.</li>
+                <li><strong>Conexión:</strong> Valoramos la conexión profunda, tanto con una misma como con las demás. Cada clase y taller es una oportunidad para escuchar el cuerpo, las emociones y crear lazos genuinos.</li>
+                <li><strong>Pasión:</strong> Ponemos el corazón en cada detalle. Nos mueve la pasión por el yoga, pilates y el desarrollo personal, compartiéndolo con alegría y dedicación.</li>
+            </ul>
+        </section>
+        <section class="info-box">
+            <h2>Características del local</h2>
+            <p><strong>Horario de atención:</strong> Lunes a viernes: 8 a 20 hs | Sábados: 8 a 13 hs</p>
+            <p><strong>Dirección:</strong> Mariano Acha 2771, entre Nahuel Huapí y Pedro Rivera - Villa Urquiza - CABA.</p>
+            <p class="contacto"><strong>Contacto:</strong> IG mensaje directo | Email: <a href="mailto:espaciopuna@gmail.com">espaciopuna@gmail.com</a></p>
+        </section>
+        <section>
+            <h2>Actividades</h2>
+            <ul>
+                <li><strong>Pilates reformer:</strong> 6 camas (box, tabla de salto y accesorios incluidos).</li>
+                <li><strong>Yoga integral y stretching:</strong> Clases grupales de hasta 7 personas (con todo tipo de accesorios).</li>
+                <li><strong>Talleres especiales:</strong> Meditación, yoga para embarazadas, reflexología.</li>
+            </ul>
+            <p>Las actividades están orientadas al cuerpo, mente, relajación y movimiento consciente.</p>
+        </section>
+        <section>
+            <h2>Suscripciones</h2>
+            <ul>
+                <li><strong>Pack fijo:</strong> Días y horarios fijos. Cancelación con 24 hs de anticipación y recuperación en el mismo horario.</li>
+                <li><strong>Pack móvil:</strong> Días y horarios flexibles. Cancelación con 24 hs de anticipación y recuperación en cualquier horario disponible.</li>
+            </ul>
+        </section>
+        <section>
+            <h2>Cancelaciones y elección de clases</h2>
+            <p>Si necesitás cancelar una clase, hacelo con 24 hs de anticipación para no perderla y poder recuperarla otro día. Las clases canceladas el mismo día no se recuperan.</p>
+            <p>Podés elegir la clase desde nuestra app, seleccionando tipo, día y horario.</p>
+        </section>
+        <section>
+            <h2>Ventajas de hacer pilates</h2>
+            <ul>
+                <li>Mejora la postura integral</li>
+                <li>Trabaja la fuerza corporal</li>
+                <li>Mejora la concentración</li>
+                <li>Aumenta la flexibilidad</li>
+                <li>Espacio para centrarse en uno mismo y conectarse con el presente</li>
+            </ul>
+        </section>
+        <section>
+            <h2>Actividades para patologías especiales</h2>
+            <p>Te esperamos en nuestro espacio para una charla personal sobre tus necesidades. Podemos evaluar clases personalizadas, centradas en tus propósitos.</p>
+        </section>
+        <section>
+            <h2>Términos y Condiciones</h2>
+            <p>Al utilizar nuestros servicios, aceptás los términos y condiciones establecidos por Espacio Puna. Nos reservamos el derecho de modificar estos términos en cualquier momento. Por favor, revisá esta sección periódicamente para estar informada sobre cambios.</p>
+            <p>Las clases y talleres están sujetas a disponibilidad y pueden requerir reserva previa. El uso de las instalaciones implica el respeto por las normas del espacio y el cuidado de los materiales.</p>
+        </section>
+        <section>
+            <h2>Política Comercial</h2>
+            <p>Espacio Puna se compromete a ofrecer productos y servicios de calidad, priorizando la satisfacción de cada mujer que nos visita. Todas las transacciones son seguras y la información personal es tratada con confidencialidad. Para más detalles sobre devoluciones, garantías y atención al cliente, consultá esta sección o comunicate con nuestro equipo.</p>
+            <p>Los precios y promociones serán comunicados oportunamente. Ante cualquier duda, podés escribirnos por email o mensaje directo de Instagram.</p>
+        </section>
+    </div>
+</body>
+</html>
