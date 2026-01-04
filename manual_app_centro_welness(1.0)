@@ -1,0 +1,904 @@
+!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual de Usuario - Sistema de Gestión | Espacio Puna</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #806763;
+            text-align: center;
+            border-bottom: 3px solid #C6CDBC;
+            padding-bottom: 15px;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+
+        h2 {
+            color: #806763;
+            margin-top: 40px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #C6CDBC;
+            font-size: 1.8em;
+        }
+
+        h3 {
+            color: #806763;
+            margin-top: 25px;
+            margin-bottom: 12px;
+            font-size: 1.4em;
+        }
+
+        h4 {
+            color: #806763;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        strong {
+            color: #806763;
+            font-weight: 600;
+        }
+
+        ul, ol {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        table th {
+            background-color: #806763;
+            color: #fff;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        table td {
+            padding: 12px;
+            border-bottom: 1px solid #C6CDBC;
+        }
+
+        table tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-right: 5px;
+        }
+
+        .badge-blue { background-color: #3498db; color: #fff; }
+        .badge-orange { background-color: #f39c12; color: #fff; }
+        .badge-red { background-color: #e74c3c; color: #fff; }
+        .badge-green { background-color: #27ae60; color: #fff; }
+        .badge-yellow { background-color: #f1c40f; color: #333; }
+
+        .workflow {
+            background-color: #f9f9f9;
+            border-left: 4px solid #806763;
+            padding: 15px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .tip {
+            background-color: #C6CDBC;
+            border-left: 4px solid #806763;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .tip strong {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1.1em;
+        }
+
+        .toc {
+            background-color: #f9f9f9;
+            border: 2px solid #C6CDBC;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 8px;
+        }
+
+        .toc h2 {
+            margin-top: 0;
+            border-bottom: none;
+            font-size: 1.5em;
+        }
+
+        .toc ul {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .toc a {
+            color: #806763;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .toc a:hover {
+            color: #C6CDBC;
+            text-decoration: underline;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #C6CDBC;
+            margin: 40px 0;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 2px solid #C6CDBC;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            table {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Manual de Uso y Funcionamiento</h1>
+        <p class="subtitle">Sistema de Gestión - Estudio de Pilates & Yoga</p>
+
+        <div class="toc">
+            <h2>Índice de Contenidos</h2>
+            <ul>
+                <li><a href="#introduccion">1. Introducción</a></li>
+                <li><a href="#acceso">2. Acceso al Sistema</a></li>
+                <li><a href="#staff">3. Dashboard de STAFF</a></li>
+                <li><a href="#teacher">4. Dashboard de TEACHER</a></li>
+                <li><a href="#client">5. Dashboard de CLIENT</a></li>
+                <li><a href="#configuracion">6. Configuración del Sistema</a></li>
+                <li><a href="#flujos">7. Flujos de Trabajo Principales</a></li>
+                <li><a href="#glosario">8. Glosario de Estados</a></li>
+                <li><a href="#tips">9. Atajos y Tips</a></li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <h2 id="introduccion">1. Introducción</h2>
+        <p>Este sistema de gestión está diseñado para administrar de manera integral un estudio de Pilates y Yoga. Permite gestionar clientes, suscripciones, clases, reservas, pagos y analíticas del negocio.</p>
+
+        <h3>1.1 Roles de Usuario</h3>
+        <p>El sistema maneja tres roles principales:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Rol</th>
+                    <th>Descripción</th>
+                    <th>Acceso</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Staff</strong></td>
+                    <td>Personal administrativo con acceso completo</td>
+                    <td>Gestión total del sistema</td>
+                </tr>
+                <tr>
+                    <td><strong>Teacher</strong></td>
+                    <td>Profesores/Instructores</td>
+                    <td>Gestión de sus clases y asistencias</td>
+                </tr>
+                <tr>
+                    <td><strong>Client</strong></td>
+                    <td>Clientes del estudio</td>
+                    <td>Reservas y consulta de sus suscripciones</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <hr>
+
+        <h2 id="acceso">2. Acceso al Sistema</h2>
+        <h3>2.1 Inicio de Sesión (<code>/auth</code>)</h3>
+        <ol>
+            <li>Ingrese su <strong>correo electrónico</strong> registrado</li>
+            <li>Ingrese su <strong>contraseña</strong></li>
+            <li>Haga clic en <strong>"Iniciar Sesión"</strong></li>
+        </ol>
+        <p>El sistema redirigirá automáticamente al dashboard correspondiente según su rol.</p>
+
+        <hr>
+
+        <h2 id="staff">3. Dashboard de STAFF</h2>
+        <p>El panel de Staff es el más completo y se organiza en 5 pestañas principales:</p>
+
+        <h3>3.1 Pestaña "Avisos" (Tab por defecto)</h3>
+        <p><strong>Propósito:</strong> Alertas diarias importantes para la operación.</p>
+        
+        <p><strong>Funcionalidades:</strong></p>
+        <ul>
+            <li><strong>Navegación de fechas:</strong> Flechas izquierda/derecha para ver avisos de otros días</li>
+            <li><strong>Tres categorías de alertas:</strong></li>
+        </ul>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Categoría</th>
+                    <th>Descripción</th>
+                    <th>Indicador Visual</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Clientes de Prueba</strong></td>
+                    <td>Clientes con producto "PRUEBA" que asisten hoy</td>
+                    <td><span class="badge badge-blue">Badge azul</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Pagos Pendientes</strong></td>
+                    <td>Clientes con estado PENDING, PAYMENT_PROMISE u OVERDUE</td>
+                    <td><span class="badge badge-orange">Badge naranja</span> <span class="badge badge-red">Badge rojo</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Lesiones Declaradas</strong></td>
+                    <td>Clientes con condiciones médicas que asisten hoy</td>
+                    <td><span class="badge badge-red">Badge rojo con alerta</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p><strong>Uso típico:</strong> Revisar al inicio del día para preparar la atención especial a estos clientes.</p>
+
+        <h3>3.2 Pestaña "Panel de Gestión"</h3>
+        <p>Centro principal de administración con sub-pestañas:</p>
+
+        <h4>3.2.1 Sub-tab "Clientes"</h4>
+        <p><strong>Componente:</strong> <code>ClientsTable</code></p>
+        
+        <p><strong>Funcionalidades:</strong></p>
+        <ul>
+            <li><strong>Buscar clientes</strong> por nombre, email o DNI</li>
+            <li><strong>Crear nuevo cliente</strong> (wizard de 2 pasos):
+                <ul>
+                    <li>Paso 1: Datos obligatorios (nombre, apellido, email, contraseña, identificación, teléfono)</li>
+                    <li>Paso 2: Datos opcionales (contacto emergencia, obra social, certificado médico, lesiones, Instagram)</li>
+                </ul>
+            </li>
+            <li><strong>Editar cliente</strong> existente</li>
+            <li><strong>Resetear contraseña</strong></li>
+            <li><strong>Eliminar cliente</strong> (con confirmación)</li>
+        </ul>
+
+        <p><strong>Acciones rápidas:</strong></p>
+        <ul>
+            <li>Icono de lápiz: Editar</li>
+            <li>Icono de llave: Cambiar contraseña</li>
+            <li>Icono de basura: Eliminar</li>
+        </ul>
+
+        <h4>3.2.2 Sub-tab "Suscripciones"</h4>
+        <p><strong>Componente:</strong> <code>SubscriptionSalesTable</code></p>
+        
+        <p><strong>Funcionalidades:</strong></p>
+        <ul>
+            <li><strong>Ver todas las suscripciones</strong> con filtros por:
+                <ul>
+                    <li>Estado (ACTIVE, PENDING, CANCELLED, EXPIRED)</li>
+                    <li>Estado de pago (PAID, PENDING, OVERDUE, PAYMENT_PROMISE)</li>
+                    <li>Actividad</li>
+                    <li>Rango de fechas</li>
+                </ul>
+            </li>
+            <li><strong>Crear nueva suscripción:</strong>
+                <ol>
+                    <li>Seleccionar cliente</li>
+                    <li>Elegir producto de suscripción</li>
+                    <li>Aplicar descuentos (opcional)</li>
+                    <li>Definir fechas de inicio/fin</li>
+                    <li>Prorrateo automático si aplica</li>
+                </ol>
+            </li>
+            <li><strong>Editar suscripción</strong> existente</li>
+            <li><strong>Registrar pagos</strong></li>
+        </ul>
+
+        <p><strong>Información mostrada:</strong></p>
+        <ul>
+            <li>Cliente, Producto, Actividad</li>
+            <li>Créditos restantes / totales</li>
+            <li>Fechas de inicio y fin</li>
+            <li>Precio final y estado de pago</li>
+        </ul>
+
+        <h4>3.2.3 Sub-tab "Clases"</h4>
+        <p><strong>Componentes:</strong> <code>ClassScheduleView</code> / <code>ClassesTable</code> / <code>ClassTimelineView</code></p>
+        
+        <p><strong>Modos de visualización:</strong></p>
+        <ol>
+            <li><strong>Calendario (Schedule):</strong> Vista semanal tipo agenda</li>
+            <li><strong>Lista:</strong> Tabla con todas las clases</li>
+            <li><strong>Timeline:</strong> Vista vertical por día</li>
+        </ol>
+
+        <p><strong>Funcionalidades:</strong></p>
+        <ul>
+            <li><strong>Crear clase individual:</strong> Fecha, hora, instructor, capacidad, actividad</li>
+            <li><strong>Crear serie recurrente:</strong> Días de repetición, fecha inicio/fin</li>
+            <li><strong>Ver ocupación</strong> de cada clase</li>
+            <li><strong>Gestionar reservas:</strong> Al hacer clic en una clase se abre el modal de detalles</li>
+            <li><strong>Cancelar/Modificar clases</strong></li>
+        </ul>
+
+        <p><strong>Modal de Detalles de Clase:</strong></p>
+        <ul>
+            <li>Lista de clientes reservados</li>
+            <li>Estado de asistencia (presente/ausente)</li>
+            <li>Estado de pago del cliente</li>
+            <li>Alertas de lesiones</li>
+            <li>Botón "Marcar Todos Presente"</li>
+        </ul>
+
+        <h4>3.2.4 Sub-tab "Pagos"</h4>
+        <p><strong>Componentes:</strong> <code>PaymentsTable</code> + <code>CollectionsTable</code></p>
+        
+        <p><strong>PaymentsTable:</strong></p>
+        <ul>
+            <li>Historial de pagos registrados</li>
+            <li>Filtros por fecha, método de pago, cliente</li>
+            <li>Exportación de datos</li>
+        </ul>
+
+        <p><strong>CollectionsTable (Cobranzas):</strong></p>
+        <ul>
+            <li>Suscripciones con pagos pendientes</li>
+            <li>Filtros por estado: PENDING, PAYMENT_PROMISE, OVERDUE</li>
+            <li>Cálculo de "Mora" (15 días después de inicio)</li>
+            <li>Métricas de totales pendientes</li>
+        </ul>
+
+        <h4>3.2.5 Sub-tab "Proyección"</h4>
+        <p><strong>Componente:</strong> <code>OccupancyProjectionView</code></p>
+        
+        <p><strong>Propósito:</strong> Visualizar ocupación futura basada en plantillas de reservas.</p>
+        
+        <p><strong>Funcionalidades:</strong></p>
+        <ul>
+            <li>Proyección de ocupación por clase</li>
+            <li>Identificación de clases con alta demanda</li>
+            <li>Planificación de capacidad</li>
+        </ul>
+
+        <h4>3.2.6 Sub-tabs Adicionales</h4>
+        <ul>
+            <li><strong>Reservas Múltiples</strong> (<code>BulkClassBooking</code>): Reservar múltiples clases para un cliente</li>
+            <li><strong>Buscador</strong> (<code>ClientBookingSearcher</code>): Búsqueda rápida de reservas</li>
+            <li><strong>Plantillas</strong> (<code>TemplateManager</code>): Gestionar plantillas de reservas recurrentes</li>
+        </ul>
+
+        <h3>3.3 Pestaña "Renovaciones Manuales"</h3>
+        <p><strong>Componente:</strong> <code>ManualRenewalDashboard</code></p>
+        
+        <p><strong>Propósito:</strong> Gestionar renovaciones de suscripciones próximas a vencer.</p>
+        
+        <p><strong>Secciones:</strong></p>
+        <ol>
+            <li><strong>Requieren Renovación:</strong> Suscripciones sin cobertura para el próximo mes</li>
+            <li><strong>Cubiertas:</strong> Ya tienen renovación creada</li>
+            <li><strong>No Renovar:</strong> Marcadas explícitamente como sin renovación</li>
+        </ol>
+
+        <p><strong>Funcionalidades:</strong></p>
+        <ul>
+            <li><strong>Filtros:</strong>
+                <ul>
+                    <li>Por mes de vencimiento</li>
+                    <li>Por actividad</li>
+                    <li>Por producto</li>
+                    <li>Búsqueda por cliente</li>
+                </ul>
+            </li>
+            <li><strong>Acciones:</strong>
+                <ul>
+                    <li>Crear renovación individual</li>
+                    <li>Renovación masiva (selección múltiple)</li>
+                    <li>Marcar "No Renovar" con motivo</li>
+                    <li>Editar plantilla de reservas (icono de carpeta)</li>
+                </ul>
+            </li>
+        </ul>
+
+        <p><strong>Flujo de Renovación:</strong></p>
+        <ol>
+            <li>Seleccionar suscripciones a renovar</li>
+            <li>Vista previa de renovaciones</li>
+            <li>Confirmar creación masiva</li>
+            <li>Opción de ir a reservar clases automáticamente</li>
+        </ol>
+
+        <h3>3.4 Pestaña "Informes"</h3>
+        <p>Sub-pestañas con generadores de reportes:</p>
+
+        <h4>3.4.1 Informe de Asistencias</h4>
+        <p><strong>Componente:</strong> <code>AttendanceReport</code></p>
+        <ul>
+            <li>Reporte por rango de fechas</li>
+            <li>Filtro por actividad</li>
+            <li>Muestra: clases, asistentes, % ocupación</li>
+            <li>Exportable a Excel/PDF</li>
+        </ul>
+
+        <h4>3.4.2 Informe de Ocupación</h4>
+        <p><strong>Componente:</strong> <code>OccupancyReportGenerator</code></p>
+        <ul>
+            <li>Ocupación por clase y horario</li>
+            <li>Comparativa de capacidad vs reservas</li>
+            <li>Identificación de horarios más demandados</li>
+        </ul>
+
+        <h4>3.4.3 Informe de Ventas y Pagos</h4>
+        <p><strong>Componente:</strong> <code>SalesPaymentsReportGenerator</code></p>
+        <ul>
+            <li>Ventas por período</li>
+            <li>Desglose por método de pago</li>
+            <li>Recaudación total vs pendiente</li>
+        </ul>
+
+        <h3>3.5 Pestaña "Analítica"</h3>
+        <p><strong>Componente:</strong> <code>AnalyticsDashboard</code></p>
+        
+        <p><strong>Filtros globales:</strong></p>
+        <ul>
+            <li>Rango de fechas (con atajos: Este mes, Mes pasado, Últimos 3 meses)</li>
+            <li>Estado de suscripción</li>
+            <li>Actividad (incluir/excluir)</li>
+            <li>Producto (incluir/excluir)</li>
+        </ul>
+
+        <p><strong>Visualizaciones:</strong></p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Sección</th>
+                    <th>Métricas</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Suscripciones</strong></td>
+                    <td>Activas, nuevas, canceladas, tasa de retención</td>
+                </tr>
+                <tr>
+                    <td><strong>Productos</strong></td>
+                    <td>Top productos vendidos, distribución por actividad</td>
+                </tr>
+                <tr>
+                    <td><strong>Facturación</strong></td>
+                    <td>Ingresos por método de pago, gráficos de torta/barras</td>
+                </tr>
+                <tr>
+                    <td><strong>Ocupación</strong></td>
+                    <td>% ocupación promedio, tendencias</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <hr>
+
+        <h2 id="teacher">4. Dashboard de TEACHER</h2>
+
+        <h3>4.1 Pestaña "Avisos"</h3>
+        <p>Idéntico al de Staff pero enfocado en las alertas relevantes para profesores:</p>
+        <ul>
+            <li>Clientes de prueba en sus clases</li>
+            <li>Pagos pendientes de sus alumnos</li>
+            <li>Lesiones declaradas</li>
+        </ul>
+
+        <h3>4.2 Pestaña "Mis Clases"</h3>
+        <p><strong>Componente:</strong> <code>UnifiedClientCalendarView</code> con <code>BookingDetailsModal</code></p>
+        
+        <p><strong>Funcionalidades:</strong></p>
+        <ul>
+            <li>Vista de calendario con todas las clases</li>
+            <li>Filtro automático para ver primero sus propias clases</li>
+            <li>Al hacer clic en una clase:
+                <ul>
+                    <li>Ver lista de reservados</li>
+                    <li><strong>Marcar asistencia individual</strong> (botones Presente/Ausente)</li>
+                    <li><strong>Marcar todos presente</strong> (botón masivo)</li>
+                    <li>Ver alertas de lesiones (icono de corazón rojo)</li>
+                    <li>Ver estado de pago de cada alumno</li>
+                </ul>
+            </li>
+        </ul>
+
+        <p><strong>Información de Salud:</strong></p>
+        <ul>
+            <li>Icono de corazón junto a clientes con lesiones declaradas</li>
+            <li>Modal con detalles: lesiones, contacto emergencia, obra social</li>
+        </ul>
+
+        <h3>4.3 Pestaña "Cotizador"</h3>
+        <p><strong>Componente:</strong> <code>QuickQuoter</code></p>
+        
+        <p>Herramienta rápida para consultar precios:</p>
+        <ol>
+            <li>Seleccionar <strong>Actividad</strong></li>
+            <li>Seleccionar <strong>Medio de Pago</strong></li>
+            <li>Ver <strong>Planes Disponibles</strong> filtrados</li>
+            <li>Aplicar <strong>Descuento</strong> (opcional)</li>
+            <li>Ver <strong>Resumen de Precio</strong> con desglose:
+                <ul>
+                    <li>Precio base</li>
+                    <li>Descuento aplicado</li>
+                    <li>Subtotal</li>
+                    <li>IVA</li>
+                    <li><strong>TOTAL</strong></li>
+                </ul>
+            </li>
+        </ol>
+
+        <hr>
+
+        <h2 id="client">5. Dashboard de CLIENT</h2>
+
+        <h3>5.1 Vista Principal</h3>
+        <p><strong>Componente:</strong> <code>ClientDashboard</code></p>
+
+        <h4>5.1.1 Información de Contacto</h4>
+        <p>Card con botón para actualizar datos personales:</p>
+        <ul>
+            <li>Teléfono de emergencia</li>
+            <li>Obra social y credencial</li>
+            <li>Lesiones declaradas</li>
+        </ul>
+        <p><strong>Alerta:</strong> Si faltan datos después de 30 días, se muestra advertencia.</p>
+
+        <h4>5.1.2 Mis Suscripciones Activas</h4>
+        <p>Muestra para cada suscripción:</p>
+        <ul>
+            <li>Nombre del producto y actividad</li>
+            <li><strong>Créditos restantes / totales</strong></li>
+            <li>Fechas de vigencia</li>
+            <li>Estado de pago (badge de color)</li>
+        </ul>
+
+        <p><strong>Estados de pago:</strong></p>
+        <ul>
+            <li><span class="badge badge-green">PAID</span> Pagado</li>
+            <li><span class="badge badge-yellow">PENDING</span> Pendiente</li>
+            <li><span class="badge badge-orange">PAYMENT_PROMISE</span> Promesa de pago</li>
+            <li><span class="badge badge-red">OVERDUE</span> Vencido</li>
+        </ul>
+
+        <h4>5.1.3 Calendario de Clases</h4>
+        <p><strong>Componente:</strong> <code>UnifiedClientCalendarView</code></p>
+        
+        <p><strong>Funcionalidades:</strong></p>
+        <ul>
+            <li>Ver clases disponibles en calendario</li>
+            <li><strong>Reservar clase:</strong> Click en clase disponible</li>
+            <li><strong>Cancelar reserva:</strong> Solo hasta el día anterior</li>
+            <li>Filtro por actividad</li>
+            <li>Vista de ocupación (lugares disponibles)</li>
+        </ul>
+
+        <p><strong>Estados de reserva en calendario:</strong></p>
+        <ul>
+            <li><span class="badge badge-blue">Clase reservada</span> Ya tiene reserva</li>
+            <li>⚪ <strong>Clase disponible:</strong> Puede reservar</li>
+            <li><span class="badge badge-red">Clase llena</span> Sin lugares</li>
+            <li>⚫ <strong>Clase cancelada:</strong> No disponible</li>
+        </ul>
+
+        <h4>5.1.4 Historial de Clases</h4>
+        <p>Tabla con:</p>
+        <ul>
+            <li>Clases tomadas (asistió)</li>
+            <li>Clases reservadas futuras</li>
+            <li>Reservas canceladas</li>
+            <li>Paginación</li>
+        </ul>
+
+        <hr>
+
+        <h2 id="configuracion">6. Configuración del Sistema</h2>
+        <p><strong>Acceso:</strong> Menú de navegación → "Configuración" (solo Staff)</p>
+
+        <h3>6.1 General</h3>
+        <ul>
+            <li>Nombre del estudio</li>
+            <li>Información de contacto</li>
+            <li>Configuraciones globales</li>
+        </ul>
+
+        <h3>6.2 Actividades</h3>
+        <p>CRUD de actividades (Pilates, Yoga, etc.)</p>
+
+        <h3>6.3 Productos</h3>
+        <p>Gestión de productos de suscripción:</p>
+        <ul>
+            <li>Nombre, descripción, precio</li>
+            <li>Créditos incluidos</li>
+            <li>Actividad asociada</li>
+            <li>Ciclo de facturación</li>
+            <li>Métodos de pago aceptados</li>
+            <li>Porcentaje de IVA</li>
+        </ul>
+
+        <h3>6.4 Ciclos de Facturación</h3>
+        <p>Configurar períodos:</p>
+        <ul>
+            <li>Mensual, Semanal, Clase individual, etc.</li>
+        </ul>
+
+        <h3>6.5 Medios de Pago</h3>
+        <ul>
+            <li>Efectivo, Transferencia, MercadoPago, etc.</li>
+            <li>Orden de visualización</li>
+            <li>Etiquetas de cuenta</li>
+        </ul>
+
+        <h3>6.6 Descuentos</h3>
+        <p>Crear descuentos:</p>
+        <ul>
+            <li>Tipo: Porcentaje o Monto fijo</li>
+            <li>Valor del descuento</li>
+            <li>Estado activo/inactivo</li>
+        </ul>
+
+        <h3>6.7 Logs</h3>
+        <p>Visor de logs del sistema para debugging.</p>
+
+        <hr>
+
+        <h2 id="flujos">7. Flujos de Trabajo Principales</h2>
+
+        <h3>7.1 Alta de Nuevo Cliente</h3>
+        <div class="workflow">
+Staff → Panel de Gestión → Clientes → "+ Nuevo Cliente"
+  → Paso 1: Datos básicos (nombre, email, contraseña, DNI)
+  → Paso 2: Datos adicionales (emergencia, obra social, lesiones)
+  → Guardar
+        </div>
+
+        <h3>7.2 Venta de Suscripción</h3>
+        <div class="workflow">
+Staff → Panel de Gestión → Suscripciones → "+ Nueva Venta"
+  → Seleccionar cliente
+  → Elegir producto
+  → Aplicar descuento (opcional)
+  → Definir fechas
+  → Confirmar
+        </div>
+
+        <h3>7.3 Reserva de Clases (Staff)</h3>
+        <div class="workflow">
+Staff → Panel de Gestión → Clases → Click en clase
+  → Modal de detalles → "+ Agregar Cliente"
+  → Buscar cliente → Confirmar reserva
+        </div>
+
+        <h3>7.4 Reserva de Clases (Cliente)</h3>
+        <div class="workflow">
+Cliente → Calendario → Click en clase disponible
+  → Confirmar reserva
+  → Se descuenta 1 crédito automáticamente
+        </div>
+
+        <h3>7.5 Registro de Asistencia</h3>
+        <div class="workflow">
+Teacher/Staff → Avisos/Mis Clases → Click en clase
+  → Modal de asistencia
+  → Marcar Presente/Ausente por alumno
+  → O "Marcar Todos Presente"
+        </div>
+
+        <h3>7.6 Renovación de Suscripción</h3>
+        <div class="workflow">
+Staff → Renovaciones Manuales
+  → Filtrar por mes/actividad
+  → Seleccionar suscripciones
+  → "Crear Renovaciones"
+  → Confirmar en preview
+  → (Opcional) Ir a reservar clases
+        </div>
+
+        <hr>
+
+        <h2 id="glosario">8. Glosario de Estados</h2>
+
+        <h3>Estados de Suscripción</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Estado</th>
+                    <th>Significado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>PENDING</strong></td>
+                    <td>Creada pero no inicia aún</td>
+                </tr>
+                <tr>
+                    <td><strong>ACTIVE</strong></td>
+                    <td>Vigente y utilizable</td>
+                </tr>
+                <tr>
+                    <td><strong>EXPIRED</strong></td>
+                    <td>Fecha de fin superada</td>
+                </tr>
+                <tr>
+                    <td><strong>CANCELLED</strong></td>
+                    <td>Cancelada manualmente</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Estados de Pago (Billing Status)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Estado</th>
+                    <th>Significado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>PAID</strong></td>
+                    <td>Pago completo recibido</td>
+                </tr>
+                <tr>
+                    <td><strong>PENDING</strong></td>
+                    <td>Aguardando pago</td>
+                </tr>
+                <tr>
+                    <td><strong>PAYMENT_PROMISE</strong></td>
+                    <td>Cliente prometió pagar</td>
+                </tr>
+                <tr>
+                    <td><strong>OVERDUE</strong></td>
+                    <td>Mora (15+ días sin pago)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Estados de Reserva</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Estado</th>
+                    <th>Significado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>booked</strong></td>
+                    <td>Reserva activa</td>
+                </tr>
+                <tr>
+                    <td><strong>cancelled</strong></td>
+                    <td>Reserva cancelada</td>
+                </tr>
+                <tr>
+                    <td><strong>attended</strong></td>
+                    <td>Asistió a la clase</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <hr>
+
+        <h2 id="tips">9. Atajos y Tips</h2>
+
+        <div class="tip">
+            <strong>💡 Atajos de Teclado</strong>
+            <ul>
+                <li><strong>Calendario:</strong> Use flechas del teclado para navegar semanas</li>
+                <li><strong>Búsquedas:</strong> Puede buscar por DNI parcial</li>
+                <li><strong>Filtros:</strong> Se guardan durante la sesión</li>
+            </ul>
+        </div>
+
+        <div class="tip">
+            <strong>📊 Exportación de Datos</strong>
+            <p>La mayoría de tablas tienen botón de exportar a Excel/PDF en la esquina superior derecha.</p>
+        </div>
+
+        <div class="tip">
+            <strong>📱 Acceso Móvil</strong>
+            <p>La aplicación es completamente responsive y funciona en dispositivos móviles. Todos los profesores y clientes pueden gestionar sus actividades desde el celular.</p>
+        </div>
+
+        <div class="tip">
+            <strong>🔍 Búsqueda Inteligente</strong>
+            <p>En la búsqueda de clientes, puede buscar por nombre completo, email parcial o DNI. El sistema es flexible y encuentra resultados aproximados.</p>
+        </div>
+
+        <hr>
+
+        <div class="footer">
+            <p><strong>Documento generado para Espacio Puna</strong></p>
+            <p>Sistema de Gestión de Pilates & Yoga</p>
+            <p>© 2026 - Todos los derechos reservados</p>
+        </div>
+    </div>
+</body>
+</html>
