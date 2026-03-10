@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERP Unificado CentroAmérica - Arquitectura de Sistemas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Syne', sans-serif;
+        }
+        .connection-line {
+            stroke: #3b82f6;
+            stroke-width: 2;
+            fill: none;
+            stroke-dasharray: 5,5;
+            animation: dash 2s linear infinite;
+        }
+        
+        .connection-line-solid {
+            stroke: #10b981;
+            stroke-width: 3;
+            fill: none;
+        }
+
+        .connection-line-orange {
+            stroke: #f59e0b;
+            stroke-width: 2;
+            fill: none;
+            stroke-dasharray: 8,4;
+            animation: dash 3s linear infinite;
+        }
+
+        .connection-line-purple {
+            stroke: #a855f7;
+            stroke-width: 2;
+            fill: none;
+            stroke-dasharray: 6,3;
+            animation: dash 2.5s linear infinite reverse;
+        }
+        
+        @keyframes dash {
+            to {
+                stroke-dashoffset: -10;
+            }
+        }
+        
+        .platform-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .platform-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .pulse-dot {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+        
+        .flow-arrow {
+            animation: flow 3s ease-in-out infinite;
+        }
+        
+        @keyframes flow {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(10px); }
+        }
+
+        .stage-badge {
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 5px rgba(59, 130, 246, 0.5); }
+            to { box-shadow: 0 0 20px rgba(59, 130, 246, 0.8); }
+        }
+
+        .replica-line {
+            stroke: #a855f7;
+            stroke-width: 2;
+            fill: none;
+            stroke-dasharray: 4,6;
+            animation: dash 4s linear infinite;
+        }
+    </style>
+</head>
+<body class="bg-black min-h-screen p-6">
+    <div class="max-w-7xl mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <div class="inline-block stage-badge bg-blue-600 text-white text-xs font-bold px-4 py-1.5 rounded-full mb-4 uppercase tracking-widest">Primera Etapa del Proyecto</div>
+            <h1 class="text-4xl font-bold text-white mb-4">ERP Unificado CentroAmérica</h1>
+            <p class="text-lg text-gray-300">Arquitectura de Sistemas — Diagrama Interactivo</p>
+        </div>
+
+        <!-- Main Architecture Diagram -->
+        <div class="relative bg-gray-900 rounded-2xl shadow-xl border border-gray-700 p-8 mb-8">
+            <svg class="absolute inset-0 w-full h-full pointer-events-none" style="z-index: 1;">
+                <!-- FrontEnd → BackEnd (solid green) -->
+                <line x1="25%" y1="35%" x2="50%" y2="35%" class="connection-line-solid"/>
+                <!-- BackEnd → BD Transaccional (solid green) -->
+                <line x1="50%" y1="50%" x2="50%" y2="80%" class="connection-line-solid"/>
+                <!-- Agente IA ↔ FrontEnd (dashed blue) -->
+                <line x1="25%" y1="75%" x2="25%" y2="45%" class="connection-line"/>
+                <!-- Agente IA → BackEnd (dashed orange) -->
+                <line x1="32%" y1="75%" x2="45%" y2="55%" class="connection-line-orange"/>
+                <!-- BD Transaccional → Réplica BD (dashed purple) -->
+                <line x1="60%" y1="85%" x2="72%" y2="85%" class="replica-line"/>
+                <!-- Réplica BD → ARK (solid green) -->
+                <line x1="75%" y1="75%" x2="75%" y2="45%" class="connection-line-solid"/>
+                <!-- Localizaciones → BackEnd (dashed) -->
+                <line x1="50%" y1="20%" x2="50%" y2="30%" class="connection-line"/>
+                
+                <!-- Flow indicators -->
+                <circle cx="37.5%" cy="35%" r="4" fill="#10b981" class="pulse-dot"/>
+                <circle cx="50%" cy="65%" r="4" fill="#10b981" class="pulse-dot"/>
+                <circle cx="25%" cy="60%" r="4" fill="#3b82f6" class="pulse-dot"/>
+                <circle cx="66%" cy="85%" r="4" fill="#a855f7" class="pulse-dot"/>
+                <circle cx="75%" cy="60%" r="4" fill="#10b981" class="pulse-dot"/>
+            </svg>
+
+            <div class="relative grid grid-cols-3 gap-8" style="z-index: 2; min-height: 620px;">
+                <!-- Left Column - FrontEnd + Agente IA -->
+                <div class="flex flex-col justify-between">
+                    <!-- FrontEnd Odoo -->
+                    <div class="platform-card bg-gradient-to-br from-blue-500 to-cyan-600 rounded-xl p-6 text-white" onclick="showDetails('frontend')">
+                        <div class="flex items-center mb-3">
+                            <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center mr-3">
+                                <span class="text-2xl">🖥️</span>
+                            </div>
+                            <h3 class="font-bold text-xl">FrontEnd</h3>
+                        </div>
+                        <p class="text-sm opacity-90 mb-2">Odoo V18 Community — UI Customizado</p>
+                        <div class="bg-white bg-opacity-20 rounded-lg p-2 mt-2">
+                            <p class="text-xs">Vistas simplificadas tipo POS</p>
+                        </div>
+                        <div class="mt-3 flex items-center text-xs">
+                            <div class="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
+                            <span>Capa de Presentación</span>
+                        </div>
+                    </div>
+
+                    <!-- Agente IA Transaccional -->
+                    <div class="platform-card bg-gradient-to-br from-amber-500 via-orange-500 to-red-500 rounded-xl p-6 text-white mt-6" onclick="showDetails('agente-ia')">
+                        <div class="flex items-center mb-3">
+                            <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center mr-3">
+                                <span class="text-2xl">🤖</span>
+                            </div>
+                            <h3 class="font-bold text-xl">Agente de IA</h3>
+                        </div>
+                        <p class="text-sm opacity-90 mb-2">Transaccional — Chat en Odoo</p>
+                        <div class="bg-white bg-opacity-20 rounded-lg p-2 mt-2">
+                            <p class="text-xs">Asistencia con cambios concretos sobre la herramienta</p>
+                        </div>
+                        <div class="mt-3 flex items-center text-xs">
+                            <div class="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
+                            <span>Soporte Inteligente</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Center Column - Localizaciones + BackEnd + BD -->
+                <div class="flex flex-col justify-between">
+                    <!-- Localizaciones Fiscales -->
+                    <div class="platform-card bg-gradient-to-r from-gray-600 to-gray-700 rounded-xl p-4 text-white border-2 border-dashed border-gray-400" onclick="showDetails('localizaciones')">
+                        <div class="text-center">
+                            <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center mx-auto mb-2">
+                                <span class="text-xl">🌎</span>
+                            </div>
+                            <h3 class="font-bold text-lg">Localizaciones Fiscales</h3>
+                            <p class="text-xs opacity-90 mt-1">GT • SV • HN • NI • CR • PA • BZ</p>
+                        </div>
+                    </div>
+
+                    <!-- BackEnd Odoo V18 -->
+                    <div class="platform-card bg-gradient-to-br from-purple-600 via-violet-600 to-indigo-700 rounded-xl p-8 text-white" onclick="showDetails('backend')">
+                        <div class="text-center">
+                            <div class="flex justify-center space-x-2 mb-4">
+                                <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                                    <span class="text-2xl">⚙️</span>
+                                </div>
+                            </div>
+                            <h3 class="font-bold text-2xl mb-2">BackEnd</h3>
+                            <p class="text-sm opacity-90 mb-2">Odoo V18 Community</p>
+                            <div class="bg-white bg-opacity-20 rounded-lg p-3">
+                                <p class="text-xs">Lógica de negocio + Facturación electrónica + Localizaciones CA</p>
+                            </div>
+                            <div class="mt-3 flex items-center justify-center text-xs">
+                                <div class="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
+                                <span>Núcleo del Sistema</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BD Transaccional -->
+                    <div class="platform-card bg-gradient-to-r from-green-600 to-emerald-700 rounded-xl p-4 text-white" onclick="showDetails('bd-transaccional')">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center mr-3">
+                                <span class="text-xl">🗄️</span>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg">BD Transaccional</h3>
+                                <p class="text-xs opacity-90">PostgreSQL — Odoo V18</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column - ARK (BI + Strategy) -->
+                <div class="flex flex-col justify-between">
+                    <!-- ARK Component -->
+                    <div class="platform-card bg-gradient-to-br from-teal-500 via-emerald-500 to-green-600 rounded-xl p-6 text-white" onclick="showDetails('ark')">
+                        <div class="flex items-center mb-3">
+                            <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center mr-3">
+                                <span class="text-2xl">📊</span>
+                            </div>
+                            <h3 class="font-bold text-xl">ARK</h3>
+                        </div>
+                        <p class="text-sm opacity-90 mb-2">Business Intelligence — Strategy</p>
+                        <div class="space-y-2 mt-3">
+                            <div class="bg-white bg-opacity-20 rounded-lg p-2">
+                                <p class="text-xs">📈 Dashboards analíticos</p>
+                            </div>
+                            <div class="bg-white bg-opacity-20 rounded-lg p-2">
+                                <p class="text-xs">🧠 IA Analítica propia de Strategy</p>
+                            </div>
+                        </div>
+                        <div class="mt-3 flex items-center text-xs">
+                            <div class="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
+                            <span>Inteligencia de Negocio</span>
+                        </div>
+                    </div>
+
+                    <!-- Réplica BD -->
+                    <div class="platform-card bg-gradient-to-r from-violet-600 to-purple-700 rounded-xl p-4 text-white border-2 border-dashed border-purple-400" onclick="showDetails('replica-bd')">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center mr-3">
+                                <span class="text-xl">🔁</span>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg">Réplica BD</h3>
+                                <p class="text-xs opacity-90">Read-only para BI</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Flow Legend + Roles -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div class="bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-700">
+                <h3 class="font-bold text-lg mb-4 text-white">Flujo de Datos</h3>
+                <div class="space-y-3">
+                    <div class="flex items-center">
+                        <div class="w-8 h-0.5 bg-green-500 mr-3"></div>
+                        <span class="text-sm text-gray-300">Conexión directa (FrontEnd ↔ BackEnd ↔ BD)</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-8 h-0.5 bg-blue-500 mr-3" style="border-top: 2px dashed #3b82f6;"></div>
+                        <span class="text-sm text-gray-300">Integración IA ↔ FrontEnd</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-8 h-0.5 mr-3" style="border-top: 2px dashed #f59e0b;"></div>
+                        <span class="text-sm text-gray-300">Agente IA → BackEnd (transaccional)</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-8 h-0.5 mr-3" style="border-top: 2px dashed #a855f7;"></div>
+                        <span class="text-sm text-gray-300">Replicación BD → ARK (read-only)</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-3 h-3 bg-green-500 rounded-full mr-3 pulse-dot"></div>
+                        <span class="text-sm text-gray-300">Punto de transferencia activo</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-700">
+                <h3 class="font-bold text-lg mb-4 text-white">Capas de la Arquitectura</h3>
+                <div class="space-y-2 text-sm text-gray-300">
+                    <div>• <strong class="text-cyan-400">FrontEnd:</strong> Odoo V18 UI simplificado, formato POS customizado</div>
+                    <div>• <strong class="text-violet-400">BackEnd:</strong> Odoo V18 Community + localizaciones fiscales CA</div>
+                    <div>• <strong class="text-orange-400">Agente IA:</strong> Soporte transaccional por chat integrado en Odoo</div>
+                    <div>• <strong class="text-emerald-400">ARK:</strong> BI con Strategy, dashboards e IA Analítica</div>
+                    <div>• <strong class="text-purple-400">Réplica BD:</strong> Copia read-only para análisis sin impacto</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Country Coverage -->
+        <div class="bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-700 mb-8">
+            <h3 class="font-bold text-lg mb-4 text-white text-center">Cobertura Regional — CentroAmérica</h3>
+            <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-3">
+                <div class="bg-gray-700 rounded-lg p-3 text-center">
+                    <span class="text-2xl">🇬🇹</span>
+                    <p class="text-xs text-gray-300 mt-1">Guatemala</p>
+                </div>
+                <div class="bg-gray-700 rounded-lg p-3 text-center">
+                    <span class="text-2xl">🇸🇻</span>
+                    <p class="text-xs text-gray-300 mt-1">El Salvador</p>
+                </div>
+                <div class="bg-gray-700 rounded-lg p-3 text-center">
+                    <span class="text-2xl">🇭🇳</span>
+                    <p class="text-xs text-gray-300 mt-1">Honduras</p>
+                </div>
+                <div class="bg-gray-700 rounded-lg p-3 text-center">
+                    <span class="text-2xl">🇳🇮</span>
+                    <p class="text-xs text-gray-300 mt-1">Nicaragua</p>
+                </div>
+                <div class="bg-gray-700 rounded-lg p-3 text-center">
+                    <span class="text-2xl">🇨🇷</span>
+                    <p class="text-xs text-gray-300 mt-1">Costa Rica</p>
+                </div>
+                <div class="bg-gray-700 rounded-lg p-3 text-center">
+                    <span class="text-2xl">🇵🇦</span>
+                    <p class="text-xs text-gray-300 mt-1">Panamá</p>
+                </div>
+                <div class="bg-gray-700 rounded-lg p-3 text-center">
+                    <span class="text-2xl">🇧🇿</span>
+                    <p class="text-xs text-gray-300 mt-1">Belice</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Details Modal -->
+        <div id="detailsModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50" onclick="closeModal()">
+            <div class="bg-gray-900 border border-gray-700 rounded-2xl p-8 max-w-lg mx-4 max-h-[90vh] overflow-y-auto" onclick="event.stopPropagation()">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 id="modalTitle" class="text-2xl font-bold text-white"></h3>
+                    <button onclick="closeModal()" class="text-gray-400 hover:text-gray-200 text-2xl">&times;</button>
+                </div>
+                <div id="modalContent" class="text-gray-300"></div>
+                <button onclick="closeModal()" class="mt-6 bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const platformDetails = {
+            frontend: {
+                title: "FrontEnd — Odoo V18 Customizado",
+                content: `
+                    <div class="space-y-4">
+                        <p><strong>Función principal:</strong> Capa de presentación basada en Odoo V18 Community con mejoras de UX</p>
+                        <div>
+                            <p class="font-semibold mb-2">Características clave:</p>
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li>Simplificación de módulos Odoo para operación ágil</li>
+                                <li>Customización de vistas según reglas de negocio</li>
+                                <li>Formato de trabajo similar al POS de Odoo</li>
+                                <li>Interfaz optimizada para operaciones transaccionales</li>
+                                <li>Navegación reducida y enfocada en flujos clave</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="font-semibold mb-2">Tecnología:</p>
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li>Odoo Web Client (OWL Framework)</li>
+                                <li>Vistas XML customizadas</li>
+                                <li>Assets y templates personalizados</li>
+                            </ul>
+                        </div>
+                        <p class="text-sm bg-cyan-900 bg-opacity-50 p-3 rounded-lg">
+                            <strong>Objetivo:</strong> Ofrecer una experiencia de usuario simplificada y eficiente, eliminando complejidad innecesaria de Odoo estándar para centrar al usuario en la operación diaria.
+                        </p>
+                    </div>
+                `
+            },
+            backend: {
+                title: "BackEnd — Odoo V18 Community",
+                content: `
+                    <div class="space-y-4">
+                        <p><strong>Función principal:</strong> Núcleo del ERP con toda la lógica de negocio y localizaciones fiscales</p>
+                        <div>
+                            <p class="font-semibold mb-2">Módulos principales:</p>
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li>Contabilidad y finanzas</li>
+                                <li>Facturación (electrónica y convencional)</li>
+                                <li>Inventario y almacén</li>
+                                <li>Compras y ventas</li>
+                                <li>Recursos humanos</li>
+                                <li>CRM</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="font-semibold mb-2">Facturación para Entes:</p>
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li>Facturación electrónica (FEL) donde aplique</li>
+                                <li>Integración con entes fiscales de cada país</li>
+                                <li>Documentos tributarios electrónicos</li>
+                                <li>Soporte para facturación convencional</li>
+                            </ul>
+                        </div>
+                        <p class="text-sm bg-violet-900 bg-opacity-50 p-3 rounded-lg">
+                            <strong>Arquitectura:</strong> Odoo V18 Community como base, extendido con módulos de localización fiscal para cada país de CentroAmérica y conectado a la BD PostgreSQL transaccional.
+                        </p>
+                    </div>
+                `
+            },
+            localizaciones: {
+                title: "Localizaciones Fiscales — CentroAmérica",
+                content: `
+                    <div class="space-y-4">
+                        <p><strong>Función principal:</strong> Adaptación fiscal y tributaria para cada país</p>
+                        <div>
+                            <p class="font-semibold mb-2">Países cubiertos:</p>
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li>🇬🇹 <strong>Guatemala:</strong> SAT, FEL, NIT</li>
+                                <li>🇸🇻 <strong>El Salvador:</strong> MH, DTE, NIT/NRC</li>
+                                <li>🇭🇳 <strong>Honduras:</strong> SAR, CAI, RTN</li>
+                                <li>🇳🇮 <strong>Nicaragua:</strong> DGI, RUC</li>
+                                <li>🇨🇷 <strong>Costa Rica:</strong> MH, FE, cédula</li>
+                                <li>🇵🇦 <strong>Panamá:</strong> DGI, RUC, FE</li>
+                                <li>🇧🇿 <strong>Belice:</strong> TIN, GST</li>
+                            </ul>
+                        </div>
+                        <p class="text-sm bg-gray-700 p-3 rounded-lg">
+                            <strong>Alcance:</strong> Cada localización incluye plan de cuentas, impuestos locales, formatos de factura, reportes fiscales y conexión con entes reguladores.
+                        </p>
+                    </div>
+                `
+            },
+            'agente-ia': {
+                title: "Agente de IA Transaccional",
+                content: `
+                    <div class="space-y-4">
+                        <p><strong>Función principal:</strong> Asistente inteligente integrado en Odoo V18 para soporte por chat</p>
+                        <div>
+                            <p class="font-semibold mb-2">Capacidades transaccionales:</p>
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li>Ejecutar acciones concretas sobre el ERP</li>
+                                <li>Crear, modificar o consultar registros</li>
+                                <li>Guiar al usuario en flujos de trabajo</li>
+                                <li>Resolver dudas operativas en tiempo real</li>
+                                <li>Automatizar tareas repetitivas por instrucción</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="font-semibold mb-2">Integración:</p>
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li>Accesible desde el FrontEnd de Odoo (chat widget)</li>
+                                <li>Conectado al BackEnd para ejecutar transacciones</li>
+                                <li>Contexto del usuario y módulo activo</li>
+                                <li>Permisos heredados del rol del usuario</li>
+                            </ul>
+                        </div>
+                        <p class="text-sm bg-orange-900 bg-opacity-50 p-3 rounded-lg">
+                            <strong>Diferenciador:</strong> No es solo un chatbot informativo — es un agente transaccional que puede realizar cambios reales en el sistema asistiendo al usuario en su operación diaria.
+                        </p>
+                    </div>
+                `
+            },
+            ark: {
+                title: "ARK — Business Intelligence",
+                content: `
+                    <div class="space-y-4">
+                        <p><strong>Función principal:</strong> Componente de BI basado en Strategy para análisis avanzado</p>
+                        <div>
+                            <p class="font-semibold mb-2">Componentes:</p>
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li><strong>Strategy:</strong> Motor de BI y análisis</li>
+                                <li><strong>Dashboards:</strong> Visualización de KPIs y métricas</li>
+                                <li><strong>IA Analítica:</strong> Capacidad propia de Strategy</li>
+                                <li><strong>Reportes:</strong> Generación de informes avanzados</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="font-semibold mb-2">Fuente de datos:</p>
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li>Accede a réplica read-only de la BD transaccional</li>
+                                <li>Sin impacto en rendimiento del ERP</li>
+                                <li>Datos sincronizados periódicamente</li>
+                                <li>Consultas analíticas pesadas aisladas</li>
+                            </ul>
+                        </div>
+                        <p class="text-sm bg-emerald-900 bg-opacity-50 p-3 rounded-lg">
+                            <strong>Valor:</strong> Provee inteligencia de negocio y análisis predictivo sobre los datos operativos sin comprometer la performance del sistema transaccional.
+                        </p>
+                    </div>
+                `
+            },
+            'bd-transaccional': {
+                title: "BD Transaccional — PostgreSQL",
+                content: `
+                    <div class="space-y-4">
+                        <p><strong>Función principal:</strong> Base de datos principal del ERP Odoo V18</p>
+                        <div>
+                            <p class="font-semibold mb-2">Características:</p>
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li>PostgreSQL (motor nativo de Odoo)</li>
+                                <li>Almacenamiento de todas las transacciones</li>
+                                <li>Datos contables, fiscales y operativos</li>
+                                <li>Alta disponibilidad y backups</li>
+                            </ul>
+                        </div>
+                        <p class="text-sm bg-green-900 bg-opacity-50 p-3 rounded-lg">
+                            <strong>Replicación:</strong> Se mantiene una réplica read-only de esta BD para que ARK (Strategy) pueda ejecutar consultas analíticas sin afectar la operación transaccional.
+                        </p>
+                    </div>
+                `
+            },
+            'replica-bd': {
+                title: "Réplica BD — Read Only",
+                content: `
+                    <div class="space-y-4">
+                        <p><strong>Función principal:</strong> Copia de solo lectura de la BD transaccional para BI</p>
+                        <div>
+                            <p class="font-semibold mb-2">Propósito:</p>
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li>Aislar cargas analíticas del sistema productivo</li>
+                                <li>Permitir queries pesados sin afectar rendimiento</li>
+                                <li>Fuente exclusiva de datos para ARK / Strategy</li>
+                                <li>Sincronización periódica con BD principal</li>
+                            </ul>
+                        </div>
+                        <p class="text-sm bg-purple-900 bg-opacity-50 p-3 rounded-lg">
+                            <strong>Arquitectura:</strong> PostgreSQL Streaming Replication o logical replication para mantener los datos actualizados sin impacto en la operación.
+                        </p>
+                    </div>
+                `
+            }
+        };
+
+        function showDetails(platform) {
+            const modal = document.getElementById('detailsModal');
+            const title = document.getElementById('modalTitle');
+            const content = document.getElementById('modalContent');
+            
+            title.textContent = platformDetails[platform].title;
+            content.innerHTML = platformDetails[platform].content;
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('detailsModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // Add some interactive animations on load
+        window.addEventListener('load', function() {
+            const cards = document.querySelectorAll('.platform-card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    card.style.transition = 'all 0.6s ease';
+                    
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 100);
+                }, index * 200);
+            });
+        });
+    </script>
+</body>
+</html>
