@@ -862,6 +862,64 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* ── Lucide Icon Sizing ── */
+        .lucide {
+            display: inline-block;
+            vertical-align: middle;
+            stroke: currentColor;
+        }
+
+        .icon .lucide {
+            width: 2.2rem;
+            height: 2.2rem;
+            stroke-width: 1.5;
+        }
+
+        .hero-model-icon .lucide {
+            width: 2rem;
+            height: 2rem;
+            stroke-width: 1.5;
+        }
+
+        .equipo-avatar .lucide {
+            width: 1.8rem;
+            height: 1.8rem;
+            stroke-width: 1.5;
+        }
+
+        .expansion-card .icon .lucide {
+            width: 2.5rem;
+            height: 2.5rem;
+            stroke-width: 1.5;
+        }
+
+        .valor-pill .lucide {
+            width: 0.9rem;
+            height: 0.9rem;
+            vertical-align: -0.12em;
+            stroke-width: 2;
+        }
+
+        .local-feature h4 .lucide {
+            width: 1.1rem;
+            height: 1.1rem;
+            stroke-width: 2;
+        }
+
+        .chart-title .lucide {
+            width: 1.1rem;
+            height: 1.1rem;
+            vertical-align: -0.12em;
+            stroke-width: 2;
+        }
+
+        .footer-section .lucide {
+            width: 0.9rem;
+            height: 0.9rem;
+            vertical-align: -0.1em;
+            stroke-width: 2;
+        }
+
         /* ── Responsive ── */
         @media (max-width: 1024px) {
             .quienes-grid,
@@ -927,6 +985,7 @@
             .bar-label { text-align: left; }
         }
     </style>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 </head>
 <body>
 
@@ -950,17 +1009,17 @@
             <p class="hero-subtitle">Una marca de bienestar integral en plena expansión. Tres modelos de negocio, una misma filosofía: conectar cuerpo, mente y comunidad.</p>
             <div class="hero-models">
                 <div class="hero-model">
-                    <div class="hero-model-icon">🏢</div>
+                    <div class="hero-model-icon"><i data-lucide="building-2"></i></div>
                     <h3>Franquicias</h3>
                     <p>Tu propio Espacio PUNA</p>
                 </div>
                 <div class="hero-model">
-                    <div class="hero-model-icon">🧭</div>
+                    <div class="hero-model-icon"><i data-lucide="compass"></i></div>
                     <h3>Consultoría</h3>
                     <p>Asesoramiento en wellness</p>
                 </div>
                 <div class="hero-model">
-                    <div class="hero-model-icon">🛍️</div>
+                    <div class="hero-model-icon"><i data-lucide="shopping-bag"></i></div>
                     <h3>Productos</h3>
                     <p>Marca propia del rubro</p>
                 </div>
@@ -976,22 +1035,22 @@
 
         <div class="objetivo-grid">
             <div class="objetivo-card">
-                <div class="icon">🎯</div>
+                <div class="icon"><i data-lucide="target"></i></div>
                 <h3>Modelo Validado</h3>
                 <p>Espacio Puna opera desde octubre 2025 con crecimiento sostenido mes a mes en clientes, suscripciones y facturación, demostrando que el modelo funciona y es replicable.</p>
             </div>
             <div class="objetivo-card">
-                <div class="icon">📈</div>
+                <div class="icon"><i data-lucide="trending-up"></i></div>
                 <h3>Mercado en Crecimiento</h3>
                 <p>La industria del bienestar crece a doble dígito cada año. Pilates, yoga y las prácticas de autocuidado se posicionan como hábitos esenciales, no como moda pasajera.</p>
             </div>
             <div class="objetivo-card">
-                <div class="icon">🤝</div>
+                <div class="icon"><i data-lucide="users"></i></div>
                 <h3>Comunidad como Motor</h3>
                 <p>PUNA construye comunidades reales. No vendemos clases: creamos vínculos. Eso genera retención orgánica, boca a boca genuino y valor de marca a largo plazo.</p>
             </div>
             <div class="objetivo-card">
-                <div class="icon">⚡</div>
+                <div class="icon"><i data-lucide="zap"></i></div>
                 <h3>Expansión Inteligente</h3>
                 <p>Tres canales de ingreso — franquicias, consultoría y productos — permiten diversificar riesgo, escalar sin depender de una sola fuente y aumentar el alcance de la marca.</p>
             </div>
@@ -1007,28 +1066,28 @@
 
             <div class="quienes-grid">
                 <div class="quienes-card">
-                    <div class="icon">💫</div>
+                    <div class="icon"><i data-lucide="sparkles"></i></div>
                     <h3>Misión</h3>
                     <p>Crear espacios seguros y cálidos donde cada persona se conecte consigo misma y con otros, a través del yoga, pilates y talleres pensados para su bienestar integral.</p>
                 </div>
                 <div class="quienes-card">
-                    <div class="icon">🔭</div>
+                    <div class="icon"><i data-lucide="eye"></i></div>
                     <h3>Visión</h3>
                     <p>Ser el lugar de encuentro preferido, reconocido no solo por la calidad de sus clases, sino por ser una verdadera comunidad de bienestar integral y conexiones reales.</p>
                 </div>
                 <div class="quienes-card">
-                    <div class="icon">🏡</div>
+                    <div class="icon"><i data-lucide="home"></i></div>
                     <h3>Espacio Puna — Hoy</h3>
                     <p>Local operativo en Villa Urquiza, CABA. 6 camas reformer, sala de yoga, talleres especiales. +200 clientes activos y crecimiento sostenido desde el primer mes.</p>
                 </div>
             </div>
 
             <div class="valores-row">
-                <span class="valor-pill">🤎 Comunidad</span>
-                <span class="valor-pill">🌿 Bienestar Integral</span>
-                <span class="valor-pill">🕊️ Aceptación</span>
-                <span class="valor-pill">🔗 Conexión</span>
-                <span class="valor-pill">🔥 Pasión</span>
+                <span class="valor-pill"><i data-lucide="heart"></i> Comunidad</span>
+                <span class="valor-pill"><i data-lucide="leaf"></i> Bienestar Integral</span>
+                <span class="valor-pill"><i data-lucide="feather"></i> Aceptación</span>
+                <span class="valor-pill"><i data-lucide="link"></i> Conexión</span>
+                <span class="valor-pill"><i data-lucide="flame"></i> Pasión</span>
             </div>
 
             <!-- Equipo Fundador -->
@@ -1037,28 +1096,28 @@
 
             <div class="equipo-grid">
                 <div class="equipo-card">
-                    <div class="equipo-avatar">👩‍🎨</div>
+                    <div class="equipo-avatar"><i data-lucide="palette"></i></div>
                     <h3>Pau</h3>
                     <div class="equipo-role">Gestión & Espacio</div>
-                    <div class="equipo-profession">Diseñadora Textil</div>
+                    <div class="equipo-profession">Diseñadora Textil · Instructora de Pilates</div>
                     <p class="equipo-quote">Me encargo de la gestión del espacio, de recibirte. Me encanta la decoración y la moda, así que todo lo que verás tendrá mi impronta.</p>
                 </div>
                 <div class="equipo-card">
-                    <div class="equipo-avatar">📊</div>
+                    <div class="equipo-avatar"><i data-lucide="bar-chart-3"></i></div>
                     <h3>Naty</h3>
                     <div class="equipo-role">Finanzas & Actividades</div>
                     <div class="equipo-profession">Contadora · Instructora de Pilates</div>
                     <p class="equipo-quote">Me encargo de lo contable, para que todo cierre, pero también de la programación y supervisión de las actividades y las profes.</p>
                 </div>
                 <div class="equipo-card">
-                    <div class="equipo-avatar">🤝</div>
+                    <div class="equipo-avatar"><i data-lucide="message-circle"></i></div>
                     <h3>Leo</h3>
                     <div class="equipo-role">Atención al Cliente</div>
                     <div class="equipo-profession">Politólogo</div>
                     <p class="equipo-quote">Estoy a cargo de la atención al cliente, así que voy a usar todas esas herramientas para que tengas la mejor experiencia en nuestro espacio.</p>
                 </div>
                 <div class="equipo-card">
-                    <div class="equipo-avatar">💻</div>
+                    <div class="equipo-avatar"><i data-lucide="monitor"></i></div>
                     <h3>Nico</h3>
                     <div class="equipo-role">Sistemas & Obra</div>
                     <div class="equipo-profession">Sistemas · Técnico Electromecánico</div>
@@ -1076,7 +1135,7 @@
 
         <div class="expansion-grid">
             <div class="expansion-card">
-                <div class="icon">🏢</div>
+                <div class="icon"><i data-lucide="building-2"></i></div>
                 <h3>Franquicias PUNA</h3>
                 <p>Abrí tu propio Espacio Puna con respaldo operativo, de marca y formación completa.</p>
                 <ul class="expansion-list">
@@ -1089,7 +1148,7 @@
                 </ul>
             </div>
             <div class="expansion-card">
-                <div class="icon">🧭</div>
+                <div class="icon"><i data-lucide="compass"></i></div>
                 <h3>Asesoramiento & Consultoría</h3>
                 <p>Acompañamos a emprendedores y espacios del rubro a profesionalizar su modelo.</p>
                 <ul class="expansion-list">
@@ -1102,7 +1161,7 @@
                 </ul>
             </div>
             <div class="expansion-card">
-                <div class="icon">🛍️</div>
+                <div class="icon"><i data-lucide="shopping-bag"></i></div>
                 <h3>Productos PUNA</h3>
                 <p>Línea de productos propios para la comunidad wellness con el sello PUNA.</p>
                 <ul class="expansion-list">
@@ -1148,7 +1207,7 @@
             <div class="charts-grid">
                 <!-- Revenue chart -->
                 <div class="chart-section">
-                    <div class="chart-title">📈 Evolución de Facturación (ARS)</div>
+                    <div class="chart-title"><i data-lucide="trending-up"></i> Evolución de Facturación (ARS)</div>
                     <div class="bar-chart" id="revenueChart">
                         <div class="bar-row">
                             <span class="bar-label">Oct '25</span>
@@ -1185,7 +1244,7 @@
 
                 <!-- Clients chart -->
                 <div class="chart-section">
-                    <div class="chart-title">👥 Evolución de Clientes Activos</div>
+                    <div class="chart-title"><i data-lucide="users"></i> Evolución de Clientes Activos</div>
                     <div class="bar-chart" id="clientsChart">
                         <div class="bar-row">
                             <span class="bar-label">Oct '25</span>
@@ -1231,27 +1290,27 @@
 
         <div class="local-features">
             <div class="local-feature">
-                <h4>🏋️ Pilates Reformer</h4>
+                <h4><i data-lucide="dumbbell"></i> Pilates Reformer</h4>
                 <p>6 camas equipadas con box, tabla de salto y todos los accesorios. Método contemporáneo, clases de hasta 6 personas.</p>
             </div>
             <div class="local-feature">
-                <h4>🧘 Yoga Integral</h4>
+                <h4><i data-lucide="flower-2"></i> Yoga Integral</h4>
                 <p>Clases grupales de hasta 7 personas. Modalidad integral con foco en la conexión cuerpo-mente.</p>
             </div>
             <div class="local-feature">
-                <h4>✨ Talleres Especiales</h4>
+                <h4><i data-lucide="sparkles"></i> Talleres Especiales</h4>
                 <p>Meditación, yoga prenatal, reflexología. Actividades de movimiento consciente y relajación profunda.</p>
             </div>
             <div class="local-feature">
-                <h4>📱 App de Reservas</h4>
+                <h4><i data-lucide="smartphone"></i> App de Reservas</h4>
                 <p>Sistema propio para reservas, gestión de packs, cancelaciones y comunicación con clientes.</p>
             </div>
             <div class="local-feature">
-                <h4>💳 Packs Flexibles</h4>
+                <h4><i data-lucide="credit-card"></i> Packs Flexibles</h4>
                 <p>Suscripciones fijas o móviles, con validez de 30 días. El cliente elige horarios según su rutina.</p>
             </div>
             <div class="local-feature">
-                <h4>📍 Ubicación Estratégica</h4>
+                <h4><i data-lucide="map-pin"></i> Ubicación Estratégica</h4>
                 <p>Mariano Acha 2771, Villa Urquiza, CABA. Zona residencial con alta densidad y perfil target.</p>
             </div>
         </div>
@@ -1276,14 +1335,14 @@
             </div>
             <div class="footer-section">
                 <h4>Contacto</h4>
-                <a href="mailto:espaciopuna@gmail.com">📧 espaciopuna@gmail.com</a>
-                <a href="https://www.instagram.com/espaciopuna" target="_blank">📱 @espaciopuna</a>
+                <a href="mailto:espaciopuna@gmail.com"><i data-lucide="mail"></i> espaciopuna@gmail.com</a>
+                <a href="https://www.instagram.com/espaciopuna" target="_blank"><i data-lucide="instagram"></i> @espaciopuna</a>
             </div>
             <div class="footer-section">
                 <h4>Espacio Puna</h4>
-                <p>📍 Mariano Acha 2771</p>
+                <p><i data-lucide="map-pin"></i> Mariano Acha 2771</p>
                 <p>Villa Urquiza — CABA</p>
-                <a href="https://preview--espaciopuna.lovable.app/" target="_blank">🌐 App de Reservas</a>
+                <a href="https://preview--espaciopuna.lovable.app/" target="_blank"><i data-lucide="globe"></i> App de Reservas</a>
             </div>
         </div>
         <div class="footer-bottom">
@@ -1292,6 +1351,9 @@
     </footer>
 
     <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
         // Scroll observer for sections
         const observerOptions = { threshold: 0.12, rootMargin: '0px 0px -40px 0px' };
         const observer = new IntersectionObserver((entries) => {
