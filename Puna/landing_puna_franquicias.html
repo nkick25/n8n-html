@@ -100,6 +100,25 @@
             transform: translateY(-2px);
         }
 
+        .nav-cta-outline {
+            color: var(--puna-cacao);
+            border: 1.5px solid var(--puna-cacao);
+            border-radius: 25px;
+            padding: 0.5rem 1.2rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+            background: transparent;
+        }
+
+        .nav-cta-outline:hover {
+            background: var(--puna-cacao);
+            color: var(--puna-cream);
+            transform: translateY(-2px);
+        }
+
         /* ── Hero ── */
         .hero {
             min-height: 100vh;
@@ -998,7 +1017,10 @@
             <a href="#expansion">Expansión</a>
             <a href="#numeros">Números</a>
         </div>
-        <a href="mailto:espaciopuna@gmail.com" class="nav-cta">Contactar</a>
+        <div style="display: flex; gap: 0.8rem; align-items: center;">
+            <a href="https://espaciopuna.com.ar" target="_blank" class="nav-cta-outline">Sitio Web</a>
+            <a href="https://api.whatsapp.com/send/?phone=5491160995590&text=Hola%21+Me+interesa+conocer+m%C3%A1s+sobre+la+oportunidad+de+franquicia+PUNA&type=phone_number&app_absent=0" target="_blank" class="nav-cta">Contactar</a>
+        </div>
     </nav>
 
     <!-- ═══════════════ HERO ═══════════════ -->
@@ -1078,7 +1100,7 @@
                 <div class="quienes-card">
                     <div class="icon"><i data-lucide="home"></i></div>
                     <h3>Espacio Puna — Hoy</h3>
-                    <p>Local operativo en Villa Urquiza, CABA. 6 camas reformer, sala de yoga, talleres especiales. +200 clientes activos y crecimiento sostenido desde el primer mes.</p>
+                    <p>Local operativo en Villa Urquiza, CABA. Pilates Reformer (6 camas), Yoga Integral, Masoterapia y Talleres Especiales. +200 clientes activos con crecimiento sostenido desde el primer mes.</p>
                 </div>
             </div>
 
@@ -1291,27 +1313,27 @@
         <div class="local-features">
             <div class="local-feature">
                 <h4><i data-lucide="dumbbell"></i> Pilates Reformer</h4>
-                <p>6 camas equipadas con box, tabla de salto y todos los accesorios. Método contemporáneo, clases de hasta 6 personas.</p>
+                <p>6 camas equipadas con box, tabla de salto y todos los accesorios. Método contemporáneo, clases de hasta 6 personas para atención personalizada.</p>
             </div>
             <div class="local-feature">
                 <h4><i data-lucide="flower-2"></i> Yoga Integral</h4>
-                <p>Clases grupales de hasta 7 personas. Modalidad integral con foco en la conexión cuerpo-mente.</p>
+                <p>Clases grupales de hasta 7 personas. Modalidad integral que conecta cuerpo, mente y espíritu a través de posturas y respiración consciente.</p>
+            </div>
+            <div class="local-feature">
+                <h4><i data-lucide="hand-heart"></i> Masoterapia</h4>
+                <p>Sesiones de masajes terapéuticos que complementan la práctica de movimiento, mejorando la recuperación y el bienestar general.</p>
             </div>
             <div class="local-feature">
                 <h4><i data-lucide="sparkles"></i> Talleres Especiales</h4>
-                <p>Meditación, yoga prenatal, reflexología. Actividades de movimiento consciente y relajación profunda.</p>
-            </div>
-            <div class="local-feature">
-                <h4><i data-lucide="smartphone"></i> App de Reservas</h4>
-                <p>Sistema propio para reservas, gestión de packs, cancelaciones y comunicación con clientes.</p>
+                <p>Meditación, yoga para embarazadas y reflexología. Actividades orientadas al movimiento consciente y la relajación profunda.</p>
             </div>
             <div class="local-feature">
                 <h4><i data-lucide="credit-card"></i> Packs Flexibles</h4>
-                <p>Suscripciones fijas o móviles, con validez de 30 días. El cliente elige horarios según su rutina.</p>
+                <p>Planes de 1, 4, 8, 12 o 16 clases mensuales y trimestrales. Efectivo, transferencia o tarjeta. Promociones de 25% OFF en horarios especiales y 15% por referidos.</p>
             </div>
             <div class="local-feature">
                 <h4><i data-lucide="map-pin"></i> Ubicación Estratégica</h4>
-                <p>Mariano Acha 2771, Villa Urquiza, CABA. Zona residencial con alta densidad y perfil target.</p>
+                <p>Mariano Acha 2771, Villa Urquiza, CABA. L-V 8:00–21:00, Sáb 9:00–13:00. Zona residencial con alta densidad y perfil target.</p>
             </div>
         </div>
     </section>
@@ -1321,7 +1343,7 @@
         <div class="cta-inner">
             <h2>¿Querés ser parte de PUNA?</h2>
             <p>Estamos abriendo las puertas a socios estratégicos, franquiciados y aliados comerciales que compartan nuestra visión de bienestar integral.</p>
-            <a href="mailto:espaciopuna@gmail.com" class="cta-button">Quiero saber más →</a>
+            <a href="https://api.whatsapp.com/send/?phone=5491160995590&text=Hola%21+Me+interesa+conocer+m%C3%A1s+sobre+la+oportunidad+de+franquicia+PUNA&type=phone_number&app_absent=0" target="_blank" class="cta-button">Quiero saber más →</a>
         </div>
     </div>
 
@@ -1332,9 +1354,11 @@
                 <h4>PUNA</h4>
                 <p>Marca de bienestar integral</p>
                 <p>Franquicias • Consultoría • Productos</p>
+                <a href="https://espaciopuna.com.ar" target="_blank" style="margin-top: 0.5rem;"><i data-lucide="globe"></i> espaciopuna.com.ar</a>
             </div>
             <div class="footer-section">
                 <h4>Contacto</h4>
+                <a href="https://api.whatsapp.com/send/?phone=5491160995590&text=Hola%21+Me+interesa+conocer+m%C3%A1s+sobre+la+oportunidad+de+franquicia+PUNA&type=phone_number&app_absent=0" target="_blank"><i data-lucide="message-circle"></i> +54 11 6099-5590</a>
                 <a href="mailto:espaciopuna@gmail.com"><i data-lucide="mail"></i> espaciopuna@gmail.com</a>
                 <a href="https://www.instagram.com/espaciopuna" target="_blank"><i data-lucide="instagram"></i> @espaciopuna</a>
             </div>
@@ -1342,11 +1366,12 @@
                 <h4>Espacio Puna</h4>
                 <p><i data-lucide="map-pin"></i> Mariano Acha 2771</p>
                 <p>Villa Urquiza — CABA</p>
-                <a href="https://preview--espaciopuna.lovable.app/" target="_blank"><i data-lucide="globe"></i> App de Reservas</a>
+                <a href="https://maps.google.com/?q=Mariano+Acha+2771,+Villa+Urquiza,+CABA" target="_blank"><i data-lucide="map"></i> Ver en Google Maps</a>
+                <p style="margin-top: 0.5rem;"><i data-lucide="clock"></i> L-V 8:00–21:00 · Sáb 9:00–13:00</p>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© 2026 PUNA — Bienestar Integral</p>
+            <p>© 2026 PUNA — Bienestar Integral · Empresa gestionada por AZUL FOGUETE S.R.L.</p>
         </div>
     </footer>
 
