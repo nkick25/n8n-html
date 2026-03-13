@@ -612,6 +612,268 @@
             font-size: 0.8rem;
         }
 
+        /* ── Consultoría detail ── */
+        .consultoria-detail {
+            background: var(--puna-soft);
+            border-radius: 20px;
+            padding: 3rem;
+            border: 1px solid rgba(128,103,99,0.1);
+            margin-top: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .consultoria-detail::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: var(--puna-terracota);
+            border-radius: 20px 20px 0 0;
+        }
+
+        .consultoria-detail .icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--puna-cacao);
+        }
+
+        .consultoria-detail h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--puna-cacao);
+            margin-bottom: 0.5rem;
+        }
+
+        .consultoria-detail > p {
+            font-size: 0.95rem;
+            color: var(--puna-dark);
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+            max-width: 700px;
+        }
+
+        .consultoria-services {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .consultoria-services li {
+            background: var(--puna-white);
+            border-radius: 12px;
+            padding: 1rem 1.2rem;
+            font-size: 0.88rem;
+            color: var(--puna-dark);
+            border: 1px solid rgba(128,103,99,0.08);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            transition: all 0.3s;
+        }
+
+        .consultoria-services li:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(128,103,99,0.1);
+            border-color: var(--puna-mauve);
+        }
+
+        .consultoria-services li .step-num {
+            background: var(--puna-cacao);
+            color: var(--puna-cream);
+            font-size: 0.7rem;
+            font-weight: 700;
+            width: 22px;
+            height: 22px;
+            min-width: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 1px;
+        }
+
+        .consultoria-services li .step-text {
+            font-size: 0.88rem;
+            line-height: 1.5;
+        }
+
+        .consultoria-services li .step-note {
+            display: block;
+            font-size: 0.78rem;
+            color: var(--puna-terracota);
+            font-weight: 500;
+            margin-top: 0.2rem;
+        }
+
+        /* Fees */
+        .fees-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--puna-cacao);
+            margin-top: 3rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .fees-subtitle {
+            font-size: 0.92rem;
+            color: var(--puna-dark);
+            opacity: 0.75;
+            margin-bottom: 1.5rem;
+        }
+
+        .fees-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 0;
+        }
+
+        .fee-card {
+            background: var(--puna-cacao);
+            border-radius: 20px;
+            padding: 2.2rem 2rem;
+            color: var(--puna-cream);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .fee-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(128,103,99,0.25);
+        }
+
+        .fee-card .fee-label {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            opacity: 0.75;
+            margin-bottom: 0.5rem;
+        }
+
+        .fee-card .fee-amount {
+            font-size: clamp(1.8rem, 3vw, 2.4rem);
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .fee-card .fee-desc {
+            font-size: 0.88rem;
+            opacity: 0.85;
+            line-height: 1.6;
+        }
+
+        .fee-card .fee-details {
+            list-style: none;
+            padding: 0;
+            margin: 0.8rem 0 0;
+        }
+
+        .fee-card .fee-details li {
+            font-size: 0.82rem;
+            opacity: 0.8;
+            padding: 0.25rem 0;
+            border-bottom: 1px solid rgba(234,222,213,0.12);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .fee-card .fee-details li:last-child {
+            border-bottom: none;
+        }
+
+        .fee-card .fee-details li::before {
+            content: '→';
+            font-size: 0.75rem;
+            opacity: 0.6;
+        }
+
+        .fee-card .fee-icon {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            opacity: 0.15;
+            font-size: 3rem;
+        }
+
+        .fee-card:nth-child(2) {
+            background: var(--puna-dark);
+        }
+
+        .fee-card:nth-child(3) {
+            background: linear-gradient(135deg, var(--puna-terracota) 0%, var(--puna-cacao) 100%);
+        }
+
+        /* Decision point */
+        .decision-point {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: var(--puna-verde-calma);
+            border-radius: 16px;
+            padding: 1.2rem 1.8rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .decision-point .decision-icon {
+            background: var(--puna-cacao);
+            color: var(--puna-cream);
+            width: 36px;
+            height: 36px;
+            min-width: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .decision-point p {
+            font-size: 0.88rem;
+            color: var(--puna-dark);
+            line-height: 1.5;
+        }
+
+        .decision-point p strong {
+            color: var(--puna-cacao);
+        }
+
+        @media (max-width: 1024px) {
+            .fees-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .fee-card:nth-child(3) {
+                grid-column: 1 / -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .consultoria-services {
+                grid-template-columns: 1fr;
+            }
+            .fees-grid {
+                grid-template-columns: 1fr;
+            }
+            .fee-card:nth-child(3) {
+                grid-column: auto;
+            }
+            .consultoria-detail {
+                padding: 2rem 1.5rem;
+            }
+            .decision-point {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
         /* ── KPIs Band ── */
         .kpi-band {
             background: linear-gradient(135deg, var(--puna-cacao) 0%, var(--puna-dark) 100%);
@@ -1014,7 +1276,7 @@
         <div class="nav-links">
             <a href="#objetivo">Objetivo</a>
             <a href="#quienes-somos">Quiénes Somos</a>
-            <a href="#expansion">Expansión</a>
+            <a href="#expansion">Consultoría</a>
             <a href="#numeros">Números</a>
         </div>
         <div style="display: flex; gap: 0.8rem; align-items: center;">
@@ -1031,19 +1293,19 @@
             <p class="hero-subtitle">Una marca de bienestar integral en plena expansión. Tres modelos de negocio, una misma filosofía: conectar cuerpo, mente y comunidad.</p>
             <div class="hero-models">
                 <div class="hero-model">
+                    <div class="hero-model-icon"><i data-lucide="search"></i></div>
+                    <h3>Etapa 1</h3>
+                    <p>Inspección y Plan de Inversión</p>
+                </div>
+                <div class="hero-model">
+                    <div class="hero-model-icon"><i data-lucide="rocket"></i></div>
+                    <h3>Etapa 2</h3>
+                    <p>Acompañamiento en apertura</p>
+                </div>
+                <div class="hero-model">
                     <div class="hero-model-icon"><i data-lucide="building-2"></i></div>
-                    <h3>Franquicias</h3>
-                    <p>Tu propio Espacio PUNA</p>
-                </div>
-                <div class="hero-model">
-                    <div class="hero-model-icon"><i data-lucide="compass"></i></div>
-                    <h3>Consultoría</h3>
-                    <p>Asesoramiento en wellness</p>
-                </div>
-                <div class="hero-model">
-                    <div class="hero-model-icon"><i data-lucide="shopping-bag"></i></div>
-                    <h3>Productos</h3>
-                    <p>Marca propia del rubro</p>
+                    <h3>Etapa 3</h3>
+                    <p>Mantenimiento y soporte post apertura</p>
                 </div>
             </div>
         </div>
@@ -1053,7 +1315,7 @@
     <section class="section" id="objetivo">
         <span class="section-label">01 — Objetivo</span>
         <h2>¿Por qué PUNA?</h2>
-        <p class="section-desc">Convertir a PUNA en la marca referente de bienestar integral en Latinoamérica, escalando un modelo probado a través de tres líneas de negocio complementarias.</p>
+        <p class="section-desc">Convertir a PUNA en la marca referente de bienestar integral en Argentina, escalando un modelo probado a través de tres líneas de negocio complementarias.</p>
 
         <div class="objetivo-grid">
             <div class="objetivo-card">
@@ -1074,7 +1336,7 @@
             <div class="objetivo-card">
                 <div class="icon"><i data-lucide="zap"></i></div>
                 <h3>Expansión Inteligente</h3>
-                <p>Tres canales de ingreso — franquicias, consultoría y productos — permiten diversificar riesgo, escalar sin depender de una sola fuente y aumentar el alcance de la marca.</p>
+                <p>Tres canales de ingreso — franquicias, consultoría, actividades, talleres y productos — permiten reducir riesgo, escalar sin depender de una sola fuente y aumentar el alcance de la marca.</p>
             </div>
         </div>
     </section>
@@ -1151,50 +1413,96 @@
 
     <!-- ═══════════════ HACIA DONDE VAMOS ═══════════════ -->
     <section class="section" id="expansion">
-        <span class="section-label">03 — Hacia Donde Vamos</span>
-        <h2>Tres caminos, una marca</h2>
-        <p class="section-desc">PUNA se expande a través de modelos de negocio diseñados para que cada socio o franquiciado tenga un vehículo claro de crecimiento.</p>
+        <span class="section-label">03 — Consultoría & Expansión</span>
+        <h2>Nuestro modelo de acompañamiento</h2>
+        <p class="section-desc">Guiamos cada etapa del proceso para que puedas abrir y operar tu propio espacio de bienestar con respaldo integral. Así trabajamos:</p>
 
-        <div class="expansion-grid">
-            <div class="expansion-card">
-                <div class="icon"><i data-lucide="building-2"></i></div>
-                <h3>Franquicias PUNA</h3>
-                <p>Abrí tu propio Espacio Puna con respaldo operativo, de marca y formación completa.</p>
-                <ul class="expansion-list">
-                    <li>Manual operativo completo</li>
-                    <li>Identidad de marca & branding</li>
-                    <li>Capacitación en gestión y ventas</li>
-                    <li>App de reservas integrada</li>
+        <div class="consultoria-detail">
+            <div class="icon"><i data-lucide="compass"></i></div>
+            <h3>Consultoría Integral PUNA</h3>
+            <p>Acompañamos a cada franquiciado y emprendedor en todas las dimensiones del negocio, desde la constitución legal hasta la operación diaria.</p>
+
+            <ul class="consultoria-services">
+                <li>
+                    <span class="step-num">1</span>
+                    <span class="step-text">Asesoramiento impositivo y contable</span>
+                </li>
+                <li>
+                    <span class="step-num">2</span>
+                    <span class="step-text">Asesoramiento para armado de SRL o Monotributo</span>
+                </li>
+                <li>
+                    <span class="step-num">3</span>
+                    <span class="step-text">Asesoramiento para evaluación estética, funcional y edilicia para habilitación de comercio</span>
+                </li>
+                <li>
+                    <span class="step-num">4</span>
+                    <span class="step-text">Búsqueda de locales
+                        <span class="step-note">A cargo del cliente</span>
+                    </span>
+                </li>
+                <li>
+                    <span class="step-num">5</span>
+                    <span class="step-text">Asesoramiento tecnológico para Web y APP de gestión interna y hacia clientes</span>
+                </li>
+                <li>
+                    <span class="step-num">6</span>
+                    <span class="step-text">Asesoramiento para uso y diseño de imagen de marca PUNA</span>
+                </li>
+                <li>
+                    <span class="step-num">7</span>
+                    <span class="step-text">Asesoramiento RRHH y Capacitación para búsqueda y formación de personal</span>
+                </li>
+                <li>
+                    <span class="step-num">8</span>
+                    <span class="step-text">Asesoramiento para manejo de Redes Sociales</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Etapas de inversión -->
+        <h3 class="fees-title">Etapas de inversión</h3>
+        <p class="fees-subtitle">Un proceso claro, transparente y con punto de decisión para el franquiciado en cada paso.</p>
+
+        <div class="fees-grid">
+            <div class="fee-card">
+                <div class="fee-icon"><i data-lucide="search"></i></div>
+                <div class="fee-label">Etapa 1 — Inspección y Análisis Inicial</div>
+                <div class="fee-amount">$500.000</div>
+                <p class="fee-desc">Contra entregable de <strong>Plan de Inversión</strong> personalizado: inversión total, costos de apertura, costos operativos e ingresos estimados.</p>
+                <ul class="fee-details">
+                    <li>Análisis completo del local propuesto</li>
+                    <li>Proyección E2E: inversión hasta apertura</li>
+                    <li>Hasta 2 cambios de local sin costo adicional</li>
+                </ul>
+            </div>
+            <div class="fee-card">
+                <div class="fee-icon"><i data-lucide="rocket"></i></div>
+                <div class="fee-label">Etapa 2 — Acompañamiento en Apertura</div>
+                <div class="fee-amount">10%</div>
+                <p class="fee-desc">Sobre el valor total de inversión del Plan. Los <strong>$500.000 de la Etapa 1 se descuentan</strong> del monto final.</p>
+                <ul class="fee-details">
+                    <li>50% al inicio del proyecto</li>
+                    <li>50% a la apertura del espacio</li>
+                    <li>Incluye los 8 ejes de consultoría</li>
+                </ul>
+            </div>
+            <div class="fee-card">
+                <div class="fee-icon"><i data-lucide="handshake"></i></div>
+                <div class="fee-label">Etapa 3 — Mantenimiento y Soporte Post Apertura</div>
+                <div class="fee-amount">Planes</div>
+                <p class="fee-desc">Porcentaje según dimensión del comercio, con política de acompañamiento para el éxito sin asfixiar el comienzo operativo.</p>
+                <ul class="fee-details">
+                    <li>Fee mínimo: Web, APPs y asesoría base</li>
+                    <li>Planes incrementales según crecimiento</li>
                     <li>Soporte continuo del equipo central</li>
-                    <li>Playbook de marketing digital</li>
                 </ul>
             </div>
-            <div class="expansion-card">
-                <div class="icon"><i data-lucide="compass"></i></div>
-                <h3>Asesoramiento & Consultoría</h3>
-                <p>Acompañamos a emprendedores y espacios del rubro a profesionalizar su modelo.</p>
-                <ul class="expansion-list">
-                    <li>Diagnóstico de negocio wellness</li>
-                    <li>Diseño de experiencia de cliente</li>
-                    <li>Implementación de sistemas y app</li>
-                    <li>Estrategia de marketing y branding</li>
-                    <li>Optimización de rentabilidad</li>
-                    <li>Formación de equipos</li>
-                </ul>
-            </div>
-            <div class="expansion-card">
-                <div class="icon"><i data-lucide="shopping-bag"></i></div>
-                <h3>Productos PUNA</h3>
-                <p>Línea de productos propios para la comunidad wellness con el sello PUNA.</p>
-                <ul class="expansion-list">
-                    <li>Indumentaria de práctica</li>
-                    <li>Accesorios de yoga & pilates</li>
-                    <li>Productos de autocuidado</li>
-                    <li>Packaging & experiencia de marca</li>
-                    <li>Canal e-commerce propio</li>
-                    <li>Distribución en franquicias</li>
-                </ul>
-            </div>
+        </div>
+
+        <div class="decision-point">
+            <div class="decision-icon"><i data-lucide="git-branch"></i></div>
+            <p><strong>Punto de decisión:</strong> Si tras la Etapa 1 decidís no avanzar, solo abonás los $500.000 del análisis. Sin compromiso adicional.</p>
         </div>
     </section>
 
@@ -1308,7 +1616,7 @@
     <section class="section" id="local">
         <span class="section-label">Funcionamiento del Local</span>
         <h2>Así opera Espacio Puna</h2>
-        <p class="section-desc">Detalles del modelo operativo que hoy funciona en Villa Urquiza y que se replica en cada franquicia.</p>
+        <p class="section-desc">Detalles del modelo operativo que hoy funciona en Villa Urquiza y que se replicará en cada franquicia.</p>
 
         <div class="local-features">
             <div class="local-feature">
