@@ -315,6 +315,222 @@
             opacity: 0.85;
         }
 
+        /* ── Ecosistema PUNA ── */
+        .ecosistema-wrap {
+            margin-top: 4rem;
+            text-align: center;
+        }
+
+        .ecosistema-wrap h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--puna-cacao);
+            margin-bottom: 0.4rem;
+        }
+
+        .ecosistema-wrap > p {
+            font-size: 0.95rem;
+            color: var(--puna-dark);
+            opacity: 0.75;
+            margin-bottom: 2.5rem;
+        }
+
+        .ecosistema {
+            position: relative;
+            width: 580px;
+            height: 580px;
+            margin: 0 auto;
+        }
+
+        /* Orbit rings */
+        .eco-orbit {
+            position: absolute;
+            border: 1.5px dashed rgba(128,103,99,0.15);
+            border-radius: 50%;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .eco-orbit--inner {
+            width: 300px; height: 300px;
+        }
+
+        .eco-orbit--outer {
+            width: 520px; height: 520px;
+        }
+
+        /* Spin animation */
+        @keyframes orbitPulse {
+            0%, 100% { opacity: 0.15; }
+            50% { opacity: 0.3; }
+        }
+
+        .eco-orbit--inner { animation: orbitPulse 4s ease-in-out infinite; }
+        .eco-orbit--outer { animation: orbitPulse 4s ease-in-out infinite 1s; }
+
+        /* Center hub */
+        .eco-center {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 130px; height: 130px;
+            background: var(--puna-cacao);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--puna-cream);
+            z-index: 10;
+            box-shadow: 0 8px 35px rgba(128,103,99,0.35);
+            transition: transform 0.4s;
+        }
+
+        .eco-center:hover {
+            transform: translate(-50%, -50%) scale(1.06);
+        }
+
+        .eco-center .lucide {
+            width: 2rem; height: 2rem;
+            margin-bottom: 0.3rem;
+            stroke-width: 1.5;
+        }
+
+        .eco-center span {
+            font-size: 1.1rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        /* Connector lines (SVG layer) */
+        .eco-lines {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .eco-lines line {
+            stroke: var(--puna-mauve);
+            stroke-width: 1.2;
+            stroke-dasharray: 6 4;
+            opacity: 0.35;
+        }
+
+        /* Nodes */
+        .eco-node {
+            position: absolute;
+            z-index: 5;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            transition: transform 0.35s;
+            cursor: default;
+        }
+
+        .eco-node:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .eco-node-circle {
+            width: 72px; height: 72px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 0.5rem;
+            border: 2px solid rgba(128,103,99,0.12);
+            transition: all 0.35s;
+            box-shadow: 0 4px 15px rgba(128,103,99,0.12);
+        }
+
+        .eco-node:hover .eco-node-circle {
+            box-shadow: 0 8px 25px rgba(128,103,99,0.22);
+        }
+
+        .eco-node-circle .lucide {
+            width: 1.6rem; height: 1.6rem;
+            stroke-width: 1.8;
+        }
+
+        .eco-node-label {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--puna-cacao);
+            line-height: 1.3;
+            max-width: 100px;
+        }
+
+        /* Inner ring colors */
+        .eco-node--propios .eco-node-circle   { background: var(--puna-cacao); color: var(--puna-cream); }
+        .eco-node--franq .eco-node-circle     { background: var(--puna-terracota); color: var(--puna-cream); }
+        .eco-node--consulta .eco-node-circle  { background: var(--puna-dark); color: var(--puna-cream); }
+
+        /* Outer ring colors */
+        .eco-node--indumen .eco-node-circle   { background: var(--puna-durazno); color: var(--puna-dark); }
+        .eco-node--talleres .eco-node-circle  { background: var(--puna-verde-calma); color: var(--puna-dark); }
+        .eco-node--app .eco-node-circle       { background: var(--puna-mauve); color: var(--puna-dark); }
+        .eco-node--productos .eco-node-circle { background: var(--puna-cream); color: var(--puna-dark); }
+        .eco-node--comunidad .eco-node-circle { background: var(--puna-soft); color: var(--puna-cacao); border-color: var(--puna-mauve); }
+
+        /* Responsive ecosystem */
+        @media (max-width: 768px) {
+            .ecosistema {
+                width: 100%;
+                height: auto;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 0;
+            }
+
+            .eco-orbit, .eco-lines { display: none; }
+
+            .eco-center {
+                position: relative;
+                top: auto; left: auto;
+                transform: none;
+                margin-bottom: 2rem;
+            }
+
+            .eco-center:hover {
+                transform: scale(1.06);
+            }
+
+            .eco-nodes-mobile {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.2rem;
+                width: 100%;
+                max-width: 400px;
+            }
+
+            .eco-node {
+                position: relative;
+                top: auto !important;
+                left: auto !important;
+                transform: none;
+            }
+
+            .eco-node:hover {
+                transform: scale(1.05);
+            }
+
+            .eco-node-circle {
+                width: 56px; height: 56px;
+            }
+
+            .eco-node-circle .lucide {
+                width: 1.3rem; height: 1.3rem;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .eco-nodes-mobile {
+                display: contents;
+            }
+        }
+
         /* ── Quienes somos (full-width band) ── */
         .band {
             background: var(--puna-cacao);
@@ -1304,8 +1520,8 @@
                 </div>
                 <div class="hero-model">
                     <div class="hero-model-icon"><i data-lucide="building-2"></i></div>
-                    <h3>Post Apertura</h3>
-                    <p>Franquicia operativa con soporte</p>
+                    <h3>Etapa 3</h3>
+                    <p>Mantenimiento y soporte post apertura</p>
                 </div>
             </div>
         </div>
@@ -1315,7 +1531,7 @@
     <section class="section" id="objetivo">
         <span class="section-label">01 — Objetivo</span>
         <h2>¿Por qué PUNA?</h2>
-        <p class="section-desc">Convertir a PUNA en la marca referente de bienestar integral en Latinoamérica, escalando un modelo probado a través de tres líneas de negocio complementarias.</p>
+        <p class="section-desc">Convertir a PUNA en la marca referente de bienestar integral en Argentina, escalando un modelo probado a través de tres líneas de negocio complementarias.</p>
 
         <div class="objetivo-grid">
             <div class="objetivo-card">
@@ -1336,7 +1552,77 @@
             <div class="objetivo-card">
                 <div class="icon"><i data-lucide="zap"></i></div>
                 <h3>Expansión Inteligente</h3>
-                <p>Tres canales de ingreso — franquicias, consultoría y productos — permiten diversificar riesgo, escalar sin depender de una sola fuente y aumentar el alcance de la marca.</p>
+                <p>Tres canales de ingreso — franquicias, consultoría, actividades, talleres y productos — permiten reducir riesgo, escalar sin depender de una sola fuente y aumentar el alcance de la marca.</p>
+            </div>
+        </div>
+
+        <!-- Ecosistema PUNA -->
+        <div class="ecosistema-wrap">
+            <h3>El Ecosistema PUNA</h3>
+            <p>Una marca, múltiples líneas de negocio que se potencian entre sí.</p>
+
+            <div class="ecosistema">
+                <!-- Orbit rings -->
+                <div class="eco-orbit eco-orbit--inner"></div>
+                <div class="eco-orbit eco-orbit--outer"></div>
+
+                <!-- Connector lines -->
+                <svg class="eco-lines" viewBox="0 0 580 580">
+                    <!-- Inner ring connectors -->
+                    <line x1="290" y1="290" x2="290" y2="140" />
+                    <line x1="290" y1="290" x2="160" y2="365" />
+                    <line x1="290" y1="290" x2="420" y2="365" />
+                    <!-- Outer ring connectors -->
+                    <line x1="290" y1="290" x2="130" y2="120" />
+                    <line x1="290" y1="290" x2="450" y2="120" />
+                    <line x1="290" y1="290" x2="65" y2="290" />
+                    <line x1="290" y1="290" x2="515" y2="290" />
+                    <line x1="290" y1="290" x2="290" y2="520" />
+                </svg>
+
+                <!-- Center -->
+                <div class="eco-center">
+                    <i data-lucide="mountain"></i>
+                    <span>PUNA</span>
+                </div>
+
+                <div class="eco-nodes-mobile">
+                    <!-- ── Inner ring (3 core) ── -->
+                    <div class="eco-node eco-node--propios" style="top:24%;left:50%;">
+                        <div class="eco-node-circle"><i data-lucide="home"></i></div>
+                        <div class="eco-node-label">Espacios Propios</div>
+                    </div>
+                    <div class="eco-node eco-node--franq" style="top:63%;left:27.5%;">
+                        <div class="eco-node-circle"><i data-lucide="building-2"></i></div>
+                        <div class="eco-node-label">Espacios Franquiciados</div>
+                    </div>
+                    <div class="eco-node eco-node--consulta" style="top:63%;left:72.5%;">
+                        <div class="eco-node-circle"><i data-lucide="compass"></i></div>
+                        <div class="eco-node-label">Consultoría</div>
+                    </div>
+
+                    <!-- ── Outer ring (5 growth) ── -->
+                    <div class="eco-node eco-node--indumen" style="top:9%;left:22.5%;">
+                        <div class="eco-node-circle"><i data-lucide="shirt"></i></div>
+                        <div class="eco-node-label">Indumentaria</div>
+                    </div>
+                    <div class="eco-node eco-node--talleres" style="top:9%;left:77.5%;">
+                        <div class="eco-node-circle"><i data-lucide="calendar-heart"></i></div>
+                        <div class="eco-node-label">Talleres & Eventos</div>
+                    </div>
+                    <div class="eco-node eco-node--app" style="top:50%;left:11%;">
+                        <div class="eco-node-circle"><i data-lucide="smartphone"></i></div>
+                        <div class="eco-node-label">APP & Tecnología</div>
+                    </div>
+                    <div class="eco-node eco-node--productos" style="top:50%;left:89%;">
+                        <div class="eco-node-circle"><i data-lucide="package"></i></div>
+                        <div class="eco-node-label">Productos de Bienestar</div>
+                    </div>
+                    <div class="eco-node eco-node--comunidad" style="top:90%;left:50%;">
+                        <div class="eco-node-circle"><i data-lucide="heart-handshake"></i></div>
+                        <div class="eco-node-label">Comunidad</div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -1489,7 +1775,7 @@
             </div>
             <div class="fee-card">
                 <div class="fee-icon"><i data-lucide="handshake"></i></div>
-                <div class="fee-label">Post Apertura — Contrato de Franquicia</div>
+                <div class="fee-label">Etapa 3 — Mantenimiento y Soporte Post Apertura</div>
                 <div class="fee-amount">Planes</div>
                 <p class="fee-desc">Porcentaje según dimensión del comercio, con política de acompañamiento para el éxito sin asfixiar el comienzo operativo.</p>
                 <ul class="fee-details">
@@ -1616,7 +1902,7 @@
     <section class="section" id="local">
         <span class="section-label">Funcionamiento del Local</span>
         <h2>Así opera Espacio Puna</h2>
-        <p class="section-desc">Detalles del modelo operativo que hoy funciona en Villa Urquiza y que se replica en cada franquicia.</p>
+        <p class="section-desc">Detalles del modelo operativo que hoy funciona en Villa Urquiza y que se replicará en cada franquicia.</p>
 
         <div class="local-features">
             <div class="local-feature">
