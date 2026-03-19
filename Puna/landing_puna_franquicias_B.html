@@ -352,11 +352,15 @@
         }
 
         .eco-orbit--inner {
-            width: 300px; height: 300px;
+            width: 240px; height: 240px;
+        }
+
+        .eco-orbit--mid {
+            width: 440px; height: 440px;
         }
 
         .eco-orbit--outer {
-            width: 520px; height: 520px;
+            width: 540px; height: 540px;
         }
 
         /* Spin animation */
@@ -366,6 +370,7 @@
         }
 
         .eco-orbit--inner { animation: orbitPulse 4s ease-in-out infinite; }
+        .eco-orbit--mid   { animation: orbitPulse 4s ease-in-out infinite 0.5s; }
         .eco-orbit--outer { animation: orbitPulse 4s ease-in-out infinite 1s; }
 
         /* Center hub */
@@ -373,33 +378,27 @@
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            width: 130px; height: 130px;
-            background: var(--puna-cacao);
+            width: 140px; height: 140px;
+            background: var(--puna-white);
+            border: 3px solid var(--puna-cacao);
             border-radius: 50%;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            color: var(--puna-cream);
             z-index: 10;
             box-shadow: 0 8px 35px rgba(128,103,99,0.35);
             transition: transform 0.4s;
+            overflow: hidden;
         }
 
         .eco-center:hover {
             transform: translate(-50%, -50%) scale(1.06);
         }
 
-        .eco-center .lucide {
-            width: 2rem; height: 2rem;
-            margin-bottom: 0.3rem;
-            stroke-width: 1.5;
-        }
-
-        .eco-center span {
-            font-size: 1.1rem;
-            font-weight: 800;
-            letter-spacing: 2px;
+        .eco-center img {
+            width: 82%;
+            height: auto;
+            object-fit: contain;
         }
 
         /* Connector lines (SVG layer) */
@@ -416,6 +415,19 @@
             stroke-width: 1.2;
             stroke-dasharray: 6 4;
             opacity: 0.35;
+        }
+
+        .eco-lines .eco-line--primary {
+            stroke: var(--puna-cacao);
+            stroke-width: 2;
+            stroke-dasharray: none;
+            opacity: 0.5;
+        }
+
+        .eco-lines .eco-line--service {
+            stroke: var(--puna-terracota);
+            stroke-width: 1;
+            opacity: 0.22;
         }
 
         /* Nodes */
@@ -472,6 +484,11 @@
         .eco-node--app .eco-node-circle       { background: var(--puna-mauve); color: var(--puna-dark); }
         .eco-node--productos .eco-node-circle { background: var(--puna-cream); color: var(--puna-dark); }
         .eco-node--comunidad .eco-node-circle { background: var(--puna-soft); color: var(--puna-cacao); border-color: var(--puna-mauve); }
+
+        /* Service nodes */
+        .eco-node--pilates .eco-node-circle     { background: #E8D5CC; color: var(--puna-dark); }
+        .eco-node--yoga .eco-node-circle         { background: #D4DCCE; color: var(--puna-dark); }
+        .eco-node--masoterapia .eco-node-circle   { background: #EDCCB4; color: var(--puna-dark); }
 
         /* Responsive ecosystem */
         @media (max-width: 768px) {
@@ -1564,61 +1581,84 @@
             <div class="ecosistema">
                 <!-- Orbit rings -->
                 <div class="eco-orbit eco-orbit--inner"></div>
+                <div class="eco-orbit eco-orbit--mid"></div>
                 <div class="eco-orbit eco-orbit--outer"></div>
 
                 <!-- Connector lines -->
                 <svg class="eco-lines" viewBox="0 0 580 580">
-                    <!-- Inner ring connectors -->
-                    <line x1="290" y1="290" x2="290" y2="140" />
-                    <line x1="290" y1="290" x2="160" y2="365" />
-                    <line x1="290" y1="290" x2="420" y2="365" />
-                    <!-- Outer ring connectors -->
-                    <line x1="290" y1="290" x2="130" y2="120" />
-                    <line x1="290" y1="290" x2="450" y2="120" />
-                    <line x1="290" y1="290" x2="65" y2="290" />
-                    <line x1="290" y1="290" x2="515" y2="290" />
+                    <!-- Centro → Espacios (primary) -->
+                    <line x1="290" y1="290" x2="210" y2="230" class="eco-line--primary" />
+                    <line x1="290" y1="290" x2="370" y2="230" class="eco-line--primary" />
+                    <!-- Propios → Servicios -->
+                    <line x1="210" y1="230" x2="120" y2="150" class="eco-line--service" />
+                    <line x1="210" y1="230" x2="225" y2="100" class="eco-line--service" />
+                    <line x1="210" y1="230" x2="355" y2="100" class="eco-line--service" />
+                    <line x1="210" y1="230" x2="460" y2="150" class="eco-line--service" />
+                    <!-- Franquiciados → Servicios -->
+                    <line x1="370" y1="230" x2="120" y2="150" class="eco-line--service" />
+                    <line x1="370" y1="230" x2="225" y2="100" class="eco-line--service" />
+                    <line x1="370" y1="230" x2="355" y2="100" class="eco-line--service" />
+                    <line x1="370" y1="230" x2="460" y2="150" class="eco-line--service" />
+                    <!-- Centro → Líneas de negocio -->
+                    <line x1="290" y1="290" x2="60" y2="340" />
+                    <line x1="290" y1="290" x2="520" y2="340" />
+                    <line x1="290" y1="290" x2="120" y2="490" />
+                    <line x1="290" y1="290" x2="460" y2="490" />
                     <line x1="290" y1="290" x2="290" y2="520" />
                 </svg>
 
-                <!-- Center -->
+                <!-- Center — Isologotipo -->
                 <div class="eco-center">
-                    <i data-lucide="mountain"></i>
-                    <span>PUNA</span>
+                    <img src="logo-espacio-puna.png" alt="PUNA">
                 </div>
 
                 <div class="eco-nodes-mobile">
-                    <!-- ── Inner ring (3 core) ── -->
-                    <div class="eco-node eco-node--propios" style="top:24%;left:50%;">
+                    <!-- ── Espacios (close to center) ── -->
+                    <div class="eco-node eco-node--propios" style="top:39.7%;left:36.2%;">
                         <div class="eco-node-circle"><i data-lucide="home"></i></div>
                         <div class="eco-node-label">Espacios Propios</div>
                     </div>
-                    <div class="eco-node eco-node--franq" style="top:63%;left:27.5%;">
+                    <div class="eco-node eco-node--franq" style="top:39.7%;left:63.8%;">
                         <div class="eco-node-circle"><i data-lucide="building-2"></i></div>
                         <div class="eco-node-label">Espacios Franquiciados</div>
                     </div>
-                    <div class="eco-node eco-node--consulta" style="top:63%;left:72.5%;">
-                        <div class="eco-node-circle"><i data-lucide="compass"></i></div>
-                        <div class="eco-node-label">Consultoría</div>
-                    </div>
 
-                    <!-- ── Outer ring (5 growth) ── -->
-                    <div class="eco-node eco-node--indumen" style="top:9%;left:22.5%;">
-                        <div class="eco-node-circle"><i data-lucide="shirt"></i></div>
-                        <div class="eco-node-label">Indumentaria</div>
+                    <!-- ── Servicios (branching from Espacios) ── -->
+                    <div class="eco-node eco-node--pilates" style="top:25.9%;left:20.7%;">
+                        <div class="eco-node-circle"><i data-lucide="dumbbell"></i></div>
+                        <div class="eco-node-label">Pilates Reformer</div>
                     </div>
-                    <div class="eco-node eco-node--talleres" style="top:9%;left:77.5%;">
+                    <div class="eco-node eco-node--yoga" style="top:17.2%;left:38.8%;">
+                        <div class="eco-node-circle"><i data-lucide="flower-2"></i></div>
+                        <div class="eco-node-label">Yoga Integral</div>
+                    </div>
+                    <div class="eco-node eco-node--masoterapia" style="top:17.2%;left:61.2%;">
+                        <div class="eco-node-circle"><i data-lucide="heart-pulse"></i></div>
+                        <div class="eco-node-label">Masoterapia</div>
+                    </div>
+                    <div class="eco-node eco-node--talleres" style="top:25.9%;left:79.3%;">
                         <div class="eco-node-circle"><i data-lucide="calendar-heart"></i></div>
                         <div class="eco-node-label">Talleres & Eventos</div>
                     </div>
-                    <div class="eco-node eco-node--app" style="top:50%;left:11%;">
+
+                    <!-- ── Líneas de negocio (outer ring) ── -->
+                    <div class="eco-node eco-node--indumen" style="top:58.6%;left:10.3%;">
+                        <div class="eco-node-circle"><i data-lucide="shirt"></i></div>
+                        <div class="eco-node-label">Indumentaria</div>
+                    </div>
+                    <div class="eco-node eco-node--app" style="top:58.6%;left:89.7%;">
                         <div class="eco-node-circle"><i data-lucide="smartphone"></i></div>
                         <div class="eco-node-label">APP & Tecnología</div>
                     </div>
-                    <div class="eco-node eco-node--productos" style="top:50%;left:89%;">
+                    <div class="eco-node eco-node--consulta" style="top:84.5%;left:20.7%;">
+                        <div class="eco-node-circle"><i data-lucide="compass"></i></div>
+                        <div class="eco-node-label">Consultoría</div>
+                    </div>
+                    <div class="eco-node eco-node--productos" style="top:84.5%;left:79.3%;">
                         <div class="eco-node-circle"><i data-lucide="package"></i></div>
                         <div class="eco-node-label">Productos de Bienestar</div>
                     </div>
-                    <div class="eco-node eco-node--comunidad" style="top:90%;left:50%;">
+                    <div class="eco-node eco-node--comunidad" style="top:89.7%;left:50%;">
                         <div class="eco-node-circle"><i data-lucide="heart-handshake"></i></div>
                         <div class="eco-node-label">Comunidad</div>
                     </div>
