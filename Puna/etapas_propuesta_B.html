@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PUNA Franquicia — Propuesta B: Tablero de Detalle</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --puna-cacao: #806763;
+            --puna-mauve: #D1A99A;
+            --puna-cream: #EADED5;
+            --puna-terracota: #C97D68;
+            --puna-verde-calma: #C6CDBC;
+            --puna-durazno: #EDCCB4;
+            --puna-dark: #5D4B47;
+            --puna-white: #FFFCF9;
+            --puna-soft: #F8F5F2;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--puna-dark);
+            background: var(--puna-white);
+            line-height: 1.7;
+        }
+
+        /* ── Propuesta banner ── */
+        .prop-banner {
+            background: var(--puna-dark);
+            color: var(--puna-cream);
+            text-align: center;
+            padding: 0.7rem 2rem;
+            font-size: 0.82rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .prop-banner strong { color: var(--puna-durazno); font-size: 0.9rem; }
+        .prop-nav { display: flex; gap: 0.6rem; }
+        .prop-nav a {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: var(--puna-cream);
+            text-decoration: none;
+            border-radius: 20px;
+            padding: 0.3rem 1rem;
+            font-size: 0.78rem;
+            transition: all 0.2s;
+        }
+        .prop-nav a:hover { background: rgba(255,255,255,0.22); }
+        .prop-nav a.current { background: var(--puna-terracota); border-color: var(--puna-terracota); font-weight: 700; }
+
+        /* ── Page wrapper ── */
+        .page-section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 5rem 2rem 6rem;
+        }
+
+        .section-label {
+            display: inline-block;
+            background: var(--puna-verde-calma);
+            color: var(--puna-cacao);
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+            font-weight: 700;
+            color: var(--puna-cacao);
+            margin-bottom: 0.6rem;
+            line-height: 1.2;
+        }
+
+        .section-desc {
+            font-size: 0.98rem;
+            color: var(--puna-dark);
+            opacity: 0.8;
+            max-width: 680px;
+            margin-bottom: 3rem;
+        }
+
+        /* ── Accordion-style tab bar ── */
+        .stage-tabs {
+            display: flex;
+            gap: 0;
+            border-radius: 16px 16px 0 0;
+            overflow: hidden;
+            border: 1px solid rgba(128,103,99,0.12);
+            border-bottom: none;
+        }
+
+        .stage-tab {
+            flex: 1;
+            padding: 1.1rem 1.4rem;
+            cursor: pointer;
+            transition: all 0.25s;
+            border-right: 1px solid rgba(128,103,99,0.12);
+            position: relative;
+        }
+        .stage-tab:last-child { border-right: none; }
+
+        .stage-tab.active { background: var(--puna-cacao); }
+        .stage-tab:not(.active) { background: var(--puna-soft); }
+        .stage-tab:not(.active):hover { background: var(--puna-cream); }
+
+        .tab-num {
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.7;
+        }
+        .stage-tab.active .tab-num { color: var(--puna-mauve); opacity: 0.9; }
+        .stage-tab:not(.active) .tab-num { color: var(--puna-cacao); }
+
+        .tab-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+        .stage-tab.active .tab-title { color: var(--puna-cream); }
+        .stage-tab:not(.active) .tab-title { color: var(--puna-dark); }
+
+        .tab-fee {
+            font-size: 1.2rem;
+            font-weight: 800;
+            display: block;
+            margin-top: 0.1rem;
+        }
+        .stage-tab.active .tab-fee { color: var(--puna-durazno); }
+        .stage-tab:not(.active) .tab-fee { color: var(--puna-terracota); }
+
+        /* Active indicator */
+        .stage-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--puna-terracota);
+        }
+
+        /* ── Stage panel ── */
+        .stage-panel {
+            border: 1px solid rgba(128,103,99,0.12);
+            border-radius: 0 0 20px 20px;
+            background: var(--puna-white);
+            margin-bottom: 0.5rem;
+        }
+
+        /* ── Inner layout for each stage ── */
+        .stage-inner {
+            padding: 2.5rem 2.5rem;
+        }
+
+        .stage-two-col {
+            display: grid;
+            grid-template-columns: 1fr 1.6fr;
+            gap: 2.5rem;
+            align-items: start;
+        }
+
+        /* Left col (summary) */
+        .stage-summary h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--puna-cacao);
+            margin-bottom: 0.6rem;
+        }
+
+        .stage-summary p {
+            font-size: 0.88rem;
+            color: var(--puna-dark);
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+            line-height: 1.65;
+        }
+
+        /* Fee card */
+        .fee-card-b {
+            background: var(--puna-cacao);
+            border-radius: 14px;
+            padding: 1.5rem;
+            color: var(--puna-cream);
+            margin-bottom: 1.2rem;
+        }
+
+        .fee-card-b .fc-label {
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            opacity: 0.75;
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+
+        .fee-card-b .fc-amount {
+            font-size: 2.4rem;
+            font-weight: 800;
+            line-height: 1;
+            color: var(--puna-durazno);
+        }
+
+        .fee-card-b .fc-sub {
+            font-size: 0.78rem;
+            opacity: 0.75;
+            display: block;
+            margin-top: 0.35rem;
+        }
+
+        .fee-card-b.terracota { background: var(--puna-terracota); }
+        .fee-card-b.dark { background: var(--puna-dark); }
+
+        /* Payment conditions */
+        .conditions {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .conditions li {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.83rem;
+            color: var(--puna-dark);
+            padding: 0.6rem 1rem;
+            background: var(--puna-soft);
+            border-radius: 10px;
+            border-left: 3px solid transparent;
+        }
+
+        .conditions li.positive { border-left-color: var(--puna-verde-calma); }
+        .conditions li.warning  { border-left-color: var(--puna-terracota); }
+        .conditions li .lucide  { width: 15px; height: 15px; flex-shrink: 0; color: var(--puna-cacao); opacity: 0.7; }
+
+        /* ── RIGHT COL: tabla de items / E2 ── */
+        .items-table-wrap {
+            overflow-x: auto;
+        }
+
+        .items-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        .items-table thead tr {
+            background: var(--puna-cacao);
+            color: var(--puna-cream);
+        }
+
+        .items-table thead th {
+            text-align: left;
+            padding: 0.75rem 1rem;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .items-table tbody tr {
+            border-bottom: 1px solid rgba(128,103,99,0.08);
+            transition: background 0.15s;
+        }
+
+        .items-table tbody tr:hover { background: rgba(128,103,99,0.04); }
+
+        .items-table tbody td {
+            padding: 0.65rem 1rem;
+            vertical-align: middle;
+        }
+
+        /* Category group header */
+        .items-table .cat-row td {
+            background: var(--puna-soft);
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--puna-cacao);
+            opacity: 0.75;
+            padding: 0.45rem 1rem;
+        }
+
+        /* Category color accent */
+        .cat-band-inmueble  td:first-child { border-left: 3px solid #C97D68; }
+        .cat-band-legal     td:first-child { border-left: 3px solid var(--puna-verde-calma); }
+        .cat-band-equip     td:first-child { border-left: 3px solid var(--puna-durazno); }
+        .cat-band-comercial td:first-child { border-left: 3px solid var(--puna-mauve); }
+
+        /* Responsibility badge */
+        .badge {
+            display: inline-block;
+            border-radius: 20px;
+            padding: 0.28rem 0.85rem;
+            font-size: 0.72rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .badge--ejecuta  { background: var(--puna-cacao); color: var(--puna-cream); }
+        .badge--asesora  { background: var(--puna-durazno); color: var(--puna-dark); }
+
+        /* E1 items grid */
+        .e1-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.9rem;
+        }
+
+        .e1-row {
+            background: var(--puna-soft);
+            border-radius: 12px;
+            padding: 1rem 1.2rem;
+            display: flex;
+            gap: 0.8rem;
+            align-items: flex-start;
+            border: 1px solid rgba(128,103,99,0.08);
+        }
+
+        .e1-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--puna-cacao);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--puna-cream);
+        }
+        .e1-icon .lucide { width: 14px; height: 14px; }
+
+        .e1-row p { font-size: 0.83rem; line-height: 1.5; }
+
+        /* ── Etapa 3: feature matrix + plans ── */
+        .e3-split {
+            display: grid;
+            grid-template-columns: 1fr 1.7fr;
+            gap: 2.5rem;
+            align-items: start;
+        }
+
+        /* Feature matrix */
+        .matrix-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--puna-cacao);
+            opacity: 0.65;
+            margin-bottom: 1rem;
+        }
+
+        .feature-matrix {
+            border: 1px solid rgba(128,103,99,0.1);
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .matrix-head {
+            display: grid;
+            grid-template-columns: 1.4fr repeat(3, 1fr);
+            background: var(--puna-cacao);
+            color: var(--puna-cream);
+        }
+
+        .matrix-head div {
+            padding: 0.7rem 0.8rem;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+        .matrix-head div:first-child { text-align: left; }
+
+        .matrix-row {
+            display: grid;
+            grid-template-columns: 1.4fr repeat(3, 1fr);
+            border-bottom: 1px solid rgba(128,103,99,0.07);
+            transition: background 0.15s;
+        }
+        .matrix-row:last-child { border-bottom: none; }
+        .matrix-row:hover { background: rgba(128,103,99,0.04); }
+
+        .matrix-row div {
+            padding: 0.65rem 0.8rem;
+            font-size: 0.8rem;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .matrix-row div:first-child {
+            text-align: left;
+            justify-content: flex-start;
+            color: var(--puna-dark);
+            font-size: 0.82rem;
+        }
+
+        .matrix-row.base-row div:first-child {
+            font-weight: 600;
+            color: var(--puna-cacao);
+        }
+
+        .check-yes {
+            width: 20px;
+            height: 20px;
+            background: var(--puna-verde-calma);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .check-yes::after { content: '✓'; font-size: 0.65rem; font-weight: 800; color: var(--puna-dark); }
+
+        .check-no {
+            width: 20px;
+            height: 20px;
+            background: transparent;
+            border: 1.5px solid rgba(128,103,99,0.18);
+            border-radius: 50%;
+        }
+
+        /* Plans cost strip */
+        .plans-cost-strip {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cost-card {
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid rgba(128,103,99,0.1);
+            text-align: center;
+        }
+
+        .cost-card-head {
+            padding: 1rem;
+        }
+
+        .cost-card:nth-child(1) .cost-card-head { background: var(--puna-soft); }
+        .cost-card:nth-child(2) .cost-card-head { background: var(--puna-cacao); }
+        .cost-card:nth-child(3) .cost-card-head { background: var(--puna-dark); }
+
+        .cost-name {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+        .cost-card:nth-child(1) .cost-name { color: var(--puna-cacao); }
+        .cost-card:nth-child(2) .cost-name { color: var(--puna-durazno); }
+        .cost-card:nth-child(3) .cost-name { color: var(--puna-mauve); }
+
+        .cost-amount {
+            font-size: 1.6rem;
+            font-weight: 800;
+            display: block;
+        }
+        .cost-card:nth-child(1) .cost-amount { color: var(--puna-cacao); }
+        .cost-card:nth-child(2) .cost-amount { color: var(--puna-cream); }
+        .cost-card:nth-child(3) .cost-amount { color: var(--puna-cream); }
+
+        .cost-note {
+            font-size: 0.72rem;
+            display: block;
+            margin-top: 0.2rem;
+        }
+        .cost-card:nth-child(1) .cost-note { color: var(--puna-dark); opacity: 0.6; }
+        .cost-card:nth-child(2) .cost-note { color: var(--puna-cream); opacity: 0.7; }
+        .cost-card:nth-child(3) .cost-note { color: var(--puna-cream); opacity: 0.7; }
+
+        .cost-card-body {
+            padding: 0.7rem 1rem;
+            background: var(--puna-white);
+            font-size: 0.76rem;
+            color: var(--puna-dark);
+            opacity: 0.75;
+            line-height: 1.4;
+        }
+
+        /* what's always included note */
+        .always-included {
+            background: linear-gradient(135deg, rgba(198,205,188,0.25) 0%, rgba(234,222,213,0.25) 100%);
+            border: 1px solid rgba(128,103,99,0.1);
+            border-radius: 12px;
+            padding: 1rem 1.3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .always-included p {
+            font-size: 0.73rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--puna-cacao);
+            margin-bottom: 0.6rem;
+        }
+
+        .always-included ul {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            list-style: none;
+        }
+
+        .always-included ul li {
+            background: var(--puna-white);
+            border: 1px solid rgba(128,103,99,0.12);
+            border-radius: 20px;
+            padding: 0.3rem 0.9rem;
+            font-size: 0.8rem;
+            color: var(--puna-dark);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .always-included ul li::before { content: '→'; color: var(--puna-terracota); font-size: 0.7rem; }
+
+        /* ── Decision point ── */
+        .decision-point {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: var(--puna-verde-calma);
+            border-radius: 14px;
+            padding: 1.2rem 1.8rem;
+            margin-top: 2.5rem;
+        }
+
+        .decision-icon {
+            background: var(--puna-cacao);
+            color: var(--puna-cream);
+            width: 36px; height: 36px; min-width: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .decision-icon .lucide { width: 16px; height: 16px; }
+
+        .decision-point p { font-size: 0.88rem; color: var(--puna-dark); }
+        .decision-point strong { color: var(--puna-cacao); }
+
+        /* ── Responsive ── */
+        @media (max-width: 900px) {
+            .stage-two-col { grid-template-columns: 1fr; }
+            .e3-split { grid-template-columns: 1fr; }
+            .stage-tabs { flex-direction: column; border-radius: 12px; border-bottom: 1px solid rgba(128,103,99,0.12); }
+            .stage-tab { border-right: none; border-bottom: 1px solid rgba(128,103,99,0.1); }
+            .stage-panel { border-radius: 12px; }
+            .plans-cost-strip { grid-template-columns: 1fr; }
+            .e1-grid { grid-template-columns: 1fr; }
+            .matrix-head, .matrix-row { grid-template-columns: 2fr 1fr 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Propuesta banner -->
+    <div class="prop-banner">
+        <span><strong>Propuesta B</strong> — Tablero de Detalle · Diseño de sección para Franquicia Puna</span>
+        <nav class="prop-nav">
+            <a href="etapas_propuesta_A.html">A — Timeline</a>
+            <a href="etapas_propuesta_B.html" class="current">B — Tablero</a>
+            <a href="etapas_propuesta_C.html">C — Journey</a>
+        </nav>
+    </div>
+
+    <div class="page-section">
+        <span class="section-label">03 — Consultoría &amp; Expansión</span>
+        <h2 class="section-title">Tu hoja de ruta hacia<br>la apertura y operación</h2>
+        <p class="section-desc">Tres etapas con fees, plazos y responsabilidades documentadas. Seleccioná cada etapa para ver el detalle completo.</p>
+
+        <!-- ── TAB BAR ── -->
+        <div class="stage-tabs" id="stageTabs">
+            <div class="stage-tab active" data-panel="panel1">
+                <div class="tab-num">Etapa 1 · Diagnóstico</div>
+                <div class="tab-title">Inspección & Plan</div>
+                <span class="tab-fee">$500k</span>
+            </div>
+            <div class="stage-tab" data-panel="panel2" style="--accent:var(--puna-terracota);">
+                <div class="tab-num">Etapa 2 · Ejecución</div>
+                <div class="tab-title">Apertura del Espacio</div>
+                <span class="tab-fee">10%</span>
+            </div>
+            <div class="stage-tab" data-panel="panel3">
+                <div class="tab-num">Etapa 3 · Franquicia</div>
+                <div class="tab-title">Operación Continua</div>
+                <span class="tab-fee">Planes</span>
+            </div>
+        </div>
+
+        <!-- ── PANEL 1 ── -->
+        <div class="stage-panel" id="panel1">
+            <div class="stage-inner">
+                <div class="stage-two-col">
+                    <div class="stage-summary">
+                        <div class="fee-card-b">
+                            <span class="fc-label">Fee Etapa 1</span>
+                            <div class="fc-amount">$500.000</div>
+                            <span class="fc-sub">Pago único al contratar</span>
+                        </div>
+                        <h3>Inspección & Plan de Inversión</h3>
+                        <p>Analizamos en profundidad el local elegido y elaboramos un plan personalizado con todos los costos reales: inversión inicial, costos de apertura, costos operativos mensuales e ingresos estimados.</p>
+                        <ul class="conditions">
+                            <li class="positive"><i data-lucide="check-circle"></i>Los $500.000 se <strong>descuentan</strong> del fee de Etapa 2</li>
+                            <li class="positive"><i data-lucide="check-circle"></i>Hasta 2 cambios de local sin costo adicional</li>
+                            <li class="positive"><i data-lucide="check-circle"></i>Entregable escrito: Plan de Inversión completo</li>
+                            <li class="warning"><i data-lucide="alert-triangle"></i>Si no avanzás a E2, solo abonás este monto</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--puna-cacao);opacity:0.6;margin-bottom:1rem;">Entregables incluidos</p>
+                        <div class="e1-grid">
+                            <div class="e1-row">
+                                <div class="e1-icon"><i data-lucide="map-pin"></i></div>
+                                <p>Análisis completo del local: dimensiones, estado edilicio y potencial de habilitación</p>
+                            </div>
+                            <div class="e1-row">
+                                <div class="e1-icon"><i data-lucide="calculator"></i></div>
+                                <p>Inversión total hasta apertura desglosada ítem por ítem</p>
+                            </div>
+                            <div class="e1-row">
+                                <div class="e1-icon"><i data-lucide="bar-chart-2"></i></div>
+                                <p>Proyección de costos operativos mensuales post-apertura</p>
+                            </div>
+                            <div class="e1-row">
+                                <div class="e1-icon"><i data-lucide="trending-up"></i></div>
+                                <p>Estimación de ingresos y punto de equilibrio del espacio</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── PANEL 2 ── -->
+        <div class="stage-panel" id="panel2" style="display:none;">
+            <div class="stage-inner">
+                <div class="stage-two-col">
+                    <div class="stage-summary">
+                        <div class="fee-card-b terracota">
+                            <span class="fc-label">Fee Etapa 2</span>
+                            <div class="fc-amount">10%</div>
+                            <span class="fc-sub">del total del Plan de Inversión</span>
+                        </div>
+                        <h3>Ejecución del Plan de Inversión</h3>
+                        <p>PUNA toma la conducción del proyecto. Para cada ítem del plan, asumimos el rol de <strong>ejecutores directos</strong> (gestionamos la contratación y entrega) o de <strong>asesores</strong> (acompañamos y evaluamos, pero el contrato queda a nombre del franquiciado).</p>
+                        <ul class="conditions">
+                            <li class="positive"><i data-lucide="check-circle"></i>50% al inicio del proyecto (firma)</li>
+                            <li class="positive"><i data-lucide="check-circle"></i>50% contra apertura del espacio</li>
+                            <li class="positive"><i data-lucide="minus-circle"></i>Se descuentan los $500k abonados en E1</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--puna-cacao);opacity:0.6;margin-bottom:1rem;">Items del plan · responsabilidad PUNA</p>
+                        <div class="items-table-wrap">
+                            <table class="items-table">
+                                <thead>
+                                    <tr>
+                                        <th>Ítem</th>
+                                        <th>Categoría</th>
+                                        <th>Rol PUNA</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="cat-row"><td colspan="3">INMUEBLE</td></tr>
+                                    <tr class="cat-band-inmueble">
+                                        <td>Alquiler del local</td>
+                                        <td>Inmueble</td>
+                                        <td><span class="badge badge--asesora">PUNA Asesora</span></td>
+                                    </tr>
+                                    <tr class="cat-band-inmueble">
+                                        <td>Gastos de inmobiliaria</td>
+                                        <td>Inmueble</td>
+                                        <td><span class="badge badge--asesora">PUNA Asesora</span></td>
+                                    </tr>
+                                    <tr class="cat-band-inmueble">
+                                        <td>Depósito de garantía</td>
+                                        <td>Inmueble</td>
+                                        <td><span class="badge badge--asesora">PUNA Asesora</span></td>
+                                    </tr>
+                                    <tr class="cat-band-inmueble">
+                                        <td>Remodelación del local</td>
+                                        <td>Inmueble</td>
+                                        <td><span class="badge badge--ejecuta">PUNA Ejecuta</span></td>
+                                    </tr>
+                                    <tr class="cat-row"><td colspan="3">LEGAL-ADMINISTRATIVO</td></tr>
+                                    <tr class="cat-band-legal">
+                                        <td>Habilitación comercial</td>
+                                        <td>Legal-Admin</td>
+                                        <td><span class="badge badge--ejecuta">PUNA Ejecuta</span></td>
+                                    </tr>
+                                    <tr class="cat-band-legal">
+                                        <td>Constitución de sociedad</td>
+                                        <td>Legal-Admin</td>
+                                        <td><span class="badge badge--ejecuta">PUNA Ejecuta</span></td>
+                                    </tr>
+                                    <tr class="cat-row"><td colspan="3">EQUIPAMIENTO</td></tr>
+                                    <tr class="cat-band-equip">
+                                        <td>8 Camas de tratamiento</td>
+                                        <td>Equipamiento</td>
+                                        <td><span class="badge badge--ejecuta">PUNA Ejecuta</span></td>
+                                    </tr>
+                                    <tr class="cat-band-equip">
+                                        <td>Accesorios de práctica</td>
+                                        <td>Equipamiento</td>
+                                        <td><span class="badge badge--ejecuta">PUNA Ejecuta</span></td>
+                                    </tr>
+                                    <tr class="cat-band-equip">
+                                        <td>Climatización (frío/calor)</td>
+                                        <td>Equipamiento</td>
+                                        <td><span class="badge badge--ejecuta">PUNA Ejecuta</span></td>
+                                    </tr>
+                                    <tr class="cat-band-equip">
+                                        <td>Mobiliario completo</td>
+                                        <td>Equipamiento</td>
+                                        <td><span class="badge badge--ejecuta">PUNA Ejecuta</span></td>
+                                    </tr>
+                                    <tr class="cat-band-equip">
+                                        <td>Uniformes del equipo</td>
+                                        <td>Equipamiento</td>
+                                        <td><span class="badge badge--ejecuta">PUNA Ejecuta</span></td>
+                                    </tr>
+                                    <tr class="cat-row"><td colspan="3">COMERCIAL</td></tr>
+                                    <tr class="cat-band-comercial">
+                                        <td>Apertura + pauta digital</td>
+                                        <td>Comercial</td>
+                                        <td><span class="badge badge--ejecuta">PUNA Ejecuta</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p style="font-size:0.77rem;color:var(--puna-dark);opacity:0.55;margin-top:0.8rem;font-style:italic;">* Los ítems con rol "PUNA Asesora" tienen el contrato a nombre del franquiciado. PUNA acompaña en la evaluación y negociación.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── PANEL 3 ── -->
+        <div class="stage-panel" id="panel3" style="display:none;">
+            <div class="stage-inner">
+                <div class="e3-split">
+                    <div class="stage-summary">
+                        <div class="fee-card-b dark">
+                            <span class="fc-label">Fee mensual recurrente</span>
+                            <div class="fc-amount">Planes</div>
+                            <span class="fc-sub">desde la apertura · según facturación</span>
+                        </div>
+                        <h3>Franquicia Activa con Soporte PUNA</h3>
+                        <p>Una vez abierto el espacio, la relación con PUNA pasa a ser de franquicia operativa. El fee mensual cubre el acceso a la marca, plataforma tecnológica y servicios de soporte según el plan elegido.</p>
+                        <div class="always-included">
+                            <p>Siempre incluido en todos los planes</p>
+                            <ul>
+                                <li>Licencia de marca PUNA</li>
+                                <li>Web propia del espacio</li>
+                                <li>APP gestión interna</li>
+                                <li>APP clientes (reservas)</li>
+                                <li>Soporte operativo base</li>
+                                <li>Manuales y protocolos</li>
+                            </ul>
+                        </div>
+                        <ul class="conditions">
+                            <li class="positive"><i data-lucide="check-circle"></i>Política de acompañamiento para el inicio operativo</li>
+                            <li class="positive"><i data-lucide="check-circle"></i>Revisión del plan al cumplir 3 meses</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="matrix-title">Servicios adicionales por plan</p>
+
+                        <div class="plans-cost-strip">
+                            <div class="cost-card">
+                                <div class="cost-card-head">
+                                    <span class="cost-name">Esencial</span>
+                                    <span class="cost-amount">Base</span>
+                                    <span class="cost-note">fee mínimo mensual</span>
+                                </div>
+                                <div class="cost-card-body">Solo servicios base incluidos</div>
+                            </div>
+                            <div class="cost-card">
+                                <div class="cost-card-head">
+                                    <span class="cost-name">Crecimiento</span>
+                                    <span class="cost-amount">+Redes</span>
+                                    <span class="cost-note">fee intermedio mensual</span>
+                                </div>
+                                <div class="cost-card-body">Suma gestión de redes y asesoría contable</div>
+                            </div>
+                            <div class="cost-card">
+                                <div class="cost-card-head">
+                                    <span class="cost-name">Full</span>
+                                    <span class="cost-amount">Todo</span>
+                                    <span class="cost-note">fee completo mensual</span>
+                                </div>
+                                <div class="cost-card-body">Todos los servicios activos y RRHH</div>
+                            </div>
+                        </div>
+
+                        <div class="feature-matrix">
+                            <div class="matrix-head">
+                                <div>Servicio adicional</div>
+                                <div>Esencial</div>
+                                <div>Crecimiento</div>
+                                <div>Full</div>
+                            </div>
+                            <div class="matrix-row base-row">
+                                <div>Licencia de marca PUNA</div>
+                                <div><span class="check-yes"></span></div>
+                                <div><span class="check-yes"></span></div>
+                                <div><span class="check-yes"></span></div>
+                            </div>
+                            <div class="matrix-row base-row">
+                                <div>Web + APP (gestión + clientes)</div>
+                                <div><span class="check-yes"></span></div>
+                                <div><span class="check-yes"></span></div>
+                                <div><span class="check-yes"></span></div>
+                            </div>
+                            <div class="matrix-row base-row">
+                                <div>Soporte operativo + manuales</div>
+                                <div><span class="check-yes"></span></div>
+                                <div><span class="check-yes"></span></div>
+                                <div><span class="check-yes"></span></div>
+                            </div>
+                            <div class="matrix-row">
+                                <div>Gestión de redes sociales</div>
+                                <div><span class="check-no"></span></div>
+                                <div><span class="check-yes"></span></div>
+                                <div><span class="check-yes"></span></div>
+                            </div>
+                            <div class="matrix-row">
+                                <div>Asesoría contable-impositiva</div>
+                                <div><span class="check-no"></span></div>
+                                <div><span class="check-yes"></span></div>
+                                <div><span class="check-yes"></span></div>
+                            </div>
+                            <div class="matrix-row">
+                                <div>Consultoría RRHH y capacitación</div>
+                                <div><span class="check-no"></span></div>
+                                <div><span class="check-no"></span></div>
+                                <div><span class="check-yes"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Decision point -->
+        <div class="decision-point">
+            <div class="decision-icon"><i data-lucide="git-branch"></i></div>
+            <p><strong>Punto de decisión clave:</strong> Tras la Etapa 1 recibís el Plan de Inversión completo. Si decidís no avanzar, solo abonás los $500.000 del análisis. Sin compromisos adicionales.</p>
+        </div>
+
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // Tab switching
+        document.querySelectorAll('.stage-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.stage-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.stage-panel').forEach(p => p.style.display = 'none');
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.panel).style.display = 'block';
+            });
+        });
+    </script>
+</body>
+</html>

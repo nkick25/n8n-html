@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PUNA Franquicia — Propuesta A: Timeline por Fases</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --puna-cacao: #806763;
+            --puna-mauve: #D1A99A;
+            --puna-cream: #EADED5;
+            --puna-terracota: #C97D68;
+            --puna-verde-calma: #C6CDBC;
+            --puna-durazno: #EDCCB4;
+            --puna-dark: #5D4B47;
+            --puna-white: #FFFCF9;
+            --puna-soft: #F8F5F2;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--puna-dark);
+            background: var(--puna-white);
+            line-height: 1.7;
+        }
+
+        /* ── Propuesta banner ── */
+        .prop-banner {
+            background: var(--puna-dark);
+            color: var(--puna-cream);
+            text-align: center;
+            padding: 0.7rem 2rem;
+            font-size: 0.82rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .prop-banner strong { color: var(--puna-durazno); font-size: 0.9rem; }
+        .prop-nav { display: flex; gap: 0.6rem; }
+        .prop-nav a {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: var(--puna-cream);
+            text-decoration: none;
+            border-radius: 20px;
+            padding: 0.3rem 1rem;
+            font-size: 0.78rem;
+            transition: all 0.2s;
+        }
+        .prop-nav a:hover { background: rgba(255,255,255,0.22); }
+        .prop-nav a.current { background: var(--puna-terracota); border-color: var(--puna-terracota); font-weight: 700; }
+
+        /* ── Section wrapper ── */
+        .page-section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 5rem 2rem 6rem;
+        }
+
+        .section-label {
+            display: inline-block;
+            background: var(--puna-verde-calma);
+            color: var(--puna-cacao);
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+            font-weight: 700;
+            color: var(--puna-cacao);
+            margin-bottom: 0.6rem;
+            line-height: 1.2;
+        }
+
+        .section-desc {
+            font-size: 0.98rem;
+            color: var(--puna-dark);
+            opacity: 0.8;
+            max-width: 680px;
+            margin-bottom: 3rem;
+        }
+
+        /* ── Timeline wrapper ── */
+        .timeline {
+            position: relative;
+            padding-left: 0;
+        }
+
+        /* vertical line */
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 38px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(
+                to bottom,
+                var(--puna-cacao) 0%,
+                var(--puna-terracota) 40%,
+                var(--puna-verde-calma) 100%
+            );
+            opacity: 0.3;
+            border-radius: 2px;
+        }
+
+        /* ── Individual phase ── */
+        .phase {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 0;
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        .phase-marker {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 1.6rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .phase-num {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--puna-cream);
+            box-shadow: 0 4px 16px rgba(128,103,99,0.3);
+            flex-shrink: 0;
+        }
+        .phase:nth-child(1) .phase-num { background: var(--puna-cacao); }
+        .phase:nth-child(2) .phase-num { background: var(--puna-terracota); }
+        .phase:nth-child(3) .phase-num { background: var(--puna-dark); }
+
+        .phase-card {
+            background: var(--puna-soft);
+            border-radius: 20px;
+            border: 1px solid rgba(128,103,99,0.09);
+            overflow: hidden;
+            transition: box-shadow 0.3s;
+        }
+        .phase-card:hover {
+            box-shadow: 0 16px 48px rgba(128,103,99,0.12);
+        }
+
+        .phase-header {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 1.5rem;
+            align-items: start;
+            padding: 2rem 2.2rem 1.8rem;
+            border-bottom: 1px solid rgba(128,103,99,0.09);
+        }
+
+        .phase-tag {
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 0.4rem;
+            opacity: 0.65;
+            color: var(--puna-cacao);
+        }
+        .phase:nth-child(2) .phase-tag { color: var(--puna-terracota); }
+        .phase:nth-child(3) .phase-tag { color: var(--puna-dark); }
+
+        .phase-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--puna-cacao);
+            margin-bottom: 0.4rem;
+            line-height: 1.3;
+        }
+        .phase:nth-child(2) .phase-name { color: var(--puna-terracota); }
+        .phase:nth-child(3) .phase-name { color: var(--puna-dark); }
+
+        .phase-desc {
+            font-size: 0.88rem;
+            color: var(--puna-dark);
+            opacity: 0.8;
+            max-width: 500px;
+        }
+
+        /* Fee box */
+        .fee-box {
+            text-align: right;
+            white-space: nowrap;
+        }
+
+        .fee-tag {
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--puna-cacao);
+            opacity: 0.7;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .fee-amount {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--puna-cacao);
+            line-height: 1;
+        }
+        .phase:nth-child(2) .fee-amount { color: var(--puna-terracota); }
+        .phase:nth-child(3) .fee-amount { color: var(--puna-dark); }
+
+        .fee-sub {
+            font-size: 0.75rem;
+            opacity: 0.65;
+            display: block;
+            margin-top: 0.25rem;
+        }
+
+        /* Payment pills */
+        .payment-row {
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+            margin-top: 0.8rem;
+        }
+
+        .payment-pill {
+            background: rgba(128,103,99,0.08);
+            border: 1px solid rgba(128,103,99,0.12);
+            border-radius: 20px;
+            padding: 0.3rem 0.9rem;
+            font-size: 0.77rem;
+            font-weight: 500;
+            color: var(--puna-cacao);
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .payment-pill .lucide { width: 13px; height: 13px; opacity: 0.7; }
+
+        /* Phase body */
+        .phase-body {
+            padding: 2rem 2.2rem;
+        }
+
+        /* ── Etapa 1: simple checklist ── */
+        .e1-items {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .e1-item {
+            background: var(--puna-white);
+            border-radius: 14px;
+            padding: 1.3rem 1.2rem;
+            border: 1px solid rgba(128,103,99,0.08);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+        }
+
+        .e1-item-icon {
+            width: 34px;
+            height: 34px;
+            background: var(--puna-cacao);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--puna-cream);
+        }
+        .e1-item-icon .lucide { width: 16px; height: 16px; }
+
+        .e1-item p {
+            font-size: 0.858rem;
+            color: var(--puna-dark);
+            line-height: 1.5;
+        }
+
+        /* ── Etapa 2: responsabilidades ── */
+        .e2-resp-header {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--puna-dark);
+            opacity: 0.55;
+            margin-bottom: 1.2rem;
+        }
+
+        .resp-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .resp-col {
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(128,103,99,0.1);
+        }
+
+        .resp-col-header {
+            padding: 0.9rem 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.82rem;
+            font-weight: 700;
+        }
+
+        .resp-col-header .lucide { width: 16px; height: 16px; }
+
+        .resp-col--asesora .resp-col-header {
+            background: var(--puna-durazno);
+            color: var(--puna-dark);
+        }
+
+        .resp-col--ejecuta .resp-col-header {
+            background: var(--puna-cacao);
+            color: var(--puna-cream);
+        }
+
+        .resp-col--ejecuta .resp-col-header .lucide { color: var(--puna-cream); }
+
+        .resp-col-note {
+            font-size: 0.74rem;
+            opacity: 0.75;
+            font-weight: 400;
+            margin-left: 0.3rem;
+        }
+
+        .resp-items {
+            padding: 1rem 1.3rem;
+            background: var(--puna-white);
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .resp-category {
+            margin-bottom: 0.4rem;
+        }
+
+        .resp-cat-label {
+            font-size: 0.67rem;
+            text-transform: uppercase;
+            letter-spacing: 1.8px;
+            font-weight: 700;
+            padding: 0.2rem 0.6rem;
+            border-radius: 6px;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .cat-inmueble { background: #E8D8D4; color: var(--puna-dark); }
+        .cat-legal    { background: #D9E0D4; color: var(--puna-dark); }
+        .cat-equip    { background: #E5D9C4; color: var(--puna-dark); }
+        .cat-comercial{ background: #D4DCCE; color: var(--puna-dark); }
+
+        .resp-item-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        .resp-item-list li {
+            font-size: 0.85rem;
+            color: var(--puna-dark);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.32rem 0.5rem;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .resp-item-list li:hover { background: rgba(128,103,99,0.05); }
+
+        .resp-col--asesora .resp-item-list li::before {
+            content: '○';
+            color: var(--puna-terracota);
+            font-size: 0.7rem;
+            flex-shrink: 0;
+        }
+
+        .resp-col--ejecuta .resp-item-list li::before {
+            content: '●';
+            color: var(--puna-terracota);
+            font-size: 0.7rem;
+            flex-shrink: 0;
+        }
+
+        /* Payment detail strip */
+        .payment-strip {
+            background: rgba(128,103,99,0.06);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            margin-top: 1.5rem;
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .pstrip-item {
+            display: flex;
+            flex-direction: column;
+        }
+        .pstrip-item .ps-label {
+            font-size: 0.67rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+            color: var(--puna-cacao);
+            opacity: 0.65;
+        }
+        .pstrip-item .ps-val {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--puna-terracota);
+        }
+        .pstrip-divider {
+            width: 1px;
+            height: 36px;
+            background: rgba(128,103,99,0.18);
+        }
+
+        /* ── Etapa 3: planes ── */
+        .planes-note {
+            font-size: 0.88rem;
+            color: var(--puna-dark);
+            opacity: 0.75;
+            margin-bottom: 1.5rem;
+        }
+
+        .planes-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.2rem;
+        }
+
+        .plan-card {
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(128,103,99,0.1);
+            transition: all 0.3s;
+        }
+
+        .plan-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 35px rgba(128,103,99,0.14);
+        }
+
+        .plan-head {
+            padding: 1.4rem 1.5rem 1.1rem;
+        }
+
+        .plan-card:nth-child(1) .plan-head { background: var(--puna-soft); }
+        .plan-card:nth-child(2) .plan-head { background: var(--puna-cacao); }
+        .plan-card:nth-child(3) .plan-head { background: var(--puna-dark); }
+
+        .plan-name {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+        }
+        .plan-card:nth-child(1) .plan-name { color: var(--puna-cacao); }
+        .plan-card:nth-child(2) .plan-name { color: var(--puna-durazno); }
+        .plan-card:nth-child(3) .plan-name { color: var(--puna-mauve); }
+
+        .plan-fee {
+            font-size: 1.9rem;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 0.3rem;
+        }
+        .plan-card:nth-child(1) .plan-fee { color: var(--puna-cacao); }
+        .plan-card:nth-child(2) .plan-fee { color: var(--puna-cream); }
+        .plan-card:nth-child(3) .plan-fee { color: var(--puna-cream); }
+
+        .plan-fee-note {
+            font-size: 0.74rem;
+            opacity: 0.7;
+        }
+        .plan-card:nth-child(1) .plan-fee-note { color: var(--puna-dark); }
+        .plan-card:nth-child(2) .plan-fee-note { color: var(--puna-cream); }
+        .plan-card:nth-child(3) .plan-fee-note { color: var(--puna-cream); }
+
+        .plan-body {
+            background: var(--puna-white);
+            padding: 1.3rem 1.5rem;
+        }
+
+        .plan-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.55rem;
+        }
+
+        .plan-features li {
+            font-size: 0.82rem;
+            color: var(--puna-dark);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.55rem;
+        }
+
+        .feat-check {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .feat-check--yes { background: var(--puna-verde-calma); }
+        .feat-check--yes::after {
+            content: '✓';
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: var(--puna-dark);
+        }
+
+        .feat-check--no {
+            background: rgba(128,103,99,0.08);
+            border: 1px solid rgba(128,103,99,0.12);
+        }
+        .feat-check--no::after {
+            content: '–';
+            font-size: 0.65rem;
+            color: rgba(128,103,99,0.4);
+        }
+
+        .plan-features .feat-included { color: var(--puna-dark); }
+        .plan-features .feat-excluded { color: rgba(93,75,71,0.4); }
+
+        .plan-services-base {
+            background: rgba(128,103,99,0.05);
+            border-radius: 10px;
+            padding: 0.8rem 1rem;
+            margin-bottom: 0.8rem;
+        }
+        .plan-services-base p {
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--puna-cacao);
+            opacity: 0.7;
+            margin-bottom: 0.4rem;
+        }
+        .plan-services-base ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+        .plan-services-base ul li {
+            font-size: 0.8rem;
+            color: var(--puna-dark);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .plan-services-base ul li::before {
+            content: '→';
+            font-size: 0.7rem;
+            color: var(--puna-terracota);
+        }
+
+        /* ── Decision point ── */
+        .decision-point {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: var(--puna-verde-calma);
+            border-radius: 14px;
+            padding: 1.2rem 1.8rem;
+            margin-top: 2.5rem;
+        }
+
+        .decision-icon {
+            background: var(--puna-cacao);
+            color: var(--puna-cream);
+            width: 36px;
+            height: 36px;
+            min-width: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .decision-icon .lucide { width: 16px; height: 16px; }
+
+        .decision-point p {
+            font-size: 0.88rem;
+            color: var(--puna-dark);
+        }
+        .decision-point strong { color: var(--puna-cacao); }
+
+        /* ── Responsive ── */
+        @media (max-width: 900px) {
+            .timeline::before { display: none; }
+            .phase { grid-template-columns: 1fr; }
+            .phase-marker { flex-direction: row; padding: 1.4rem 1.5rem 0; }
+            .e1-items { grid-template-columns: 1fr 1fr; }
+            .resp-grid { grid-template-columns: 1fr; }
+            .planes-grid { grid-template-columns: 1fr 1fr; }
+            .phase-header { grid-template-columns: 1fr; }
+            .fee-box { text-align: left; }
+        }
+
+        @media (max-width: 600px) {
+            .e1-items { grid-template-columns: 1fr; }
+            .planes-grid { grid-template-columns: 1fr; }
+            .payment-strip { flex-direction: column; gap: 1rem; }
+            .pstrip-divider { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Propuesta banner -->
+    <div class="prop-banner">
+        <span><strong>Propuesta A</strong> — Timeline por Fases · Diseño de sección para Franquicia Puna</span>
+        <nav class="prop-nav">
+            <a href="etapas_propuesta_A.html" class="current">A — Timeline</a>
+            <a href="etapas_propuesta_B.html">B — Tablero</a>
+            <a href="etapas_propuesta_C.html">C — Journey</a>
+        </nav>
+    </div>
+
+    <div class="page-section">
+        <span class="section-label">03 — Consultoría &amp; Expansión</span>
+        <h2 class="section-title">Nuestro modelo de<br>acompañamiento en 3 etapas</h2>
+        <p class="section-desc">Un proceso transparente, con fees claros y compromisos definidos en cada paso. Vos decidís si seguir avanzando después de la Etapa 1.</p>
+
+        <div class="timeline">
+
+            <!-- ═══ ETAPA 1 ═══ -->
+            <div class="phase">
+                <div class="phase-marker">
+                    <div class="phase-num">1</div>
+                </div>
+                <div class="phase-card">
+                    <div class="phase-header">
+                        <div>
+                            <div class="phase-tag">Etapa 1 · Diagnóstico</div>
+                            <div class="phase-name">Inspección & Plan de Inversión</div>
+                            <p class="phase-desc">Analizamos el local elegido y elaboramos un plan de inversión personalizado con todos los costos reales del proyecto.</p>
+                            <div class="payment-row">
+                                <span class="payment-pill"><i data-lucide="calendar-check"></i>Pago único al contratar</span>
+                                <span class="payment-pill"><i data-lucide="file-text"></i>Entregable con Plan de Inversión</span>
+                                <span class="payment-pill"><i data-lucide="refresh-cw"></i>Hasta 2 cambios de local sin costo</span>
+                            </div>
+                        </div>
+                        <div class="fee-box">
+                            <span class="fee-tag">Fee Etapa 1</span>
+                            <div class="fee-amount">$500.000</div>
+                            <span class="fee-sub">pago único · descontable en E2</span>
+                        </div>
+                    </div>
+                    <div class="phase-body">
+                        <div class="e1-items">
+                            <div class="e1-item">
+                                <div class="e1-item-icon"><i data-lucide="map-pin"></i></div>
+                                <p>Análisis completo del local propuesto: dimensiones, estado, potencial</p>
+                            </div>
+                            <div class="e1-item">
+                                <div class="e1-item-icon"><i data-lucide="calculator"></i></div>
+                                <p>Proyección E2E: inversión total hasta apertura con desglose por ítem</p>
+                            </div>
+                            <div class="e1-item">
+                                <div class="e1-item-icon"><i data-lucide="trending-up"></i></div>
+                                <p>Costos operativos + ingresos estimados del espacio una vez abierto</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══ ETAPA 2 ═══ -->
+            <div class="phase">
+                <div class="phase-marker">
+                    <div class="phase-num">2</div>
+                </div>
+                <div class="phase-card">
+                    <div class="phase-header">
+                        <div>
+                            <div class="phase-tag">Etapa 2 · Ejecución</div>
+                            <div class="phase-name">Ejecución del Plan de Inversión</div>
+                            <p class="phase-desc">PUNA toma la conducción del proyecto de apertura. Según tipo de ítem, asumimos rol de <strong>ejecutores directos</strong> o de <strong>asesores</strong> acompañando al franquiciado.</p>
+                            <div class="payment-row">
+                                <span class="payment-pill"><i data-lucide="split-square-horizontal"></i>50% al inicio del proyecto</span>
+                                <span class="payment-pill"><i data-lucide="flag"></i>50% a la apertura</span>
+                                <span class="payment-pill"><i data-lucide="minus-circle"></i>$500k de E1 se descuentan</span>
+                            </div>
+                        </div>
+                        <div class="fee-box">
+                            <span class="fee-tag">Fee Etapa 2</span>
+                            <div class="fee-amount">10%</div>
+                            <span class="fee-sub">del Plan de Inversión total</span>
+                        </div>
+                    </div>
+                    <div class="phase-body">
+                        <p class="e2-resp-header">¿Quién hace qué? — Responsabilidades PUNA</p>
+                        <div class="resp-grid">
+
+                            <!-- PUNA ASESORA -->
+                            <div class="resp-col resp-col--asesora">
+                                <div class="resp-col-header">
+                                    <i data-lucide="compass"></i>
+                                    PUNA Asesora & Acompaña
+                                    <span class="resp-col-note">coordina, no ejectua</span>
+                                </div>
+                                <div class="resp-items">
+                                    <div class="resp-category">
+                                        <span class="resp-cat-label cat-inmueble">Inmueble</span>
+                                        <ul class="resp-item-list">
+                                            <li>Alquiler del local</li>
+                                            <li>Gastos de inmobiliaria</li>
+                                            <li>Depósito de garantía</li>
+                                        </ul>
+                                    </div>
+                                    <p style="font-size:0.79rem; color:var(--puna-dark); opacity:0.65; margin-top:0.6rem; font-style:italic;">La búsqueda y contratación del inmueble queda a nombre del franquiciado. PUNA asiste en evaluación y negociación.</p>
+                                </div>
+                            </div>
+
+                            <!-- PUNA EJECUTA -->
+                            <div class="resp-col resp-col--ejecuta">
+                                <div class="resp-col-header">
+                                    <i data-lucide="zap"></i>
+                                    PUNA Ejecuta Directamente
+                                    <span class="resp-col-note" style="color:var(--puna-cream);">gestión end-to-end</span>
+                                </div>
+                                <div class="resp-items">
+                                    <div class="resp-category">
+                                        <span class="resp-cat-label cat-inmueble">Inmueble</span>
+                                        <ul class="resp-item-list">
+                                            <li>Remodelación del local</li>
+                                        </ul>
+                                    </div>
+                                    <div class="resp-category">
+                                        <span class="resp-cat-label cat-legal">Legal-Administrativo</span>
+                                        <ul class="resp-item-list">
+                                            <li>Habilitación comercial</li>
+                                            <li>Constitución de sociedad (SRL / Monotributo)</li>
+                                        </ul>
+                                    </div>
+                                    <div class="resp-category">
+                                        <span class="resp-cat-label cat-equip">Equipamiento</span>
+                                        <ul class="resp-item-list">
+                                            <li>8 Camas de tratamiento</li>
+                                            <li>Accesorios de práctica</li>
+                                            <li>Climatización (frío/calor)</li>
+                                            <li>Mobiliario completo</li>
+                                            <li>Uniformes del equipo</li>
+                                        </ul>
+                                    </div>
+                                    <div class="resp-category">
+                                        <span class="resp-cat-label cat-comercial">Comercial</span>
+                                        <ul class="resp-item-list">
+                                            <li>Apertura + pauta digital de lanzamiento</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="payment-strip">
+                            <div class="pstrip-item">
+                                <span class="ps-label">Base de cálculo</span>
+                                <span class="ps-val">Total del Plan E1</span>
+                            </div>
+                            <div class="pstrip-divider"></div>
+                            <div class="pstrip-item">
+                                <span class="ps-label">Fee</span>
+                                <span class="ps-val">10% del total</span>
+                            </div>
+                            <div class="pstrip-divider"></div>
+                            <div class="pstrip-item">
+                                <span class="ps-label">Descuento E1</span>
+                                <span class="ps-val">− $500.000</span>
+                            </div>
+                            <div class="pstrip-divider"></div>
+                            <div class="pstrip-item">
+                                <span class="ps-label">Pago 1 (inicio)</span>
+                                <span class="ps-val">50% al firmar</span>
+                            </div>
+                            <div class="pstrip-divider"></div>
+                            <div class="pstrip-item">
+                                <span class="ps-label">Pago 2 (apertura)</span>
+                                <span class="ps-val">50% al abrir</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══ ETAPA 3 ═══ -->
+            <div class="phase">
+                <div class="phase-marker">
+                    <div class="phase-num">3</div>
+                </div>
+                <div class="phase-card">
+                    <div class="phase-header">
+                        <div>
+                            <div class="phase-tag">Etapa 3 · Franquicia Activa</div>
+                            <div class="phase-name">Operación con Soporte PUNA</div>
+                            <p class="phase-desc">Desde la apertura, tu espacio opera bajo la marca PUNA con acceso a plataforma tecnológica, soporte operativo continuo y servicios adicionales según el plan elegido.</p>
+                            <div class="payment-row">
+                                <span class="payment-pill"><i data-lucide="repeat"></i>Fee mensual recurrente</span>
+                                <span class="payment-pill"><i data-lucide="percent"></i>Según facturación del espacio</span>
+                            </div>
+                        </div>
+                        <div class="fee-box">
+                            <span class="fee-tag">Fee mensual</span>
+                            <div class="fee-amount">Planes</div>
+                            <span class="fee-sub">según dimensión y servicios</span>
+                        </div>
+                    </div>
+                    <div class="phase-body">
+                        <p class="planes-note">Todos los planes incluyen los cuatro servicios base. Los planes superiores agregan módulos de gestión y acompañamiento:</p>
+
+                        <div class="planes-grid">
+
+                            <!-- Plan Esencial -->
+                            <div class="plan-card">
+                                <div class="plan-head">
+                                    <div class="plan-name">Esencial</div>
+                                    <div class="plan-fee">Base</div>
+                                    <span class="plan-fee-note">fee mínimo mensual</span>
+                                </div>
+                                <div class="plan-body">
+                                    <div class="plan-services-base">
+                                        <p>Siempre incluido</p>
+                                        <ul>
+                                            <li>Licencia de marca PUNA</li>
+                                            <li>Web propia del espacio</li>
+                                            <li>APP gestión interna + APP clientes</li>
+                                            <li>Soporte operativo base</li>
+                                        </ul>
+                                    </div>
+                                    <ul class="plan-features">
+                                        <li>
+                                            <span class="feat-check feat-check--yes"></span>
+                                            <span class="feat-included">Acceso a manuales y protocolos PUNA</span>
+                                        </li>
+                                        <li>
+                                            <span class="feat-check feat-check--no"></span>
+                                            <span class="feat-excluded">Gestión de redes sociales</span>
+                                        </li>
+                                        <li>
+                                            <span class="feat-check feat-check--no"></span>
+                                            <span class="feat-excluded">Asesoría contable-impositiva</span>
+                                        </li>
+                                        <li>
+                                            <span class="feat-check feat-check--no"></span>
+                                            <span class="feat-excluded">Consultoría RRHH y formación</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Plan Crecimiento -->
+                            <div class="plan-card">
+                                <div class="plan-head">
+                                    <div class="plan-name">Crecimiento</div>
+                                    <div class="plan-fee">+Redes</div>
+                                    <span class="plan-fee-note">fee intermedio mensual</span>
+                                </div>
+                                <div class="plan-body">
+                                    <div class="plan-services-base">
+                                        <p>Siempre incluido</p>
+                                        <ul>
+                                            <li>Licencia de marca PUNA</li>
+                                            <li>Web propia del espacio</li>
+                                            <li>APP gestión interna + APP clientes</li>
+                                            <li>Soporte operativo base</li>
+                                        </ul>
+                                    </div>
+                                    <ul class="plan-features">
+                                        <li>
+                                            <span class="feat-check feat-check--yes"></span>
+                                            <span class="feat-included">Acceso a manuales y protocolos PUNA</span>
+                                        </li>
+                                        <li>
+                                            <span class="feat-check feat-check--yes"></span>
+                                            <span class="feat-included">Gestión de redes sociales</span>
+                                        </li>
+                                        <li>
+                                            <span class="feat-check feat-check--yes"></span>
+                                            <span class="feat-included">Asesoría contable-impositiva</span>
+                                        </li>
+                                        <li>
+                                            <span class="feat-check feat-check--no"></span>
+                                            <span class="feat-excluded">Consultoría RRHH y formación</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Plan Full -->
+                            <div class="plan-card">
+                                <div class="plan-head">
+                                    <div class="plan-name">Full</div>
+                                    <div class="plan-fee">Todo</div>
+                                    <span class="plan-fee-note">fee completo mensual</span>
+                                </div>
+                                <div class="plan-body">
+                                    <div class="plan-services-base">
+                                        <p>Siempre incluido</p>
+                                        <ul>
+                                            <li>Licencia de marca PUNA</li>
+                                            <li>Web propia del espacio</li>
+                                            <li>APP gestión interna + APP clientes</li>
+                                            <li>Soporte operativo base</li>
+                                        </ul>
+                                    </div>
+                                    <ul class="plan-features">
+                                        <li>
+                                            <span class="feat-check feat-check--yes"></span>
+                                            <span class="feat-included">Acceso a manuales y protocolos PUNA</span>
+                                        </li>
+                                        <li>
+                                            <span class="feat-check feat-check--yes"></span>
+                                            <span class="feat-included">Gestión de redes sociales</span>
+                                        </li>
+                                        <li>
+                                            <span class="feat-check feat-check--yes"></span>
+                                            <span class="feat-included">Asesoría contable-impositiva</span>
+                                        </li>
+                                        <li>
+                                            <span class="feat-check feat-check--yes"></span>
+                                            <span class="feat-included">Consultoría RRHH y formación</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /timeline -->
+
+        <!-- Decision point -->
+        <div class="decision-point">
+            <div class="decision-icon"><i data-lucide="git-branch"></i></div>
+            <p><strong>Punto de decisión clave:</strong> Tras la Etapa 1 recibís el Plan de Inversión completo. Si decidís no avanzar, solo abonás los $500.000 del análisis. Sin compromisos adicionales.</p>
+        </div>
+
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
