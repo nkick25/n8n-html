@@ -350,8 +350,8 @@
 
         .e1-row p { font-size: 0.83rem; line-height: 1.5; }
 
-        /* ── Etapa 3: feature matrix + plans ── */
-        .e3-split {
+        /* ── Etapa 3: feature matrix (Full) ── */
+        .e3-full-layout {
             display: grid;
             grid-template-columns: 1fr 1.7fr;
             gap: 2.5rem;
@@ -377,13 +377,13 @@
 
         .matrix-head {
             display: grid;
-            grid-template-columns: 1.4fr repeat(3, 1fr);
+            grid-template-columns: 1.6fr 1fr;
             background: var(--puna-cacao);
             color: var(--puna-cream);
         }
 
         .matrix-head div {
-            padding: 0.7rem 0.8rem;
+            padding: 0.7rem 1rem;
             font-size: 0.7rem;
             font-weight: 700;
             text-align: center;
@@ -394,7 +394,7 @@
 
         .matrix-row {
             display: grid;
-            grid-template-columns: 1.4fr repeat(3, 1fr);
+            grid-template-columns: 1.6fr 1fr;
             border-bottom: 1px solid rgba(128,103,99,0.07);
             transition: background 0.15s;
         }
@@ -402,7 +402,7 @@
         .matrix-row:hover { background: rgba(128,103,99,0.04); }
 
         .matrix-row div {
-            padding: 0.65rem 0.8rem;
+            padding: 0.65rem 1rem;
             font-size: 0.8rem;
             text-align: center;
             display: flex;
@@ -433,77 +433,7 @@
         }
         .check-yes::after { content: '✓'; font-size: 0.65rem; font-weight: 800; color: var(--puna-dark); }
 
-        .check-no {
-            width: 20px;
-            height: 20px;
-            background: transparent;
-            border: 1.5px solid rgba(128,103,99,0.18);
-            border-radius: 50%;
-        }
-
-        /* Plans cost strip */
-        .plans-cost-strip {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .cost-card {
-            border-radius: 14px;
-            overflow: hidden;
-            border: 1px solid rgba(128,103,99,0.1);
-            text-align: center;
-        }
-
-        .cost-card-head {
-            padding: 1rem;
-        }
-
-        .cost-card:nth-child(1) .cost-card-head { background: var(--puna-soft); }
-        .cost-card:nth-child(2) .cost-card-head { background: var(--puna-cacao); }
-        .cost-card:nth-child(3) .cost-card-head { background: var(--puna-dark); }
-
-        .cost-name {
-            font-size: 0.72rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            display: block;
-            margin-bottom: 0.4rem;
-        }
-        .cost-card:nth-child(1) .cost-name { color: var(--puna-cacao); }
-        .cost-card:nth-child(2) .cost-name { color: var(--puna-durazno); }
-        .cost-card:nth-child(3) .cost-name { color: var(--puna-mauve); }
-
-        .cost-amount {
-            font-size: 1.6rem;
-            font-weight: 800;
-            display: block;
-        }
-        .cost-card:nth-child(1) .cost-amount { color: var(--puna-cacao); }
-        .cost-card:nth-child(2) .cost-amount { color: var(--puna-cream); }
-        .cost-card:nth-child(3) .cost-amount { color: var(--puna-cream); }
-
-        .cost-note {
-            font-size: 0.72rem;
-            display: block;
-            margin-top: 0.2rem;
-        }
-        .cost-card:nth-child(1) .cost-note { color: var(--puna-dark); opacity: 0.6; }
-        .cost-card:nth-child(2) .cost-note { color: var(--puna-cream); opacity: 0.7; }
-        .cost-card:nth-child(3) .cost-note { color: var(--puna-cream); opacity: 0.7; }
-
-        .cost-card-body {
-            padding: 0.7rem 1rem;
-            background: var(--puna-white);
-            font-size: 0.76rem;
-            color: var(--puna-dark);
-            opacity: 0.75;
-            line-height: 1.4;
-        }
-
-        /* what's always included note */
+        /* always-included note */
         .always-included {
             background: linear-gradient(135deg, rgba(198,205,188,0.25) 0%, rgba(234,222,213,0.25) 100%);
             border: 1px solid rgba(128,103,99,0.1);
@@ -569,13 +499,12 @@
         /* ── Responsive ── */
         @media (max-width: 900px) {
             .stage-two-col { grid-template-columns: 1fr; }
-            .e3-split { grid-template-columns: 1fr; }
+            .e3-full-layout { grid-template-columns: 1fr; }
             .stage-tabs { flex-direction: column; border-radius: 12px; border-bottom: 1px solid rgba(128,103,99,0.12); }
             .stage-tab { border-right: none; border-bottom: 1px solid rgba(128,103,99,0.1); }
             .stage-panel { border-radius: 12px; }
-            .plans-cost-strip { grid-template-columns: 1fr; }
             .e1-grid { grid-template-columns: 1fr; }
-            .matrix-head, .matrix-row { grid-template-columns: 2fr 1fr 1fr 1fr; }
+            .stage-inner { padding: 1.5rem; }
         }
     </style>
 </head>
@@ -611,7 +540,7 @@
             <div class="stage-tab" data-panel="panel3">
                 <div class="tab-num">Etapa 3 · Franquicia</div>
                 <div class="tab-title">Operación Continua</div>
-                <span class="tab-fee">Planes</span>
+                <span class="tab-fee">Mensual</span>
             </div>
         </div>
 
@@ -723,7 +652,7 @@
                                     </tr>
                                     <tr class="cat-row"><td colspan="3">EQUIPAMIENTO</td></tr>
                                     <tr class="cat-band-equip">
-                                        <td>8 Camas de tratamiento</td>
+                                        <td>Camas Reformer (Pilates)</td>
                                         <td>Equipamiento</td>
                                         <td><span class="badge badge--ejecuta">PUNA Ejecuta</span></td>
                                     </tr>
@@ -765,102 +694,54 @@
         <!-- ── PANEL 3 ── -->
         <div class="stage-panel" id="panel3" style="display:none;">
             <div class="stage-inner">
-                <div class="e3-split">
+                <div class="e3-full-layout">
                     <div class="stage-summary">
                         <div class="fee-card-b dark">
                             <span class="fc-label">Fee mensual recurrente</span>
-                            <div class="fc-amount">Planes</div>
-                            <span class="fc-sub">desde la apertura · según facturación</span>
+                            <div class="fc-amount">Full</div>
+                            <span class="fc-sub">desde la apertura · todos los servicios</span>
                         </div>
                         <h3>Franquicia Activa con Soporte PUNA</h3>
-                        <p>Una vez abierto el espacio, la relación con PUNA pasa a ser de franquicia operativa. El fee mensual cubre el acceso a la marca, plataforma tecnológica y servicios de soporte según el plan elegido.</p>
-                        <div class="always-included">
-                            <p>Siempre incluido en todos los planes</p>
-                            <ul>
-                                <li>Licencia de marca PUNA</li>
-                                <li>Web propia del espacio</li>
-                                <li>APP gestión interna</li>
-                                <li>APP clientes (reservas)</li>
-                                <li>Soporte operativo base</li>
-                                <li>Manuales y protocolos</li>
-                            </ul>
-                        </div>
+                        <p>Una vez abierto el espacio, operás bajo la marca PUNA con acceso a la plataforma tecnológica, soporte operativo continuo y todos los servicios de acompañamiento activos desde el día uno.</p>
                         <ul class="conditions">
-                            <li class="positive"><i data-lucide="check-circle"></i>Política de acompañamiento para el inicio operativo</li>
-                            <li class="positive"><i data-lucide="check-circle"></i>Revisión del plan al cumplir 3 meses</li>
+                            <li class="positive"><i data-lucide="check-circle"></i>Fee mensual según facturación del espacio</li>
+                            <li class="positive"><i data-lucide="check-circle"></i>Política de acompañamiento en el inicio operativo</li>
+                            <li class="positive"><i data-lucide="check-circle"></i>Revisión del acuerdo al cumplir 3 meses</li>
                         </ul>
                     </div>
                     <div>
-                        <p class="matrix-title">Servicios adicionales por plan</p>
-
-                        <div class="plans-cost-strip">
-                            <div class="cost-card">
-                                <div class="cost-card-head">
-                                    <span class="cost-name">Esencial</span>
-                                    <span class="cost-amount">Base</span>
-                                    <span class="cost-note">fee mínimo mensual</span>
-                                </div>
-                                <div class="cost-card-body">Solo servicios base incluidos</div>
-                            </div>
-                            <div class="cost-card">
-                                <div class="cost-card-head">
-                                    <span class="cost-name">Crecimiento</span>
-                                    <span class="cost-amount">+Redes</span>
-                                    <span class="cost-note">fee intermedio mensual</span>
-                                </div>
-                                <div class="cost-card-body">Suma gestión de redes y asesoría contable</div>
-                            </div>
-                            <div class="cost-card">
-                                <div class="cost-card-head">
-                                    <span class="cost-name">Full</span>
-                                    <span class="cost-amount">Todo</span>
-                                    <span class="cost-note">fee completo mensual</span>
-                                </div>
-                                <div class="cost-card-body">Todos los servicios activos y RRHH</div>
-                            </div>
-                        </div>
-
+                        <p class="matrix-title">Servicios incluidos en el Fee Mensual</p>
                         <div class="feature-matrix">
                             <div class="matrix-head">
-                                <div>Servicio adicional</div>
-                                <div>Esencial</div>
-                                <div>Crecimiento</div>
-                                <div>Full</div>
+                                <div>Servicio</div>
+                                <div>Full ✓</div>
                             </div>
                             <div class="matrix-row base-row">
                                 <div>Licencia de marca PUNA</div>
                                 <div><span class="check-yes"></span></div>
-                                <div><span class="check-yes"></span></div>
+                            </div>
+                            <div class="matrix-row base-row">
+                                <div>Web propia del espacio</div>
                                 <div><span class="check-yes"></span></div>
                             </div>
                             <div class="matrix-row base-row">
-                                <div>Web + APP (gestión + clientes)</div>
-                                <div><span class="check-yes"></span></div>
-                                <div><span class="check-yes"></span></div>
+                                <div>APP gestión interna + APP clientes</div>
                                 <div><span class="check-yes"></span></div>
                             </div>
                             <div class="matrix-row base-row">
-                                <div>Soporte operativo + manuales</div>
-                                <div><span class="check-yes"></span></div>
-                                <div><span class="check-yes"></span></div>
+                                <div>Soporte operativo y manuales PUNA</div>
                                 <div><span class="check-yes"></span></div>
                             </div>
                             <div class="matrix-row">
                                 <div>Gestión de redes sociales</div>
-                                <div><span class="check-no"></span></div>
-                                <div><span class="check-yes"></span></div>
                                 <div><span class="check-yes"></span></div>
                             </div>
                             <div class="matrix-row">
                                 <div>Asesoría contable-impositiva</div>
-                                <div><span class="check-no"></span></div>
-                                <div><span class="check-yes"></span></div>
                                 <div><span class="check-yes"></span></div>
                             </div>
                             <div class="matrix-row">
                                 <div>Consultoría RRHH y capacitación</div>
-                                <div><span class="check-no"></span></div>
-                                <div><span class="check-no"></span></div>
                                 <div><span class="check-yes"></span></div>
                             </div>
                         </div>
