@@ -209,10 +209,7 @@
 
   <form id="quizForm">
 
-    <!-- MINE -->
-    <div class="section-title">mine</div>
-
-    <div class="exercise">
+  <div class="exercise">
       <span class="num">1.</span>
       That red backpack is
       <select data-answer="mine" id="q1">
@@ -221,6 +218,8 @@
         <option>yours</option>
         <option>his</option>
         <option>hers</option>
+        <option>ours</option>
+        <option>theirs</option>
       </select>
       . I bought it last week.
       <span class="feedback" id="f1"></span>
@@ -231,17 +230,16 @@
       The dog in the garden is
       <select data-answer="mine" id="q2">
         <option value="">— choose —</option>
+        <option>mine</option>
+        <option>yours</option>
+        <option>his</option>
+        <option>hers</option>
         <option>ours</option>
         <option>theirs</option>
-        <option>mine</option>
-        <option>hers</option>
       </select>
       . His name is Coco.
       <span class="feedback" id="f2"></span>
     </div>
-
-    <!-- YOURS -->
-    <div class="section-title">yours</div>
 
     <div class="exercise">
       <span class="num">3.</span>
@@ -250,8 +248,10 @@
         <option value="">— choose —</option>
         <option>mine</option>
         <option>yours</option>
-        <option>theirs</option>
+        <option>his</option>
+        <option>hers</option>
         <option>ours</option>
+        <option>theirs</option>
       </select>
       ? I found it on the bench.
       <span class="feedback" id="f3"></span>
@@ -262,27 +262,28 @@
       The bicycle in the garage is
       <select data-answer="yours" id="q4">
         <option value="">— choose —</option>
-        <option>his</option>
-        <option>hers</option>
         <option>mine</option>
         <option>yours</option>
+        <option>his</option>
+        <option>hers</option>
+        <option>ours</option>
+        <option>theirs</option>
       </select>
       , right?
       <span class="feedback" id="f4"></span>
     </div>
-
-    <!-- HIS -->
-    <div class="section-title">his</div>
 
     <div class="exercise">
       <span class="num">5.</span>
       That adventure book is
       <select data-answer="his" id="q5">
         <option value="">— choose —</option>
-        <option>hers</option>
-        <option>his</option>
-        <option>ours</option>
+        <option>mine</option>
         <option>yours</option>
+        <option>his</option>
+        <option>hers</option>
+        <option>ours</option>
+        <option>theirs</option>
       </select>
       . Peter left it here yesterday.
       <span class="feedback" id="f5"></span>
@@ -294,25 +295,26 @@
       <select data-answer="his" id="q6">
         <option value="">— choose —</option>
         <option>mine</option>
-        <option>theirs</option>
+        <option>yours</option>
         <option>his</option>
         <option>hers</option>
+        <option>ours</option>
+        <option>theirs</option>
       </select>
       . Tom forgot it this morning.
       <span class="feedback" id="f6"></span>
     </div>
-
-    <!-- HERS -->
-    <div class="section-title">hers</div>
 
     <div class="exercise">
       <span class="num">7.</span>
       That folder with the drawings is
       <select data-answer="hers" id="q7">
         <option value="">— choose —</option>
-        <option>ours</option>
+        <option>mine</option>
+        <option>yours</option>
         <option>his</option>
         <option>hers</option>
+        <option>ours</option>
         <option>theirs</option>
       </select>
       . Lucy brought it today.
@@ -325,26 +327,27 @@
       <select data-answer="hers" id="q8">
         <option value="">— choose —</option>
         <option>mine</option>
-        <option>hers</option>
         <option>yours</option>
         <option>his</option>
+        <option>hers</option>
+        <option>ours</option>
+        <option>theirs</option>
       </select>
       .
       <span class="feedback" id="f8"></span>
     </div>
-
-    <!-- OURS -->
-    <div class="section-title">ours</div>
 
     <div class="exercise">
       <span class="num">9.</span>
       That dog is
       <select data-answer="ours" id="q9">
         <option value="">— choose —</option>
-        <option>theirs</option>
-        <option>ours</option>
         <option>mine</option>
         <option>yours</option>
+        <option>his</option>
+        <option>hers</option>
+        <option>ours</option>
+        <option>theirs</option>
       </select>
       . We adopted him two years ago.
       <span class="feedback" id="f9"></span>
@@ -355,6 +358,8 @@
       The house on the corner is
       <select data-answer="ours" id="q10">
         <option value="">— choose —</option>
+        <option>mine</option>
+        <option>yours</option>
         <option>his</option>
         <option>hers</option>
         <option>ours</option>
@@ -364,17 +369,16 @@
       <span class="feedback" id="f10"></span>
     </div>
 
-    <!-- THEIRS -->
-    <div class="section-title">theirs</div>
-
     <div class="exercise">
       <span class="num">11.</span>
       Those notebooks are
       <select data-answer="theirs" id="q11">
         <option value="">— choose —</option>
-        <option>ours</option>
-        <option>yours</option>
         <option>mine</option>
+        <option>yours</option>
+        <option>his</option>
+        <option>hers</option>
+        <option>ours</option>
         <option>theirs</option>
       </select>
       . The other class left them here.
@@ -386,10 +390,12 @@
       The sneakers at the door are
       <select data-answer="theirs" id="q12">
         <option value="">— choose —</option>
-        <option>hers</option>
-        <option>theirs</option>
-        <option>ours</option>
+        <option>mine</option>
+        <option>yours</option>
         <option>his</option>
+        <option>hers</option>
+        <option>ours</option>
+        <option>theirs</option>
       </select>
       . They left them when they came in.
       <span class="feedback" id="f12"></span>
