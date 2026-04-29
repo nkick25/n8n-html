@@ -395,7 +395,7 @@
       <span class="feedback" id="f12"></span>
     </div>
 
-    <button type="button" class="btn-submit" id="submitBtn" onclick="evaluate()">Check My Answers</button>
+    <button type="button" class="btn-submit" id="submitBtn" onclick="checkAnswers()">Check My Answers</button>
     <button type="button" class="btn-retry"  id="retryBtn"  onclick="reset()">Try Again</button>
 
     <div class="result-box" id="resultBox">
@@ -409,7 +409,7 @@
 <script>
   const total = 12;
 
-  function evaluate() {
+  function checkAnswers() {
     const selects = document.querySelectorAll('select[data-answer]');
     let unanswered = false;
 
