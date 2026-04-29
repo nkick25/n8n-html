@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Possessive Pronouns Quiz</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f4ff;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 24px 16px 48px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+      max-width: 680px;
+      width: 100%;
+      padding: 36px 32px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .header .badge {
+      display: inline-block;
+      background: #e8eeff;
+      color: #3a5bd9;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+
+    .header h1 {
+      font-size: 1.8rem;
+      color: #1a1a2e;
+      font-weight: 700;
+    }
+
+    .header p {
+      color: #666;
+      margin-top: 8px;
+      font-size: 0.95rem;
+    }
+
+    .section-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #3a5bd9;
+      margin: 28px 0 14px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid #e8eeff;
+    }
+
+    .exercise {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+      font-size: 1rem;
+      color: #222;
+      line-height: 1.6;
+    }
+
+    .exercise span.num {
+      font-weight: 700;
+      color: #3a5bd9;
+      min-width: 22px;
+    }
+
+    .exercise select {
+      border: 2px solid #cdd5f0;
+      border-radius: 8px;
+      padding: 4px 10px;
+      font-size: 0.95rem;
+      color: #222;
+      background: #f7f9ff;
+      cursor: pointer;
+      outline: none;
+      transition: border-color 0.2s;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%233a5bd9' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      padding-right: 30px;
+    }
+
+    .exercise select:focus {
+      border-color: #3a5bd9;
+    }
+
+    .exercise select.correct {
+      border-color: #22c55e;
+      background-color: #f0fdf4;
+      color: #15803d;
+    }
+
+    .exercise select.wrong {
+      border-color: #ef4444;
+      background-color: #fef2f2;
+      color: #b91c1c;
+    }
+
+    .exercise .feedback {
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .exercise .feedback.correct { color: #15803d; }
+    .exercise .feedback.wrong   { color: #b91c1c; }
+
+    .btn-submit {
+      display: block;
+      width: 100%;
+      margin-top: 32px;
+      padding: 14px;
+      background: #3a5bd9;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      letter-spacing: 0.5px;
+    }
+
+    .btn-submit:hover  { background: #2d49b8; }
+    .btn-submit:active { transform: scale(0.98); }
+
+    .btn-retry {
+      display: none;
+      width: 100%;
+      margin-top: 12px;
+      padding: 12px;
+      background: #fff;
+      color: #3a5bd9;
+      font-size: 0.95rem;
+      font-weight: 700;
+      border: 2px solid #3a5bd9;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-retry:hover { background: #f0f4ff; }
+
+    .result-box {
+      display: none;
+      margin-top: 28px;
+      padding: 20px 24px;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .result-box.show { display: block; }
+
+    .result-box.perfect  { background: #f0fdf4; border: 2px solid #22c55e; }
+    .result-box.good     { background: #fffbeb; border: 2px solid #f59e0b; }
+    .result-box.needwork { background: #fef2f2; border: 2px solid #ef4444; }
+
+    .result-box .score {
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .result-box.perfect  .score { color: #15803d; }
+    .result-box.good     .score { color: #b45309; }
+    .result-box.needwork .score { color: #b91c1c; }
+
+    .result-box .message {
+      font-size: 1rem;
+      color: #444;
+    }
+
+    @media (max-width: 480px) {
+      .card { padding: 24px 18px; }
+      .header h1 { font-size: 1.4rem; }
+      .exercise { font-size: 0.93rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="card">
+
+  <div class="header">
+    <div class="badge">English Quiz</div>
+    <h1>Possessive Pronouns</h1>
+    <p>Choose the correct pronoun from the dropdown in each sentence.</p>
+  </div>
+
+  <form id="quizForm">
+
+    <!-- MINE -->
+    <div class="section-title">mine</div>
+
+    <div class="exercise">
+      <span class="num">1.</span>
+      That red backpack is
+      <select data-answer="mine" id="q1">
+        <option value="">— choose —</option>
+        <option>mine</option>
+        <option>yours</option>
+        <option>his</option>
+        <option>hers</option>
+      </select>
+      . I bought it last week.
+      <span class="feedback" id="f1"></span>
+    </div>
+
+    <div class="exercise">
+      <span class="num">2.</span>
+      The dog in the garden is
+      <select data-answer="mine" id="q2">
+        <option value="">— choose —</option>
+        <option>ours</option>
+        <option>theirs</option>
+        <option>mine</option>
+        <option>hers</option>
+      </select>
+      . His name is Coco.
+      <span class="feedback" id="f2"></span>
+    </div>
+
+    <!-- YOURS -->
+    <div class="section-title">yours</div>
+
+    <div class="exercise">
+      <span class="num">3.</span>
+      Is this blue jacket
+      <select data-answer="yours" id="q3">
+        <option value="">— choose —</option>
+        <option>mine</option>
+        <option>yours</option>
+        <option>theirs</option>
+        <option>ours</option>
+      </select>
+      ? I found it on the bench.
+      <span class="feedback" id="f3"></span>
+    </div>
+
+    <div class="exercise">
+      <span class="num">4.</span>
+      The bicycle in the garage is
+      <select data-answer="yours" id="q4">
+        <option value="">— choose —</option>
+        <option>his</option>
+        <option>hers</option>
+        <option>mine</option>
+        <option>yours</option>
+      </select>
+      , right?
+      <span class="feedback" id="f4"></span>
+    </div>
+
+    <!-- HIS -->
+    <div class="section-title">his</div>
+
+    <div class="exercise">
+      <span class="num">5.</span>
+      That adventure book is
+      <select data-answer="his" id="q5">
+        <option value="">— choose —</option>
+        <option>hers</option>
+        <option>his</option>
+        <option>ours</option>
+        <option>yours</option>
+      </select>
+      . Peter left it here yesterday.
+      <span class="feedback" id="f5"></span>
+    </div>
+
+    <div class="exercise">
+      <span class="num">6.</span>
+      The blue pencil case is
+      <select data-answer="his" id="q6">
+        <option value="">— choose —</option>
+        <option>mine</option>
+        <option>theirs</option>
+        <option>his</option>
+        <option>hers</option>
+      </select>
+      . Tom forgot it this morning.
+      <span class="feedback" id="f6"></span>
+    </div>
+
+    <!-- HERS -->
+    <div class="section-title">hers</div>
+
+    <div class="exercise">
+      <span class="num">7.</span>
+      That folder with the drawings is
+      <select data-answer="hers" id="q7">
+        <option value="">— choose —</option>
+        <option>ours</option>
+        <option>his</option>
+        <option>hers</option>
+        <option>theirs</option>
+      </select>
+      . Lucy brought it today.
+      <span class="feedback" id="f7"></span>
+    </div>
+
+    <div class="exercise">
+      <span class="num">8.</span>
+      The pink notebook on the desk is
+      <select data-answer="hers" id="q8">
+        <option value="">— choose —</option>
+        <option>mine</option>
+        <option>hers</option>
+        <option>yours</option>
+        <option>his</option>
+      </select>
+      .
+      <span class="feedback" id="f8"></span>
+    </div>
+
+    <!-- OURS -->
+    <div class="section-title">ours</div>
+
+    <div class="exercise">
+      <span class="num">9.</span>
+      That dog is
+      <select data-answer="ours" id="q9">
+        <option value="">— choose —</option>
+        <option>theirs</option>
+        <option>ours</option>
+        <option>mine</option>
+        <option>yours</option>
+      </select>
+      . We adopted him two years ago.
+      <span class="feedback" id="f9"></span>
+    </div>
+
+    <div class="exercise">
+      <span class="num">10.</span>
+      The house on the corner is
+      <select data-answer="ours" id="q10">
+        <option value="">— choose —</option>
+        <option>his</option>
+        <option>hers</option>
+        <option>ours</option>
+        <option>theirs</option>
+      </select>
+      . We have lived there forever.
+      <span class="feedback" id="f10"></span>
+    </div>
+
+    <!-- THEIRS -->
+    <div class="section-title">theirs</div>
+
+    <div class="exercise">
+      <span class="num">11.</span>
+      Those notebooks are
+      <select data-answer="theirs" id="q11">
+        <option value="">— choose —</option>
+        <option>ours</option>
+        <option>yours</option>
+        <option>mine</option>
+        <option>theirs</option>
+      </select>
+      . The other class left them here.
+      <span class="feedback" id="f11"></span>
+    </div>
+
+    <div class="exercise">
+      <span class="num">12.</span>
+      The sneakers at the door are
+      <select data-answer="theirs" id="q12">
+        <option value="">— choose —</option>
+        <option>hers</option>
+        <option>theirs</option>
+        <option>ours</option>
+        <option>his</option>
+      </select>
+      . They left them when they came in.
+      <span class="feedback" id="f12"></span>
+    </div>
+
+    <button type="button" class="btn-submit" id="submitBtn" onclick="evaluate()">Check My Answers</button>
+    <button type="button" class="btn-retry"  id="retryBtn"  onclick="reset()">Try Again</button>
+
+    <div class="result-box" id="resultBox">
+      <div class="score" id="resultScore"></div>
+      <div class="message" id="resultMessage"></div>
+    </div>
+
+  </form>
+</div>
+
+<script>
+  const total = 12;
+
+  function evaluate() {
+    const selects = document.querySelectorAll('select[data-answer]');
+    let unanswered = false;
+
+    selects.forEach(sel => {
+      if (sel.value === '') unanswered = true;
+    });
+
+    if (unanswered) {
+      alert('Please answer all questions before checking! 😊');
+      return;
+    }
+
+    let correct = 0;
+
+    selects.forEach((sel, i) => {
+      const num = i + 1;
+      const feedback = document.getElementById('f' + num);
+      sel.disabled = true;
+
+      if (sel.value === sel.dataset.answer) {
+        sel.classList.add('correct');
+        feedback.textContent = '✓';
+        feedback.className = 'feedback correct';
+        correct++;
+      } else {
+        sel.classList.add('wrong');
+        feedback.textContent = '✗ → ' + sel.dataset.answer;
+        feedback.className = 'feedback wrong';
+      }
+    });
+
+    const box = document.getElementById('resultBox');
+    const score = document.getElementById('resultScore');
+    const message = document.getElementById('resultMessage');
+
+    score.textContent = correct + ' / ' + total;
+
+    if (correct === total) {
+      box.className = 'result-box show perfect';
+      message.textContent = '🎉 Perfect score! Amazing work!';
+    } else if (correct >= 9) {
+      box.className = 'result-box show good';
+      message.textContent = '👍 Great job! Review the ones in red and you\'ll get them next time.';
+    } else {
+      box.className = 'result-box show needwork';
+      message.textContent = '📚 Keep practicing! Try again and you\'ll do better.';
+    }
+
+    document.getElementById('submitBtn').style.display = 'none';
+    document.getElementById('retryBtn').style.display = 'block';
+  }
+
+  function reset() {
+    const selects = document.querySelectorAll('select[data-answer]');
+    selects.forEach((sel, i) => {
+      const num = i + 1;
+      sel.value = '';
+      sel.disabled = false;
+      sel.className = '';
+      const feedback = document.getElementById('f' + num);
+      feedback.textContent = '';
+      feedback.className = 'feedback';
+    });
+
+    document.getElementById('resultBox').className = 'result-box';
+    document.getElementById('submitBtn').style.display = 'block';
+    document.getElementById('retryBtn').style.display = 'none';
+  }
+</script>
+</body>
+</html>
