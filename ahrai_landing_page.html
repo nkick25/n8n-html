@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>AHRAI Automation | Réplica HTML</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+	<style>
+		:root {
+			--bg: #050505;
+			--bg-soft: #101010;
+			--text: #ffffff;
+			--muted: #d2d2d2;
+			--accent: #bada55;
+			--accent-dark: #93b631;
+			--line: rgba(255,255,255,0.12);
+			--max: 1180px;
+			--radius: 20px;
+			--shadow: 0 16px 45px rgba(0, 0, 0, 0.28);
+		}
+
+		* { box-sizing: border-box; }
+
+		html, body {
+			margin: 0;
+			padding: 0;
+			background: radial-gradient(circle at 10% 0%, #1d1d1d 0%, var(--bg) 48%) fixed;
+			color: var(--text);
+			font-family: Manrope, sans-serif;
+			overflow-x: hidden;
+		}
+
+		a { color: inherit; text-decoration: none; }
+
+		.container {
+			width: min(var(--max), 92vw);
+			margin-inline: auto;
+		}
+
+		.header {
+			position: sticky;
+			top: 0;
+			z-index: 50;
+			backdrop-filter: blur(12px);
+			background: linear-gradient(to bottom, rgba(5,5,5,0.88), rgba(5,5,5,0.55));
+			border-bottom: 1px solid var(--line);
+		}
+
+		.header-inner {
+			min-height: 88px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 1rem;
+		}
+
+		.brand {
+			display: flex;
+			align-items: center;
+			gap: 0.75rem;
+		}
+
+		.brand img {
+			width: 56px;
+			height: 56px;
+			border-radius: 12px;
+			object-fit: cover;
+		}
+
+		.brand-text {
+			line-height: 1.05;
+			font-size: 0.95rem;
+			color: #f5f5f5;
+			letter-spacing: -0.02em;
+		}
+
+		.nav {
+			display: flex;
+			align-items: center;
+			gap: 1.2rem;
+			font-size: 0.95rem;
+			color: #f0f0f0;
+		}
+
+		.nav a {
+			padding: 0.4rem 0.2rem;
+			border-bottom: 2px solid transparent;
+			transition: border-color 180ms ease;
+		}
+
+		.nav a:hover { border-color: var(--accent); }
+
+		.hero {
+			padding: 4.5rem 0 2.2rem;
+			position: relative;
+			isolation: isolate;
+		}
+
+		.hero::before {
+			content: "";
+			position: absolute;
+			inset: 15% -20% auto -20%;
+			height: 380px;
+			z-index: -1;
+			background: radial-gradient(circle, rgba(186,218,85,0.24), transparent 58%);
+			filter: blur(16px);
+			pointer-events: none;
+			animation: pulse 5.2s infinite ease-in-out;
+		}
+
+		@keyframes pulse {
+			0%, 100% { transform: scale(1); opacity: 0.72; }
+			50% { transform: scale(1.05); opacity: 1; }
+		}
+
+		h1, h2, h3 {
+			margin: 0;
+			font-family: Syne, sans-serif;
+			letter-spacing: -0.03em;
+		}
+
+		h1 {
+			font-size: clamp(2rem, 5.6vw, 4.7rem);
+			line-height: 0.98;
+			max-width: 9.5ch;
+		}
+
+		.hero p {
+			max-width: 66ch;
+			margin-top: 1rem;
+			color: var(--muted);
+			font-size: clamp(1rem, 1.7vw, 1.2rem);
+			line-height: 1.7;
+		}
+
+		.btn {
+			display: inline-flex;
+			margin-top: 1.6rem;
+			align-items: center;
+			justify-content: center;
+			gap: 0.5rem;
+			min-height: 48px;
+			border: none;
+			border-radius: 999px;
+			padding: 0.85rem 1.3rem;
+			font-weight: 700;
+			color: #111;
+			background: var(--accent);
+			transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+			box-shadow: 0 8px 20px rgba(186,218,85,0.3);
+		}
+
+		.btn:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 12px 24px rgba(186,218,85,0.35);
+			background: #c5e86a;
+		}
+
+		.marquee {
+			margin: 1.8rem 0 1rem;
+			border-block: 1px solid var(--line);
+			overflow: hidden;
+			white-space: nowrap;
+		}
+
+		.marquee-track {
+			display: inline-flex;
+			min-width: 100%;
+			animation: marquee 24s linear infinite;
+			font-family: Syne, sans-serif;
+			text-transform: lowercase;
+			letter-spacing: -0.02em;
+			color: #f7f7f7;
+			font-size: clamp(1.25rem, 2.8vw, 2rem);
+			padding: 0.7rem 0;
+			gap: 2rem;
+		}
+
+		@keyframes marquee {
+			from { transform: translateX(0); }
+			to { transform: translateX(-50%); }
+		}
+
+		.section {
+			padding: 4rem 0;
+		}
+
+		.surface {
+			background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+			border: 1px solid var(--line);
+			border-radius: var(--radius);
+			box-shadow: var(--shadow);
+		}
+
+		.pain {
+			padding: 2rem;
+		}
+
+		.pain h2,
+		.faq h2,
+		.about h2,
+		.videos h2 {
+			font-size: clamp(1.8rem, 4vw, 3.25rem);
+		}
+
+		.pain-list {
+			margin-top: 1.25rem;
+			color: var(--muted);
+			line-height: 1.8;
+			font-size: 1.02rem;
+		}
+
+		.solution {
+			margin-top: 1.6rem;
+			padding: 1.2rem;
+			display: grid;
+			grid-template-columns: 1fr;
+			gap: 1rem;
+			align-items: center;
+		}
+
+		.solution h3 {
+			font-size: clamp(1.25rem, 2.2vw, 2rem);
+			color: #fafafa;
+		}
+
+		.solution img {
+			width: 100%;
+			max-width: 420px;
+			border-radius: 16px;
+			border: 1px solid rgba(255,255,255,0.18);
+		}
+
+		.faq-grid {
+			margin-top: 1.5rem;
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 1rem;
+		}
+
+		.faq-item {
+			padding: 1.2rem;
+			border-radius: 16px;
+			border: 1px solid var(--line);
+			background: rgba(255,255,255,0.02);
+		}
+
+		.faq-item h3 {
+			font-size: 1.12rem;
+			margin-bottom: 0.65rem;
+		}
+
+		.faq-item p {
+			margin: 0;
+			color: var(--muted);
+			line-height: 1.62;
+		}
+
+		.about-grid {
+			margin-top: 1.6rem;
+			display: grid;
+			grid-template-columns: minmax(240px, 0.55fr) 1fr;
+			gap: 1.4rem;
+			align-items: stretch;
+		}
+
+		.about-grid img {
+			width: 100%;
+			height: 100%;
+			min-height: 380px;
+			object-fit: cover;
+			border-radius: 16px;
+			border: 1px solid rgba(255,255,255,0.12);
+		}
+
+		.about-copy {
+			padding: 1.2rem;
+			border-radius: 16px;
+			border: 1px solid var(--line);
+			background: rgba(255,255,255,0.02);
+			color: var(--muted);
+			line-height: 1.7;
+		}
+
+		.about-copy strong { color: #fff; }
+
+		.videos .surface {
+			padding: 1.6rem;
+			text-align: center;
+		}
+
+		.video-title {
+			margin-top: 0.5rem;
+			color: #f6f6f6;
+			font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+		}
+
+		.video-placeholder {
+			margin-top: 1rem;
+			width: 100%;
+			aspect-ratio: 16 / 9;
+			border-radius: 18px;
+			background:
+				linear-gradient(135deg, rgba(186,218,85,0.18), rgba(80,103,27,0.15)),
+				radial-gradient(circle at 70% 20%, rgba(255,255,255,0.09), transparent 45%),
+				#0f0f0f;
+			border: 1px solid var(--line);
+			display: grid;
+			place-items: center;
+			color: #ddd;
+			font-size: 1rem;
+			letter-spacing: 0.02em;
+		}
+
+		.footer {
+			margin-top: 4rem;
+			background: #f3f3f3;
+			color: #111;
+			padding: 3rem 0 2rem;
+			border-top: 1px solid #ddd;
+		}
+
+		.footer-grid {
+			display: grid;
+			grid-template-columns: 1.2fr 1fr;
+			gap: 1.4rem;
+		}
+
+		.footer h3 {
+			font-size: clamp(1.6rem, 2.8vw, 2.3rem);
+			color: #111;
+		}
+
+		.footer a { text-decoration: underline; }
+
+		.socials {
+			margin-top: 0.8rem;
+			display: flex;
+			gap: 0.7rem;
+			flex-wrap: wrap;
+		}
+
+		.socials img {
+			width: 22px;
+			height: 22px;
+			display: block;
+		}
+
+		.legal {
+			margin-top: 1.6rem;
+			color: #333;
+			font-size: 0.9rem;
+			border-top: 1px solid #ddd;
+			padding-top: 1rem;
+		}
+
+		.reveal {
+			opacity: 0;
+			transform: translateY(24px);
+			transition: opacity 650ms ease, transform 650ms ease;
+		}
+
+		.reveal.on {
+			opacity: 1;
+			transform: translateY(0);
+		}
+
+		@media (max-width: 980px) {
+			.nav { display: none; }
+			.faq-grid { grid-template-columns: 1fr; }
+			.about-grid,
+			.footer-grid { grid-template-columns: 1fr; }
+			.hero { padding-top: 3.2rem; }
+		}
+	</style>
+</head>
+<body>
+	<header class="header">
+		<div class="container header-inner">
+			<a class="brand" href="https://www.ahrai-automation.com/" target="_blank" rel="noopener noreferrer">
+				<img src="https://static.wixstatic.com/media/d47d63_703d6529e45c49b3afea55ae081d0e40~mv2.png/v1/fill/w_216,h_212,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Logo%20sin%20fondo.png" alt="Logo AHRAI" />
+				<span class="brand-text">
+					AHRAI Automation<br />Inteligencia artificial a tu alcance
+				</span>
+			</a>
+
+			<nav class="nav" aria-label="Sitio">
+				<a href="#inicio">Inicio</a>
+				<a href="https://www.ahrai-automation.com/pricing-plans/list" target="_blank" rel="noopener noreferrer">Planes y precios</a>
+				<a href="https://www.ahrai-automation.com/blank-2" target="_blank" rel="noopener noreferrer">Términos y Condiciones</a>
+			</nav>
+		</div>
+	</header>
+
+	<main id="inicio">
+		<section class="hero section">
+			<div class="container reveal">
+				<h1>Descubre Nuestra Tecnología</h1>
+				<p>
+					Brindamos soluciones de inteligencia artificial accesibles para optimizar tu negocio.
+					Potencia tu rendimiento con AHRAI Automation.
+				</p>
+				<a class="btn" href="https://www.ahrai-automation.com/pricing-plans/list" target="_blank" rel="noopener noreferrer">
+					Explorar nuestros Planes y Servicios
+				</a>
+			</div>
+
+			<div class="marquee" aria-label="innovando pensando creando">
+				<div class="marquee-track">
+					<span>innovando, pensando, creando</span><span>innovando, pensando, creando</span>
+					<span>innovando, pensando, creando</span><span>innovando, pensando, creando</span>
+					<span>innovando, pensando, creando</span><span>innovando, pensando, creando</span>
+					<span>innovando, pensando, creando</span><span>innovando, pensando, creando</span>
+					<span>innovando, pensando, creando</span><span>innovando, pensando, creando</span>
+					<span>innovando, pensando, creando</span><span>innovando, pensando, creando</span>
+				</div>
+			</div>
+		</section>
+
+		<section class="section">
+			<div class="container surface pain reveal">
+				<h2>CASO DE USO</h2>
+				<div class="pain-list">
+					Puntos de dolor...<br />
+					1- Tengo un pequeño o mediano negocio donde hay pocos empleados.<br />
+					2- Manejo mis redes manualmente todas por separado y demoro mucho en contestar a mis clientes.<br />
+					3- Mis clientes se frustran y pierdo ventas; no puedo tener trazabilidad de las conversaciones y ventas.<br />
+					4- Tengo un sistema distinto para cada cosa que hago: Gestionar Stock, Ventas, Facturación, etc.
+				</div>
+
+				<div class="solution surface">
+					<h3>NUESTRA SOLUCION</h3>
+					<img src="https://static.wixstatic.com/media/d47d63_04c8a39157e0482b8c4f7106e43a64a5~mv2.png" alt="Ilustración de solución AHRAI" />
+				</div>
+			</div>
+		</section>
+
+		<section class="section faq">
+			<div class="container reveal">
+				<h2>Preguntas Frecuentes</h2>
+				<div class="faq-grid">
+					<article class="faq-item">
+						<h3>¿Cómo funciona?</h3>
+						<p>Utilizamos una plataforma cloud llamada N8N sobre la que soportamos el diseño de procesos automatizados utilizando Agentes IA. Los más comunes son OpenAI (ChatGPT) o Gemini (Google).</p>
+					</article>
+					<article class="faq-item">
+						<h3>¿Para qué contratarlos si puedo acceder a IA en internet?</h3>
+						<p>Aunque podés contratar IA en internet, es complejo llevarla a resultados diarios y consistentes para tu comercio. Nosotros la diseñamos y acotamos para que haga exactamente lo que necesitás.</p>
+					</article>
+					<article class="faq-item">
+						<h3>¿Qué aplicación práctica tiene en mi comercio?</h3>
+						<p>Permite automatizar procesos diarios en comercios PyME. Lo más común es interactuar por WhatsApp, Telegram o chat web para automatizar atención al cliente interno y externo.</p>
+					</article>
+					<article class="faq-item">
+						<h3>Entonces... ¿Existen otros procesos para automatizar con IA?</h3>
+						<p>Sí. Desde gestión de Gmail, Google Sheets, Drive y Calendar, hasta conexión con CRM y ERP para ventas, compras, contabilidad y más.</p>
+					</article>
+					<article class="faq-item">
+						<h3>¿Cómo puedo saber qué procesos son automatizables?</h3>
+						<p>Simple: identifica tareas repetitivas que consumen tiempo y estén soportadas por herramientas tecnológicas. Si podemos acceder a esos datos, el proceso puede automatizarse.</p>
+					</article>
+					<article class="faq-item">
+						<h3>¿Cómo se contratan sus servicios?</h3>
+						<p>Tenemos modalidades FireUp y ModelUp. Contactanos a <a href="mailto:ahraiautomation@gmail.com">ahraiautomation@gmail.com</a> o por chat con nuestro agente IA.</p>
+					</article>
+				</div>
+				<a class="btn" href="https://www.ahrai-automation.com/pricing-plans/list" target="_blank" rel="noopener noreferrer">Explorar nuestros Planes y Servicios</a>
+			</div>
+		</section>
+
+		<section class="section about">
+			<div class="container reveal">
+				<h2>Acerca de Nosotros</h2>
+				<div class="about-grid">
+					<img src="https://static.wixstatic.com/media/d47d63_84fefdb2f53f4260b8798cd09ee4077d~mv2.jpg/v1/crop/x_295,y_12,w_490,h_1056,q_85,blur_2,enc_avif,quality_auto/d47d63_84fefdb2f53f4260b8798cd09ee4077d~mv2.jpg" alt="Equipo AHRAI" />
+					<div class="about-copy">
+						<p><strong>Nuestra Misión, Visión y Valores</strong></p>
+						<p>En AHRAI Automation nos dedicamos a llevar la inteligencia artificial al alcance de todos, con soluciones innovadoras y personalizadas que impulsan crecimiento y eficiencia.</p>
+						<p>Creemos que la IA no es el futuro: es la actualidad. No te reemplaza, pero sí puede mejorar todos los aspectos del funcionamiento de tu negocio, marca o emprendimiento.</p>
+						<p>Fundada en Abril del 2025 por Andrés Repollés y Nicolás López.</p>
+						<p><strong>Información de Andrés Repollés:</strong> Estudiante de ingeniería electrónica en la UNLAM. Más de 15 años de experiencia en industria automotriz, automatización de procesos productivos, robótica y programación.</p>
+						<p><strong>Información de Nicolás López:</strong> Diplomatura en Lean Six Sigma Black Belt, Programador Python y Javascript. Más de 15 años en IT como Team Leader y Project Manager en CRM, OM y ERP.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="section videos">
+			<div class="container surface reveal">
+				<h2>Videos Destacados</h2>
+				<p class="video-title">"CAMILA" nuestro Bot AI del servicio</p>
+				<p class="video-title">
+					<a href="https://www.ahrai-automation.com/pricing-plans/list" target="_blank" rel="noopener noreferrer">Pack Farmacias - “Consulta Sin Turno”</a>
+				</p>
+				<div class="video-placeholder">Espacio de video destacado</div>
+				<a class="btn" href="https://www.ahrai-automation.com/pricing-plans/list" target="_blank" rel="noopener noreferrer">Explorar nuestros Planes y Servicios</a>
+			</div>
+		</section>
+	</main>
+
+	<footer class="footer">
+		<div class="container">
+			<div class="footer-grid">
+				<div>
+					<h3>AHRAI Automation || Inteligencia artificial a tu alcance</h3>
+					<p>+54 9 11 6026-2336</p>
+					<p><a href="mailto:ahrai.automation@gmail.com">ahrai.automation@gmail.com</a></p>
+					<p>Buenos Aires, Argentina</p>
+
+					<div class="socials" aria-label="Redes sociales">
+						<a href="https://www.facebook.com/wix" target="_blank" rel="noopener noreferrer"><img src="https://static.wixstatic.com/media/64a918_d9471de294d741f48b2e2b25d078e7a8~mv2.png/v1/fill/w_22,h_22,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/64a918_d9471de294d741f48b2e2b25d078e7a8~mv2.png" alt="Facebook" /></a>
+						<a href="https://www.instagram.com/wix" target="_blank" rel="noopener noreferrer"><img src="https://static.wixstatic.com/media/64a918_8f522ffdce4e48b09136b1486bb2822a~mv2.png/v1/fill/w_22,h_22,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/64a918_8f522ffdce4e48b09136b1486bb2822a~mv2.png" alt="Instagram" /></a>
+						<a href="https://x.com/wix" target="_blank" rel="noopener noreferrer"><img src="https://static.wixstatic.com/media/2e2a49_e38ff9c38b8e41bb8422e115dc67df4a~mv2.png/v1/fill/w_22,h_22,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/2e2a49_e38ff9c38b8e41bb8422e115dc67df4a~mv2.png" alt="X" /></a>
+						<a href="https://www.tiktok.com/@wix" target="_blank" rel="noopener noreferrer"><img src="https://static.wixstatic.com/media/2e2a49_aaa72a7b672b4ade9ee8643cee872256~mv2.png/v1/fill/w_22,h_22,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/2e2a49_aaa72a7b672b4ade9ee8643cee872256~mv2.png" alt="TikTok" /></a>
+					</div>
+				</div>
+
+				<div>
+					<p><a href="https://www.ahrai-automation.com/general-5" target="_blank" rel="noopener noreferrer">Política de Privacidad</a></p>
+					<p><a href="https://www.ahrai-automation.com/blank-2" target="_blank" rel="noopener noreferrer">Términos y Condiciones</a></p>
+					<p class="legal">© 2025 by AHRAI Automation || Inteligencia artificial a tu alcance. Powered and secured by Wix.</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<script>
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					entry.target.classList.add("on");
+					observer.unobserve(entry.target);
+				}
+			});
+		}, { threshold: 0.14 });
+
+		document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+	</script>
+</body>
+</html>
