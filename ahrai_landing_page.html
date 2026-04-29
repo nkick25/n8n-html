@@ -152,10 +152,21 @@
 			box-shadow: 0 8px 20px rgba(186,218,85,0.3);
 		}
 
+		.btn.whatsapp {
+			background: #25d366;
+			color: #051d09;
+			box-shadow: 0 8px 20px rgba(37,211,102,0.35);
+		}
+
 		.btn:hover {
 			transform: translateY(-2px);
 			box-shadow: 0 12px 24px rgba(186,218,85,0.35);
 			background: #c5e86a;
+		}
+
+		.btn.whatsapp:hover {
+			background: #30e274;
+			box-shadow: 0 12px 24px rgba(37,211,102,0.45);
 		}
 
 		.marquee {
@@ -201,7 +212,7 @@
 		.pain h2,
 		.faq h2,
 		.about h2,
-		.videos h2 {
+		.legal-section h2 {
 			font-size: clamp(1.8rem, 4vw, 3.25rem);
 		}
 
@@ -286,32 +297,39 @@
 
 		.about-copy strong { color: #fff; }
 
-		.videos .surface {
-			padding: 1.6rem;
-			text-align: center;
+		.legal-section .surface {
+			padding: 1.25rem;
 		}
 
-		.video-title {
-			margin-top: 0.5rem;
-			color: #f6f6f6;
-			font-size: clamp(1.1rem, 2.2vw, 1.6rem);
-		}
-
-		.video-placeholder {
-			margin-top: 1rem;
-			width: 100%;
-			aspect-ratio: 16 / 9;
-			border-radius: 18px;
-			background:
-				linear-gradient(135deg, rgba(186,218,85,0.18), rgba(80,103,27,0.15)),
-				radial-gradient(circle at 70% 20%, rgba(255,255,255,0.09), transparent 45%),
-				#0f0f0f;
+		details.legal-item {
+			background: rgba(255,255,255,0.02);
 			border: 1px solid var(--line);
-			display: grid;
-			place-items: center;
-			color: #ddd;
-			font-size: 1rem;
-			letter-spacing: 0.02em;
+			border-radius: 14px;
+			padding: 0.9rem 1rem;
+			margin-top: 0.8rem;
+		}
+
+		details.legal-item summary {
+			cursor: pointer;
+			list-style: none;
+			font-family: Syne, sans-serif;
+			font-size: clamp(1rem, 1.7vw, 1.2rem);
+			font-weight: 700;
+		}
+
+		details.legal-item summary::-webkit-details-marker {
+			display: none;
+		}
+
+		.legal-body {
+			margin-top: 0.9rem;
+			color: var(--muted);
+			line-height: 1.7;
+			font-size: 0.98rem;
+		}
+
+		.legal-body p {
+			margin: 0.6rem 0;
 		}
 
 		.footer {
@@ -388,8 +406,8 @@
 
 			<nav class="nav" aria-label="Sitio">
 				<a href="#inicio">Inicio</a>
-				<a href="https://www.ahrai-automation.com/pricing-plans/list" target="_blank" rel="noopener noreferrer">Planes y precios</a>
-				<a href="https://www.ahrai-automation.com/blank-2" target="_blank" rel="noopener noreferrer">Términos y Condiciones</a>
+				<a href="https://wa.me/5491160262336" target="_blank" rel="noopener noreferrer">Contactanos</a>
+				<a href="#legal">Términos y Condiciones</a>
 			</nav>
 		</div>
 	</header>
@@ -402,8 +420,8 @@
 					Brindamos soluciones de inteligencia artificial accesibles para optimizar tu negocio.
 					Potencia tu rendimiento con AHRAI Automation.
 				</p>
-				<a class="btn" href="https://www.ahrai-automation.com/pricing-plans/list" target="_blank" rel="noopener noreferrer">
-					Explorar nuestros Planes y Servicios
+				<a class="btn whatsapp" href="https://wa.me/5491160262336" target="_blank" rel="noopener noreferrer">
+					Contactanos por WhatsApp
 				</a>
 			</div>
 
@@ -466,7 +484,7 @@
 						<p>Tenemos modalidades FireUp y ModelUp. Contactanos a <a href="mailto:ahraiautomation@gmail.com">ahraiautomation@gmail.com</a> o por chat con nuestro agente IA.</p>
 					</article>
 				</div>
-				<a class="btn" href="https://www.ahrai-automation.com/pricing-plans/list" target="_blank" rel="noopener noreferrer">Explorar nuestros Planes y Servicios</a>
+				<a class="btn whatsapp" href="https://wa.me/5491160262336" target="_blank" rel="noopener noreferrer">Contactanos por WhatsApp</a>
 			</div>
 		</section>
 
@@ -487,15 +505,47 @@
 			</div>
 		</section>
 
-		<section class="section videos">
-			<div class="container surface reveal">
-				<h2>Videos Destacados</h2>
-				<p class="video-title">"CAMILA" nuestro Bot AI del servicio</p>
-				<p class="video-title">
-					<a href="https://www.ahrai-automation.com/pricing-plans/list" target="_blank" rel="noopener noreferrer">Pack Farmacias - “Consulta Sin Turno”</a>
-				</p>
-				<div class="video-placeholder">Espacio de video destacado</div>
-				<a class="btn" href="https://www.ahrai-automation.com/pricing-plans/list" target="_blank" rel="noopener noreferrer">Explorar nuestros Planes y Servicios</a>
+		<section class="section legal-section" id="legal">
+			<div class="container reveal">
+				<h2>Legal</h2>
+				<div class="surface">
+					<details class="legal-item">
+						<summary>Política de Privacidad</summary>
+						<div class="legal-body">
+							<p>1. El objeto de la Política de Privacidad es informar al usuario sobre la recolección y tratamiento de sus datos personales y sus acciones derivadas.</p>
+							<p>2. Esta Política de Privacidad se aplica a todos los sitios y servicios de propiedad y operados por AHRAI Automation, sus redes sociales y sitios web vinculados.</p>
+							<p>3. También aplica a formularios de inscripción, participación en eventos, capacitaciones, conferencias, cursos y otras actividades organizadas o auspiciadas por AHRAI Automation, incluyendo el uso de plataformas de terceros para registración.</p>
+							<p>4. No resulta aplicable a sitios de terceros a los que el usuario acceda mediante links externos.</p>
+							<p>5. La recolección de datos está enmarcada en normativa nacional e internacional aplicable en protección de datos personales. AHRAI Automation no divulga los datos salvo requerimiento judicial o de autoridad competente.</p>
+							<p>6. En caso de modificaciones de registro ante autoridad competente, el usuario presta consentimiento para cesión de datos a terceros con acuerdos vigentes, para finalidades específicas.</p>
+							<p>7. El titular de los datos tiene derecho de acceso, rectificación, supresión y revocación del consentimiento, notificando por e-mail o vía telefónica según los datos de contacto publicados.</p>
+							<p>8. En caso de supresión, la empresa podrá retener datos hasta cinco (5) años cuando estén vinculados a facturación, cobros o auditorías financieras/contables.</p>
+							<p>9. El sitio puede utilizar cookies para estadísticas de uso y mejora del servicio. El usuario puede configurar su navegador para bloquearlas. También puede haber cookies de terceros que prestan servicios al sitio.</p>
+							<p>10. El usuario acepta esta política y sus futuras modificaciones publicadas por AHRAI Automation.</p>
+							<p>11. Toda cuestión se rige por leyes de la República Argentina y jurisdicción de Tribunales Nacionales Ordinarios en lo Comercial con asiento en CABA.</p>
+						</div>
+					</details>
+
+					<details class="legal-item">
+						<summary>Términos y Condiciones</summary>
+						<div class="legal-body">
+							<p>Términos y Condiciones de Servicios de Implementación de Agentes IA por AHRAI Automation.</p>
+							<p>1. Descripción de servicios: análisis de requerimientos, diseño y desarrollo, implementación, pruebas, ajustes y capacitación básica.</p>
+							<p>2. Integraciones: sujetas a factibilidad técnica con plataformas de terceros; AHRAI Automation no responde por limitaciones externas.</p>
+							<p>3. Precios y pagos: definidos en cotización, en ARS con IVA, sujetos a cambios por inflación y tipo de cambio. Falta de pago puede suspender servicios.</p>
+							<p>4. Suscripción mensual: si aplica mantenimiento/soporte, la renovación es automática y puede cancelarse con preaviso de 30 días.</p>
+							<p>5. Propiedad intelectual: AHRAI Automation conserva derechos sobre código, tecnología y documentación; el cliente usa el agente para fines comerciales según el acuerdo.</p>
+							<p>6. Limitación de responsabilidad: no responde por interrupciones por causas fuera de control (por ejemplo, conectividad o terceros) y su responsabilidad se limita al monto abonado.</p>
+							<p>7. Confidencialidad: AHRAI Automation mantiene la confidencialidad de la información del cliente.</p>
+							<p>8. Rescisión: la empresa puede rescindir por incumplimiento; el cliente puede rescindir con preaviso de 30 días.</p>
+							<p>9. Ley aplicable y jurisdicción: leyes de la República Argentina y tribunales competentes de la Provincia de Buenos Aires.</p>
+							<p>10. Modificaciones: AHRAI Automation puede modificar estos términos, con vigencia desde su publicación en el sitio.</p>
+							<p>11. Aceptación: al contratar, el cliente declara haber leído y aceptado estos términos.</p>
+						</div>
+					</details>
+
+					<a class="btn whatsapp" href="https://wa.me/5491160262336" target="_blank" rel="noopener noreferrer">Contactanos por WhatsApp</a>
+				</div>
 			</div>
 		</section>
 	</main>
@@ -518,8 +568,8 @@
 				</div>
 
 				<div>
-					<p><a href="https://www.ahrai-automation.com/general-5" target="_blank" rel="noopener noreferrer">Política de Privacidad</a></p>
-					<p><a href="https://www.ahrai-automation.com/blank-2" target="_blank" rel="noopener noreferrer">Términos y Condiciones</a></p>
+					<p><a href="#inicio" aria-label="Volver al inicio">Inicio</a></p>
+					<p><a href="https://wa.me/5491160262336" target="_blank" rel="noopener noreferrer">Contactanos por WhatsApp</a></p>
 					<p class="legal">© 2025 by AHRAI Automation || Inteligencia artificial a tu alcance. Powered and secured by Wix.</p>
 				</div>
 			</div>
