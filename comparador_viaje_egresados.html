@@ -91,7 +91,7 @@
     .actions {
       display: grid;
       gap: 12px;
-      grid-template-columns: repeat(2, minmax(120px, 1fr));
+      grid-template-columns: minmax(140px, 220px);
       margin-bottom: 14px;
     }
 
@@ -220,7 +220,7 @@
 
     .summary {
       display: none;
-      margin-top: 16px;
+      margin-top: 14px;
       background: #f8fafc;
       border: 1px solid var(--line);
       border-left: 6px solid var(--brand);
@@ -269,7 +269,11 @@
 
     @media (max-width: 840px) {
       .actions {
-        grid-template-columns: repeat(2, minmax(130px, 1fr));
+        grid-template-columns: 1fr;
+      }
+
+      table {
+        min-width: 980px;
       }
     }
 
@@ -285,6 +289,15 @@
       .actions {
         grid-template-columns: 1fr;
       }
+
+      .summary .scoreline {
+        gap: 8px;
+      }
+
+      .chip {
+        width: 100%;
+        text-align: center;
+      }
     }
   </style>
 </head>
@@ -297,23 +310,31 @@
         Carguen y comparen punto por punto las propuestas de Super Tour y Serrano.
         Pueden agregar filas nuevas, ponderar importancia y obtener una sugerencia automatica.
       </p>
+
+      <article id="summary" class="summary" aria-live="polite">
+        <h2 id="summaryTitle"></h2>
+        <p id="summaryText"></p>
+        <div class="scoreline">
+          <span class="chip" id="scoreSuper"></span>
+          <span class="chip" id="scoreSerrano"></span>
+        </div>
+      </article>
     </section>
 
     <section class="panel">
       <div class="actions">
         <button class="btn-main" type="button" id="btnAddRow">Agregar tema</button>
-        <button class="btn-soft" type="button" id="btnAnalyze">Ver resultado</button>
       </div>
 
       <div class="table-shell">
         <table aria-label="Tabla comparativa de empresas de viaje">
           <thead>
             <tr>
-              <th style="width: 24%;">Tema</th>
+              <th style="width: 22%;">Tema</th>
               <th style="width: 22%;">Super Tour</th>
+              <th style="width: 11%;">Evaluacion</th>
               <th style="width: 22%;">Serrano</th>
-              <th style="width: 12%;">Evaluacion Super Tour</th>
-              <th style="width: 12%;">Evaluacion Serrano</th>
+              <th style="width: 11%;">Evaluacion</th>
               <th style="width: 8%;">Accion</th>
             </tr>
           </thead>
@@ -325,14 +346,6 @@
         Consejo: asignen una evaluacion de 1 a 5 para cada empresa en cada tema. El resultado se actualiza automaticamente al cambiar una evaluacion.
       </p>
 
-      <article id="summary" class="summary" aria-live="polite">
-        <h2 id="summaryTitle"></h2>
-        <p id="summaryText"></p>
-        <div class="scoreline">
-          <span class="chip" id="scoreSuper"></span>
-          <span class="chip" id="scoreSerrano"></span>
-        </div>
-      </article>
     </section>
   </main>
 
@@ -400,8 +413,8 @@
       tr.innerHTML =
         "<td><input type=\"text\" class=\"topic\" placeholder=\"Ej: Traslado\" value=\"" + escapeHtml(data.topic) + "\" /></td>" +
         "<td><textarea class=\"super-tour\" placeholder=\"Oferta / postura de Super Tour\">" + escapeHtml(data.superTour) + "</textarea></td>" +
-        "<td><textarea class=\"serrano\" placeholder=\"Oferta / postura de Serrano\">" + escapeHtml(data.serrano) + "</textarea></td>" +
         "<td><div class=\"evaluation\"><select class=\"super-eval\">" + createEvaluationOptions(data.superEval) + "</select></div></td>" +
+        "<td><textarea class=\"serrano\" placeholder=\"Oferta / postura de Serrano\">" + escapeHtml(data.serrano) + "</textarea></td>" +
         "<td><div class=\"evaluation\"><select class=\"serrano-eval\">" + createEvaluationOptions(data.serranoEval) + "</select></div></td>" +
         "<td><button class=\"del-btn\" type=\"button\">Quitar</button></td>";
 
@@ -516,10 +529,10 @@
 
       if (superScore > serranoScore) {
         title.textContent = "Sugerencia actual: Super Tour";
-        text.textContent = "En base a la informacion cargada y las prioridades, Super Tour cubre mas puntos ponderados.";
+        text.textContent = "En base a la informacion cargada y las evaluaciones, Super Tour obtiene mejor puntaje total.";
       } else if (serranoScore > superScore) {
         title.textContent = "Sugerencia actual: Serrano";
-        text.textContent = "En base a la informacion cargada y las prioridades, Serrano cubre mas puntos ponderados.";
+        text.textContent = "En base a la informacion cargada y las evaluaciones, Serrano obtiene mejor puntaje total.";
       } else {
         title.textContent = "Resultado parejo";
         text.textContent = "Ambas opciones quedan empatadas. Conviene profundizar en precio final, condiciones y cobertura.";
@@ -541,7 +554,6 @@
       saveState();
       analyze();
     });
-    document.getElementById("btnAnalyze").addEventListener("click", analyze);
 
     loadState();
   </script>
