@@ -111,8 +111,12 @@
     }
 
     .btn-main {
-      background: var(--brand);
+      background: #111111;
       color: #ffffff;
+    }
+
+    .btn-main:hover {
+      background: #000000;
     }
 
     .btn-soft {
@@ -280,9 +284,65 @@
       .hero-actions .btn-main {
         width: 100%;
       }
+    }
+
+    @media (max-width: 760px) {
+      .table-shell {
+        border: none;
+        overflow: visible;
+      }
 
       table {
-        min-width: 980px;
+        min-width: 0;
+      }
+
+      thead {
+        display: none;
+      }
+
+      tbody,
+      tbody tr,
+      tbody td {
+        display: block;
+        width: 100%;
+      }
+
+      tbody tr {
+        margin-bottom: 12px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        overflow: hidden;
+        background: #ffffff;
+      }
+
+      tbody td {
+        position: relative;
+        border-bottom: 1px solid var(--line);
+        padding: 10px 10px 10px 44%;
+        min-height: 52px;
+      }
+
+      tbody td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 38%;
+        font-family: "Montserrat", sans-serif;
+        font-size: 0.74rem;
+        letter-spacing: 0.4px;
+        text-transform: uppercase;
+        color: #334155;
+      }
+
+      tbody td:last-child {
+        border-bottom: none;
+      }
+
+      .evaluation select,
+      .del-btn {
+        max-width: 100%;
       }
     }
 
@@ -293,10 +353,6 @@
 
       .panel {
         padding: 14px;
-      }
-
-      .actions {
-        grid-template-columns: 1fr;
       }
 
       .summary .scoreline {
@@ -419,12 +475,12 @@
     function addRow(data = { topic: "", superTour: "", serrano: "", superEval: "3", serranoEval: "3" }) {
       const tr = document.createElement("tr");
       tr.innerHTML =
-        "<td><input type=\"text\" class=\"topic\" placeholder=\"Ej: Traslado\" value=\"" + escapeHtml(data.topic) + "\" /></td>" +
-        "<td><textarea class=\"super-tour\" placeholder=\"Oferta / postura de Super Tour\">" + escapeHtml(data.superTour) + "</textarea></td>" +
-        "<td><div class=\"evaluation\"><select class=\"super-eval\">" + createEvaluationOptions(data.superEval) + "</select></div></td>" +
-        "<td><textarea class=\"serrano\" placeholder=\"Oferta / postura de Serrano\">" + escapeHtml(data.serrano) + "</textarea></td>" +
-        "<td><div class=\"evaluation\"><select class=\"serrano-eval\">" + createEvaluationOptions(data.serranoEval) + "</select></div></td>" +
-        "<td><button class=\"del-btn\" type=\"button\">Quitar</button></td>";
+        "<td data-label=\"Tema\"><input type=\"text\" class=\"topic\" placeholder=\"Ej: Traslado\" value=\"" + escapeHtml(data.topic) + "\" /></td>" +
+        "<td data-label=\"Super Tour\"><textarea class=\"super-tour\" placeholder=\"Oferta / postura de Super Tour\">" + escapeHtml(data.superTour) + "</textarea></td>" +
+        "<td data-label=\"Evaluacion\"><div class=\"evaluation\"><select class=\"super-eval\">" + createEvaluationOptions(data.superEval) + "</select></div></td>" +
+        "<td data-label=\"Serrano\"><textarea class=\"serrano\" placeholder=\"Oferta / postura de Serrano\">" + escapeHtml(data.serrano) + "</textarea></td>" +
+        "<td data-label=\"Evaluacion\"><div class=\"evaluation\"><select class=\"serrano-eval\">" + createEvaluationOptions(data.serranoEval) + "</select></div></td>" +
+        "<td data-label=\"Accion\"><button class=\"del-btn\" type=\"button\">Quitar</button></td>";
 
       tr.querySelector(".del-btn").addEventListener("click", () => {
         tr.remove();
