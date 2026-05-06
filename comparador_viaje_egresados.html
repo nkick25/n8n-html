@@ -88,11 +88,10 @@
       padding: 18px;
     }
 
-    .actions {
-      display: grid;
-      gap: 12px;
-      grid-template-columns: minmax(140px, 220px);
-      margin-bottom: 14px;
+    .hero-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 12px;
     }
 
     button {
@@ -226,6 +225,7 @@
       border-left: 6px solid var(--brand);
       border-radius: 12px;
       padding: 14px;
+      color: #0f172a;
       animation: fadeUp 0.35s ease both;
     }
 
@@ -236,7 +236,12 @@
     .summary h2 {
       font-family: "Montserrat", sans-serif;
       font-size: 1.05rem;
+      color: #0f172a;
       margin-bottom: 4px;
+    }
+
+    .summary p {
+      color: #334155;
     }
 
     .summary .scoreline {
@@ -268,8 +273,12 @@
     }
 
     @media (max-width: 840px) {
-      .actions {
-        grid-template-columns: 1fr;
+      .hero-actions {
+        justify-content: stretch;
+      }
+
+      .hero-actions .btn-main {
+        width: 100%;
       }
 
       table {
@@ -319,13 +328,13 @@
           <span class="chip" id="scoreSerrano"></span>
         </div>
       </article>
+
+      <div class="hero-actions">
+        <button class="btn-main" type="button" id="btnAddRow">Agregar tema</button>
+      </div>
     </section>
 
     <section class="panel">
-      <div class="actions">
-        <button class="btn-main" type="button" id="btnAddRow">Agregar tema</button>
-      </div>
-
       <div class="table-shell">
         <table aria-label="Tabla comparativa de empresas de viaje">
           <thead>
