@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comparador de Viaje de Egresados - Primario</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-1: #fff7ed;
+      --bg-2: #ecfeff;
+      --ink: #1f2937;
+      --muted: #64748b;
+      --line: #e2e8f0;
+      --brand: #0f766e;
+      --brand-dark: #115e59;
+      --warn: #b45309;
+      --card: #ffffff;
+      --shadow: 0 16px 36px rgba(15, 118, 110, 0.12);
+      --chip: #ccfbf1;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Source Sans 3", sans-serif;
+      color: var(--ink);
+      min-height: 100vh;
+      background:
+        radial-gradient(1200px 600px at -10% -20%, #fde68a 0%, transparent 55%),
+        radial-gradient(800px 420px at 110% 0%, #99f6e4 0%, transparent 62%),
+        linear-gradient(145deg, var(--bg-1), var(--bg-2));
+      padding: 28px 14px 40px;
+    }
+
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      animation: fadeUp 0.55s ease both;
+    }
+
+    .hero {
+      background: linear-gradient(120deg, rgba(15, 118, 110, 0.92), rgba(14, 116, 144, 0.9));
+      color: #ffffff;
+      border-radius: 20px;
+      padding: 24px 22px;
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+
+    .hero .tag {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 12px;
+      letter-spacing: 0.6px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-family: "Montserrat", sans-serif;
+      font-size: clamp(1.3rem, 2.8vw, 2rem);
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+
+    .hero p {
+      max-width: 72ch;
+      color: rgba(255, 255, 255, 0.92);
+      font-size: 1rem;
+    }
+
+    .panel {
+      background: var(--card);
+      border: 1px solid #ffffff;
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+
+    .actions {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(4, minmax(120px, 1fr));
+      margin-bottom: 14px;
+    }
+
+    button {
+      border: none;
+      border-radius: 12px;
+      padding: 11px 12px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      font-family: inherit;
+      cursor: pointer;
+      transition: transform 0.14s ease, filter 0.2s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      filter: saturate(1.08);
+    }
+
+    .btn-main {
+      background: var(--brand);
+      color: #ffffff;
+    }
+
+    .btn-soft {
+      background: #e0f2fe;
+      color: #0c4a6e;
+    }
+
+    .btn-ghost {
+      background: #f8fafc;
+      color: #334155;
+      border: 1px solid var(--line);
+    }
+
+    .btn-warn {
+      background: #ffedd5;
+      color: var(--warn);
+    }
+
+    .table-shell {
+      overflow-x: auto;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 840px;
+      background: #ffffff;
+    }
+
+    thead th {
+      font-family: "Montserrat", sans-serif;
+      font-size: 0.86rem;
+      text-transform: uppercase;
+      letter-spacing: 0.65px;
+      padding: 13px 10px;
+      border-bottom: 2px solid var(--line);
+      background: #f8fafc;
+      color: #1e293b;
+    }
+
+    tbody td {
+      padding: 10px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+      background: #ffffff;
+    }
+
+    tbody tr:nth-child(even) td {
+      background: #fcfefe;
+    }
+
+    input[type="text"],
+    textarea,
+    select {
+      width: 100%;
+      font-family: inherit;
+      font-size: 0.95rem;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      padding: 9px 10px;
+      color: #0f172a;
+      background: #ffffff;
+      transition: border-color 0.18s ease;
+    }
+
+    textarea {
+      min-height: 56px;
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      outline: none;
+      border-color: #0ea5e9;
+    }
+
+    .priority {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .priority select {
+      max-width: 84px;
+    }
+
+    .hint {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .del-btn {
+      background: #fef2f2;
+      color: #b91c1c;
+      border: 1px solid #fecaca;
+      width: 100%;
+      padding: 8px;
+      border-radius: 10px;
+    }
+
+    .summary {
+      display: none;
+      margin-top: 16px;
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-left: 6px solid var(--brand);
+      border-radius: 12px;
+      padding: 14px;
+      animation: fadeUp 0.35s ease both;
+    }
+
+    .summary.show {
+      display: block;
+    }
+
+    .summary h2 {
+      font-family: "Montserrat", sans-serif;
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+    }
+
+    .summary .scoreline {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .chip {
+      background: var(--chip);
+      color: #134e4a;
+      border: 1px solid #99f6e4;
+      border-radius: 999px;
+      padding: 6px 11px;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 840px) {
+      .actions {
+        grid-template-columns: repeat(2, minmax(130px, 1fr));
+      }
+    }
+
+    @media (max-width: 520px) {
+      .hero {
+        padding: 20px 16px;
+      }
+
+      .panel {
+        padding: 14px;
+      }
+
+      .actions {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <div class="tag">Decision familiar</div>
+      <h1>Comparador dinamico - Viaje de Egresados Primario</h1>
+      <p>
+        Carguen y comparen punto por punto las propuestas de Super Tour y Serrano.
+        Pueden agregar filas nuevas, ponderar importancia y obtener una sugerencia automatica.
+      </p>
+    </section>
+
+    <section class="panel">
+      <div class="actions">
+        <button class="btn-main" type="button" id="btnAddRow">Agregar tema</button>
+        <button class="btn-soft" type="button" id="btnAnalyze">Analizar por prioridad</button>
+        <button class="btn-ghost" type="button" id="btnExport">Exportar JSON</button>
+        <button class="btn-warn" type="button" id="btnReset">Restaurar inicial</button>
+      </div>
+
+      <div class="table-shell">
+        <table aria-label="Tabla comparativa de empresas de viaje">
+          <thead>
+            <tr>
+              <th style="width: 24%;">Tema</th>
+              <th style="width: 28%;">Super Tour</th>
+              <th style="width: 28%;">Serrano</th>
+              <th style="width: 12%;">Prioridad</th>
+              <th style="width: 8%;">Accion</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+
+      <p class="hint">
+        Consejo: usen prioridad de 1 a 5 segun lo importante para las familias. Luego hagan clic en "Analizar por prioridad".
+      </p>
+
+      <article id="summary" class="summary" aria-live="polite">
+        <h2 id="summaryTitle"></h2>
+        <p id="summaryText"></p>
+        <div class="scoreline">
+          <span class="chip" id="scoreSuper"></span>
+          <span class="chip" id="scoreSerrano"></span>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <script>
+    const STORAGE_KEY = "comparador_viaje_egresados_primario_v1";
+
+    const initialRows = [
+      {
+        topic: "Asistencia medica",
+        superTour: "Cobertura incluida. Confirmar alcance y prestador.",
+        serrano: "Cobertura incluida. Confirmar franquicias y emergencias.",
+        priority: "5"
+      },
+      {
+        topic: "Acompanantes padres",
+        superTour: "Definir cupo de padres y costo adicional.",
+        serrano: "Definir modalidad y condiciones de acompanamiento.",
+        priority: "4"
+      },
+      {
+        topic: "Liberados",
+        superTour: "Revisar politica de liberados por cantidad de alumnos.",
+        serrano: "Revisar porcentaje y a quien aplica el liberado.",
+        priority: "4"
+      },
+      {
+        topic: "Deposito/Seguro hotel (nuestro)",
+        superTour: "A definir por la institucion.",
+        serrano: "A definir por la institucion.",
+        priority: "3"
+      },
+      {
+        topic: "Cant coordinadores",
+        superTour: "Confirmar relacion coordinador/alumnos.",
+        serrano: "Confirmar cantidad fija y refuerzos en excursiones.",
+        priority: "5"
+      },
+      {
+        topic: "Valores del viaje",
+        superTour: "Completar precio final, cuotas e intereses.",
+        serrano: "Completar precio final, cuotas e intereses.",
+        priority: "5"
+      }
+    ];
+
+    const tableBody = document.getElementById("tableBody");
+
+    function createPriorityOptions(selectedValue) {
+      let html = "";
+      for (let i = 1; i <= 5; i++) {
+        const selected = String(i) === String(selectedValue) ? "selected" : "";
+        html += "<option value=\"" + i + "\" " + selected + ">" + i + "</option>";
+      }
+      return html;
+    }
+
+    function addRow(data = { topic: "", superTour: "", serrano: "", priority: "3" }) {
+      const tr = document.createElement("tr");
+      tr.innerHTML =
+        "<td><input type=\"text\" class=\"topic\" placeholder=\"Ej: Traslado\" value=\"" + escapeHtml(data.topic) + "\" /></td>" +
+        "<td><textarea class=\"super-tour\" placeholder=\"Oferta / postura de Super Tour\">" + escapeHtml(data.superTour) + "</textarea></td>" +
+        "<td><textarea class=\"serrano\" placeholder=\"Oferta / postura de Serrano\">" + escapeHtml(data.serrano) + "</textarea></td>" +
+        "<td><div class=\"priority\"><select class=\"priority-value\">" + createPriorityOptions(data.priority) + "</select></div></td>" +
+        "<td><button class=\"del-btn\" type=\"button\">Quitar</button></td>";
+
+      tr.querySelector(".del-btn").addEventListener("click", () => {
+        tr.remove();
+        saveState();
+      });
+
+      tr.querySelectorAll("input, textarea, select").forEach((el) => {
+        el.addEventListener("input", saveState);
+        el.addEventListener("change", saveState);
+      });
+
+      tableBody.appendChild(tr);
+    }
+
+    function collectRows() {
+      const rows = [];
+      tableBody.querySelectorAll("tr").forEach((tr) => {
+        rows.push({
+          topic: tr.querySelector(".topic").value.trim(),
+          superTour: tr.querySelector(".super-tour").value.trim(),
+          serrano: tr.querySelector(".serrano").value.trim(),
+          priority: tr.querySelector(".priority-value").value
+        });
+      });
+      return rows;
+    }
+
+    function saveState() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(collectRows()));
+    }
+
+    function loadState() {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) {
+        renderRows(initialRows);
+        return;
+      }
+
+      try {
+        const rows = JSON.parse(raw);
+        if (!Array.isArray(rows) || rows.length === 0) {
+          renderRows(initialRows);
+          return;
+        }
+        renderRows(rows);
+      } catch {
+        renderRows(initialRows);
+      }
+    }
+
+    function renderRows(rows) {
+      tableBody.innerHTML = "";
+      rows.forEach((row) => addRow(row));
+      saveState();
+      hideSummary();
+    }
+
+    function hideSummary() {
+      document.getElementById("summary").classList.remove("show");
+    }
+
+    function analyze() {
+      const rows = collectRows();
+      if (rows.length === 0) {
+        alert("No hay filas para analizar.");
+        return;
+      }
+
+      let superScore = 0;
+      let serranoScore = 0;
+      let validRows = 0;
+
+      rows.forEach((row) => {
+        const p = Number(row.priority) || 1;
+
+        const hasSuper = row.superTour.length > 0;
+        const hasSerrano = row.serrano.length > 0;
+
+        if (hasSuper || hasSerrano) {
+          validRows++;
+        }
+
+        if (hasSuper) superScore += p;
+        if (hasSerrano) serranoScore += p;
+      });
+
+      if (validRows === 0) {
+        alert("Completen al menos una oferta en alguna empresa para analizar.");
+        return;
+      }
+
+      const title = document.getElementById("summaryTitle");
+      const text = document.getElementById("summaryText");
+      const scoreSuper = document.getElementById("scoreSuper");
+      const scoreSerrano = document.getElementById("scoreSerrano");
+      const summary = document.getElementById("summary");
+
+      scoreSuper.textContent = "Super Tour: " + superScore + " pts";
+      scoreSerrano.textContent = "Serrano: " + serranoScore + " pts";
+
+      if (superScore > serranoScore) {
+        title.textContent = "Sugerencia actual: Super Tour";
+        text.textContent = "En base a la informacion cargada y las prioridades, Super Tour cubre mas puntos ponderados.";
+      } else if (serranoScore > superScore) {
+        title.textContent = "Sugerencia actual: Serrano";
+        text.textContent = "En base a la informacion cargada y las prioridades, Serrano cubre mas puntos ponderados.";
+      } else {
+        title.textContent = "Resultado parejo";
+        text.textContent = "Ambas opciones quedan empatadas. Conviene profundizar en precio final, condiciones y cobertura.";
+      }
+
+      summary.classList.add("show");
+    }
+
+    function exportJson() {
+      const payload = {
+        generatedAt: new Date().toISOString(),
+        companies: ["Super Tour", "Serrano"],
+        rows: collectRows()
+      };
+
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "comparativa-viaje-egresados.json";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function resetInitial() {
+      const ok = confirm("Esto va a restaurar los temas iniciales y borrar cambios locales. Continuar?");
+      if (!ok) return;
+      renderRows(initialRows);
+    }
+
+    function escapeHtml(text) {
+      return String(text)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll("\"", "&quot;");
+    }
+
+    document.getElementById("btnAddRow").addEventListener("click", () => {
+      addRow();
+      saveState();
+    });
+    document.getElementById("btnAnalyze").addEventListener("click", analyze);
+    document.getElementById("btnExport").addEventListener("click", exportJson);
+    document.getElementById("btnReset").addEventListener("click", resetInitial);
+
+    loadState();
+  </script>
+</body>
+</html>
