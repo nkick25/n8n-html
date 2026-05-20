@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PUNA — Espacio Pilates · Guía para Profes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --puna-cacao:       #806763;
+      --puna-mauve:       #D1A99A;
+      --puna-cream:       #EADED5;
+      --puna-terracota:   #C97D68;
+      --puna-verde-calma: #C6CDBC;
+      --puna-durazno:     #EDCCB4;
+      --puna-dark:        #5D4B47;
+      --puna-white:       #FFFCF9;
+      --puna-soft:        #F8F5F2;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--puna-dark);
+      line-height: 1.7;
+      overflow-x: hidden;
+      background: var(--puna-white);
+    }
+
+    /* ── Navbar ── */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; width: 100%;
+      background: rgba(198, 205, 188, 0.95);
+      backdrop-filter: blur(12px);
+      z-index: 1000;
+      padding: 0.8rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+    }
+
+    .nav-brand {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--puna-cacao);
+      letter-spacing: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.8rem;
+    }
+
+    .nav-links a {
+      color: var(--puna-cacao);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.85rem;
+      position: relative;
+      transition: color 0.3s;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 2px;
+      background: var(--puna-cacao);
+      transition: width 0.3s;
+    }
+
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-badge {
+      background: var(--puna-cacao);
+      color: var(--puna-cream);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 0.35rem 1rem;
+      border-radius: 20px;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      min-height: 72vh;
+      background: linear-gradient(140deg, var(--puna-dark) 0%, var(--puna-cacao) 55%, #9a7a76 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 35% 60%, rgba(209,169,154,0.18) 0%, transparent 55%),
+        radial-gradient(ellipse at 72% 35%, rgba(198,205,188,0.1) 0%, transparent 50%);
+      animation: heroShimmer 14s ease-in-out infinite alternate;
+    }
+
+    @keyframes heroShimmer {
+      0%   { transform: translate(0, 0); }
+      100% { transform: translate(-4%, 3%); }
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 780px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(198,205,188,0.15);
+      border: 1px solid rgba(198,205,188,0.32);
+      color: var(--puna-verde-calma);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 0.45rem 1.4rem;
+      border-radius: 30px;
+      margin-bottom: 1.5rem;
+      animation: fadeInUp 0.8s ease;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.6rem, 5vw, 4.2rem);
+      font-weight: 800;
+      color: var(--puna-cream);
+      margin-bottom: 1.2rem;
+      line-height: 1.12;
+      animation: fadeInUp 1s ease;
+    }
+
+    .hero h1 span { color: var(--puna-mauve); }
+
+    .hero-subtitle {
+      font-size: 1.05rem;
+      color: var(--puna-cream);
+      opacity: 0.85;
+      font-weight: 300;
+      margin-bottom: 2.5rem;
+      animation: fadeInUp 1.2s ease;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 2.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeInUp 1.4s ease;
+    }
+
+    .hero-stat {
+      text-align: center;
+      color: var(--puna-cream);
+    }
+
+    .hero-stat strong {
+      display: block;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--puna-mauve);
+      line-height: 1;
+    }
+
+    .hero-stat span {
+      font-size: 0.78rem;
+      opacity: 0.72;
+      letter-spacing: 0.5px;
+    }
+
+    .hero-divider {
+      width: 1px;
+      height: 50px;
+      background: rgba(234,222,213,0.2);
+      align-self: center;
+    }
+
+    /* ── Section base ── */
+    .section {
+      padding: 5rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.7s ease;
+    }
+
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section-label {
+      display: inline-block;
+      background: var(--puna-verde-calma);
+      color: var(--puna-cacao);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 0.35rem 1rem;
+      border-radius: 20px;
+      margin-bottom: 0.9rem;
+    }
+
+    .section h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 700;
+      color: var(--puna-cacao);
+      margin-bottom: 0.8rem;
+      line-height: 1.2;
+    }
+
+    .section-desc {
+      font-size: 0.97rem;
+      color: var(--puna-dark);
+      opacity: 0.78;
+      max-width: 680px;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── Floor Plan ── */
+    .floor-plan-card {
+      background: var(--puna-soft);
+      border-radius: 24px;
+      padding: 2.5rem 2rem 2rem;
+      border: 1px solid rgba(128,103,99,0.1);
+      overflow-x: auto;
+      text-align: center;
+    }
+
+    .floor-plan-card h3 {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--puna-cacao);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+
+    .floor-plan-card .scale-note {
+      font-size: 0.75rem;
+      color: var(--puna-dark);
+      opacity: 0.55;
+      margin-bottom: 1.8rem;
+    }
+
+    .legend {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(128,103,99,0.1);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.78rem;
+      color: var(--puna-dark);
+      opacity: 0.75;
+    }
+
+    .legend-swatch {
+      width: 22px;
+      height: 12px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    /* ── Schedule ── */
+    .schedule-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+    }
+
+    .month-block {
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid rgba(128,103,99,0.1);
+      box-shadow: 0 4px 24px rgba(93,75,71,0.06);
+    }
+
+    .month-header {
+      padding: 1.3rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .month-header.june  { background: var(--puna-cacao); }
+    .month-header.july  { background: var(--puna-dark);  }
+
+    .month-icon { font-size: 1.8rem; }
+
+    .month-header-text h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--puna-cream);
+      letter-spacing: 0.5px;
+    }
+
+    .month-header-text p {
+      font-size: 0.78rem;
+      color: var(--puna-cream);
+      opacity: 0.72;
+    }
+
+    .month-items {
+      background: var(--puna-soft);
+      padding: 1.5rem 1.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+
+    .sched-item {
+      background: #fff;
+      border-radius: 14px;
+      padding: 1.2rem 1.4rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      border-left: 4px solid var(--puna-mauve);
+      box-shadow: 0 2px 8px rgba(128,103,99,0.06);
+    }
+
+    .sched-item.highlight { border-left-color: var(--puna-terracota); }
+    .sched-item.info      { border-left-color: var(--puna-verde-calma); }
+    .sched-item.internal  { border-left-color: #c9b8b4; background: #fdf9f7; }
+
+    .sched-icon { font-size: 1.5rem; flex-shrink: 0; padding-top: 0.05rem; }
+
+    .sched-body h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--puna-cacao);
+      margin-bottom: 0.4rem;
+    }
+
+    .sched-body p {
+      font-size: 0.86rem;
+      color: var(--puna-dark);
+      opacity: 0.82;
+      line-height: 1.6;
+    }
+
+    .sched-body ul {
+      margin: 0.5rem 0 0 1rem;
+      font-size: 0.86rem;
+      color: var(--puna-dark);
+      opacity: 0.82;
+    }
+
+    .sched-body ul li { margin-bottom: 0.3rem; }
+
+    .tag-internal {
+      display: inline-block;
+      background: #f0e8e4;
+      color: var(--puna-cacao);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 0.2rem 0.7rem;
+      border-radius: 10px;
+      margin-bottom: 0.45rem;
+    }
+
+    /* ── Notes grid ── */
+    .notes-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .note-card {
+      background: var(--puna-soft);
+      border-radius: 20px;
+      padding: 2rem;
+      border: 1px solid rgba(128,103,99,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .note-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 14px 35px rgba(93,75,71,0.1);
+    }
+
+    .note-card .note-icon { font-size: 2.2rem; margin-bottom: 0.8rem; }
+
+    .note-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--puna-cacao);
+      margin-bottom: 0.6rem;
+    }
+
+    .note-card p, .note-card li {
+      font-size: 0.87rem;
+      color: var(--puna-dark);
+      opacity: 0.82;
+      line-height: 1.65;
+    }
+
+    .note-card ul { margin: 0.5rem 0 0 1.1rem; }
+    .note-card li { margin-bottom: 0.3rem; }
+
+    .note-pending {
+      display: inline-block;
+      margin-top: 0.8rem;
+      font-size: 0.78rem;
+      font-style: italic;
+      color: var(--puna-cacao);
+      opacity: 0.6;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      background: var(--puna-dark);
+      color: var(--puna-cream);
+      text-align: center;
+      padding: 2.5rem 2rem;
+      margin-top: 1rem;
+    }
+
+    .footer p { font-size: 0.84rem; opacity: 0.7; line-height: 1.8; }
+    .footer strong { color: var(--puna-mauve); opacity: 1; }
+    .footer a { color: var(--puna-mauve); text-decoration: none; }
+
+    /* ── Animations ── */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 680px) {
+      .notes-grid       { grid-template-columns: 1fr; }
+      .nav-links        { display: none; }
+      .hero-divider     { display: none; }
+      .hero h1          { font-size: 2.2rem; }
+      .floor-plan-card  { padding: 1.5rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navbar ── -->
+  <nav class="navbar">
+    <span class="nav-brand">✦ PUNA</span>
+    <div class="nav-links">
+      <a href="#distribucion">Distribución</a>
+      <a href="#cronograma">Cronograma</a>
+      <a href="#espacio">Espacio</a>
+    </div>
+    <span class="nav-badge">Equipo Interno · Profes</span>
+  </nav>
+
+  <!-- ── Hero ── -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-badge">Documento Interno · Mayo 2026</div>
+      <h1>Espacio Pilates<br><span>Guía para Profes</span></h1>
+      <p class="hero-subtitle">
+        Distribución del Salón 2, cronograma de transición<br>
+        y organización del espacio compartido.
+      </p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <strong>3</strong>
+          <span>Camas Reformer</span>
+        </div>
+        <div class="hero-divider"></div>
+        <div class="hero-stat">
+          <strong>6×3 m</strong>
+          <span>Salón 2</span>
+        </div>
+        <div class="hero-divider"></div>
+        <div class="hero-stat">
+          <strong>Jun–Jul</strong>
+          <span>Transición</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Distribución ── -->
+  <section class="section" id="distribucion">
+    <span class="section-label">Salón 2</span>
+    <h2>Distribución de Camas Reformer</h2>
+    <p class="section-desc">
+      Las 3 camas quedan alineadas contra la pared superior del salón (6 × 3 m),
+      con 60 cm de separación entre sí y 60 cm desde la pared derecha.
+      El acceso al salón es por la abertura central de la pared inferior.
+    </p>
+
+    <div class="floor-plan-card">
+      <h3>Salón 2 — Vista en Planta</h3>
+      <p class="scale-note">Plano orientativo · Escala aproximada 1 m = 73 px · Cotas en metros</p>
+
+      <!--
+        Room coords: x=100, y=70 · width=440px (6 m) · height=220px (3 m)
+        Scale: 73.3 px/m → 60 cm = 44 px
+        Bed: width=48px (0.65 m) · length=183px (2.5 m)
+
+        Bed positions from right wall (x=540):
+          Bed 1 (R): x=448..496  gap to wall = 44px = 60 cm
+          Bed 2 (M): x=356..404  gap to B1   = 44px = 60 cm
+          Bed 3 (L): x=264..312  gap to B2   = 44px = 60 cm
+          Free left  space: 100..264 = 164px ≈ 2.24 m
+          Circulation at foot: y=253..290 = 37px ≈ 0.50 m
+      -->
+      <svg xmlns="http://www.w3.org/2000/svg"
+           viewBox="0 0 680 360"
+           style="max-width:100%; height:auto; font-family:'Poppins',Arial,sans-serif;">
+
+        <defs>
+          <!-- Subtle grid pattern (1 m = 73.3 px → minor grid every 73.3/4 ≈ 18 px) -->
+          <pattern id="minorGrid" width="18.3" height="18.3" patternUnits="userSpaceOnUse">
+            <path d="M 18.3 0 L 0 0 0 18.3" fill="none" stroke="#e2d9d4" stroke-width="0.4"/>
+          </pattern>
+          <pattern id="majorGrid" width="73.3" height="73.3" patternUnits="userSpaceOnUse">
+            <rect width="73.3" height="73.3" fill="url(#minorGrid)"/>
+            <path d="M 73.3 0 L 0 0 0 73.3" fill="none" stroke="#d4c9c4" stroke-width="0.8"/>
+          </pattern>
+          <!-- Arrowhead markers -->
+          <marker id="arrowStart" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto-start-reverse">
+            <path d="M 0 3 L 6 0 L 6 6 Z" fill="#C97D68"/>
+          </marker>
+          <marker id="arrowEnd" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+            <path d="M 0 0 L 6 3 L 0 6 Z" fill="#C97D68"/>
+          </marker>
+          <marker id="dimStart" markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" orient="auto-start-reverse">
+            <path d="M 0 2.5 L 5 0 L 5 5 Z" fill="#806763"/>
+          </marker>
+          <marker id="dimEnd" markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" orient="auto">
+            <path d="M 0 0 L 5 2.5 L 0 5 Z" fill="#806763"/>
+          </marker>
+        </defs>
+
+        <!-- ── Floor fill + grid ── -->
+        <rect x="100" y="70" width="440" height="220" fill="#fdf9f7"/>
+        <rect x="100" y="70" width="440" height="220" fill="url(#majorGrid)"/>
+
+        <!-- ── Free left zone tint ── -->
+        <rect x="104" y="74" width="156" height="175" fill="#C6CDBC" fill-opacity="0.18" rx="3"/>
+        <text x="182" y="156" text-anchor="middle" fill="#6b8060"
+              font-size="9" font-style="italic" font-family="Poppins,sans-serif">Espacio libre</text>
+        <text x="182" y="169" text-anchor="middle" fill="#6b8060"
+              font-size="9" font-style="italic" font-family="Poppins,sans-serif">≈ 2,24 m</text>
+
+        <!-- ── Circulation strip at foot ── -->
+        <rect x="104" y="257" width="432" height="29" fill="#C6CDBC" fill-opacity="0.25" rx="3"/>
+        <text x="320" y="276" text-anchor="middle" fill="#6b8060"
+              font-size="8" font-style="italic" font-family="Poppins,sans-serif">
+          Pasillo de circulación ≈ 0,50 m
+        </text>
+
+        <!-- ══ WALLS ══ -->
+        <!-- Top wall -->
+        <line x1="96"  y1="70"  x2="544" y2="70"  stroke="#5D4B47" stroke-width="8" stroke-linecap="square"/>
+        <!-- Left wall -->
+        <line x1="100" y1="66"  x2="100" y2="294" stroke="#5D4B47" stroke-width="8" stroke-linecap="square"/>
+        <!-- Right wall -->
+        <line x1="540" y1="66"  x2="540" y2="294" stroke="#5D4B47" stroke-width="8" stroke-linecap="square"/>
+        <!-- Bottom wall — left segment -->
+        <line x1="96"  y1="290" x2="255" y2="290" stroke="#5D4B47" stroke-width="8" stroke-linecap="square"/>
+        <!-- Bottom wall — right segment -->
+        <line x1="385" y1="290" x2="544" y2="290" stroke="#5D4B47" stroke-width="8" stroke-linecap="square"/>
+
+        <!-- ── Opening / door indicator ── -->
+        <!-- Door jambs -->
+        <line x1="255" y1="286" x2="255" y2="302" stroke="#9a8280" stroke-width="2"/>
+        <line x1="385" y1="286" x2="385" y2="302" stroke="#9a8280" stroke-width="2"/>
+        <!-- Swing arc (optional visual) -->
+        <path d="M 255 290 Q 320 330 385 290" fill="none" stroke="#9a8280"
+              stroke-width="1.2" stroke-dasharray="5,3"/>
+        <!-- Opening label -->
+        <text x="320" y="325" text-anchor="middle" fill="#806763"
+              font-size="9" font-weight="600" font-family="Poppins,sans-serif">
+          🚪 Abertura / Acceso   (≈ 1,77 m)
+        </text>
+
+        <!-- ══ BED 1 — Reformer 1 (rightmost) ══ -->
+        <!-- x=448, y=70, w=48, h=183 -->
+        <rect x="448" y="70"  width="48" height="183" fill="#D1A99A" stroke="#806763" stroke-width="1.8" rx="3"/>
+        <!-- Head cushion -->
+        <rect x="452" y="74"  width="40" height="22"  fill="#C49088" rx="2" opacity="0.7"/>
+        <!-- Internal carriage guides -->
+        <line x1="448" y1="116" x2="496" y2="116" stroke="#806763" stroke-width="0.8" opacity="0.45"/>
+        <line x1="448" y1="162" x2="496" y2="162" stroke="#806763" stroke-width="0.8" opacity="0.45"/>
+        <line x1="448" y1="208" x2="496" y2="208" stroke="#806763" stroke-width="0.8" opacity="0.45"/>
+        <!-- Label -->
+        <text x="472" y="135" text-anchor="middle" fill="#5D4B47"
+              font-size="9" font-weight="700" font-family="Poppins,sans-serif">R1</text>
+        <text x="472" y="148" text-anchor="middle" fill="#806763"
+              font-size="7.5" font-family="Poppins,sans-serif">Reformer</text>
+
+        <!-- ══ BED 2 — Reformer 2 (center) ══ -->
+        <!-- x=356, y=70, w=48, h=183 -->
+        <rect x="356" y="70"  width="48" height="183" fill="#D1A99A" stroke="#806763" stroke-width="1.8" rx="3"/>
+        <rect x="360" y="74"  width="40" height="22"  fill="#C49088" rx="2" opacity="0.7"/>
+        <line x1="356" y1="116" x2="404" y2="116" stroke="#806763" stroke-width="0.8" opacity="0.45"/>
+        <line x1="356" y1="162" x2="404" y2="162" stroke="#806763" stroke-width="0.8" opacity="0.45"/>
+        <line x1="356" y1="208" x2="404" y2="208" stroke="#806763" stroke-width="0.8" opacity="0.45"/>
+        <text x="380" y="135" text-anchor="middle" fill="#5D4B47"
+              font-size="9" font-weight="700" font-family="Poppins,sans-serif">R2</text>
+        <text x="380" y="148" text-anchor="middle" fill="#806763"
+              font-size="7.5" font-family="Poppins,sans-serif">Reformer</text>
+
+        <!-- ══ BED 3 — Reformer 3 (leftmost of the three) ══ -->
+        <!-- x=264, y=70, w=48, h=183 -->
+        <rect x="264" y="70"  width="48" height="183" fill="#D1A99A" stroke="#806763" stroke-width="1.8" rx="3"/>
+        <rect x="268" y="74"  width="40" height="22"  fill="#C49088" rx="2" opacity="0.7"/>
+        <line x1="264" y1="116" x2="312" y2="116" stroke="#806763" stroke-width="0.8" opacity="0.45"/>
+        <line x1="264" y1="162" x2="312" y2="162" stroke="#806763" stroke-width="0.8" opacity="0.45"/>
+        <line x1="264" y1="208" x2="312" y2="208" stroke="#806763" stroke-width="0.8" opacity="0.45"/>
+        <text x="288" y="135" text-anchor="middle" fill="#5D4B47"
+              font-size="9" font-weight="700" font-family="Poppins,sans-serif">R3</text>
+        <text x="288" y="148" text-anchor="middle" fill="#806763"
+              font-size="7.5" font-family="Poppins,sans-serif">Reformer</text>
+
+        <!-- ══ GAP DIMENSIONS (60 cm between beds / wall) ══ -->
+        <!-- Gap: right wall → R1  (x 496..540, mid=518) -->
+        <line x1="498" y1="180" x2="538" y2="180"
+              stroke="#C97D68" stroke-width="1.2"
+              marker-start="url(#arrowStart)" marker-end="url(#arrowEnd)"/>
+        <text x="518" y="174" text-anchor="middle" fill="#C97D68"
+              font-size="8" font-weight="600" font-family="Poppins,sans-serif">60 cm</text>
+
+        <!-- Gap: R1 → R2  (x 404..448, mid=426) -->
+        <line x1="406" y1="180" x2="446" y2="180"
+              stroke="#C97D68" stroke-width="1.2"
+              marker-start="url(#arrowStart)" marker-end="url(#arrowEnd)"/>
+        <text x="426" y="174" text-anchor="middle" fill="#C97D68"
+              font-size="8" font-weight="600" font-family="Poppins,sans-serif">60 cm</text>
+
+        <!-- Gap: R2 → R3  (x 312..356, mid=334) -->
+        <line x1="314" y1="180" x2="354" y2="180"
+              stroke="#C97D68" stroke-width="1.2"
+              marker-start="url(#arrowStart)" marker-end="url(#arrowEnd)"/>
+        <text x="334" y="174" text-anchor="middle" fill="#C97D68"
+              font-size="8" font-weight="600" font-family="Poppins,sans-serif">60 cm</text>
+
+        <!-- ══ ROOM DIMENSIONS ══ -->
+        <!-- Width: 6 m (below room) -->
+        <line x1="100" y1="310" x2="540" y2="310"
+              stroke="#806763" stroke-width="1"
+              marker-start="url(#dimStart)" marker-end="url(#dimEnd)"/>
+        <text x="320" y="326" text-anchor="middle" fill="#5D4B47"
+              font-size="10.5" font-weight="600" font-family="Poppins,sans-serif">6,00 m</text>
+
+        <!-- Depth: 3 m (right of room) -->
+        <line x1="560" y1="70" x2="560" y2="290"
+              stroke="#806763" stroke-width="1"
+              marker-start="url(#dimStart)" marker-end="url(#dimEnd)"/>
+        <text x="576" y="183" text-anchor="middle" fill="#5D4B47"
+              font-size="10.5" font-weight="600" font-family="Poppins,sans-serif"
+              transform="rotate(90,576,183)">3,00 m</text>
+
+        <!-- Bed length: 2.5 m (left of room) -->
+        <line x1="80" y1="70" x2="80" y2="253"
+              stroke="#C6CDBC" stroke-width="1"
+              marker-start="url(#dimStart)" marker-end="url(#dimEnd)"/>
+        <text x="64" y="164" text-anchor="middle" fill="#806763"
+              font-size="8.5" font-weight="500" font-family="Poppins,sans-serif"
+              transform="rotate(-90,64,164)">2,50 m</text>
+
+        <!-- Compass -->
+        <text x="620" y="84" text-anchor="middle" fill="#806763"
+              font-size="26" opacity="0.35" font-family="Poppins,sans-serif">↑</text>
+        <text x="620" y="100" text-anchor="middle" fill="#9a8280"
+              font-size="9" font-family="Poppins,sans-serif">NORTE</text>
+
+      </svg>
+
+      <!-- Legend -->
+      <div class="legend">
+        <div class="legend-item">
+          <div class="legend-swatch" style="background:#D1A99A; border:1.5px solid #806763;"></div>
+          Cama Pilates Reformer
+        </div>
+        <div class="legend-item">
+          <div class="legend-swatch" style="background:#C6CDBC; opacity:0.45;"></div>
+          Espacio disponible
+        </div>
+        <div class="legend-item">
+          <div class="legend-swatch" style="background:#fdf9f7; border:1.5px dashed #9a8280;"></div>
+          Abertura / Acceso
+        </div>
+        <div class="legend-item">
+          <div class="legend-swatch" style="background:#C97D68;"></div>
+          Separación 60 cm
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Cronograma ── -->
+  <section class="section" id="cronograma">
+    <span class="section-label">Planificación</span>
+    <h2>Cronograma de Transición</h2>
+    <p class="section-desc">
+      Organización de actividades durante la llegada de las camas Reformer,
+      la reformulación del Salón 2 y el lanzamiento de nuevas propuestas.
+    </p>
+
+    <div class="schedule-stack">
+
+      <!-- ─ JUNIO ─ -->
+      <div class="month-block">
+        <div class="month-header june">
+          <span class="month-icon">🌿</span>
+          <div class="month-header-text">
+            <h3>Junio 2026</h3>
+            <p>Instalación y transición del salón</p>
+          </div>
+        </div>
+        <div class="month-items">
+
+          <div class="sched-item internal">
+            <span class="sched-icon">🔒</span>
+            <div class="sched-body">
+              <div class="tag-internal">Solo equipo — No comunicar al cliente</div>
+              <h4>Yoga: suspensión temporal sin aviso previo</h4>
+              <p>
+                Hasta la llegada de las camas, todo continúa con normalidad.
+                El aviso de suspensión de Yoga se hará al cliente <strong>en el momento</strong>
+                en que la actividad quede afectada, ofreciendo traslado a otra actividad.
+                La gestión del cambio la realiza el <strong>STAFF directamente</strong>.
+                No adelantar información a los clientes.
+              </p>
+            </div>
+          </div>
+
+          <div class="sched-item highlight">
+            <span class="sched-icon">🛏️</span>
+            <div class="sched-body">
+              <h4>Llegada de camas + Reformulación Salón 2</h4>
+              <p>
+                Una vez instaladas y reorganizado el salón, el cronograma de Junio
+                operará al <strong>50% de la capacidad</strong> del espacio, priorizando:
+              </p>
+              <ul>
+                <li>
+                  <strong>Slow Pilates</strong> — Grupos de 3 personas,
+                  Lunes / Miércoles / Viernes a las <strong>11 hs y 16 hs</strong>.
+                  Se evalúa sumar horario adicional Martes y Jueves.
+                </li>
+                <li>
+                  <strong>Resto del espacio</strong> — Pilates tradicional:
+                  reagendamientos, nuevas ventas en horarios pico o Sportclub.
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ─ JULIO ─ -->
+      <div class="month-block">
+        <div class="month-header july">
+          <span class="month-icon">⚡</span>
+          <div class="month-header-text">
+            <h3>Julio 2026</h3>
+            <p>Nuevas clases y operación consolidada</p>
+          </div>
+        </div>
+        <div class="month-items">
+
+          <div class="sched-item info">
+            <span class="sched-icon">🎓</span>
+            <div class="sched-body">
+              <h4>Nuevas clases post-curso de Stretching</h4>
+              <p>
+                Al finalizar el curso de Stretching, se comunicarán al equipo de profes
+                nuevas propuestas de clases para fomentar hacia los clientes.
+                Ideas en consideración:
+              </p>
+              <ul>
+                <li><strong>Pilates Stretching</strong></li>
+                <li><strong>Pilates Dinámico</strong></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sched-item">
+            <span class="sched-icon">🪞</span>
+            <div class="sched-body">
+              <h4>Operación simultánea — Ambos salones</h4>
+              <p>
+                Los dos salones funcionarán en paralelo, con clases independientes.
+                Lineamientos generales:
+              </p>
+              <ul>
+                <li>Cortina cerrada o abierta según el caso.</li>
+                <li>
+                  Pueden funcionar como <strong>clases espejadas</strong>
+                  o compartir música con coordinación entre profes.
+                </li>
+                <li>Cada clase mantiene su propia dinámica e instructora.</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Espacio ── -->
+  <section class="section" id="espacio">
+    <span class="section-label">Espacios del Local</span>
+    <h2>Organización General del Espacio</h2>
+    <p class="section-desc">
+      Definiciones sobre el uso de los diferentes ámbitos del local
+      que impactan en el día a día del equipo de profes y staff.
+    </p>
+
+    <div class="notes-grid">
+
+      <div class="note-card">
+        <div class="note-icon">🛁</div>
+        <h3>Masoterapia</h3>
+        <p>La continuidad del servicio queda sujeta a la disponibilidad de espacio
+        una vez instaladas las camas Reformer. Se evaluarán las siguientes opciones:</p>
+        <ul>
+          <li>Espacio restante del Salón 2, separado visualmente con cortina.</li>
+          <li>Última opción: Salón 3 (oficina) en horarios acotados.</li>
+        </ul>
+        <span class="note-pending">⏳ A definir luego de la instalación final.</span>
+      </div>
+
+      <div class="note-card">
+        <div class="note-icon">💼</div>
+        <h3>Salón 3 — Cowork Compartido</h3>
+        <p>
+          El Salón 3 contará con una <strong>mesa de cowork común</strong>
+          para STAFF y PROFES. Será el espacio centralizado del local para:
+        </p>
+        <ul>
+          <li>Descanso y colaciones</li>
+          <li>Planificación y estudio</li>
+          <li>Almuerzo</li>
+        </ul>
+        <p style="margin-top:0.7rem;">
+          Un solo espacio para todo el equipo. 🤝
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer class="footer">
+    <p>
+      <strong>Espacio Puna</strong> · Documento interno para el equipo de Profes · Mayo 2026
+    </p>
+    <p>
+      Mariano Acha 2771, Villa Urquiza ·
+      <a href="https://instagram.com/espaciopuna">@espaciopuna</a> ·
+      <a href="mailto:espaciopuna@gmail.com">espaciopuna@gmail.com</a>
+    </p>
+  </footer>
+
+  <script>
+    const sections = document.querySelectorAll('.section');
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      { threshold: 0.1 }
+    );
+    sections.forEach(s => observer.observe(s));
+  </script>
+
+</body>
+</html>
