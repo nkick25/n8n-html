@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grilla de Profes — Espacio Puna</title>
+  <script src="https://cdn.tailwindcss.com" async></script>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    * { font-family: 'Syne', sans-serif; }
+
+    :root {
+      --bg: #0c0e14;
+      --surface: #13161f;
+      --surface2: #1a1e2a;
+      --border: rgba(255,255,255,0.07);
+      --text: #e2e8f0;
+      --muted: #6b7280;
+      --accent: #f97316;
+      --hour-h: 80px;
+    }
+
+    body { background: var(--bg); color: var(--text); margin: 0; min-height: 100vh; }
+
+    /* ── Schedule grid ─────────────────────────────────────── */
+    .schedule-wrapper {
+      overflow: auto;
+      max-height: calc(100vh - 310px);
+      min-height: 300px;
+    }
+
+    .schedule-outer {
+      display: flex;
+      min-width: 820px;
+    }
+
+    .time-col {
+      width: 60px;
+      flex-shrink: 0;
+      position: sticky;
+      left: 0;
+      z-index: 10;
+      background: var(--bg);
+    }
+
+    .time-spacer { height: 58px; border-right: 1px solid var(--border); }
+
+    .time-label {
+      height: var(--hour-h);
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-end;
+      padding: 4px 8px 0 0;
+      font-size: 10px;
+      color: var(--muted);
+      border-right: 1px solid var(--border);
+      letter-spacing: 0.05em;
+    }
+
+    .days-grid { display: flex; flex: 1; }
+
+    .day-col {
+      flex: 1;
+      min-width: 100px;
+      border-right: 1px solid var(--border);
+    }
+    .day-col:last-child { border-right: none; }
+
+    .day-header {
+      height: 58px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      z-index: 8;
+      gap: 1px;
+    }
+    .day-header .dname  { font-size: 9px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+    .day-header .dnum   { font-size: 22px; font-weight: 800; line-height: 1; }
+    .day-header.today .dnum { color: var(--accent); }
+    .day-header.today::after {
+      content: '';
+      display: block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .day-body { position: relative; }
+
+    .hour-line {
+      position: absolute;
+      left: 0; right: 0;
+      pointer-events: none;
+    }
+    .hour-line.full   { border-top: 1px solid rgba(255,255,255,0.05); }
+    .hour-line.half   { border-top: 1px dashed rgba(255,255,255,0.025); }
+
+    /* ── Class cards ─────────────────────────────────────────── */
+    .cls-card {
+      position: absolute;
+      left: 3px; right: 3px;
+      border-radius: 8px;
+      padding: 5px 7px;
+      cursor: pointer;
+      overflow: hidden;
+      transition: transform .12s ease, box-shadow .12s ease;
+      border-width: 1px;
+      border-style: solid;
+      z-index: 2;
+    }
+    .cls-card:hover { transform: scale(1.03); z-index: 6; box-shadow: 0 10px 30px rgba(0,0,0,.45); }
+    .cls-card .c-act  { font-size: 10px; font-weight: 700; line-height: 1.2; }
+    .cls-card .c-pro  { font-size: 9px; opacity: .75; margin-top: 2px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+    .cls-card .c-time { font-size: 8px; opacity: .55; margin-top: 3px; }
+    .cls-card .c-cap  { position: absolute; top: 5px; right: 6px; font-size: 8px; opacity: .6; }
+    .cls-card.cancelled { opacity: .35; filter: grayscale(.6); }
+
+    /* current-time line */
+    .now-line {
+      position: absolute; left: 0; right: 0; height: 2px; background: #ef4444; z-index: 5; pointer-events: none;
+    }
+    .now-line::before {
+      content: '';
+      position: absolute; left: -4px; top: -4px;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: #ef4444;
+    }
+
+    /* ── Balance bars ─────────────────────────────────────────── */
+    .bal-track { background: rgba(255,255,255,.08); border-radius: 999px; height: 7px; overflow: hidden; }
+    .bal-fill  { height: 100%; border-radius: 999px; transition: width .5s ease; }
+
+    /* ── Stat cards ────────────────────────────────────────────── */
+    .stat-card {
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 14px;
+      padding: 14px 16px;
+    }
+
+    /* ── Modal ───────────────────────────────────────────────── */
+    .modal-bg {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.72);
+      backdrop-filter: blur(5px);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 100;
+    }
+    .modal-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px;
+      width: 340px; max-width: 92vw;
+    }
+
+    /* ── Config panel ────────────────────────────────────────── */
+    .cfg-input {
+      width: 100%;
+      background: rgba(0,0,0,.35);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 8px;
+      padding: 8px 12px;
+      color: var(--text);
+      font-size: 13px;
+      outline: none;
+      transition: border-color .15s;
+    }
+    .cfg-input:focus { border-color: rgba(249,115,22,.45); }
+
+    /* ── Scrollbars ──────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,.1); border-radius: 3px; }
+
+    /* ── Demo banner ─────────────────────────────────────────── */
+    .demo-banner {
+      position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+      background: rgba(234,179,8,.15); border: 1px solid rgba(234,179,8,.35);
+      color: #fde68a; font-size: 11px; padding: 8px 16px;
+      border-radius: 999px; z-index: 50; white-space: nowrap;
+      animation: fadeup .4s ease;
+    }
+    @keyframes fadeup { from { opacity: 0; transform: translateX(-50%) translateY(10px); } }
+  </style>
+</head>
+
+<body>
+<div id="app" class="p-4 md:p-6">
+
+  <!-- ── HEADER ─────────────────────────────────────────────── -->
+  <div class="flex flex-wrap items-center justify-between gap-4 mb-5">
+    <div>
+      <div class="text-xs font-semibold tracking-widest uppercase text-orange-400 mb-0.5">Espacio Puna</div>
+      <h1 class="text-xl md:text-2xl font-extrabold leading-tight">Grilla de Profes</h1>
+    </div>
+
+    <!-- week nav -->
+    <div class="flex items-center gap-2">
+      <button onclick="changeWeek(-1)" class="w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition" aria-label="Semana anterior">
+        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <div class="text-center w-44">
+        <div id="lbl-week" class="font-bold text-sm leading-tight">—</div>
+        <div id="lbl-year" class="text-xs text-gray-500"></div>
+      </div>
+      <button onclick="changeWeek(1)" class="w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition" aria-label="Semana siguiente">
+        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+      <button onclick="goToToday()" class="px-3 py-1 rounded-lg bg-orange-500/15 text-orange-400 hover:bg-orange-500/25 text-xs font-semibold transition">Hoy</button>
+    </div>
+
+    <!-- config btn -->
+    <button onclick="toggleConfig()" title="Configurar Supabase" class="w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition">
+      <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v2m0 16v2M4.22 4.22l1.42 1.42m12.72 12.72 1.42 1.42M2 12h2m16 0h2M4.22 19.78l1.42-1.42m12.72-12.72 1.42-1.42"/></svg>
+    </button>
+  </div>
+
+  <!-- ── CONFIG PANEL ──────────────────────────────────────── -->
+  <div id="cfg-panel" class="hidden mb-5 bg-white/[.03] border border-white/[.07] rounded-xl p-4">
+    <p class="text-xs uppercase tracking-widest text-gray-400 font-semibold mb-3">Configuración Supabase</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+      <div>
+        <label class="block text-xs text-gray-400 mb-1">Project URL</label>
+        <input id="cfg-url" type="text" placeholder="https://xxxxxx.supabase.co" class="cfg-input">
+      </div>
+      <div>
+        <label class="block text-xs text-gray-400 mb-1">Anon Key</label>
+        <input id="cfg-key" type="password" placeholder="eyJhbGciOi..." class="cfg-input">
+      </div>
+    </div>
+    <div class="flex gap-2 mt-3">
+      <button onclick="saveConfig()" class="px-4 py-1.5 bg-orange-500 hover:bg-orange-600 text-white text-xs font-semibold rounded-lg transition">Guardar y recargar</button>
+      <button onclick="useDemoData()" class="px-4 py-1.5 bg-white/10 hover:bg-white/15 text-xs font-semibold rounded-lg transition">Datos demo</button>
+    </div>
+  </div>
+
+  <!-- ── STATS ─────────────────────────────────────────────── -->
+  <div id="stats" class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5"></div>
+
+  <!-- ── MAIN GRID ─────────────────────────────────────────── -->
+  <div class="bg-white/[.03] border border-white/[.06] rounded-2xl overflow-hidden mb-5">
+    <div class="schedule-wrapper">
+      <div id="schedule" class="schedule-outer"></div>
+    </div>
+  </div>
+
+  <!-- ── BALANCE ───────────────────────────────────────────── -->
+  <div class="bg-white/[.03] border border-white/[.06] rounded-2xl p-5">
+    <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+      <h2 class="font-bold text-sm">Balance de Carga — Profes</h2>
+      <div class="flex items-center gap-3 text-xs text-gray-400">
+        <span class="flex items-center gap-1"><i class="w-2 h-2 rounded-full bg-emerald-400 inline-block"></i> Balanceado</span>
+        <span class="flex items-center gap-1"><i class="w-2 h-2 rounded-full bg-amber-400 inline-block"></i> Leve desvío</span>
+        <span class="flex items-center gap-1"><i class="w-2 h-2 rounded-full bg-red-400 inline-block"></i> Desbalanceado</span>
+      </div>
+    </div>
+    <div id="balance" class="space-y-3"></div>
+  </div>
+
+</div>
+
+<!-- ── MODAL ─────────────────────────────────────────────────── -->
+<div id="modal" class="modal-bg hidden" onclick="onModalBgClick(event)">
+  <div class="modal-box">
+    <div id="modal-body"></div>
+    <button onclick="closeModal()" class="mt-4 w-full py-2 bg-white/10 hover:bg-white/15 rounded-xl text-sm transition font-semibold">Cerrar</button>
+  </div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   CONFIGURATION
+   Edit here OR use the ⚙️ panel in the UI
+═══════════════════════════════════════════════════════════════ */
+const CFG = {
+  supabaseUrl:  localStorage.getItem('puna_sb_url')  || '',
+  supabaseKey:  localStorage.getItem('puna_sb_key')  || '',
+  startHour:    7,   // grid starts at 07:00
+  endHour:      22,  // grid ends at 22:00
+  HOUR_PX:      80,  // pixels per hour
+};
+
+/* ═══════════════════════════════════════════════════════════════
+   CONSTANTS & HELPERS
+═══════════════════════════════════════════════════════════════ */
+const DAYS_SHORT = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+const MONTHS     = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+
+// 8 instructor colour slots (bg, border, text, bar)
+const PALETTE = [
+  ['rgba(249,115,22,.22)','rgba(249,115,22,.5)','#fdba74','#f97316'],
+  ['rgba(139,92,246,.22)','rgba(139,92,246,.5)','#c4b5fd','#8b5cf6'],
+  ['rgba(20,184,166,.22)','rgba(20,184,166,.5)','#5eead4','#14b8a6'],
+  ['rgba(236,72,153,.22)','rgba(236,72,153,.5)','#f9a8d4','#ec4899'],
+  ['rgba(59,130,246,.22)','rgba(59,130,246,.5)','#93c5fd','#3b82f6'],
+  ['rgba(34,197,94,.22)', 'rgba(34,197,94,.5)', '#86efac','#22c55e'],
+  ['rgba(234,179,8,.22)', 'rgba(234,179,8,.5)', '#fde047','#eab308'],
+  ['rgba(239,68,68,.22)', 'rgba(239,68,68,.5)', '#fca5a5','#ef4444'],
+];
+
+let _colorMap = {}, _colorIdx = 0;
+
+function instrColor(name) {
+  if (!_colorMap[name]) { _colorMap[name] = PALETTE[_colorIdx % PALETTE.length]; _colorIdx++; }
+  return _colorMap[name];
+}
+
+function pad2(n) { return String(n).padStart(2,'0'); }
+function fmtTime(d) { return `${pad2(d.getHours())}:${pad2(d.getMinutes())}`; }
+
+function isToday(d) {
+  const t = new Date();
+  return d.getDate()===t.getDate() && d.getMonth()===t.getMonth() && d.getFullYear()===t.getFullYear();
+}
+
+/* ── Week helpers ─────────────────────────────────────────────── */
+let weekOffset = 0;
+
+function weekBounds(off=0) {
+  const now = new Date();
+  const dow = now.getDay();           // 0=Sun
+  const toMon = dow===0 ? -6 : 1-dow;
+  const mon = new Date(now); mon.setDate(now.getDate()+toMon+off*7); mon.setHours(0,0,0,0);
+  const sun = new Date(mon); sun.setDate(mon.getDate()+6); sun.setHours(23,59,59,999);
+  return {start:mon, end:sun};
+}
+
+function weekDays(off=0) {
+  const {start} = weekBounds(off);
+  return Array.from({length:7},(_,i)=>{ const d=new Date(start); d.setDate(start.getDate()+i); return d; });
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   FETCH
+═══════════════════════════════════════════════════════════════ */
+async function fetchClasses(start, end) {
+  if (!CFG.supabaseUrl || !CFG.supabaseKey) return null;
+
+  const url = new URL(`${CFG.supabaseUrl}/rest/v1/classes`);
+  url.searchParams.set('select','id,name,instructor,scheduled_at,duration_minutes,max_capacity,status,activities(name)');
+  url.searchParams.set('scheduled_at', `gte.${start.toISOString()}`);
+  url.searchParams.append('scheduled_at', `lte.${end.toISOString()}`);
+  url.searchParams.set('order','scheduled_at');
+
+  const res = await fetch(url.toString(), {
+    headers: { 'apikey': CFG.supabaseKey, 'Authorization': `Bearer ${CFG.supabaseKey}` }
+  });
+  if (!res.ok) throw new Error(`Supabase ${res.status}: ${await res.text()}`);
+  return res.json();
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   DEMO DATA GENERATOR
+═══════════════════════════════════════════════════════════════ */
+function demoData(days) {
+  const profes = ['Valentina R.','Luciana M.','Sofía C.','Agustín P.','Carla B.'];
+  const acts   = ['Pilates Mat','Yoga Flow','Stretching','Reformer','Vinyasa','Core Flex'];
+  // [dayIdx, h, m, durMin, profeIdx, actIdx, cap]
+  const slots = [
+    [0,8,0,60,0,0,12],[0,9,0,60,1,1,10],[0,10,0,60,2,2,8],[0,18,0,60,0,3,15],[0,19,0,60,1,4,12],
+    [1,8,30,60,3,5,6],[1,10,0,90,0,0,12],[1,17,0,60,4,1,10],[1,18,0,60,2,2,8],[1,19,30,60,1,3,15],
+    [2,7,30,60,0,4,12],[2,9,0,60,3,5,8],[2,11,0,60,1,0,10],[2,18,30,60,2,1,12],[2,20,0,60,4,2,8],
+    [3,8,0,60,0,3,15],[3,9,30,60,2,4,12],[3,19,0,60,3,5,10],[3,20,0,60,4,0,8],
+    [4,8,0,60,1,0,8],[4,10,0,60,4,1,12],[4,17,30,60,0,2,15],[4,18,30,90,2,3,12],
+    [5,9,0,60,1,4,10],[5,10,30,60,3,5,8],[5,11,30,60,0,0,12],[5,12,30,60,4,2,10],
+    [6,10,0,60,2,1,15],[6,11,0,60,4,2,12],[6,12,0,60,1,3,10],
+  ];
+  return slots.map((s,i)=>{
+    const d=new Date(days[s[0]]); d.setHours(s[1],s[2],0,0);
+    return { id:`d${i}`, name:acts[s[5]], instructor:profes[s[4]],
+             scheduled_at:d.toISOString(), duration_minutes:s[3],
+             max_capacity:s[6], status:'active', activities:{name:acts[s[5]]} };
+  });
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RENDER — WEEK LABEL
+═══════════════════════════════════════════════════════════════ */
+function renderLabel() {
+  const {start,end} = weekBounds(weekOffset);
+  document.getElementById('lbl-week').textContent =
+    `${start.getDate()} ${MONTHS[start.getMonth()]} — ${end.getDate()} ${MONTHS[end.getMonth()]}`;
+  document.getElementById('lbl-year').textContent = start.getFullYear();
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RENDER — STATS
+═══════════════════════════════════════════════════════════════ */
+function renderStats(cls) {
+  const profes   = new Set(cls.map(c=>c.instructor)).size;
+  const totalH   = cls.reduce((s,c)=>s+c.duration_minutes/60,0);
+  const cancelled= cls.filter(c=>c.status==='cancelled').length;
+
+  document.getElementById('stats').innerHTML = [
+    ['📅 Clases semana', cls.length,  'text-white'],
+    ['🧑‍🏫 Profes activos', profes, 'text-white'],
+    ['⏱️ Horas totales',  totalH.toFixed(1)+'h', 'text-white'],
+    ['❌ Canceladas',     cancelled, cancelled>0?'text-red-400':'text-gray-500'],
+  ].map(([lbl,val,cls_])=>`
+    <div class="stat-card">
+      <div class="text-xs text-gray-400 mb-1">${lbl}</div>
+      <div class="text-2xl font-extrabold ${cls_}">${val}</div>
+    </div>`).join('');
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RENDER — SCHEDULE GRID
+═══════════════════════════════════════════════════════════════ */
+function renderGrid(days, classes) {
+  const HOURS    = CFG.endHour - CFG.startHour;
+  const TOTAL_PX = HOURS * CFG.HOUR_PX;
+  const isThisWeek = weekOffset === 0;
+
+  // ── time column ──────────────────────────────────────────────
+  let html = `<div class="time-col"><div class="time-spacer"></div>`;
+  for (let h = CFG.startHour; h < CFG.endHour; h++) {
+    html += `<div class="time-label">${pad2(h)}:00</div>`;
+  }
+  html += `</div>`;
+
+  // ── days ─────────────────────────────────────────────────────
+  html += `<div class="days-grid">`;
+
+  days.forEach((day) => {
+    const today = isToday(day);
+    const dayClasses = classes.filter(c => {
+      const cd = new Date(c.scheduled_at);
+      return cd.getDate()===day.getDate() && cd.getMonth()===day.getMonth() && cd.getFullYear()===day.getFullYear();
+    });
+
+    html += `<div class="day-col">
+      <div class="day-header${today?' today':''}">
+        <span class="dname">${DAYS_SHORT[day.getDay()]}</span>
+        <span class="dnum">${day.getDate()}</span>
+      </div>
+      <div class="day-body" style="height:${TOTAL_PX}px;">`;
+
+    // hour lines
+    for (let h = 0; h < HOURS; h++) {
+      const topFull = h * CFG.HOUR_PX;
+      const topHalf = topFull + CFG.HOUR_PX / 2;
+      html += `<div class="hour-line full" style="top:${topFull}px;"></div>`;
+      html += `<div class="hour-line half" style="top:${topHalf}px;"></div>`;
+    }
+
+    // now-line
+    if (today && isThisWeek) {
+      const now = new Date();
+      const minFromTop = (now.getHours() - CFG.startHour) * 60 + now.getMinutes();
+      if (minFromTop >= 0 && minFromTop < HOURS * 60) {
+        html += `<div class="now-line" style="top:${(minFromTop/60)*CFG.HOUR_PX}px;"></div>`;
+      }
+    }
+
+    // class cards
+    dayClasses.forEach(cls => {
+      const sd   = new Date(cls.scheduled_at);
+      const ed   = new Date(sd.getTime() + cls.duration_minutes * 60000);
+      const minT = (sd.getHours() - CFG.startHour) * 60 + sd.getMinutes();
+      const topPx   = (minT / 60) * CFG.HOUR_PX;
+      const heightPx = Math.max((cls.duration_minutes / 60) * CFG.HOUR_PX - 5, 20);
+      const [bg, border, textCol] = instrColor(cls.instructor);
+      const actName = cls.activities?.name || cls.name;
+      const cancelled = cls.status === 'cancelled';
+
+      // safe JSON for onclick
+      const data = JSON.stringify({
+        name: actName, instructor: cls.instructor,
+        start: fmtTime(sd), end: fmtTime(ed),
+        duration: cls.duration_minutes, capacity: cls.max_capacity, status: cls.status
+      }).replace(/'/g, "\\'");
+
+      html += `
+        <div class="cls-card${cancelled?' cancelled':''}"
+          style="top:${topPx}px;height:${heightPx}px;background:${bg};border-color:${border};color:${textCol};"
+          onclick="openModal(JSON.parse(this.dataset.info))"
+          data-info='${data}'>
+          <div class="c-cap">👤${cls.max_capacity}</div>
+          <div class="c-act">${actName}</div>
+          ${heightPx > 34 ? `<div class="c-pro">⬡ ${cls.instructor}</div>` : ''}
+          ${heightPx > 52 ? `<div class="c-time">${fmtTime(sd)} · ${cls.duration_minutes}min</div>` : ''}
+        </div>`;
+    });
+
+    html += `</div></div>`;
+  });
+
+  html += `</div>`;
+  document.getElementById('schedule').innerHTML = html;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RENDER — BALANCE
+═══════════════════════════════════════════════════════════════ */
+function renderBalance(classes) {
+  const panel = document.getElementById('balance');
+  if (!classes.length) {
+    panel.innerHTML = `<p class="text-gray-500 text-sm text-center py-4">Sin datos</p>`;
+    return;
+  }
+
+  // aggregate per instructor
+  const map = {};
+  classes.forEach(c => {
+    if (!map[c.instructor]) map[c.instructor] = { count:0, hours:0 };
+    map[c.instructor].count++;
+    map[c.instructor].hours += c.duration_minutes / 60;
+  });
+
+  const rows    = Object.entries(map).sort((a,b)=>b[1].hours-a[1].hours);
+  const maxH    = Math.max(...rows.map(r=>r[1].hours));
+  const avgH    = rows.reduce((s,r)=>s+r[1].hours,0) / rows.length;
+  const totalH  = rows.reduce((s,r)=>s+r[1].hours,0);
+
+  panel.innerHTML = rows.map(([name, d]) => {
+    const pct = (d.hours / maxH * 100).toFixed(1);
+    const [,,textCol, barCol] = instrColor(name);
+    const ratio = d.hours / avgH;
+    const [statusTxt, statusCls] =
+      ratio < 0.5 ? ['Baja carga','text-red-400'] :
+      ratio > 1.8 ? ['Alta carga','text-amber-400'] :
+                    ['Balanceado','text-emerald-400'];
+
+    return `
+      <div class="flex items-center gap-4">
+        <div class="w-32 flex-shrink-0">
+          <div class="font-semibold text-sm truncate" style="color:${textCol}">${name}</div>
+          <div class="text-xs ${statusCls}">${statusTxt}</div>
+        </div>
+        <div class="flex-1">
+          <div class="bal-track"><div class="bal-fill" style="width:${pct}%;background:${barCol};"></div></div>
+        </div>
+        <div class="text-right w-24 flex-shrink-0">
+          <span class="font-bold text-sm">${d.hours.toFixed(1)}h</span>
+          <span class="text-gray-500 text-xs ml-1">(${d.count} cl.)</span>
+        </div>
+      </div>`;
+  }).join('');
+
+  panel.innerHTML += `
+    <div class="pt-3 border-t border-white/5 text-xs text-gray-500 flex flex-wrap gap-4">
+      <span>Promedio: <strong class="text-gray-300">${avgH.toFixed(1)}h / profe</strong></span>
+      <span>Cobertura total: <strong class="text-gray-300">${totalH.toFixed(1)}h semanales</strong></span>
+      <span>Clases sin cobertura visual en <span class="text-amber-400">naranja/rojo</span></span>
+    </div>`;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MODAL
+═══════════════════════════════════════════════════════════════ */
+function openModal(data) {
+  const [bg, border, textCol] = instrColor(data.instructor);
+  document.getElementById('modal-body').innerHTML = `
+    <div class="flex items-center gap-3 mb-5">
+      <div class="w-11 h-11 rounded-xl flex items-center justify-center text-xl"
+           style="background:${bg};border:1px solid ${border};">🧘</div>
+      <div>
+        <div class="font-extrabold text-base leading-tight">${data.name}</div>
+        <div class="text-sm mt-0.5" style="color:${textCol}">${data.instructor}</div>
+      </div>
+    </div>
+    <div class="space-y-2.5 text-sm">
+      <div class="flex justify-between"><span class="text-gray-400">Horario</span><span class="font-semibold">${data.start} – ${data.end}</span></div>
+      <div class="flex justify-between"><span class="text-gray-400">Duración</span><span>${data.duration} min</span></div>
+      <div class="flex justify-between"><span class="text-gray-400">Capacidad</span><span>${data.capacity} alumnos</span></div>
+      <div class="flex justify-between"><span class="text-gray-400">Estado</span>
+        <span class="${data.status==='active'?'text-emerald-400':'text-red-400'} font-semibold">
+          ${data.status==='active'?'✓ Activa':'✗ '+data.status}
+        </span>
+      </div>
+    </div>`;
+  document.getElementById('modal').classList.remove('hidden');
+}
+function closeModal() { document.getElementById('modal').classList.add('hidden'); }
+function onModalBgClick(e) { if (e.target===document.getElementById('modal')) closeModal(); }
+
+/* ═══════════════════════════════════════════════════════════════
+   CONFIG PANEL
+═══════════════════════════════════════════════════════════════ */
+function toggleConfig() {
+  const p = document.getElementById('cfg-panel');
+  p.classList.toggle('hidden');
+  if (!p.classList.contains('hidden')) {
+    document.getElementById('cfg-url').value = CFG.supabaseUrl;
+    document.getElementById('cfg-key').value = CFG.supabaseKey;
+  }
+}
+function saveConfig() {
+  CFG.supabaseUrl = document.getElementById('cfg-url').value.trim().replace(/\/$/,'');
+  CFG.supabaseKey = document.getElementById('cfg-key').value.trim();
+  localStorage.setItem('puna_sb_url', CFG.supabaseUrl);
+  localStorage.setItem('puna_sb_key', CFG.supabaseKey);
+  document.getElementById('cfg-panel').classList.add('hidden');
+  load();
+}
+function useDemoData() {
+  CFG.supabaseUrl = ''; CFG.supabaseKey = '';
+  document.getElementById('cfg-panel').classList.add('hidden');
+  load();
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   DEMO BANNER
+═══════════════════════════════════════════════════════════════ */
+let _bannerShown = false;
+function showBanner(msg) {
+  if (_bannerShown) return; _bannerShown = true;
+  const el = document.createElement('div');
+  el.className = 'demo-banner';
+  el.textContent = msg;
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(), 7000);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MAIN LOAD
+═══════════════════════════════════════════════════════════════ */
+async function load() {
+  _bannerShown = false;
+  _colorMap = {}; _colorIdx = 0;          // reset colours each render
+
+  renderLabel();
+  const days         = weekDays(weekOffset);
+  const {start, end} = weekBounds(weekOffset);
+
+  document.getElementById('schedule').innerHTML =
+    `<div class="w-full flex items-center justify-center py-16 text-gray-500 text-sm">Cargando clases…</div>`;
+
+  let classes;
+  try {
+    classes = await fetchClasses(start, end);
+    if (!classes) { classes = demoData(days); showBanner('Sin conexión a Supabase — mostrando datos de demostración. Configurá con ⚙️'); }
+  } catch(err) {
+    classes = demoData(days);
+    showBanner(`Error Supabase: ${err.message} — mostrando datos de demostración`);
+  }
+
+  renderGrid(days, classes);
+  renderStats(classes);
+  renderBalance(classes);
+}
+
+function changeWeek(d) { weekOffset += d; load(); }
+function goToToday()   { weekOffset = 0;  load(); }
+
+// kick off
+load();
+</script>
+</body>
+</html>
