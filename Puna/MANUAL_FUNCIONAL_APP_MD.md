@@ -308,6 +308,8 @@ Es el módulo comercial central: catálogo de planes, ventas a clientes, modific
 - **Producto/Plan** (catálogo, se configura una sola vez en Configuración → Productos): nombre, precio estándar, cantidad de créditos, ciclo de renovación, actividad asociada, métodos de pago aceptados, si requiere plantilla de horarios fijos.
 - **Suscripción** (la venta concreta a un cliente, se gestiona en Gestión → Suscripciones): cliente, producto elegido, precio realmente pagado, créditos otorgados, descuentos aplicados, vigencia (inicio/fin), horarios asignados, estado de pago y estado de la suscripción.
 
+> Nota — puerta única ("Customer 360", desde 08/2026): **Vender** y **Modificar** una suscripción ya no se hacen desde menús propios ni desde íconos sueltos en la grilla de Suscripciones. Se hacen siempre desde **Gestión → Clientes → abrir la ficha del cliente**, en las secciones "Vender" y "Modificar" de esa ficha. La grilla de Suscripciones (Gestión → Suscripciones) quedó como vista de **solo lectura/consulta** (ícono de ojo "Ver detalle"); el ícono de lápiz que antes abría una edición directa ahí fue retirado. Si alguna captura, video o instructivo viejo muestra un lápiz o un panel lateral para "editar" una suscripción desde esa grilla, está desactualizado.
+
 ### 6.1 Las "tres tarjetas" (marco visual común a Alta, Modificación y Renovación)
 
 Toda pantalla de venta, modificación o renovación presenta la información en 3 bloques fijos, siempre en el mismo orden:
@@ -318,7 +320,7 @@ Toda pantalla de venta, modificación o renovación presenta la información en 
 
 ### 6.2 Alta — Vender una suscripción nueva
 
-1. Abrir el **cotizador** (Ventas / "+ Venta Rápida", o desde la ficha del cliente → Nuevo).
+1. Ir a **Gestión → Clientes**, abrir la ficha del cliente y entrar a la sección **"Vender"** (o usar el atajo **Acciones rápidas → "Venta rápida"** para una venta sin plantilla, ej. clases de prueba o cortesías).
 2. **Paso 1 — Cliente y producto**: elegir el cliente y el plan a vender. La app calcula automáticamente precio estándar, vigencia (ej. 30 días) y créditos totales.
 3. **Paso 2 — Ajustes** (opcional): modificar cantidad de clases, aplicar descuentos (fijo, porcentaje o alianza comercial) y, si el producto usa horarios fijos, asignar la plantilla de horarios.
 4. **Paso 3 — Pago**: elegir método de pago y cuenta, y marcar si se cobra en el momento o queda pendiente.
@@ -342,8 +344,9 @@ Toda pantalla de venta, modificación o renovación presenta la información en 
 
 > Alcance: Modificación **solo** toca el período vigente (el que está corriendo hoy). Cualquier cambio que deba regir desde el próximo período, o desde una fecha futura puntual, no se hace acá — se deriva a Renovación anticipada (ver [6.5.1](#651-renovación-anticipada--adelantar-el-próximo-período)).
 
-1. Abrir la suscripción → **"Modificar"**.
-2. Elegir la **intención** del cliente (no una operación técnica), por ejemplo:
+1. Ir a **Gestión → Clientes**, abrir la ficha del cliente y entrar a la sección **"Modificar"** (subtab "Modificar", junto a "Cambios").
+2. Elegir la **suscripción** del cliente en el selector (si tiene más de una activa).
+3. Elegir la **intención** del cliente (no una operación técnica), por ejemplo:
 
    | Intención | Efecto |
    |---|---|
@@ -351,7 +354,7 @@ Toda pantalla de venta, modificación o renovación presenta la información en 
    | Downgrade de plan | Baja la cantidad de clases y recalcula el precio |
    | Regalo de clases | Suma clases sin cambiar el precio |
    | Quitar clases | Resta clases sin devolver dinero |
-   | Cambiar horarios | Modifica los días/horas fijos asignados |
+   | Cambiar horarios | Modifica los días/horas fijos asignados (esto es lo que hay que usar para cambiar el patrón de fechas/horarios de una suscripción, ej. "8 clases") |
    | Se va de viaje | Pausa temporal entre dos fechas |
    | Agendar libre | Saca la plantilla fija y deja que agende clase por clase |
    | Corregir precio | Ajusta descuentos sin tocar la cantidad de clases |
@@ -359,9 +362,11 @@ Toda pantalla de venta, modificación o renovación presenta la información en 
    | Transferir a otro cliente | Cambia el titular de la suscripción |
 
    Si la intención elegida es un cambio de producto u horario y el cliente lo quiere recién para el próximo período (no para el actual), el wizard lo deriva automáticamente al flujo de Renovación anticipada — no hay dos motores distintos para "cambiar algo", solo dos ejes de tiempo (período vigente vs. período futuro).
-3. Completar los campos que pida esa intención (cantidad de clases, fechas de ausencia, motivo, etc.).
-4. La app muestra una comparación **Antes → Después** sobre las tres tarjetas (Clases, Monto, Horarios y cupo), con alertas si corresponde (ej. "cobertura insuficiente", "hay reservas futuras que se van a perder").
-5. Confirmar con **"Guardar Modificación"**. Si el cambio afecta horarios, se ofrece re-agendar automáticamente las clases restantes.
+4. Completar los campos que pida esa intención (cantidad de clases, nuevo patrón de días/horarios, fechas de ausencia, motivo, etc.).
+5. La app muestra una comparación **Antes → Después** sobre las tres tarjetas (Clases, Monto, Horarios y cupo), con alertas si corresponde (ej. "cobertura insuficiente", "hay reservas futuras que se van a perder").
+6. Confirmar con **"Guardar Modificación"**. Si el cambio afecta horarios, se ofrece re-agendar automáticamente las clases restantes.
+
+> Nota — caminos obsoletos: la grilla de Gestión → Suscripciones ya **no** tiene un ícono de lápiz para "editar" una suscripción, ni existe un panel lateral genérico para tocar el patrón de fechas por fuera de este wizard. Esa grilla hoy solo permite consultar (ícono de ojo "Ver detalle"). Cualquier instructivo que describa "clic en lápiz → panel lateral con las fechas" corresponde a una versión vieja de la app y debe ignorarse.
 
 **Ajuste manual de créditos:** desde el detalle de la suscripción, botón "Ajuste de Créditos" → sumar/restar créditos con motivo obligatorio, o pedir un recálculo automático que compara los créditos guardados contra las reservas activas y corrige discrepancias.
 
@@ -609,4 +614,4 @@ Un ciclo típico, combinando los cinco módulos:
 - **Renovación anticipada NO es un módulo aparte ni una pantalla nueva**: es el mismo motor de renovación disparado antes de tiempo, entrando desde el cockpit o desde Modificación. No es "Modificación" en sentido estricto (no toca el período vigente), pero se activa muchas veces *a partir de* una Modificación o de un Pedido de cambio con destino futuro. Ver [6.5.1](#651-renovación-anticipada--adelantar-el-próximo-período).
 - **"Aviso de renovación" y "Pedido de cambio" son el mismo concepto** (la app renombró el primero por el segundo). No tratarlos como dos funcionalidades distintas. Ver [6.6](#66-pedidos-de-cambio-cambios).
 - **Lista de espera** tiene dos usos distintos que no hay que confundir: (a) pedir un lugar en una clase puntual llena ([7.5](#75-lista-de-espera-waitlist)), y (b) dentro de una renovación anticipada, un pedido que se genera solo cuando el horario nuevo elegido para el período futuro todavía no tiene cupo (ver nota en [7.5](#75-lista-de-espera-waitlist) y en [6.5.1](#651-renovación-anticipada--adelantar-el-próximo-período)).
-
+- **Vender y Modificar son "puerta única" desde Gestión → Clientes** (ficha del cliente, secciones "Vender"/"Modificar"). No inventar ni documentar accesos directos desde una grilla de Suscripciones (íconos de lápiz, paneles laterales de edición, menús "Ventas"/"Modificaciones" independientes): esos caminos fueron retirados en la migración "Customer 360" (08/2026) y son código legacy/comentado, no funcionalidad activa. Para cambiar el patrón de días/horarios de una suscripción, la intención correcta es "Cambiar horarios" dentro de Modificación (ver [6.4](#64-modificación--cambiar-una-suscripción-activa)).
