@@ -76,7 +76,7 @@ El staff tiene dos niveles de navegación:
   - Tareas — pendientes internos del equipo
 - **Gestión**
   - Clientes — alta, edición, búsqueda de clientes
-  - Cambios — pedidos de cambio de horario pendientes de resolver
+  - Cambios — bandeja de "pedidos de cambio" registrados por el staff a pedido del cliente (ver [6.6](#66-pedidos-de-cambio-cambios))
   - Suscripciones — ventas, modificaciones y detalle de planes vendidos
   - Clases — administración de clases y horarios (sub-tabs: Calendario / Lista)
   - Feriados — configuración de días/horarios sin clase
@@ -136,6 +136,8 @@ Conceptos que se repiten en todos los módulos y conviene tener claros antes de 
 | **Feriado** | Fecha (u horario puntual) en la que no se dictan clases. Puede ser de día completo o de un rango horario específico. |
 | **Plantilla (Template)** | Patrón guardado de horarios recurrentes de un cliente (ej. "lunes 9:00, miércoles 17:00"), usado para agendar o renovar en un clic. |
 | **Tres tarjetas (Clases · Monto · Horarios y cupo)** | Forma estándar en que se presenta cualquier venta, modificación o renovación de suscripción: cuántas clases tiene, cuánto cuesta, y qué horarios/cupo ocupa. Ver detalle en el [módulo Suscripciones](#6-módulo-suscripciones). |
+| **Pedido de cambio** | Ticket que el staff carga a pedido del cliente (ej. avisado por WhatsApp) para dejar registrado qué quiere cambiar, sin ejecutarlo todavía. Vive en Gestión → Cambios. Nombre anterior en la app: "Aviso de renovación"/"Recordatorio" (misma tabla de datos). Ver [6.6](#66-pedidos-de-cambio-cambios). |
+| **Renovación anticipada** | Crear o modificar el período **siguiente** de una suscripción antes de que venza el actual (en vez de esperar a que la suscripción esté por vencer). Usa el mismo motor que una renovación normal, pero se dispara antes de tiempo. Ver [6.5](#65-renovación--renovar-una-suscripción-al-vencer). |
 | **Estado de la suscripción** | ACTIVA, VENCIDA (EXPIRED), CANCELADA, etc. — indica si el plan está vigente. |
 | **Estado de facturación** | PAGADO, PENDIENTE, PARCIAL, MORA (OVERDUE), PROMESA DE PAGO — indica cuánto se cobró de esa suscripción, es independiente del estado de la suscripción. |
 | **ABMR** | Alta, Baja, Modificación, Renovación — el orden estándar en que se documentan y ejecutan los procesos de negocio en esta app. |
@@ -338,6 +340,8 @@ Toda pantalla de venta, modificación o renovación presenta la información en 
 
 ### 6.4 Modificación — Cambiar una suscripción activa
 
+> Alcance: Modificación **solo** toca el período vigente (el que está corriendo hoy). Cualquier cambio que deba regir desde el próximo período, o desde una fecha futura puntual, no se hace acá — se deriva a Renovación anticipada (ver [6.5.1](#651-renovación-anticipada--adelantar-el-próximo-período)).
+
 1. Abrir la suscripción → **"Modificar"**.
 2. Elegir la **intención** del cliente (no una operación técnica), por ejemplo:
 
@@ -354,6 +358,7 @@ Toda pantalla de venta, modificación o renovación presenta la información en 
    | No renueva / Sí renueva | Activa o desactiva la renovación automática |
    | Transferir a otro cliente | Cambia el titular de la suscripción |
 
+   Si la intención elegida es un cambio de producto u horario y el cliente lo quiere recién para el próximo período (no para el actual), el wizard lo deriva automáticamente al flujo de Renovación anticipada — no hay dos motores distintos para "cambiar algo", solo dos ejes de tiempo (período vigente vs. período futuro).
 3. Completar los campos que pida esa intención (cantidad de clases, fechas de ausencia, motivo, etc.).
 4. La app muestra una comparación **Antes → Después** sobre las tres tarjetas (Clases, Monto, Horarios y cupo), con alertas si corresponde (ej. "cobertura insuficiente", "hay reservas futuras que se van a perder").
 5. Confirmar con **"Guardar Modificación"**. Si el cambio afecta horarios, se ofrece re-agendar automáticamente las clases restantes.
@@ -369,18 +374,49 @@ Toda pantalla de venta, modificación o renovación presenta la información en 
 3. **Filtrar** por mes de vencimiento (default: mes actual), actividad, producto, cobertura o pedidos pendientes; buscar por cliente/producto/DNI/ID.
 4. En la fila del cliente, hacer clic en el ícono de **lápiz** (editar) o **rayo** (express) para abrir el panel lateral (drawer) de esa suscripción.
 5. Dentro del drawer:
-   - **Pedidos del cliente** (si existen, ej. cambio de producto, descuento, pausa): se pueden aplicar al borrador con un clic, descartar o eliminar.
+   - **Pedidos del cliente** (si existen — ver [6.6](#66-pedidos-de-cambio-cambios)): se pueden aplicar al borrador con un clic, descartar o eliminar.
    - **Secciones numeradas 1 a 5**: Producto, Fechas y prorrateo, Descuentos, Plantilla (copiar horarios al nuevo período) y Clases adicionales.
    - **Cotización** al pie: subtotal, descuentos, IVA y total (con redondeo si aplica).
 6. Confirmar con **"Renovar ahora"**. Esto crea la nueva suscripción (vinculada a la anterior, que queda marcada como "renovada") y avanza automáticamente al agendamiento masivo de las clases del nuevo período (con opción de "Saltar agendamiento").
 
 **Selección múltiple:** también se pueden tildar varias filas y usar "Renovar seleccionadas · N" para procesar un lote completo de una vez.
 
-**Renovación anticipada:** un cliente puede renovar antes de la fecha de vencimiento; el proceso es el mismo, y la app puede encadenar varios ciclos de renovación de una vez.
-
 **Renovación automática:** cada suscripción tiene un indicador "¿Debe renovarse automáticamente?" (`should_renew`), que se activa/desactiva desde el detalle de la suscripción (ver [6.4](#64-modificación--cambiar-una-suscripción-activa)), no desde el cockpit. Si está activado, la sub aparece disponible para renovar; si se desactiva, se pide un motivo (ej. "cliente de vacaciones") y la sub se excluye del listado (queda contabilizada solo en el KPI "Sin renovar").
 
-### 6.6 Estados de una suscripción
+#### 6.5.1 Renovación anticipada — Adelantar el próximo período
+
+Es el **mismo motor** de la sección anterior (mismo drawer, mismas 5 secciones, mismo botón "Renovar ahora"), pero disparado **antes** de que la suscripción esté por vencer. Sirve para dejar armado ya el período siguiente cuando el cliente pide un cambio que solo debe regir a futuro (ej. "a partir del mes que viene quiero cambiar de horario").
+
+Dos formas de entrar:
+- **Desde el cockpit**: al hacer clic en "Renovar" sobre una fila que todavía no está vencida ni "por vencer", la app detecta sola que corresponde modo anticipado y abre el mismo drawer.
+- **Desde Modificación**: al elegir en el wizard de Modificación (ver [6.4](#64-modificación--cambiar-una-suscripción-activa)) un cambio de producto/horario "para el próximo período" (o resolviendo un pedido de cambio con "¿Desde cuándo lo quiere?" = *Próximo período* o *Fecha específica*, ver [6.6](#66-pedidos-de-cambio-cambios)), el sistema deriva directo a este mismo flujo, embebido dentro de la pantalla de Modificación.
+
+Diferencias con una renovación normal:
+- Puede **encadenar varios ciclos** de una sola vez (ej. renovar 2 o 3 períodos por adelantado).
+- Si el nuevo horario elegido no tiene cupo todavía, puede **generar un nuevo pedido de lista de espera** para ese horario (una renovación normal, en cambio, solo *consume* pedidos de lista de espera que ya existían — no crea pedidos nuevos).
+- Al confirmar, deja un aviso automático en la suscripción original ("Renovada por anticipado — no renovar de nuevo") para que nadie la vuelva a renovar por error desde el cockpit.
+
+### 6.6 Pedidos de cambio (Cambios)
+
+Bandeja de tickets de soporte para dejar registrado lo que un cliente pidió cambiar (por WhatsApp, en persona, etc.) **sin ejecutar nada todavía**. Vive en el sidebar como **Gestión → Cambios**, y también aparece embebida dentro de la ficha de cada cliente (tab "Modificar → Cambios").
+
+> Nombre anterior en pantallas viejas: "Aviso de renovación" / "Recordatorio". Es el mismo dato (tabla `subscription_renewal_alerts`); el nombre visible se unificó a **"Pedido de cambio"** en toda la app.
+
+**Crear un pedido:**
+1. Clic en **"+ Nuevo pedido"** (en la bandeja general hay que elegir cliente y suscripción primero; embebido en la ficha del cliente ya vienen precargados).
+2. Elegir el **tipo** (catálogo configurable en Configuración → Motivos → "Pedidos de cambio", `RenewalAlertTypesManager`), por ejemplo: Upgrade/Downgrade, Cambio de horario, Clases adicionales, Cambio de descuento, Pausa de inicio, No renueva, Ausencia/Vacaciones, Atención manual, Nota informativa.
+3. Elegir **"¿Desde cuándo lo quiere?"**: *Este período* (se resuelve por Modificación, [6.4](#64-modificación--cambiar-una-suscripción-activa)), *Próximo período* o *Fecha específica* (ambas se resuelven por Renovación anticipada, [6.5.1](#651-renovación-anticipada--adelantar-el-próximo-período)).
+4. Cargar el detalle (texto libre) y guardar.
+
+**Severidad** (la define el tipo elegido, no se elige a mano): *Bloquea la renovación*, *Advierte* o *Informativo*. Los pedidos con severidad "Bloquea" impiden confirmar una renovación sobre esa suscripción hasta resolverlos o descartarlos.
+
+**Estados:** Abierto · Bloqueante · Esperando cupo (ligado a un pedido de lista de espera sin cupo aún) · Resuelto · Descartado.
+
+**Resolución:** el pedido de cambio **nunca ejecuta el cambio solo**. La acción sobre la fila lleva a la ficha del cliente; ahí el staff aplica el cambio real por Modificación o por Renovación anticipada (según lo que se eligió en "¿Desde cuándo lo quiere?") y recién después cierra o descarta el pedido manualmente.
+
+**Avisos automáticos del sistema:** además de los pedidos que carga el staff, la misma tabla también recibe avisos que genera el sistema solo (no son tickets accionables, son badges de solo lectura visibles en la ficha de la suscripción y en el cockpit de Renovaciones), por ejemplo: "Renovada por anticipado — no renovar de nuevo", "Modificación de horarios pendiente" (hay un pedido de lista de espera abierto), o "Agenda pendiente" (la sub futura existe pero todavía no se agendaron sus clases).
+
+### 6.7 Estados de una suscripción
 
 | Estado | Significa | ¿Puede reservar clases? |
 |---|---|---|
@@ -469,6 +505,8 @@ Cuando una clase está llena:
 2. El pedido queda en estado "esperando".
 3. Si se libera un lugar (por una cancelación), el sistema identifica los pedidos en espera para esa clase y notifica al cliente.
 4. El staff puede **"Convertir a reserva"** el pedido: se transforma en una reserva confirmada y se descuenta el crédito correspondiente.
+
+> Nota — lista de espera y renovaciones: una **renovación normal** ([6.5](#65-renovación--renovar-una-suscripción-al-vencer)) solo *consume* pedidos de lista de espera que ya existían (les da lugar si se liberó cupo). Una **renovación anticipada** ([6.5.1](#651-renovación-anticipada--adelantar-el-próximo-período)), en cambio, puede *generar* pedidos nuevos, porque arma horarios de un período que todavía no empezó y esos horarios pueden no tener cupo todavía.
 
 ### 7.6 Registro de asistencia
 
@@ -568,4 +606,7 @@ Un ciclo típico, combinando los cinco módulos:
 - Si la pregunta involucra permisos o visibilidad de menú, recordar que el sidebar de Staff es dinámico y depende de permisos por usuario: la ausencia de una opción en pantalla no siempre es un bug, puede ser una restricción de permisos.
 - Para dudas de implementación técnica (no funcionales), remitir a la documentación de `docs/estandares/` del repositorio, en particular el canon transaccional de Ventas/Modificaciones/Renovación.
 - **Renovaciones**: no inventar pasos genéricos tipo "elegir duración/precio y confirmar renovación" ni un botón "Renovar" dentro del detalle de la suscripción — ese botón está deshabilitado en la app. El único flujo real es el cockpit **Renovaciones → General**, seguido del panel lateral (drawer) con secciones numeradas y el botón **"Renovar ahora"**; ver [6.5](#65-renovación--renovar-una-suscripción-al-vencer).
+- **Renovación anticipada NO es un módulo aparte ni una pantalla nueva**: es el mismo motor de renovación disparado antes de tiempo, entrando desde el cockpit o desde Modificación. No es "Modificación" en sentido estricto (no toca el período vigente), pero se activa muchas veces *a partir de* una Modificación o de un Pedido de cambio con destino futuro. Ver [6.5.1](#651-renovación-anticipada--adelantar-el-próximo-período).
+- **"Aviso de renovación" y "Pedido de cambio" son el mismo concepto** (la app renombró el primero por el segundo). No tratarlos como dos funcionalidades distintas. Ver [6.6](#66-pedidos-de-cambio-cambios).
+- **Lista de espera** tiene dos usos distintos que no hay que confundir: (a) pedir un lugar en una clase puntual llena ([7.5](#75-lista-de-espera-waitlist)), y (b) dentro de una renovación anticipada, un pedido que se genera solo cuando el horario nuevo elegido para el período futuro todavía no tiene cupo (ver nota en [7.5](#75-lista-de-espera-waitlist) y en [6.5.1](#651-renovación-anticipada--adelantar-el-próximo-período)).
 
