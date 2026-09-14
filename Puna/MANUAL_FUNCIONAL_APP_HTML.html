@@ -356,6 +356,7 @@
 
     <h3>6.0 Producto vs. Suscripción</h3>
     <p><strong>Producto/Plan</strong> (catálogo, configurado una vez en Configuración → Productos): nombre, precio estándar, créditos, ciclo de renovación, actividad, métodos de pago aceptados. <strong>Suscripción</strong> (la venta concreta, en Gestión → Suscripciones): cliente, producto elegido, precio pagado, créditos otorgados, descuentos, vigencia, horarios, estado de pago y estado de la suscripción.</p>
+    <blockquote class="note">Puerta única ("Customer 360", desde 08/2026): <strong>Vender</strong> y <strong>Modificar</strong> ya no se hacen desde menús propios ni desde íconos sueltos en la grilla de Suscripciones. Se hacen siempre desde <strong>Gestión → Clientes → ficha del cliente</strong>, secciones "Vender"/"Modificar". La grilla de Suscripciones quedó como vista de solo lectura (ícono de ojo "Ver detalle"); el lápiz que antes editaba ahí fue retirado.</blockquote>
 
     <h3>6.1 Las "tres tarjetas"</h3>
     <p>Toda pantalla de venta, modificación o renovación presenta la información en el mismo orden:</p>
@@ -367,7 +368,7 @@
 
     <h3><span class="abmr-tag abmr-alta">ALTA</span>6.2 Vender una suscripción nueva</h3>
     <ol>
-      <li>Abrir el cotizador ("+ Venta Rápida" o desde la ficha del cliente).</li>
+      <li>Ir a Gestión → Clientes, abrir la ficha del cliente y entrar a la sección "Vender" (o el atajo Acciones rápidas → "Venta rápida" para una venta sin plantilla).</li>
       <li><strong>Paso 1:</strong> elegir cliente y producto. Se calculan precio estándar, vigencia y créditos.</li>
       <li><strong>Paso 2</strong> (opcional): ajustar cantidad de clases, aplicar descuentos, asignar plantilla de horarios.</li>
       <li><strong>Paso 3:</strong> elegir método de pago y si se cobra ahora o queda pendiente.</li>
@@ -385,19 +386,21 @@
 
     <h3><span class="abmr-tag abmr-mod">MODIFICACIÓN</span>6.4 Cambiar una suscripción activa</h3>
     <p><strong>Alcance:</strong> Modificación solo toca el período vigente (el que está corriendo hoy). Cualquier cambio que deba regir desde el próximo período, o desde una fecha futura puntual, se deriva a Renovación anticipada (6.5.1).</p>
+    <p>Se hace desde <strong>Gestión → Clientes → ficha del cliente → sección "Modificar"</strong> (subtab "Modificar", junto a "Cambios"), eligiendo primero la suscripción si el cliente tiene más de una activa.</p>
     <table>
       <tr><th>Intención</th><th>Efecto</th></tr>
       <tr><td>Upgrade de plan</td><td>Sube la cantidad de clases y recalcula el precio</td></tr>
       <tr><td>Downgrade de plan</td><td>Baja la cantidad de clases y recalcula el precio</td></tr>
       <tr><td>Regalo de clases</td><td>Suma clases sin cambiar el precio</td></tr>
       <tr><td>Quitar clases</td><td>Resta clases sin devolver dinero</td></tr>
-      <tr><td>Cambiar horarios</td><td>Modifica los días/horas fijos asignados</td></tr>
+      <tr><td>Cambiar horarios</td><td>Modifica los días/horas fijos asignados (usar esta intención para cambiar el patrón de fechas/horarios de una suscripción, ej. "8 clases")</td></tr>
       <tr><td>Se va de viaje</td><td>Pausa temporal entre dos fechas</td></tr>
       <tr><td>Agendar libre</td><td>Saca la plantilla fija, agenda clase por clase</td></tr>
       <tr><td>Corregir precio</td><td>Ajusta descuentos sin tocar la cantidad de clases</td></tr>
       <tr><td>No renueva / Sí renueva</td><td>Activa o desactiva la renovación automática</td></tr>
       <tr><td>Transferir a otro cliente</td><td>Cambia el titular de la suscripción</td></tr>
     </table>
+    <blockquote class="note">Caminos obsoletos: la grilla de Gestión → Suscripciones ya no tiene un ícono de lápiz para "editar", ni existe un panel lateral genérico para tocar el patrón de fechas fuera de este wizard. Cualquier instructivo que describa "clic en lápiz → panel lateral con las fechas" es de una versión vieja de la app.</blockquote>
     <p>Si la intención es un cambio de producto u horario pedido recién para el próximo período, el wizard deriva automáticamente a Renovación anticipada: no hay dos motores distintos para "cambiar algo", solo dos ejes de tiempo (período vigente vs. futuro).</p>
     <p>La app siempre muestra una comparación <strong>Antes → Después</strong> sobre las tres tarjetas, con alertas si corresponde, antes de confirmar con "Guardar Modificación".</p>
     <p><strong>Ajuste manual de créditos:</strong> desde el detalle, "Ajuste de Créditos" → sumar/restar con motivo obligatorio, o pedir recálculo automático.</p>
@@ -554,6 +557,7 @@
       <li><strong>Renovación anticipada</strong> no es un módulo aparte ni una pantalla nueva: es el mismo motor de renovación disparado antes de tiempo, entrando desde el cockpit o desde Modificación (ver 6.5.1).</li>
       <li><strong>"Aviso de renovación" y "Pedido de cambio" son el mismo concepto</strong> (la app renombró el primero por el segundo). No tratarlos como dos funcionalidades distintas (ver 6.6).</li>
       <li><strong>Lista de espera</strong> tiene dos usos distintos: pedir un lugar en una clase puntual llena (7.5), y el pedido que se genera solo dentro de una renovación anticipada cuando el horario nuevo elegido todavía no tiene cupo (7.5 y 6.5.1).</li>
+      <li><strong>Vender y Modificar son "puerta única"</strong> desde Gestión → Clientes (ficha del cliente, secciones "Vender"/"Modificar"). No inventar accesos directos desde una grilla de Suscripciones (lápiz, panel lateral, menús "Ventas"/"Modificaciones" independientes): fueron retirados en la migración "Customer 360" (08/2026). Para cambiar el patrón de días/horarios de una suscripción, la intención correcta es "Cambiar horarios" dentro de Modificación (6.4).</li>
     </ul>
   </main>
 </div>
