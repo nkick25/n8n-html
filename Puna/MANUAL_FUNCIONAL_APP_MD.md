@@ -66,7 +66,6 @@ El staff tiene dos niveles de navegación:
 |---|---|
 | **Avisos** | Tablero de notificaciones internas para staff/profesores |
 | **Gestión** | Panel principal — acá vive la operación diaria (clientes, clases, suscripciones, reservas, pagos) |
-| **Renovaciones (V1)** | Versión anterior de renovaciones (en desuso) |
 | **Analítica** | Reportes y métricas del estudio |
 | **Informes** | Campañas e informes personalizados |
 | **Gestión de Personal** | Alta/gestión de usuarios internos (staff/profesores) |
@@ -363,18 +362,23 @@ Toda pantalla de venta, modificación o renovación presenta la información en 
 
 ### 6.5 Renovación — Renovar una suscripción al vencer
 
-1. Ir a **Renovaciones → General** (cockpit de renovaciones).
-2. Filtrar por mes de vencimiento, estado o actividad para ubicar al cliente.
-3. Abrir la suscripción a renovar (se abre un panel lateral).
-4. **Pestaña Propuesta**: la app propone renovar con el mismo producto y condiciones; se puede cambiar plan, vigencia, descuentos o sumar clases adicionales. Se muestra la comparación Antes → Después.
-5. La app avisa de riesgos comunes: sin plantilla de horarios, sin cupo en los horarios deseados, cliente en lista de espera, o descuentos por vencer.
-6. **Pestaña Confirmar**: revisar el resumen y ejecutar con **"Ejecutar Renovación"**.
+> Nota: la renovación **no** se hace desde el detalle de la suscripción individual (ahí no hay botón "Renovar" activo). El único camino operativo es el cockpit de **Renovaciones → General**.
 
-**Efecto:** se crea una nueva suscripción vinculada como renovación de la anterior (que queda marcada como "renovada"), y se ofrece agendar automáticamente las clases del nuevo período.
+1. Ir a **Renovaciones → General** (cockpit único; la sección "Renovaciones (V1)" quedó descontinuada y ya no aparece en el menú).
+2. **KPIs** arriba: vencen en 7 días, cubiertas, sin renovar y total filtrado.
+3. **Filtrar** por mes de vencimiento (default: mes actual), actividad, producto, cobertura o pedidos pendientes; buscar por cliente/producto/DNI/ID.
+4. En la fila del cliente, hacer clic en el ícono de **lápiz** (editar) o **rayo** (express) para abrir el panel lateral (drawer) de esa suscripción.
+5. Dentro del drawer:
+   - **Pedidos del cliente** (si existen, ej. cambio de producto, descuento, pausa): se pueden aplicar al borrador con un clic, descartar o eliminar.
+   - **Secciones numeradas 1 a 5**: Producto, Fechas y prorrateo, Descuentos, Plantilla (copiar horarios al nuevo período) y Clases adicionales.
+   - **Cotización** al pie: subtotal, descuentos, IVA y total (con redondeo si aplica).
+6. Confirmar con **"Renovar ahora"**. Esto crea la nueva suscripción (vinculada a la anterior, que queda marcada como "renovada") y avanza automáticamente al agendamiento masivo de las clases del nuevo período (con opción de "Saltar agendamiento").
+
+**Selección múltiple:** también se pueden tildar varias filas y usar "Renovar seleccionadas · N" para procesar un lote completo de una vez.
 
 **Renovación anticipada:** un cliente puede renovar antes de la fecha de vencimiento; el proceso es el mismo, y la app puede encadenar varios ciclos de renovación de una vez.
 
-**Renovación automática:** cada suscripción tiene un indicador "¿Debe renovarse automáticamente?". Si está activado, al vencer se renueva sola con las mismas condiciones; si se desactiva, se pide un motivo (ej. "cliente de vacaciones").
+**Renovación automática:** cada suscripción tiene un indicador "¿Debe renovarse automáticamente?" (`should_renew`), que se activa/desactiva desde el detalle de la suscripción (ver [6.4](#64-modificación--cambiar-una-suscripción-activa)), no desde el cockpit. Si está activado, la sub aparece disponible para renovar; si se desactiva, se pide un motivo (ej. "cliente de vacaciones") y la sub se excluye del listado (queda contabilizada solo en el KPI "Sin renovar").
 
 ### 6.6 Estados de una suscripción
 
@@ -563,3 +567,5 @@ Un ciclo típico, combinando los cinco módulos:
 - Ante una pregunta de un usuario sobre "cómo hacer algo", identificar primero el módulo (Clientes/Clases/Suscripciones/Reservas/Pagos) y luego la etapa ABMR correspondiente (Alta/Baja/Modificación/Renovación) antes de responder.
 - Si la pregunta involucra permisos o visibilidad de menú, recordar que el sidebar de Staff es dinámico y depende de permisos por usuario: la ausencia de una opción en pantalla no siempre es un bug, puede ser una restricción de permisos.
 - Para dudas de implementación técnica (no funcionales), remitir a la documentación de `docs/estandares/` del repositorio, en particular el canon transaccional de Ventas/Modificaciones/Renovación.
+- **Renovaciones**: no inventar pasos genéricos tipo "elegir duración/precio y confirmar renovación" ni un botón "Renovar" dentro del detalle de la suscripción — ese botón está deshabilitado en la app. El único flujo real es el cockpit **Renovaciones → General**, seguido del panel lateral (drawer) con secciones numeradas y el botón **"Renovar ahora"**; ver [6.5](#65-renovación--renovar-una-suscripción-al-vencer).
+
