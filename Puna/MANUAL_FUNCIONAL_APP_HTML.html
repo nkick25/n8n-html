@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual Funcional — Pilates Flow Portal</title>
+<style>
+  :root {
+    --brand: #7c5cff;
+    --brand-dark: #5b3fd6;
+    --bg: #faf9fc;
+    --card: #ffffff;
+    --text: #2a2438;
+    --muted: #6b6478;
+    --border: #e7e2f0;
+    --alta: #1f9d55;
+    --baja: #d64545;
+    --mod: #d68a10;
+    --ren: #2f6fd6;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .layout { display: flex; min-height: 100vh; }
+  nav.toc {
+    width: 280px;
+    flex-shrink: 0;
+    background: var(--card);
+    border-right: 1px solid var(--border);
+    padding: 24px 16px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+  nav.toc h2 {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--muted);
+    margin: 0 0 12px 4px;
+  }
+  nav.toc a {
+    display: block;
+    padding: 7px 10px;
+    border-radius: 8px;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 14px;
+  }
+  nav.toc a:hover { background: #f1edfa; }
+  nav.toc a.module { font-weight: 600; margin-top: 6px; }
+  main {
+    flex: 1;
+    max-width: 880px;
+    padding: 40px 48px 100px;
+  }
+  header.hero {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 24px;
+    margin-bottom: 32px;
+  }
+  header.hero h1 { font-size: 30px; margin: 0 0 8px; }
+  header.hero p.subtitle { color: var(--muted); margin: 0 0 12px; font-size: 15.5px; }
+  .meta-badges { display: flex; gap: 8px; flex-wrap: wrap; }
+  .badge {
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: #f1edfa;
+    color: var(--brand-dark);
+    font-weight: 600;
+  }
+  h2 {
+    font-size: 23px;
+    margin-top: 48px;
+    padding-top: 8px;
+    border-top: 1px solid var(--border);
+  }
+  h2:first-of-type { border-top: none; }
+  h3 { font-size: 18px; margin-top: 30px; color: var(--brand-dark); }
+  h4 { font-size: 15px; margin-top: 20px; }
+  p { color: var(--text); }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 14.5px;
+    background: var(--card);
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th { background: #f6f3fb; font-weight: 600; }
+  tr:nth-child(even) td { background: #fbfaff; }
+  ol, ul { padding-left: 22px; }
+  li { margin-bottom: 6px; }
+  code {
+    background: #f1edfa;
+    padding: 1px 6px;
+    border-radius: 5px;
+    font-size: 13px;
+    color: var(--brand-dark);
+  }
+  blockquote.note {
+    border-left: 4px solid var(--brand);
+    background: #f8f6fd;
+    margin: 16px 0;
+    padding: 10px 16px;
+    border-radius: 0 8px 8px 0;
+    color: var(--muted);
+    font-size: 14.5px;
+  }
+  .abmr-tag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .04em;
+    padding: 3px 10px;
+    border-radius: 6px;
+    color: #fff;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+  .abmr-alta { background: var(--alta); }
+  .abmr-baja { background: var(--baja); }
+  .abmr-mod  { background: var(--mod); }
+  .abmr-ren  { background: var(--ren); }
+  .module-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 4px 24px 20px;
+    margin-top: 20px;
+  }
+  a.anchor-link { color: var(--brand-dark); }
+  footer {
+    max-width: 880px;
+    margin-left: 280px;
+    padding: 24px 48px 60px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  @media (max-width: 900px) {
+    nav.toc { display: none; }
+    footer { margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+  <nav class="toc">
+    <h2>Índice</h2>
+    <a href="#s1">1. Introducción general</a>
+    <a href="#s2">2. Roles y navegación</a>
+    <a href="#s3">3. Glosario</a>
+    <a href="#s4" class="module">4. Clientes</a>
+    <a href="#s5" class="module">5. Clases</a>
+    <a href="#s6" class="module">6. Suscripciones</a>
+    <a href="#s7" class="module">7. Reservas / Agendas</a>
+    <a href="#s8" class="module">8. Pagos</a>
+    <a href="#s9">9. Flujo end-to-end</a>
+    <a href="#s10">10. Notas para agentes IA</a>
+  </nav>
+  <main>
+    <header class="hero">
+      <h1>Manual Funcional — Pilates Flow Portal</h1>
+      <p class="subtitle">Guía de uso paso a paso para personal de estudios de pilates/fitness que operan la app, y fuente de referencia estructurada para agentes de IA que necesiten responder preguntas sobre su funcionamiento.</p>
+      <div class="meta-badges">
+        <span class="badge">Última actualización: 13/09/2026</span>
+        <span class="badge">Idioma: Español (Argentina)</span>
+        <span class="badge">Audiencia: Staff · Profesores · Clientes · Agentes IA</span>
+      </div>
+    </header>
+
+    <p><strong>Cómo usar este manual:</strong> está organizado por módulo (Clientes, Clases, Suscripciones, Reservas, Pagos). Dentro de cada módulo, los procesos siguen el orden <strong>ABMR</strong>: <span class="abmr-tag abmr-alta">ALTA</span><span class="abmr-tag abmr-baja">BAJA</span><span class="abmr-tag abmr-mod">MODIFICACIÓN</span><span class="abmr-tag abmr-ren">RENOVACIÓN</span> — cuando el proceso aplica a ese módulo. Los bloques de nota aclaran reglas de negocio o límites del sistema.</p>
+
+    <h2 id="s1">1. Introducción general</h2>
+    <p>Pilates Flow Portal es un sistema de gestión para estudios de pilates/fitness. Administra el ciclo completo de un cliente: alta, venta de planes (suscripciones), reserva de clases, asistencia y cobranza.</p>
+    <p><strong>Modelo de negocio de la app:</strong></p>
+    <ul>
+      <li>Es un software vendido como "white-label" a cada estudio (1 instalación por cliente/marca).</li>
+      <li><strong>No es una tienda online</strong>: el cliente final no compra ni paga con tarjeta desde la app. El personal del estudio (staff) es quien registra manualmente cada venta y cada cobro.</li>
+      <li>No hay pasarela de pago integrada. "MercadoPago" puede aparecer como una etiqueta de método de pago, pero el pago no se procesa automáticamente — sigue siendo un registro manual del staff.</li>
+    </ul>
+    <p><strong>Tres roles de usuario:</strong></p>
+    <table>
+      <tr><th>Rol</th><th>Quién es</th><th>Qué hace en la app</th></tr>
+      <tr><td><strong>Staff</strong></td><td>Personal administrativo/recepción del estudio</td><td>Gestiona clientes, clases, suscripciones, reservas y pagos. Acceso completo (según permisos).</td></tr>
+      <tr><td><strong>Teacher</strong> (Profesor)</td><td>Instructor de clases</td><td>Ve sus clases asignadas, pasa asistencia, ve avisos y tareas. Acceso acotado.</td></tr>
+      <tr><td><strong>Cliente</strong></td><td>Alumno del estudio</td><td>Ve y reserva sus propias clases, consulta sus suscripciones, gestiona su ficha de salud. Sin acceso administrativo.</td></tr>
+    </table>
+
+    <h2 id="s2">2. Roles y navegación</h2>
+    <p>La app no usa URLs distintas por pantalla: la navegación es por <strong>pestañas de estado</strong>, persistidas en el navegador. El contenido que ves depende de tu rol y de tus permisos configurados.</p>
+
+    <h3>2.1 Menú del rol Staff</h3>
+    <p>El staff tiene dos niveles de navegación.</p>
+    <p><strong>Nivel 1 — Secciones principales</strong> (selector arriba de la pantalla):</p>
+    <table>
+      <tr><th>Sección</th><th>Qué contiene</th></tr>
+      <tr><td>Avisos</td><td>Tablero de notificaciones internas para staff/profesores</td></tr>
+      <tr><td>Gestión</td><td>Panel principal — acá vive la operación diaria (clientes, clases, suscripciones, reservas, pagos)</td></tr>
+      <tr><td>Renovaciones (V1)</td><td>Versión anterior de renovaciones (en desuso)</td></tr>
+      <tr><td>Analítica</td><td>Reportes y métricas del estudio</td></tr>
+      <tr><td>Informes</td><td>Campañas e informes personalizados</td></tr>
+      <tr><td>Gestión de Personal</td><td>Alta/gestión de usuarios internos (staff/profesores)</td></tr>
+    </table>
+    <p><strong>Nivel 2 — Menú lateral (sidebar), agrupado por bloque:</strong></p>
+    <ul>
+      <li><strong>Operación:</strong> Tareas — pendientes internos del equipo</li>
+      <li><strong>Gestión:</strong> Clientes, Cambios (pedidos de cambio de horario), Suscripciones, Clases (sub-tabs Calendario/Lista), Feriados, Proyección, Historial de agendas, Plantillas de agenda, Lista de espera</li>
+      <li><strong>Pagos:</strong> Facturación y Cobranzas (sub-tabs Facturación / Cobranzas / Historial)</li>
+      <li><strong>Renovaciones:</strong> General (cockpit) e Historial de renovaciones</li>
+      <li><strong>Análisis:</strong> Analítica, Campañas e Informes</li>
+      <li><strong>Sistema:</strong> Gestión de Personal, Configuración (General, Productos, Facturación y Pagos, Motivos, Tareas, Alianzas, Campañas e Informes, Logs), Manual</li>
+    </ul>
+    <blockquote class="note">Nota: algunos ítems del menú solo aparecen si el usuario tiene el permiso correspondiente habilitado (ej. <code>sidebar.gestion.clients</code>). Es normal que dos usuarios staff vean menús distintos.</blockquote>
+
+    <h3>2.2 Menú del rol Cliente</h3>
+    <table>
+      <tr><th>Pestaña</th><th>Qué muestra</th></tr>
+      <tr><td>Mis clases</td><td>Próximas clases reservadas</td></tr>
+      <tr><td>Reservar</td><td>Calendario/buscador para reservar nuevas clases</td></tr>
+      <tr><td>Mi salud</td><td>Ficha de salud propia (lesiones, obra social, apto físico)</td></tr>
+      <tr><td>Cancelaciones</td><td>Historial de reservas canceladas</td></tr>
+      <tr><td>Mis Suscripciones</td><td>Planes activos/vencidos y sus créditos</td></tr>
+    </table>
+
+    <h3>2.3 Menú del rol Profesor (Teacher)</h3>
+    <table>
+      <tr><th>Pestaña</th><th>Qué muestra</th></tr>
+      <tr><td>Avisos</td><td>Notificaciones para profesores</td></tr>
+      <tr><td>Mis Clases</td><td>Clases asignadas, con lista de alumnos y registro de asistencia</td></tr>
+      <tr><td>Tareas</td><td>Pendientes asignados al profesor</td></tr>
+    </table>
+
+    <h2 id="s3">3. Glosario de conceptos clave</h2>
+    <table>
+      <tr><th>Concepto</th><th>Qué significa</th></tr>
+      <tr><td><strong>Producto / Plan de suscripción</strong></td><td>Plantilla de venta que crea el estudio una sola vez (ej. "8 Clases Mensuales"). Vive en Configuración → Productos. Es el catálogo.</td></tr>
+      <tr><td><strong>Suscripción</strong></td><td>La compra concreta que hace un cliente de un producto (ej. "María compró el plan de 8 clases, vence el 30/09"). Es la venta real.</td></tr>
+      <tr><td><strong>Crédito</strong></td><td>Unidad que representa "una clase". Si un cliente compra 8 clases, tiene 8 créditos. Cada reserva consume 1 crédito (o los que indique la clase); cada cancelación con devolución lo repone.</td></tr>
+      <tr><td><strong>Actividad</strong></td><td>La disciplina que se dicta (Pilates, Yoga, Zumba, etc.). Se configura en Configuración → Actividades.</td></tr>
+      <tr><td><strong>Sala</strong></td><td>El espacio físico donde se dicta una clase (Sala 1, Estudio Principal, etc.). Evita que dos clases se solapen en el mismo lugar.</td></tr>
+      <tr><td><strong>Intensidad</strong></td><td>Nivel de dificultad de una clase (Baja/Media/Alta), con color asociado en las vistas.</td></tr>
+      <tr><td><strong>Feriado</strong></td><td>Fecha (u horario puntual) en la que no se dictan clases. Puede ser de día completo o de un rango horario específico.</td></tr>
+      <tr><td><strong>Plantilla (Template)</strong></td><td>Patrón guardado de horarios recurrentes de un cliente (ej. "lunes 9:00, miércoles 17:00"), usado para agendar o renovar en un clic.</td></tr>
+      <tr><td><strong>Tres tarjetas</strong> (Clases · Monto · Horarios y cupo)</td><td>Forma estándar en que se presenta cualquier venta, modificación o renovación de suscripción: cuántas clases tiene, cuánto cuesta, y qué horarios/cupo ocupa. Ver detalle en el módulo Suscripciones.</td></tr>
+      <tr><td><strong>Estado de la suscripción</strong></td><td>ACTIVA, VENCIDA (EXPIRED), CANCELADA, etc. — indica si el plan está vigente.</td></tr>
+      <tr><td><strong>Estado de facturación</strong></td><td>PAGADO, PENDIENTE, PARCIAL, MORA (OVERDUE), PROMESA DE PAGO — indica cuánto se cobró de esa suscripción, es independiente del estado de la suscripción.</td></tr>
+      <tr><td><strong>ABMR</strong></td><td>Alta, Baja, Modificación, Renovación — el orden estándar en que se documentan y ejecutan los procesos de negocio en esta app.</td></tr>
+    </table>
+
+    <div class="module-card">
+    <h2 id="s4">4. Módulo: Clientes</h2>
+    <p>Gestión de la ficha de cada alumno del estudio: datos personales, contacto, salud y acceso a su cuenta.</p>
+
+    <h3><span class="abmr-tag abmr-alta">ALTA</span>4.1 Crear un cliente nuevo</h3>
+    <ol>
+      <li>Ir a <strong>Gestión → Clientes</strong>.</li>
+      <li>Hacer clic en <strong>"+ Nuevo Cliente"</strong>.</li>
+      <li>Completar el formulario:
+        <ul>
+          <li><strong>Identidad y acceso</strong> (obligatorio): Nombre, Apellido, Correo electrónico (único, es el login), Tipo/Número de documento, Contraseña inicial (mín. 6 caracteres).</li>
+          <li><strong>Contacto:</strong> teléfono (obligatorio), Instagram y fecha de nacimiento (opcionales).</li>
+          <li><strong>Emergencias</strong> (opcional): contacto de emergencia, obra social/prepaga, número de credencial.</li>
+          <li><strong>Salud y controles</strong> (opcional): apto físico, lesiones declaradas (con descripción), BlackList (excluye de campañas de marketing).</li>
+          <li><strong>Palabra clave:</strong> si está habilitada, se genera sola (ej. <code>dorado.aguila</code>) como identificador adicional de privacidad.</li>
+        </ul>
+      </li>
+      <li>Hacer clic en <strong>"Crear cliente"</strong>. La app valida campos obligatorios y unicidad del email antes de guardar.</li>
+    </ol>
+    <blockquote class="note">Solo Nombre, Apellido, Email, Tipo/Número de documento, Teléfono y Contraseña son obligatorios. Todo lo demás es opcional.</blockquote>
+
+    <h3><span class="abmr-tag abmr-baja">BAJA</span>4.2 Eliminar o bloquear un cliente</h3>
+    <p><strong>A) Eliminación permanente</strong> (solo si no tiene suscripciones, reservas ni plantillas asociadas):</p>
+    <ol>
+      <li>En la grilla, columna Acciones, ícono de <strong>papelera roja</strong>.</li>
+      <li>La app verifica historial: si existe, muestra "Borrado bloqueado" con el detalle y no permite continuar.</li>
+      <li>Si no hay historial, confirmar <strong>"Eliminar Cliente"</strong> en el diálogo de advertencia (acción irreversible).</li>
+    </ol>
+    <p><strong>B) Bloqueo</strong> (recomendado cuando ya tiene historial — equivale a la "baja" habitual):</p>
+    <ol>
+      <li>En Acciones, ícono de <strong>llave</strong> ("Credenciales y Acceso").</li>
+      <li>Activar el interruptor <strong>"Cuenta bloqueada"</strong>.</li>
+      <li>Elegir un <strong>motivo de bloqueo</strong> obligatorio (ej. "Deuda pendiente", "Solicitud propia").</li>
+      <li>Guardar cambios.</li>
+    </ol>
+    <p>El cliente bloqueado no puede iniciar sesión, pero conserva su historial y puede desbloquearse en cualquier momento.</p>
+
+    <h3><span class="abmr-tag abmr-mod">MODIFICACIÓN</span>4.3 Editar un cliente existente</h3>
+    <ol>
+      <li>En Acciones, ícono de <strong>lápiz amarillo</strong>.</li>
+      <li>Editar cualquier dato de la ficha (contraseña y bloqueo se gestionan aparte, en "Credenciales y Acceso").</li>
+      <li>Guardar con <strong>"Actualizar"</strong>.</li>
+    </ol>
+    <blockquote class="note">Si el email de la ficha queda distinto al del login real, aparece un banner con el botón "Alinear con la ficha" para sincronizarlos.</blockquote>
+
+    <h3>4.4 Búsqueda y otras acciones</h3>
+    <p>La grilla filtra por búsqueda libre (nombre/email/documento/teléfono), Estado (Activo/Bloqueado) y Lista negra. Otras acciones disponibles: <strong>Gestión Integral</strong> (vista 360° del cliente), <strong>Enviar Notificación</strong> push, e <strong>Historial de Actividad</strong> cronológico.</p>
+    </div>
+
+    <div class="module-card">
+    <h2 id="s5">5. Módulo: Clases</h2>
+    <p>Gestión de la oferta de clases del estudio: horarios, salas, profesores y cupos. No aplica "Renovación" como proceso propio de este módulo.</p>
+
+    <h3><span class="abmr-tag abmr-alta">ALTA</span>5.1 Crear una clase nueva</h3>
+    <ol>
+      <li>Ir a <strong>Gestión → Clases</strong> → <strong>"+ Nueva"</strong>.</li>
+      <li>Elegir tipo: <strong>Clase Única</strong> (una fecha/hora puntual) o <strong>Serie Recurrente</strong> (se repite en los días que elijas).</li>
+      <li>Completar: Nombre, Descripción, Actividad, Sala, Intensidad, Profesor, Capacidad máxima, Créditos requeridos, Fecha/hora, Duración.</li>
+      <li>Si es Serie Recurrente: marcar días de la semana y, opcionalmente, fecha de fin (vacío = 6 meses automáticos).</li>
+      <li>Confirmar con <strong>"Crear Clase"</strong> / <strong>"Crear Serie"</strong>.</li>
+    </ol>
+
+    <h3><span class="abmr-tag abmr-baja">BAJA</span>5.2 Cancelar o eliminar una clase</h3>
+    <p><strong>Eliminar</strong> borra la clase por completo (solo recomendable sin reservas). <strong>Cancelar</strong> la marca como "CANCELADA", notifica a los clientes y permite decidir la devolución de créditos — es la opción recomendada si ya hay gente anotada.</p>
+    <ol>
+      <li>Ubicar la clase → ícono <strong>🚫 cancelar</strong>.</li>
+      <li>Completar motivo (ej. "Profesor ausente"), notas opcionales y el checkbox "¿Devolver créditos?".</li>
+      <li>Confirmar.</li>
+    </ol>
+    <p>Para eliminar/cancelar una serie recurrente completa, usar "Eliminar serie" (elimina todas las futuras) o "Cancelar en lote" sobre el conjunto si ya tienen reservas.</p>
+    <blockquote class="note">Si reducís la capacidad de una clase por debajo de las reservas ya confirmadas, el sistema bloquea el guardado.</blockquote>
+
+    <h3><span class="abmr-tag abmr-mod">MODIFICACIÓN</span>5.3 Editar una o varias clases</h3>
+    <p><strong>Una clase puntual:</strong> abrir → ícono ✏️ editar → modificar cualquier campo → "Actualizar Clase".</p>
+    <p><strong>Varias a la vez (lote):</strong> seleccionar con checkboxes → elegir acción (cambiar profesor, capacidad, créditos, o correr horario ±15/30/60 min) → confirmar. La app avisa si algún cambio dejaría cupo por debajo de reservas existentes.</p>
+
+    <h3>5.4 Vistas disponibles</h3>
+    <table>
+      <tr><th>Vista</th><th>Cuándo usarla</th></tr>
+      <tr><td>Calendario (semanal)</td><td>Ocupación de la semana con semáforo: verde=disponible, amarillo=casi lleno (≥80%), naranja=lleno, rojo=cancelada</td></tr>
+      <tr><td>Lista</td><td>Datos tabulares, orden/filtro/paginado y acciones en lote</td></tr>
+      <tr><td>Timeline</td><td>Línea de tiempo por día, útil con muchas clases o pantallas angostas</td></tr>
+    </table>
+
+    <h3>5.5 Feriados</h3>
+    <p>Bloquean clases automáticamente en una fecha (día completo o rango horario). Crear en <strong>Gestión → Feriados → "+ Nuevo feriado"</strong> con fecha, nombre y horas desde/hasta. Las clases recurrentes no se generan en feriado completo, y los clientes no pueden reservar en un horario bloqueado.</p>
+    </div>
+
+    <div class="module-card">
+    <h2 id="s6">6. Módulo: Suscripciones</h2>
+    <p>Módulo comercial central: catálogo de planes, ventas, modificaciones y renovaciones. Sigue el ciclo <strong>ABMR completo</strong>.</p>
+
+    <h3>6.0 Producto vs. Suscripción</h3>
+    <p><strong>Producto/Plan</strong> (catálogo, configurado una vez en Configuración → Productos): nombre, precio estándar, créditos, ciclo de renovación, actividad, métodos de pago aceptados. <strong>Suscripción</strong> (la venta concreta, en Gestión → Suscripciones): cliente, producto elegido, precio pagado, créditos otorgados, descuentos, vigencia, horarios, estado de pago y estado de la suscripción.</p>
+
+    <h3>6.1 Las "tres tarjetas"</h3>
+    <p>Toda pantalla de venta, modificación o renovación presenta la información en el mismo orden:</p>
+    <ol>
+      <li><strong>Clases</strong> — cuántas clases/créditos tiene (plan base + extras).</li>
+      <li><strong>Monto</strong> — precio final, solo de lectura (desglose de precio, descuentos, IVA).</li>
+      <li><strong>Horarios y cupo</strong> — días/horarios asignados y veredicto de disponibilidad.</li>
+    </ol>
+
+    <h3><span class="abmr-tag abmr-alta">ALTA</span>6.2 Vender una suscripción nueva</h3>
+    <ol>
+      <li>Abrir el cotizador ("+ Venta Rápida" o desde la ficha del cliente).</li>
+      <li><strong>Paso 1:</strong> elegir cliente y producto. Se calculan precio estándar, vigencia y créditos.</li>
+      <li><strong>Paso 2</strong> (opcional): ajustar cantidad de clases, aplicar descuentos, asignar plantilla de horarios.</li>
+      <li><strong>Paso 3:</strong> elegir método de pago y si se cobra ahora o queda pendiente.</li>
+      <li><strong>Paso 4:</strong> confirmación con resumen; si tiene horarios fijos, se ofrece agendar automáticamente todas las clases del período.</li>
+    </ol>
+
+    <h3><span class="abmr-tag abmr-baja">BAJA</span>6.3 Cancelar una suscripción</h3>
+    <ol>
+      <li>Abrir la suscripción → <strong>"Cancelar Suscripción"</strong>.</li>
+      <li>La app bloquea la cancelación si hay pagos activos sin revertir.</li>
+      <li>Completar motivo obligatorio y notas opcionales.</li>
+      <li>Confirmar (puede requerir escribir una palabra de confirmación).</li>
+    </ol>
+    <p>Efecto: pasa a CANCELADA, se cancelan sus reservas futuras y se cierran los créditos restantes.</p>
+
+    <h3><span class="abmr-tag abmr-mod">MODIFICACIÓN</span>6.4 Cambiar una suscripción activa</h3>
+    <table>
+      <tr><th>Intención</th><th>Efecto</th></tr>
+      <tr><td>Upgrade de plan</td><td>Sube la cantidad de clases y recalcula el precio</td></tr>
+      <tr><td>Downgrade de plan</td><td>Baja la cantidad de clases y recalcula el precio</td></tr>
+      <tr><td>Regalo de clases</td><td>Suma clases sin cambiar el precio</td></tr>
+      <tr><td>Quitar clases</td><td>Resta clases sin devolver dinero</td></tr>
+      <tr><td>Cambiar horarios</td><td>Modifica los días/horas fijos asignados</td></tr>
+      <tr><td>Se va de viaje</td><td>Pausa temporal entre dos fechas</td></tr>
+      <tr><td>Agendar libre</td><td>Saca la plantilla fija, agenda clase por clase</td></tr>
+      <tr><td>Corregir precio</td><td>Ajusta descuentos sin tocar la cantidad de clases</td></tr>
+      <tr><td>No renueva / Sí renueva</td><td>Activa o desactiva la renovación automática</td></tr>
+      <tr><td>Transferir a otro cliente</td><td>Cambia el titular de la suscripción</td></tr>
+    </table>
+    <p>La app siempre muestra una comparación <strong>Antes → Después</strong> sobre las tres tarjetas, con alertas si corresponde, antes de confirmar con "Guardar Modificación".</p>
+    <p><strong>Ajuste manual de créditos:</strong> desde el detalle, "Ajuste de Créditos" → sumar/restar con motivo obligatorio, o pedir recálculo automático.</p>
+
+    <h3><span class="abmr-tag abmr-ren">RENOVACIÓN</span>6.5 Renovar una suscripción al vencer</h3>
+    <ol>
+      <li>Ir a <strong>Renovaciones → General</strong> (cockpit).</li>
+      <li>Filtrar por mes de vencimiento, estado o actividad.</li>
+      <li>Abrir la suscripción a renovar (panel lateral).</li>
+      <li><strong>Pestaña Propuesta:</strong> se propone renovar con el mismo producto; se puede cambiar plan, vigencia, descuentos, sumar clases. Comparación Antes → Después.</li>
+      <li>La app avisa de riesgos: sin plantilla, sin cupo, cliente en lista de espera, descuentos por vencer.</li>
+      <li><strong>Pestaña Confirmar:</strong> revisar y <strong>"Ejecutar Renovación"</strong>.</li>
+    </ol>
+    <p>Se crea una nueva suscripción vinculada a la anterior (que queda "renovada"), con oferta de agendar automáticamente el nuevo período. La <strong>renovación anticipada</strong> sigue el mismo flujo antes del vencimiento y puede encadenar varios ciclos.</p>
+
+    <h3>6.6 Estados de una suscripción</h3>
+    <table>
+      <tr><th>Estado</th><th>Significa</th><th>¿Puede reservar?</th></tr>
+      <tr><td>ACTIVA</td><td>Vigente y en uso</td><td>Sí</td></tr>
+      <tr><td>PENDIENTE</td><td>Creada, sin confirmar pago</td><td>Depende de configuración</td></tr>
+      <tr><td>POR VENCER</td><td>A pocos días de su fin</td><td>Sí, con aviso</td></tr>
+      <tr><td>VENCIDA</td><td>Pasó la fecha sin renovar</td><td>No</td></tr>
+      <tr><td>CANCELADA</td><td>Dada de baja manualmente</td><td>No</td></tr>
+    </table>
+    </div>
+
+    <div class="module-card">
+    <h2 id="s7">7. Módulo: Reservas / Agendas</h2>
+    <p>Gestión de la ocupación puntual de cada clase: quién tiene un lugar reservado, listas de espera y asistencia. Sigue el ciclo <strong>ABMR</strong>.</p>
+
+    <h3><span class="abmr-tag abmr-alta">ALTA</span>7.1 Reservar una clase</h3>
+    <p><strong>Individual (staff):</strong> abrir la clase → "Reservar cliente" → elegir cliente y suscripción → la app valida créditos, cupo y duplicados → confirmar.</p>
+    <p><strong>Individual (cliente):</strong> pestaña "Reservar" → elegir clase disponible dentro del horizonte habilitado → elegir suscripción → confirmar (se descuenta 1 crédito).</p>
+    <p><strong>Masiva, un cliente, varias clases:</strong> Agendamiento Masivo → elegir cliente → filtrar y tildar clases → validar (créditos/cupo/duplicados) → confirmar.</p>
+    <p><strong>Masiva, varios clientes:</strong> elegir modo <strong>Plantilla</strong> (busca automáticamente los horarios habituales) o <strong>Manual</strong> por cliente → validar el lote → confirmar; se informa qué se agendó y qué falló.</p>
+    <p>Se pueden guardar patrones de horarios como <strong>plantilla</strong> para reutilizarlos en próximas reservas o renovaciones.</p>
+
+    <h3><span class="abmr-tag abmr-baja">BAJA</span>7.2 Cancelar una reserva</h3>
+    <p><strong>Staff:</strong> en la fila del cliente, "Cancelar" → elegir motivo → decidir si se devuelve el crédito → confirmar.</p>
+    <p><strong>Cliente:</strong> desde "Mis clases", cancelar dentro del plazo permitido (no se puede el mismo día o dentro de las X horas previas); el crédito se devuelve automáticamente.</p>
+    <p><strong>Masiva:</strong> al cancelar una clase completa, todas sus reservas se cancelan juntas con la misma política de devolución de créditos.</p>
+
+    <h3><span class="abmr-tag abmr-mod">MODIFICACIÓN</span>7.3 Reagendar una reserva</h3>
+    <p><strong>Staff:</strong> ubicar la reserva → "Reagendar" → clase origen (motivo obligatorio) a la izquierda, buscador de clase destino con cupo disponible a la derecha → elegir destino → la app valida cupo/créditos/duplicados y avisa de restricciones de descuento → confirmar (cancela la original y crea la nueva en un solo paso).</p>
+    <p><strong>Cliente:</strong> "Mis clases" → "Reagendarme" → buscar clase destino → confirmar, sujeto a las mismas validaciones.</p>
+
+    <h3><span class="abmr-tag abmr-ren">RENOVACIÓN</span>7.4 Renovar la agenda periódica</h3>
+    <p>Al renovarse la suscripción, si el cliente tiene una plantilla activa, sus horarios habituales se buscan automáticamente en el nuevo período y se agendan en bloque; sin plantilla, se usa agendamiento masivo manual.</p>
+
+    <h3>7.5 Lista de espera (waitlist)</h3>
+    <ol>
+      <li>Con la clase llena, pedir un lugar ("Pedir horario") indicando actividad/horario y vigencia del pedido.</li>
+      <li>El pedido queda "esperando".</li>
+      <li>Si se libera un lugar, el sistema identifica los pedidos en espera y notifica.</li>
+      <li>El staff puede "Convertir a reserva" el pedido, descontando el crédito correspondiente.</li>
+    </ol>
+
+    <h3>7.6 Registro de asistencia</h3>
+    <p>En el detalle de la clase, staff y profesores marcan <strong>Presente</strong> o <strong>Ausente</strong> por alumno (estado inicial "sin confirmar"). El cliente ve su estado, pero no lo modifica.</p>
+    </div>
+
+    <div class="module-card">
+    <h2 id="s8">8. Módulo: Pagos</h2>
+    <p>Registro manual de cobros y su trazabilidad. No hay cobro automático ni pasarela online: todo pago lo carga el staff después de recibirlo.</p>
+
+    <h3><span class="abmr-tag abmr-alta">ALTA</span>8.1 Registrar un pago nuevo</h3>
+    <ol>
+      <li>Ir a <strong>Pagos → Cobranzas</strong> (o desde la ficha del cliente).</li>
+      <li>Ubicar la suscripción a cobrar → <strong>"+ Registrar pago"</strong>.</li>
+      <li>Completar: método de pago, cuenta (opcional), monto (por defecto el saldo pendiente), fecha (no futura), notas.</li>
+      <li>Confirmar con <strong>"Registrar pago"</strong>.</li>
+    </ol>
+    <p>Se puede registrar en lote seleccionando varias suscripciones con el mismo método/cuenta. El estado de facturación se recalcula automáticamente (PAGADO o PARCIAL) y queda registro de auditoría.</p>
+
+    <h3><span class="abmr-tag abmr-baja">BAJA</span>8.2 Revertir o reembolsar un pago</h3>
+    <p>Los pagos <strong>nunca se eliminan</strong>; se documentan con una reversión.</p>
+    <ol>
+      <li>En Cobranzas, menú de acciones → <strong>"Revertir pago"</strong>.</li>
+      <li>Elegir motivo: Reembolso o Cancelación (error de carga).</li>
+      <li>Completar método, cuenta (deben coincidir con el original), monto y fecha.</li>
+      <li>Confirmar. El estado vuelve a PENDIENTE (total) o PARCIAL (parcial).</li>
+    </ol>
+
+    <h3><span class="abmr-tag abmr-mod">MODIFICACIÓN</span>8.3 "Editar" un pago</h3>
+    <p>No existe edición directa por control de auditoría. Para corregir: revertir el pago incorrecto (motivo "Cancelación") y registrar uno nuevo con los datos correctos.</p>
+
+    <h3>8.4 Estados de facturación</h3>
+    <table>
+      <tr><th>Estado</th><th>Significa</th></tr>
+      <tr><td>PAGADO</td><td>Se cobró el 100% del precio final</td></tr>
+      <tr><td>PENDIENTE</td><td>Todavía no se registró ningún pago</td></tr>
+      <tr><td>PARCIAL</td><td>Se cobró una parte, falta el resto</td></tr>
+      <tr><td>MORA (OVERDUE)</td><td>Venció el plazo y sigue sin estar pagado</td></tr>
+      <tr><td>PROMESA DE PAGO</td><td>El cliente se comprometió a pagar; se marca manualmente desde Cobranzas</td></tr>
+    </table>
+
+    <h3>8.5 Recibos y comprobantes</h3>
+    <p>Cada pago tiene la acción "Generar recibo" (PDF o DOC) con los datos del estudio tomados de Configuración → General. Existe además un generador de recibo personalizado para casos no vinculados a una suscripción del sistema.</p>
+
+    <h3>8.6 Métodos y cuentas de pago</h3>
+    <p><strong>Método de pago</strong> = tipo general (Efectivo, Tarjeta, Transferencia). <strong>Cuenta de pago</strong> = subdivisión de un método (ej. "VISA 1234"). Se configuran en Configuración → Métodos de Pago / Cuentas de Pago, y opcionalmente se restringen por producto.</p>
+
+    <h3>8.7 Grillas y reportes</h3>
+    <p><strong>Pagos:</strong> historial completo (completados, reembolsados, cancelados), filtrable y exportable a Excel. <strong>Cobranzas:</strong> solo suscripciones con saldo pendiente, con acceso directo a registrar/revertir pagos, también exportable con totales.</p>
+    </div>
+
+    <h2 id="s9">9. Flujo de ejemplo end-to-end</h2>
+    <ol>
+      <li><strong>Clientes</strong> — Se da de alta a Juan (nombre, contacto, documento, contraseña inicial).</li>
+      <li><strong>Suscripciones</strong> — Se le vende el plan "8 Clases Mensuales" (Alta), con horarios fijos lunes y miércoles 18:00.</li>
+      <li><strong>Reservas</strong> — Al vender con plantilla, se agendan automáticamente sus clases del mes (Alta masiva).</li>
+      <li><strong>Pagos</strong> — Se registra el cobro del plan (Alta de pago); queda PAGADO.</li>
+      <li><strong>Clases</strong> — Un miércoles el profesor falta: se cancela esa clase puntual (Baja), devolviendo el crédito a todos los inscriptos, incluido Juan.</li>
+      <li><strong>Reservas</strong> — Juan reagenda su clase perdida a otro horario disponible esa semana (Modificación).</li>
+      <li><strong>Suscripciones</strong> — A fin de mes, su plan está por vencer: se renueva desde el cockpit, con la misma plantilla (Renovación).</li>
+      <li><strong>Pagos</strong> — Se registra el nuevo cobro del período renovado (Alta de pago).</li>
+      <li><strong>Clientes</strong> — Meses después Juan deja el estudio; como ya tiene historial, se lo <strong>bloquea</strong> con motivo "Solicitud propia" en lugar de eliminarlo (Baja).</li>
+    </ol>
+
+    <h2 id="s10">10. Notas para agentes IA</h2>
+    <ul>
+      <li>Este documento describe comportamiento funcional observado en el código de la aplicación; los nombres de botones y campos pueden variar levemente entre versiones o entre estudios (white-label).</li>
+      <li>El marco ABMR es el criterio de organización de este manual; no todos los módulos tienen los cuatro procesos: <strong>Clientes</strong> y <strong>Pagos</strong> no tienen "Renovación" propia; <strong>Clases</strong> tampoco (la tienen las Suscripciones y, por extensión, las Reservas asociadas).</li>
+      <li>Ante una pregunta sobre "cómo hacer algo", identificar primero el módulo y luego la etapa ABMR correspondiente antes de responder.</li>
+      <li>El sidebar de Staff es dinámico y depende de permisos por usuario: la ausencia de una opción en pantalla no siempre es un bug.</li>
+      <li>Para dudas de implementación técnica, remitir a <code>docs/estandares/</code> del repositorio, en particular el canon transaccional de Ventas/Modificaciones/Renovación.</li>
+    </ul>
+  </main>
+</div>
+<footer>Manual Funcional — Pilates Flow Portal · Generado para uso interno y como fuente de referencia de agentes IA.</footer>
+</body>
+</html>
