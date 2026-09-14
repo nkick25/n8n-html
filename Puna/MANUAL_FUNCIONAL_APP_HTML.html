@@ -210,7 +210,6 @@
       <tr><th>Sección</th><th>Qué contiene</th></tr>
       <tr><td>Avisos</td><td>Tablero de notificaciones internas para staff/profesores</td></tr>
       <tr><td>Gestión</td><td>Panel principal — acá vive la operación diaria (clientes, clases, suscripciones, reservas, pagos)</td></tr>
-      <tr><td>Renovaciones (V1)</td><td>Versión anterior de renovaciones (en desuso)</td></tr>
       <tr><td>Analítica</td><td>Reportes y métricas del estudio</td></tr>
       <tr><td>Informes</td><td>Campañas e informes personalizados</td></tr>
       <tr><td>Gestión de Personal</td><td>Alta/gestión de usuarios internos (staff/profesores)</td></tr>
@@ -400,15 +399,16 @@
     <p><strong>Ajuste manual de créditos:</strong> desde el detalle, "Ajuste de Créditos" → sumar/restar con motivo obligatorio, o pedir recálculo automático.</p>
 
     <h3><span class="abmr-tag abmr-ren">RENOVACIÓN</span>6.5 Renovar una suscripción al vencer</h3>
+    <p><strong>Nota:</strong> la renovación NO se hace desde el detalle de la suscripción individual (ahí no hay botón "Renovar" activo). El único camino operativo es el cockpit de <strong>Renovaciones → General</strong> (la sección "Renovaciones (V1)" quedó descontinuada y ya no aparece en el menú).</p>
     <ol>
-      <li>Ir a <strong>Renovaciones → General</strong> (cockpit).</li>
-      <li>Filtrar por mes de vencimiento, estado o actividad.</li>
-      <li>Abrir la suscripción a renovar (panel lateral).</li>
-      <li><strong>Pestaña Propuesta:</strong> se propone renovar con el mismo producto; se puede cambiar plan, vigencia, descuentos, sumar clases. Comparación Antes → Después.</li>
-      <li>La app avisa de riesgos: sin plantilla, sin cupo, cliente en lista de espera, descuentos por vencer.</li>
-      <li><strong>Pestaña Confirmar:</strong> revisar y <strong>"Ejecutar Renovación"</strong>.</li>
+      <li>Ir a <strong>Renovaciones → General</strong> (cockpit único).</li>
+      <li>KPIs arriba: vencen en 7 días, cubiertas, sin renovar y total filtrado.</li>
+      <li>Filtrar por mes de vencimiento (default: mes actual), actividad, producto, cobertura o pedidos pendientes; buscar por cliente/producto/DNI/ID.</li>
+      <li>En la fila del cliente, clic en el ícono de lápiz (editar) o rayo (express) para abrir el panel lateral (drawer) de esa suscripción.</li>
+      <li>Dentro del drawer: pedidos del cliente (aplicar/descartar), secciones numeradas 1 a 5 (Producto, Fechas y prorrateo, Descuentos, Plantilla, Clases adicionales), y la cotización al pie (subtotal, descuentos, IVA, total).</li>
+      <li>Confirmar con <strong>"Renovar ahora"</strong>. Se crea la nueva suscripción (vinculada a la anterior, que queda "renovada") y avanza automáticamente al agendamiento masivo del nuevo período.</li>
     </ol>
-    <p>Se crea una nueva suscripción vinculada a la anterior (que queda "renovada"), con oferta de agendar automáticamente el nuevo período. La <strong>renovación anticipada</strong> sigue el mismo flujo antes del vencimiento y puede encadenar varios ciclos.</p>
+    <p><strong>Selección múltiple:</strong> también se pueden tildar varias filas y usar "Renovar seleccionadas · N" para procesar un lote de una vez. La <strong>renovación anticipada</strong> sigue el mismo flujo antes del vencimiento y puede encadenar varios ciclos.</p>
 
     <h3>6.6 Estados de una suscripción</h3>
     <table>
@@ -521,6 +521,7 @@
       <li>Ante una pregunta sobre "cómo hacer algo", identificar primero el módulo y luego la etapa ABMR correspondiente antes de responder.</li>
       <li>El sidebar de Staff es dinámico y depende de permisos por usuario: la ausencia de una opción en pantalla no siempre es un bug.</li>
       <li>Para dudas de implementación técnica, remitir a <code>docs/estandares/</code> del repositorio, en particular el canon transaccional de Ventas/Modificaciones/Renovación.</li>
+      <li><strong>Renovaciones:</strong> no inventar pasos genéricos tipo "elegir duración/precio y confirmar renovación" ni un botón "Renovar" dentro del detalle de la suscripción — ese botón está deshabilitado en la app. El único flujo real es el cockpit <strong>Renovaciones → General</strong>, seguido del drawer con secciones numeradas y el botón <strong>"Renovar ahora"</strong> (ver 6.5).</li>
     </ul>
   </main>
 </div>
